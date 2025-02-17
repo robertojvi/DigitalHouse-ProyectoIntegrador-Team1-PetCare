@@ -1,6 +1,8 @@
 // Imports
 // React
 import { Routes, Route } from "react-router-dom";
+// Styles
+import "./styles/app.css";
 
 // Ruta padre
 import Layout from "./layouts/Layout";
