@@ -13,6 +13,13 @@ import Home from "./pages/Home";
 // import Detail from "./Pages/Detail";
 // import Favs from "./Pages/Favs";
 
+/**
+ * Main application component that handles routing
+ * Uses React Router for navigation
+ * Layout component serves as the parent route
+ * Home component is the default landing page
+ * Includes 404 error handling for invalid routes
+ */
 function App() {
 	return (
 		// <>
