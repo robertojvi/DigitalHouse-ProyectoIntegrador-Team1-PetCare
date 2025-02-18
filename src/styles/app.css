@@ -1,11 +1,61 @@
-:root {
-	--color-palet-darkgray: #314549;
-	--color-palet-brown: #685044;
-	--color-palet-orange: #f2be5e;
-	--color-palet-white: #ffffff;
-	--color-palet-black: #030303;
+/**
+ * Global application styles
+ * Defines:
+ * - CSS variables for colors
+ * - Typography settings
+ * - Button styles
+ * - Base layout properties
+ * - Font imports
+ * - Reset styles
+ */
 
-	--font-primary: "Lato", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Nunito&family=Inter:wght@400&display=swap");
+
+:root {
+	/* Palet colors */
+	--palet-color-darkgray: #314549;
+	--palet-color-orange: #f2be5e;
+	--palet-color-orange-light: #fae7c4;
+	--palet-color-brown: #685044;
+	--palet-color-white: #ffffff;
+	--palet-color-black: #000000;
+	--palet-color-placeholder: #a0a0a0;
+
+	/* Background colors */
+	--body-background-color: var(--palet-color-white);
+	--header-user-background-color: var(--palet-color-brown);
+	--header-menu-background-color: var(--palet-color-orange-light);
+	--footer-background-color: var(--palet-color-orange-light);
+
+	/* Buttons */
+	--button-primary-font: 700 15px "Poppins", sans-serif; /* Actualizado con peso 700 */
+	--button-primary-font-color: var(--palet-color-darkgray);
+	--button-primary-background-color: var(--palet-color-orange);
+
+	--button-secondary-font: 400 13px "Poppins", sans-serif; /* Nueva variable añadida */
+	--button-secondary-font-color: var(--palet-color-black);
+	--button-secondary-background-color: var(--palet-color-orange);
+
+	--button-third-font: 700 11px "Poppins", sans-serif;
+	--button-third-font-color: var(--palet-color-white);
+	--button-third-background-color: var(--palet-color-darkgray);
+
+	--button-user-font: 700 10px "Inter", sans-serif;
+	--button-user-font-color: var(--palet-color-white);
+
+	/* Fonts */
+	--h1-font: 28px "Poppins", sans-serif;
+	--h2-font: 18px "Nunito", sans-serif;
+
+	--paragraph-font: 400 12px "Inter", sans-serif;
+	--paragraph-font-color: var(--palet-color-brown);
+	--paragraph-font-color-light: var(--palet-color-white);
+	--paragraph-font-color-dark: var(--palet-color-black);
+	--paragraph-font-color-placeholder: var(--palet-color-placeholder);
+
+	/* Menu */
+	--menu-font: 400 13px "Inter", sans-serif;
+	--menu-font-color: var(--palet-color-black);
 }
 
 * {
@@ -15,9 +65,9 @@
 }
 
 body {
-	background: var(--color-palet-white);
-	font-family: var(--font-primary);
-	color: var(--color-palet-brown);
+	background: var(--body-background-color);
+	font-family: var(--paragraph-font);
+	color: var(--paragraph-font-color);
 }
 
 a {

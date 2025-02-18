@@ -1,0 +1,73 @@
+/**
+ * Search box styles
+ * Features:
+ * - Container styling
+ * - Input field customization
+ * - Icon placement
+ * - Shadow effects
+ * - Responsive behavior
+ */
+
+.search-container {
+	display: flex;
+	align-items: center;
+	background-color: var(--palet-color-orange-light);
+	border-radius: 4px;
+	padding: 0.5rem;
+	width: 100%;
+	max-width: 285px;
+	margin-left: -5vw;
+	border: 1px solid var(--color-palet-brown);
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); /* Added shadow */
+}
+
+.search-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 0.5rem;
+}
+
+.search-input {
+	border: none;
+	outline: none;
+	width: 100%;
+	font: var(--paragraph-font);
+	color: var(--paragraph-font-color);
+	background-color: var(--header-menu-background-color);
+}
+
+.search-input::placeholder {
+	color: var(--palet-color-placeholder);
+}
+
+/* Media queries */
+@media screen and (width < 768px) {
+	.search-container {
+		display: none;
+		max-width: 190px;
+		/* margin-left: -30vw; */
+		padding: 0.4rem;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Reduced shadow for smaller screens */
+	}
+
+	.search-icon {
+		width: 16px;
+		height: 16px;
+		margin-right: 0.4rem;
+	}
+}
+
+@media screen and (width <= 320px) {
+	.search-container {
+		max-width: 200px;
+		margin-left: -2vw;
+		padding: 0.3rem;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Further reduced shadow for smallest screens */
+	}
+
+	.search-icon {
+		width: 14px;
+		height: 14px;
+		margin-right: 0.3rem;
+	}
+}
