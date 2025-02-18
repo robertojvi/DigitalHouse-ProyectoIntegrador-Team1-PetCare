@@ -1,205 +1,60 @@
-/* Language: CSS */
-/* Estilos base para el header */
-.app-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100vw;
-	padding: 1rem 2rem;
-	background-color: #fae7c4;
+/**
+ * Header component styles
+ * Features:
+ * - Fixed positioning
+ * - Flex layout for content
+ * - Responsive adjustments
+ * - Z-index management
+ * - Height variables
+ */
+
+/* Base styles for header container */
+.header-container {
 	position: fixed;
 	top: 0;
 	left: 0;
+	width: 100%;
 	z-index: 1000;
 }
 
-/* Estilos responsive */
-@media screen and (max-width: 768px) {
-	.app-header {
-		flex-direction: column;
-		padding: 0.5rem;
-		gap: 1rem;
-	}
-
-	.menu ul {
-		flex-direction: column;
-		align-items: center;
-		padding: 0.5rem;
-	}
-
-	.auth-buttons {
-		flex-direction: column;
-		width: 100%;
-		padding: 0 1rem;
-	}
-
-	.auth-buttons button {
-		width: 100%;
-		margin: 0.25rem 0;
-	}
-
-	.menu-toggle {
-		display: block;
-		position: absolute;
-		right: 1rem;
-		top: 1rem;
-	}
-
-	.nav-container {
-		display: none;
-		width: 100%;
-	}
-
-	.nav-container.show {
-		display: flex;
-		flex-direction: column;
-	}
+/* Main header styles */
+.app-header {
+	width: 100%;
+	padding: 1rem 2rem;
+	background-color: var(--header-menu-background-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem; /* Reduced from 2rem to bring searchbox closer to logo */
+	height: var(--header-height, 80px);
 }
 
-/* Para tablets */
-@media screen and (min-width: 769px) and (max-width: 1023px) {
-	.app-header {
-		padding: 0.75rem;
-	}
-
-	.menu ul {
-		gap: 0.75rem;
-	}
-
-	.logo img {
-		max-width: 90px;
-	}
-}
-
-.logo {
+.nav-section {
 	display: flex;
 	align-items: center;
-	will-change: filter;
-	-webkit-transition: filter 300ms;
-	-moz-transition: filter 300ms;
-	-ms-transition: filter 300ms;
-	-o-transition: filter 300ms;
-	transition: filter 300ms;
 }
 
-.logo:hover,
-.menu li:hover,
-.btn-signup:hover,
-.btn-login:hover {
-	-webkit-filter: drop-shadow(0 0 2em var(--color-palet-brown));
-	filter: drop-shadow(0 0 2em var(--color-palet-brown));
-}
-
-.logo img {
-	max-width: 112px;
-	max-height: 78px;
-}
-
-.menu {
-	/* margin-left: auto; Empuja el menú hacia la derecha */
-	color: var(--color-palet-black);
-}
-
-.menu ul {
-	display: flex;
-	list-style: none;
-	gap: 1rem;
-}
-
-.menu li {
-	cursor: pointer;
-	font-weight: bold;
-}
-
-.auth-buttons {
-	display: flex;
-	gap: 1rem;
-}
-
-.auth-buttons button {
-	padding: 0.5rem 1rem;
-	border-radius: 4px;
-	border: none;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.btn-signup {
-	background-color: var(--color-palet-orange);
-	color: var(--color-palet-white);
-}
-
-.btn-login {
-	background-color: transparent;
-	color: var(--color-palet-brown);
-	border: 1px solid var(--color-palet-brown) !important;
-}
-
-/* Estilos para el menú móvil */
-.menu-toggle {
-	display: none;
-	background: none;
-	border: none;
-	font-size: 1.8rem;
-	cursor: pointer;
-	color: var(--color-palet-brown);
-	padding: 0.5rem;
-}
-
-.nav-container {
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-}
-
-/* Media queries para tablets y móviles */
-@media screen and (max-width: 1023px) {
+/* Media queries */
+@media screen and (width < 1024px) {
 	.app-header {
-		flex-direction: row; /* Mantiene logo y menú en línea */
-		padding: 1rem;
-		justify-content: space-between;
+		padding: 0.75rem 1rem;
+		height: var(--header-height, 70px);
+		gap: 0.75rem; /* Reduced from 1.5rem */
 	}
+}
 
-	.logo img {
-		max-width: 90px;
+@media screen and (width < 768px) {
+	.app-header {
+		padding: 0.5rem;
+		height: var(--header-height, 60px);
+		gap: 0.5rem; /* Reduced from 1rem */
 	}
+}
 
-	.menu-toggle {
-		display: block;
-		margin-left: auto; /* Empuja el botón hacia la derecha */
-	}
-
-	.nav-container {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		width: 100%;
-		flex-direction: column;
-		background-color: #fae7c4;
-		padding: 1rem;
-		display: none;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	.nav-container.show {
-		display: flex;
-	}
-
-	.menu ul {
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-		gap: 1rem;
-	}
-
-	.auth-buttons {
-		flex-direction: column;
-		width: 100%;
-		gap: 0.5rem;
-		margin-top: 1rem;
-	}
-
-	.auth-buttons button {
-		width: 100%;
+@media screen and (width <= 320px) {
+	.app-header {
+		padding: 0.25rem 0.5rem;
+		height: var(--header-height, 50px);
+		gap: 0.35rem; /* Reduced from 0.5rem */
 	}
 }

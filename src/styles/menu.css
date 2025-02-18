@@ -1,0 +1,112 @@
+/**
+ * Navigation menu styles
+ * Features:
+ * - List layout
+ * - Item spacing
+ * - Icon styling
+ * - Hover effects
+ * - Mobile menu adaptations
+ * - Dropdown styling
+ */
+
+/* Menu styles */
+.menu {
+	font: var(--menu-font);
+	color: var(--menu-font-color);
+}
+
+.menu ul {
+	display: flex;
+	list-style: none;
+	gap: 1rem;
+}
+
+.menu li {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.2rem;
+	cursor: pointer;
+}
+
+.menu li:hover {
+	filter: drop-shadow(0 0 2em var(--palet-color-brown));
+}
+
+.paw-icon {
+	width: 25px;
+	height: 25px;
+}
+
+/* Mobile menu styles */
+.menu-toggle {
+	display: none;
+	background: none;
+	border: none;
+	font-size: 1.8rem;
+	cursor: pointer;
+	color: var(--palet-color-brown);
+	padding: 0.5rem;
+	z-index: 1000;
+	margin-left: auto; /* Push to center when flex container is active */
+}
+
+.nav-container {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
+/* Media queries */
+@media screen and (width < 1024px) {
+	.menu-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-container {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background-color: var(--header-menu-background-color);
+		display: none;
+		padding: 1rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.nav-container.show {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.menu ul {
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		gap: 1rem;
+	}
+}
+
+@media screen and (width < 768px) {
+	.menu-toggle {
+		font-size: 1.5rem;
+		padding: 0.5rem;
+	}
+
+	.nav-container {
+		padding: 0.75rem;
+	}
+
+	.menu ul {
+		gap: 0.75rem;
+	}
+}
+
+@media screen and (width <= 320px) {
+	.menu-toggle {
+		font-size: 1.2rem;
+		padding: 0.25rem;
+	}
+}

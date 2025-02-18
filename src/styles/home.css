@@ -1,3 +1,45 @@
+/**
+ * Home Page Styles
+ *
+ * Layout:
+ * - Uses CSS Grid/Flexbox for content organization
+ * - Responsive margins and padding
+ * - Content width constraints
+ *
+ * Components:
+ * .mainContainer
+ * - Main wrapper for page content
+ * - Full width with centered content
+ * - Proper spacing from fixed header
+ *
+ * .home-content
+ * - Flex container for content items
+ * - Vertical stacking of elements
+ * - Consistent spacing between items
+ *
+ * .pet-image
+ * - Fixed dimensions (200x100)
+ * - Object-fit for image scaling
+ * - Responsive sizing for smaller screens
+ *
+ * Media Queries:
+ * - Tablet (< 1024px)
+ * - Mobile (< 768px)
+ * - Small devices (<= 320px)
+ *
+ * Dependencies:
+ * - Uses CSS variables from app.css
+ */
+
+/* Add margin to main content to prevent overlap */
+main {
+	margin-top: calc(var(--top-bar-height, 40px) + var(--header-height, 80px));
+	width: 100%;
+	min-height: calc(
+		100vh - (var(--top-bar-height, 40px) + var(--header-height, 80px))
+	);
+}
+
 .mainContainer {
 	display: flex;
 	flex-direction: column;
@@ -6,8 +48,35 @@
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
-	h1 {
-		color: red;
+	padding-top: calc(
+		var(--top-bar-height, 40px) + var(--header-height, 80px) + 2rem
+	);
+}
+
+/* Media queries for responsive layout */
+@media screen and (width < 1024px) {
+	.mainContainer {
+		padding-top: calc(
+			var(--top-bar-height, 35px) + var(--header-height, 70px) + 1.5rem
+		);
+	}
+}
+
+@media screen and (width < 768px) {
+	.mainContainer {
+		padding: 1.5rem;
+		padding-top: calc(
+			var(--top-bar-height, 30px) + var(--header-height, 60px) + 1rem
+		);
+	}
+}
+
+@media screen and (width <= 320px) {
+	.mainContainer {
+		padding: 1rem;
+		padding-top: calc(
+			var(--top-bar-height, 25px) + var(--header-height, 50px) + 0.75rem
+		);
 	}
 }
 
@@ -15,12 +84,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 1rem;
+	gap: 2rem;
 	width: 100%;
 }
 
 .pet-image {
 	width: 200px;
-	height: 100px;
+	height: auto;
 	object-fit: cover;
 }

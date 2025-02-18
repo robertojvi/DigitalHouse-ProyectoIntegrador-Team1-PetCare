@@ -1,8 +1,17 @@
+/**
+ * Logo component with home link
+ * Features:
+ * - Clickable logo image
+ * - Links to home page
+ * - Hover effect with shadow
+ * - Responsive image sizing
+ */
+
 // Rect
 import { Link } from "react-router-dom";
 
 // Styles
-import "../styles/header.css";
+import "../styles/logo.css";
 
 const Logo = () => {
 	return (

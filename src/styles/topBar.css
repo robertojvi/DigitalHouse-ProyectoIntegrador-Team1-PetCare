@@ -1,0 +1,90 @@
+/**
+ * Top bar styles
+ * Features:
+ * - Background color
+ * - Button styling
+ * - Flex layout
+ * - Text styles
+ * - Responsive adaptations
+ * - Icon sizing
+ */
+
+/* Top bar styles */
+.top-bar {
+	width: 100%;
+	padding: 0.5rem 2rem;
+	background-color: var(--header-user-background-color);
+	color: var(--palet-color-white);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: var(--top-bar-height, 40px);
+}
+
+.top-bar-text {
+	font: var(--paragraph-font);
+	font-size: 10px;
+	color: var(--paragraph-font-color-light);
+}
+
+.top-bar-buttons {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.top-bar-buttons button {
+	border: none;
+	font: var(--button-user-font);
+	color: var(--button-user-font-color);
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.user-icon {
+	width: 20px;
+	height: 20px;
+}
+
+/* Media queries for TopBar */
+@media screen and (width < 1024px) {
+	.top-bar {
+		padding: 0.5rem 1rem;
+		height: var(--top-bar-height, 35px);
+	}
+}
+
+@media screen and (width < 768px) {
+	.top-bar {
+		height: var(--top-bar-height, 30px);
+		padding: 0.25rem 1rem;
+	}
+
+	.top-bar-text {
+		font-size: 7px;
+	}
+
+	.top-bar-buttons button {
+		font-size: 7px;
+	}
+
+	.user-icon {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+@media screen and (width <= 320px) {
+	.top-bar {
+		height: var(--top-bar-height, 25px);
+		padding: 0.25rem 0.5rem;
+	}
+
+	.top-bar-buttons button {
+		font-size: 7px;
+	}
+
+	.user-icon {
+		width: 14px;
+		height: 14px;
+	}
+}

@@ -1,3 +1,10 @@
+/**
+ * Layout component that provides the main structure
+ * Contains Header component and Outlet for nested routes
+ * Future implementation planned for Footer component
+ * Wraps all page content within a common structure
+ */
+
 // Imports
 // React
 import { Outlet } from "react-router-dom";
