@@ -2,7 +2,7 @@
 // React
 import { Routes, Route } from "react-router-dom";
 // Styles
-import "./styles/app.css";
+import "./styles/common/app.css";
 
 // Ruta padre
 import Layout from "./layouts/Layout";
