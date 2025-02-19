@@ -1,0 +1,44 @@
+/**
+ * Logo styles
+ * Features:
+ * - Image sizing
+ * - Hover effects
+ * - Transition animations
+ * - Responsive image scaling
+ */
+
+/* Logo styles */
+.logo {
+	display: flex;
+	align-items: center;
+	will-change: filter;
+	transition: filter 300ms;
+}
+
+.logo:hover {
+	filter: drop-shadow(0 0 2em var(--palet-color-brown));
+}
+
+.logo img {
+	max-width: 112px;
+	max-height: 78px;
+}
+
+/* Media queries */
+@media screen and (width < 1024px) {
+	.logo img {
+		max-width: 90px;
+	}
+}
+
+@media screen and (width < 768px) {
+	.logo img {
+		max-width: 80px;
+	}
+}
+
+@media screen and (width <= 320px) {
+	.logo img {
+		max-width: 70px;
+	}
+}

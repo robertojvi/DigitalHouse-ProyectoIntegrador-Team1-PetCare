@@ -1,0 +1,60 @@
+/**
+ * Header component styles
+ * Features:
+ * - Fixed positioning
+ * - Flex layout for content
+ * - Responsive adjustments
+ * - Z-index management
+ * - Height variables
+ */
+
+/* Base styles for header container */
+.header-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+/* Main header styles */
+.app-header {
+	width: 100%;
+	padding: 1rem 2rem;
+	background-color: var(--header-menu-background-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem; /* Reduced from 2rem to bring searchbox closer to logo */
+	height: var(--header-height, 80px);
+}
+
+.nav-section {
+	display: flex;
+	align-items: center;
+}
+
+/* Media queries */
+@media screen and (width < 1024px) {
+	.app-header {
+		padding: 0.75rem 1rem;
+		height: var(--header-height, 70px);
+		gap: 0.75rem; /* Reduced from 1.5rem */
+	}
+}
+
+@media screen and (width < 768px) {
+	.app-header {
+		padding: 0.5rem;
+		height: var(--header-height, 60px);
+		gap: 0.5rem; /* Reduced from 1rem */
+	}
+}
+
+@media screen and (width <= 320px) {
+	.app-header {
+		padding: 0.25rem 0.5rem;
+		height: var(--header-height, 50px);
+		gap: 0.35rem; /* Reduced from 0.5rem */
+	}
+}
