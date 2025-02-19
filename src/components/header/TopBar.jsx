@@ -8,8 +8,8 @@
  * - Responsive design for different screen sizes
  */
 import { Link } from "react-router-dom";
-import "../styles/topBar.css";
-import userIcon from "../images/user.png";
+import "../../styles/header/topBar.css";
+import userIcon from "../../images/user.png";
 
 const TopBar = () => {
 	return (

@@ -1,5 +1,6 @@
 // Styles
-import "../styles/home.css";
+// import "../styles/home.css";
+import "../styles/home/home.css";
 
 /**
  * Home Page Component

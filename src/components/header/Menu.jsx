@@ -11,7 +11,7 @@
 import { LiaPawSolid } from "react-icons/lia";
 
 // Styles
-import "../styles/menu.css";
+import "../../styles/header/menu.css";
 
 const Menu = () => {
 	return (

@@ -14,13 +14,13 @@
 import { useState } from "react";
 
 // Styles
-import "../styles/header.css";
-import "../styles/menu.css";
+import "../../styles/header/header.css";
+import "../../styles/header/menu.css";
 
 // Components
 import TopBar from "./TopBar";
 import Logo from "./Logo";
-import SearchBox from "./SearchBox";
+import SearchBox from "../SearchBox";
 import Menu from "./Menu";
 
 const Header = () => {
