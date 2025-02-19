@@ -10,7 +10,7 @@
 import { Outlet } from "react-router-dom";
 
 // Componentes
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 // import Footer from "../Components/Footer";
 
 const Layout = () => {
