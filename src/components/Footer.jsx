@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "./header/Logo";
 import "../styles/Footer.css";
+import petCareLogo from "../images/pet-care-logo-v2.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ const Footer = () => {
       <div className="footer-main">
         <div className="footer-logo-container">
           <img
-            src="/src/images/pet-care-logo-v2.png"
+            src={petCareLogo}
             alt="Pet Care Logo"
             className="footer-logo"
           />
