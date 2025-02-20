@@ -1,0 +1,29 @@
+.services-section {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.services-section h2 {
+  font: var(--h1-font);
+  color: var(--palet-color-darkgray);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* CA3: Implementación del layout en 2 columnas */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* CA3: Exactamente 2 columnas */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Adaptación responsiva manteniendo el diseño */
+@media screen and (width < 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+} 

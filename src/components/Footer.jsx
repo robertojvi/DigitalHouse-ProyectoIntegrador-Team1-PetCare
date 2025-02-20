@@ -1,0 +1,39 @@
+import React from "react";
+import { PiWhatsappLogo } from "react-icons/pi";
+import { IoLocationOutline } from "react-icons/io5";
+import "../styles/Footer.css";
+import petCareLogo from "../images/pet-care-logo-v2.png";
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="footer">
+      <div className="footer-main">
+        <div className="footer-logo-container">
+          <img
+            src={petCareLogo}
+            alt="Pet Care Logo"
+            className="footer-logo"
+          />
+        </div>
+        <div className="footer-info">
+          <div className="contact-info">
+            <h4>HABLEMOS <PiWhatsappLogo /></h4>
+            <p>Whatsapp: 57+ 111222333</p>
+            <p>Email: info@outstanding11.com</p>
+          </div>
+          <div className="location-info">
+            <h4>ENCUÉNTRANOS <IoLocationOutline /></h4>
+            <p>Calle Digital House #10</p>
+          </div>
+        </div>
+      </div>
+      <div className="footer-copyright">
+        <p>© {currentYear} Todos los derechos reservados Outstanding11</p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
