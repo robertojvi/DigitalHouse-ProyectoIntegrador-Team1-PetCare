@@ -1,0 +1,115 @@
+.footer {
+  width: 100%;
+  background-color: #fae7c4;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.footer-logo-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.footer-logo {
+  width: 200px;
+  height: auto;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem 10px 1.5rem;
+  border-radius: 8px;
+  min-width: 250px;
+  align-items: flex-start;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 10px 1.5rem 1rem 1.5rem;
+  border-radius: 8px;
+  min-width: 250px;
+  align-items: flex-start;
+}
+
+.contact-info h4,
+.location-info h4,
+.contact-info p,
+.location-info p {
+  text-align: left;
+  margin: 0;
+  color: #314549;
+  font-family: "Nunito", sans-serif;
+}
+
+.footer-copyright {
+  width: 100%;
+  background-color: #685044;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.footer-copyright p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+h4 {
+  color: #314549;
+  margin-bottom: 0.5rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.contact-info p,
+.location-info p {
+  text-align: left;
+  margin: 0;
+  color: #314549;
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .footer-main {
+    gap: 2rem;
+  }
+
+  .footer-info {
+    gap: 1.5rem;
+  }
+
+  .contact-info,
+  .location-info {
+    text-align: right;
+  }
+}
