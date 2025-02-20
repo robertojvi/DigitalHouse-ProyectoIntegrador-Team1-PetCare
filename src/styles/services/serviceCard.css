@@ -1,0 +1,43 @@
+.service-card {
+  background-color: var(--palet-color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.1);
+}
+
+.service-content {
+  padding: 1rem;
+}
+
+.service-content h3 {
+  font: var(--h2-font);
+  color: var(--palet-color-darkgray);
+  margin-bottom: 0.5rem;
+}
+
+.service-content p {
+  font: var(--paragraph-font);
+  color: var(--paragraph-font-color);
+} 
