@@ -4,6 +4,7 @@ import Categoria from "../components/categoria/Categoria";
 import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
 import { PiPawPrintLight } from "react-icons/pi";
+import ServicesList from "../components/services/ServicesList";
 
 /**
  * Home Page Component
@@ -69,6 +70,10 @@ const Home = () => {
 				))
 			}
 			</div>
+
+			<h1>Bienvenido a Pet Care</h1>
+			<ServicesList />
+
 		</main>
 		</>
 	);
