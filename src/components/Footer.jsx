@@ -1,5 +1,6 @@
 import React from "react";
-import Logo from "./header/Logo";
+import { PiWhatsappLogo } from "react-icons/pi";
+import { IoLocationOutline } from "react-icons/io5";
 import "../styles/Footer.css";
 import petCareLogo from "../images/pet-care-logo-v2.png";
 
@@ -18,12 +19,12 @@ const Footer = () => {
         </div>
         <div className="footer-info">
           <div className="contact-info">
-            <h4>HABLEMOS</h4>
+            <h4>HABLEMOS <PiWhatsappLogo /></h4>
             <p>Whatsapp: 57+ 111222333</p>
             <p>Email: info@outstanding11.com</p>
           </div>
           <div className="location-info">
-            <h4>ENCUÉNTRANOS</h4>
+            <h4>ENCUÉNTRANOS <IoLocationOutline /></h4>
             <p>Calle Digital House #10</p>
           </div>
         </div>

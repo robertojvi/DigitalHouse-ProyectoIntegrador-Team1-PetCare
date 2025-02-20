@@ -1,6 +1,9 @@
 // Styles
 // import "../styles/home.css";
+import Categoria from "../components/categoria/Categoria";
+import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
+import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
 
 /**
@@ -47,12 +50,32 @@ import ServicesList from "../components/services/ServicesList";
  * - /src/routes/index.jsx - Route configuration
  */
 
+const categorias = [
+	{nombre: "Cuidado en casa", image:"/categoria1.png"}, 
+	{nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
+	{nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
+
+]
+
 const Home = () => {
 	return (
+		<>
+		<Hero/>
+		
 		<main className="mainContainer">
+			<h2><PiPawPrintLight /> Categorias</h2>
+			<div className="categories-container">
+			{categorias.map((categoria) => (
+					<Categoria nombre={categoria.nombre} image={categoria.image} />
+				))
+			}
+			</div>
+
 			<h1>Bienvenido a Pet Care</h1>
 			<ServicesList />
+
 		</main>
+		</>
 	);
 };
 
