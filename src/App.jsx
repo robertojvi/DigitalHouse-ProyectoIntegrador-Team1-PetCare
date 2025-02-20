@@ -9,6 +9,7 @@ import Layout from "./layouts/Layout";
 
 // Rutas hijas
 import Home from "./pages/Home";
+import AddProductForm from "./components/admin/AddProductForm";
 // import Contact from "./Pages/Contact";
 // import Detail from "./Pages/Detail";
 // import Favs from "./Pages/Favs";
@@ -28,6 +29,8 @@ function App() {
 			<Route path="/" element={<Layout />}>
 				{/* Rutas anidadas hijas */}
 				<Route path="/" element={<Home />} />
+				<Route path="/administracion" element={<AddProductForm />} />
+
 				{/* <Route path="/contact" element={<Contact />} />
 				<Route path="/dentist/:id" element={<Detail />} />
 				<Route path="/favs" element={<Favs />} /> */}
