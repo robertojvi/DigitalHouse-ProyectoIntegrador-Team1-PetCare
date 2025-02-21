@@ -9,6 +9,7 @@
 
 // React
 import { LiaPawSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
 
 // Styles
 import "../../styles/header/menu.css";
@@ -16,22 +17,24 @@ import "../../styles/header/menu.css";
 const Menu = () => {
 	return (
 		<nav className="menu">
-			<ul>
+			<ul className="menu-list">
 				<li>
-					<LiaPawSolid className="paw-icon" />
-					Cuidadores
+					<Link to="/cuidadores">
+						<LiaPawSolid className="paw-icon" />
+						Cuidadores
+					</Link>
 				</li>
 				<li>
-					<LiaPawSolid className="paw-icon" />
-					Instalaciones
+					<Link to="/instalaciones">
+						<LiaPawSolid className="paw-icon" />
+						Instalaciones
+					</Link>
 				</li>
 				<li>
-					<LiaPawSolid className="paw-icon" />
-					Nosotros
-				</li>
-				<li>
-					<LiaPawSolid className="paw-icon" />
-					Contacto
+					<Link to="/asesorias">
+						<LiaPawSolid className="paw-icon" />
+						Asesorías
+					</Link>
 				</li>
 			</ul>
 		</nav>
