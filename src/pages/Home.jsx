@@ -1,7 +1,11 @@
 // Styles
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
+import Categoria from "../components/categoria/Categoria";
+import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
+import { PiPawPrintLight } from "react-icons/pi";
+import ServicesList from "../components/services/ServicesList";
 
 /**
  * Home Page Component
@@ -47,13 +51,29 @@ import "../styles/home/home.css";
  * - /src/routes/index.jsx - Route configuration
  */
 
+const categorias = [
+	{nombre: "Cuidado en casa", image:"/categoria1.png"}, 
+	{nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
+	{nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
+
+]
+
 const Home = () => {
 	return (
+    <>
+    <Hero/>
 		<main className="mainContainer">
+    	<div className="categories-container">
+        {categorias.map((categoria) => (
+            <Categoria nombre={categoria.nombre} image={categoria.image} />
+          ))
+        }
+			</div>
 			<div>
 				<RecommendedServices />
 			</div>
 		</main>
+		</>
 	);
 };
 
