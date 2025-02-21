@@ -11,7 +11,7 @@ import { Outlet } from "react-router-dom";
 
 // Componentes
 import Header from "../components/header/Header";
-import Footer from "../Components/Footer";
+import Footer from "../components/Footer";
 
 const Layout = () => {
 	return (
@@ -20,7 +20,6 @@ const Layout = () => {
 			<Header />
 			<Outlet />
 			<Footer />
-			{/* <Footer /> */}
 		</div>
 	);
 };

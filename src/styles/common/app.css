@@ -39,6 +39,7 @@
 	--button-third-font: 700 11px "Poppins", sans-serif;
 	--button-third-font-color: var(--palet-color-white);
 	--button-third-background-color: var(--palet-color-darkgray);
+	--button-third-border-radius: 16px;
 
 	--button-user-font: 700 10px "Inter", sans-serif;
 	--button-user-font-color: var(--palet-color-white);

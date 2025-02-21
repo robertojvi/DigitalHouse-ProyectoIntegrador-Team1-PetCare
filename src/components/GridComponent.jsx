@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { ServiceCard } from './cards/ServiceCard'
+import { GridContainer } from './styled-components/GridComponent.styles';
 
 export const GridComponent = () => {
 
@@ -14,7 +15,7 @@ export const GridComponent = () => {
   }, []);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(45%, 2fr))', gap: '20px', columnGap: "100px", marginTop:"20px"}}>
+    <GridContainer>
       {profiles.map(profile => (
         <ServiceCard
           key={profile.id}
@@ -25,6 +26,6 @@ export const GridComponent = () => {
           excerpt={profile.excerpt}
         />
       ))}
-    </div>
+    </GridContainer>
   )
 }
