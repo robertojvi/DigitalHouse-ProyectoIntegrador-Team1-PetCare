@@ -1,0 +1,160 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "name": "Paseo de Perros",
+      "description": "Servicio profesional de paseo para mantener a tu perro activo y feliz",
+      "mainImage": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+      "images": [
+        "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+        "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+        "https://images.unsplash.com/photo-1552053831-71594a27632d",
+        "https://images.unsplash.com/photo-1556866261-8763a7662333",
+        "https://images.unsplash.com/photo-1541336318489-083c7153ecae"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Alojamiento para Mascotas",
+      "description": "Hospedaje cómodo y seguro para tu mascota mientras estás fuera",
+      "mainImage": "https://images.unsplash.com/photo-1604848698030-c434ba08ece1",
+      "images": [
+        "https://images.unsplash.com/photo-1604848698030-c434ba08ece1",
+        "https://images.unsplash.com/photo-1553688738-a278b9f063e0",
+        "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993",
+        "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+        "https://images.unsplash.com/photo-1570021974424-60e83dfee639"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Cuidado a Domicilio",
+      "description": "Cuidadores profesionales que visitan tu hogar para atender a tu mascota",
+      "mainImage": "https://images.unsplash.com/photo-1587764379873-97837921fd44",
+      "images": [
+        "https://images.unsplash.com/photo-1587764379873-97837921fd44",
+        "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e",
+        "https://images.unsplash.com/photo-1588269845464-8993565cac3a",
+        "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd",
+        "https://images.unsplash.com/photo-1574158622682-e40e69881006"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Entrenamiento Canino",
+      "description": "Sesiones de entrenamiento personalizado para mejorar el comportamiento",
+      "mainImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb",
+      "images": [
+        "https://images.unsplash.com/photo-1587300003388-59208cc962cb",
+        "https://images.unsplash.com/photo-1601758174114-e711c0cbaa69",
+        "https://images.unsplash.com/photo-1591946614720-90a587da4a36",
+        "https://images.unsplash.com/photo-1567752881298-894bb81f9379",
+        "https://images.unsplash.com/photo-1534361960057-19889db9621e"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Guardería de Día",
+      "description": "Cuidado durante el día para mascotas que necesitan compañía",
+      "mainImage": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+      "images": [
+        "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+        "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+        "https://images.unsplash.com/photo-1593620659530-7f98c53de278",
+        "https://images.unsplash.com/photo-1576201836106-db1758fd1c97",
+        "https://images.unsplash.com/photo-1597843797221-e34b4a320b97"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Peluquería Canina",
+      "description": "Servicios de grooming y estética para mantener a tu mascota limpia",
+      "mainImage": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7",
+      "images": [
+        "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7",
+        "https://images.unsplash.com/photo-1591946614720-90a587da4a36",
+        "https://images.unsplash.com/photo-1596491123074-fd69f812c3e9",
+        "https://images.unsplash.com/photo-1605897472359-85e4b94d685d",
+        "https://images.unsplash.com/photo-1537151672256-6caf2e9f8c95"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Cuidado de Gatos",
+      "description": "Servicios especializados para el cuidado y entretenimiento de felinos",
+      "mainImage": "https://images.unsplash.com/photo-1574158622682-e40e69881006",
+      "images": [
+        "https://images.unsplash.com/photo-1574158622682-e40e69881006",
+        "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba",
+        "https://images.unsplash.com/photo-1511044568932-338cba0ad803",
+        "https://images.unsplash.com/photo-1519052537078-e6302a4968d4",
+        "https://images.unsplash.com/photo-1495360010541-f48722b34f7d"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Transporte de Mascotas",
+      "description": "Servicio seguro de traslado para tu mascota",
+      "mainImage": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55",
+      "images": [
+        "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55",
+        "https://images.unsplash.com/photo-1581888227599-779811939961",
+        "https://images.unsplash.com/photo-1549291981-56d443d5e2a2",
+        "https://images.unsplash.com/photo-1541876176131-3f5e84a7331a",
+        "https://images.unsplash.com/photo-1520038410233-7141be7e6f97"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Cuidado de Mascotas Exóticas",
+      "description": "Atención especializada para mascotas no convencionales",
+      "mainImage": "https://images.unsplash.com/photo-1523658473-d9acf711e42c",
+      "images": [
+        "https://images.unsplash.com/photo-1523658473-d9acf711e42c",
+        "https://images.unsplash.com/photo-1550697851-920b181d8ca8",
+        "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7",
+        "https://images.unsplash.com/photo-1591824438708-ce405ef36ba6",
+        "https://images.unsplash.com/photo-1569691899455-88464f6d3ab1"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Adiestramiento Avanzado",
+      "description": "Entrenamiento especializado para casos específicos",
+      "mainImage": "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd",
+      "images": [
+        "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd",
+        "https://images.unsplash.com/photo-1591946614720-90a587da4a36",
+        "https://images.unsplash.com/photo-1587300003388-59208cc962cb",
+        "https://images.unsplash.com/photo-1567752881298-894bb81f9379",
+        "https://images.unsplash.com/photo-1534361960057-19889db9621e"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Socialización de Mascotas",
+      "description": "Sesiones grupales para mejorar la interacción con otros animales",
+      "mainImage": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+      "images": [
+        "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+        "https://images.unsplash.com/photo-1556866261-8763a7662333",
+        "https://images.unsplash.com/photo-1552053831-71594a27632d",
+        "https://images.unsplash.com/photo-1541336318489-083c7153ecae",
+        "https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Cuidados Veterinarios",
+      "description": "Atención médica básica y preventiva a domicilio",
+      "mainImage": "https://images.unsplash.com/photo-1628009368231-7bb7087b1815",
+      "images": [
+        "https://images.unsplash.com/photo-1628009368231-7bb7087b1815",
+        "https://images.unsplash.com/photo-1576201836106-db1758fd1c97",
+        "https://images.unsplash.com/photo-1597843797221-e34b4a320b97",
+        "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e",
+        "https://images.unsplash.com/photo-1588269845464-8993565cac3a"
+      ]
+    }
+  ]
+} 

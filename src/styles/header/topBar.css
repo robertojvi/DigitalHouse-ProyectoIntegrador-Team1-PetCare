@@ -11,20 +11,22 @@
 
 /* Top bar styles */
 .top-bar {
-	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 	padding: 0.5rem 2rem;
 	background-color: var(--header-user-background-color);
 	color: var(--palet-color-white);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	height: var(--top-bar-height, 40px);
 }
 
 .top-bar-text {
+	margin-right: auto;
+	padding-left: 7rem;
+	text-decoration: none;
+	color: var(--paragraph-font-color-light);
 	font: var(--paragraph-font);
 	font-size: 10px;
-	color: var(--paragraph-font-color-light);
 }
 
 .top-bar-buttons {
@@ -51,6 +53,10 @@
 		padding: 0.5rem 1rem;
 		height: var(--top-bar-height, 35px);
 	}
+	
+	.top-bar-text {
+		padding-left: 5rem;
+	}
 }
 
 @media screen and (width < 768px) {
@@ -61,6 +67,7 @@
 
 	.top-bar-text {
 		font-size: 7px;
+		padding-left: 3rem;
 	}
 
 	.top-bar-buttons button {
@@ -77,6 +84,10 @@
 	.top-bar {
 		height: var(--top-bar-height, 25px);
 		padding: 0.25rem 0.5rem;
+	}
+
+	.top-bar-text {
+		padding-left: 1rem;
 	}
 
 	.top-bar-buttons button {
