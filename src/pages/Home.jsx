@@ -6,6 +6,8 @@ import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
 import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
+import { TitleComponent } from '../components/shared/TitleComponent'
+import WhatsAppButton from "../components/shared/WhatsAppComponent";
 
 /**
  * Home Page Component
@@ -63,6 +65,8 @@ const Home = () => {
     <>
     <Hero/>
 		<main className="mainContainer">
+		
+		<TitleComponent title={"Categorías"}/>
     	<div className="categories-container">
         {categorias.map((categoria) => (
             <Categoria nombre={categoria.nombre} image={categoria.image} />
@@ -73,7 +77,8 @@ const Home = () => {
 				<RecommendedServices />
 			</div>
 		</main>
-		</>
+	<WhatsAppButton/>
+	</>
 	);
 };
 

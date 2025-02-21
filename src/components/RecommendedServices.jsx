@@ -6,7 +6,6 @@ import { GridComponent } from './GridComponent'
 export const RecommendedServices = () => {
   return (
     <div>
-        <TitleComponent title={"Categorías"}/>
         <TitleComponent title={"Recomendados"}/>
         <GridComponent/>
     </div>
