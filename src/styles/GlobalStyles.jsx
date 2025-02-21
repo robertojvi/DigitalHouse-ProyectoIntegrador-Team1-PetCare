@@ -16,4 +16,10 @@ export const GlobalStyles = createGlobalStyle`
     color: #685044;
     font-size: 24px;
   }
+
+  h4{
+    font-size: 16px;
+  }
+
+ 
 `;
