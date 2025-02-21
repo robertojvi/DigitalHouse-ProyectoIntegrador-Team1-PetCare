@@ -43,6 +43,11 @@ export const NameContainer = styled.div`
     font-weight: 600;
     font-size: 14px
   }
+
+  @media (max-width: 767px) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
 `;
 
 export const ExcerptContainer = styled.div`
@@ -57,6 +62,11 @@ export const ExcerptContainer = styled.div`
     font-weight: 400;
     font-size: 14px;
   }
+
+  @media (max-width: 767px) {
+      align-items: flex-start;
+      text-align: left;
+    }
   `;
 
   export const CTAContainer = styled.div`
