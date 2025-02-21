@@ -4,7 +4,6 @@
  * - Fixed positioning at top of viewport
  * - Contains TopBar for user actions
  * - Logo component for branding
- * - SearchBox for search functionality
  * - Responsive menu with hamburger toggle
  * - State management for menu open/close
  */
@@ -20,7 +19,6 @@ import "../../styles/header/menu.css";
 // Components
 import TopBar from "./TopBar";
 import Logo from "./Logo";
-import SearchBox from "../SearchBox";
 import Menu from "./Menu";
 
 const Header = () => {
@@ -36,7 +34,6 @@ const Header = () => {
 				<TopBar />
 				<header className="app-header">
 					<Logo />
-					<SearchBox />
 					<nav className="nav-section">
 						<button
 							className="menu-toggle"
