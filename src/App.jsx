@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // Styles
 import "./styles/common/app.css";
 import Footer from './components/Footer'
+import { GlobalStyles } from './styles/GlobalStyles';
 
 // Ruta padre
 import Layout from "./layouts/Layout";
@@ -25,6 +26,7 @@ import AddProductForm from "./components/admin/AddProductForm";
 function App() {
 	return (
 <>
+	<GlobalStyles />
 	<Routes>
 		{/* Padre de las rutas anidadas */}
 		<Route path="/" element={<Layout />}>
@@ -46,7 +48,6 @@ function App() {
 			/>
 		</Route>
 	</Routes>
-	<Footer />
 </>
 	);
 }
