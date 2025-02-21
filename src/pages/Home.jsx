@@ -58,6 +58,7 @@ const categorias = [
 ]
 
 const Home = () => {
+
 	return (
 		<>
 		<Hero/>
