@@ -8,6 +8,7 @@ import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
+import { SearchComponent } from "../components/shared/SearchComponent";
 
 /**
  * Home Page Component
@@ -66,6 +67,8 @@ const Home = () => {
     <Hero/>
 		<main className="mainContainer">
 		
+		<SearchComponent/>
+
 		<TitleComponent title={"Categorías"}/>
     	<div className="categories-container">
         {categorias.map((categoria) => (
