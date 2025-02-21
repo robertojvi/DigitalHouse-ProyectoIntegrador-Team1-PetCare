@@ -1,5 +1,6 @@
 // Styles
 // import "../styles/home.css";
+import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
 import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
@@ -58,23 +59,19 @@ const categorias = [
 ]
 
 const Home = () => {
-
 	return (
-		<>
-		<Hero/>
-		
+    <>
+    <Hero/>
 		<main className="mainContainer">
-			<h2><PiPawPrintLight /> Categorias</h2>
-			<div className="categories-container">
-			{categorias.map((categoria) => (
-					<Categoria nombre={categoria.nombre} image={categoria.image} />
-				))
-			}
+    	<div className="categories-container">
+        {categorias.map((categoria) => (
+            <Categoria nombre={categoria.nombre} image={categoria.image} />
+          ))
+        }
 			</div>
-
-			<h1>Bienvenido a Pet Care</h1>
-			<ServicesList />
-
+			<div>
+				<RecommendedServices />
+			</div>
 		</main>
 		</>
 	);
