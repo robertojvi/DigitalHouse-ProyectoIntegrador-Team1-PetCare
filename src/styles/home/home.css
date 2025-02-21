@@ -49,8 +49,9 @@ main {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding-top: calc(
-		var(--top-bar-height, 40px) + var(--header-height, 80px) + 2rem
+		var(--top-bar-height, 20px) + var(--header-height, 80px) + 0rem
 	);
+	margin-bottom: 20px;
 }
 
 /* Media queries for responsive layout */
