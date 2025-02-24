@@ -12,6 +12,8 @@ import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 import AddProductForm from "./components/admin/AddProductForm";
 import ServiceDetail from "./pages/ServiceDetail";
+import { AuthProvider } from "./auth/AuthContext";
+import Header from "./components/header/Header";
 // import Contact from "./Pages/Contact";
 // import Detail from "./Pages/Detail";
 // import Favs from "./Pages/Favs";
@@ -25,28 +27,31 @@ import ServiceDetail from "./pages/ServiceDetail";
  */
 function App() {
 	return (
-		<Routes>
-			{/* Padre de las rutas anidadas */}
-			<Route path="/" element={<Layout />}>
-				{/* Rutas anidadas hijas */}
-				<Route path="/" element={<Home />} />
-				<Route path="/administracion" element={<AddProductForm />} />
-				<Route path="/service" element={<ServiceDetail />} />
+		<AuthProvider>
+			<Header/>
+			<Routes>
+				{/* Padre de las rutas anidadas */}
+				<Route path="/" element={<Layout />}>
+					{/* Rutas anidadas hijas */}
+					<Route path="/" element={<Home />} />
+					<Route path="/administracion" element={<AddProductForm />} />
+					<Route path="/service" element={<ServiceDetail />} />
 
-				{/* <Route path="/contact" element={<Contact />} />
-			<Route path="/dentist/:id" element={<Detail />} />
-			<Route path="/favs" element={<Favs />} /> */}
+					{/* <Route path="/contact" element={<Contact />} />
+				<Route path="/dentist/:id" element={<Detail />} />
+				<Route path="/favs" element={<Favs />} /> */}
 
-				<Route
-					path="*"
-					element={
-						<h1 className="mainContainer">
-							Page not found - Error 404
-						</h1>
-					}
-				/>
-			</Route>
-		</Routes>
+					<Route
+						path="*"
+						element={
+							<h1 className="mainContainer">
+								Page not found - Error 404
+							</h1>
+						}
+					/>
+				</Route>
+			</Routes>
+		</AuthProvider>	
 	);
 }
 

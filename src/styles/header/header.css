@@ -26,6 +26,7 @@
   justify-content: space-between;
   align-items: center;
   height: var(--header-height, 80px);
+  gap: 1rem;
 }
 
 /* Añadimos padding al logo */
@@ -37,6 +38,19 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.header-user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.header-user button{
+  padding: 3px 7px;
+  border-radius: 7px;
+  cursor: pointer;
 }
 
 /* Media queries */
@@ -60,3 +74,12 @@
     height: var(--header-height, 50px);
   }
 }
+
+
+span{
+  word-wrap: break-word;
+}
+
+
+
+
