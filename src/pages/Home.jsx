@@ -1,10 +1,14 @@
 // Styles
 // import "../styles/home.css";
+import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
 import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
 import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
+import { TitleComponent } from '../components/shared/TitleComponent'
+import WhatsAppButton from "../components/shared/WhatsAppComponent";
+import { SearchComponent } from "../components/shared/SearchComponent";
 
 /**
  * Home Page Component
@@ -58,25 +62,26 @@ const categorias = [
 ]
 
 const Home = () => {
-
 	return (
-		<>
-		<Hero/>
-		
+    <>
+    <Hero/>
 		<main className="mainContainer">
-			<h2><PiPawPrintLight /> Categorias</h2>
-			<div className="categories-container">
-			{categorias.map((categoria) => (
-					<Categoria nombre={categoria.nombre} image={categoria.image} />
-				))
-			}
+		
+		<SearchComponent/>
+
+		<TitleComponent title={"Categorías"}/>
+    	<div className="categories-container">
+        {categorias.map((categoria) => (
+            <Categoria nombre={categoria.nombre} image={categoria.image} />
+          ))
+        }
 			</div>
-
-			<h1>Bienvenido a Pet Care</h1>
-			<ServicesList />
-
+			<div>
+				<RecommendedServices />
+			</div>
 		</main>
-		</>
+	<WhatsAppButton/>
+	</>
 	);
 };
 
