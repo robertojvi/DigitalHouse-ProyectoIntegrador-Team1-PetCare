@@ -40,6 +40,15 @@
   margin-left: auto;
 }
 
+.header-user-noA{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
 .header-user{
   display: flex;
   flex-direction: column;
@@ -51,13 +60,11 @@
   max-width: 200px;
 
   .logout{
-    /* position: absolute;
-    bottom: -2rem;
-    right: 1rem; */
     padding: 5px 1rem;
     width: 150px;
     background: none;
     color: #2d3e42;
+    border: none;
   } 
 }
 
@@ -78,7 +85,7 @@
   gap: .5rem;
 }
 
-.header-user button{
+.header-user-noA button{
   background-color: #2d3e42; 
   color: white;
   font-weight: bold;

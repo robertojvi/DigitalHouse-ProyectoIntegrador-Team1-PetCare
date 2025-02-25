@@ -45,7 +45,7 @@ const Header = () => {
               {/* <Menu /> */}
               {!auth.token ? (
               <>
-                <div className="header-user">
+                <div className="header-user-noA">
                   <button onClick={() => openLoginModal(false)}>Crear cuenta</button>
                   <button onClick={() => openLoginModal(true)}>Iniciar sesión</button>
                 </div>
