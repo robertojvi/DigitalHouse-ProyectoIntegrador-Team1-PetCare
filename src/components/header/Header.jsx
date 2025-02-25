@@ -52,11 +52,13 @@ const Header = () => {
               </>
             ) : (
               <div className="header-user">
-              <CiUser/> Bienvenid@ {auth.nombre}
-            
-              <button onClick={logout}>
-                <CiLogout/> Cerrar Sesión
-              </button>
+                <div className="name-avatar">
+                  <span className="avatar">{auth.nombre[0]}{auth.apellido[0]}</span>
+                  <h3>{auth.nombre}</h3>
+                </div>
+                <button className="logout" onClick={logout}>
+                  <CiLogout/> Cerrar Sesión
+                </button>
             </div>
             )}              
             </div>

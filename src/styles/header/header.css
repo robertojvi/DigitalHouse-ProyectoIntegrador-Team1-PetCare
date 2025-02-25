@@ -42,15 +42,60 @@
 
 .header-user{
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 5px;
+  position: relative;
+  max-width: 200px;
+
+  .logout{
+    /* position: absolute;
+    bottom: -2rem;
+    right: 1rem; */
+    padding: 5px 1rem;
+    width: 150px;
+    background: none;
+    color: #2d3e42;
+  } 
+}
+
+.avatar{
+  border-radius: 50%;
+  background-color: var(--palet-color-brown);
+  color: white;
+  padding: 5px 7px;
+  font-weight: bolder;
+  font-size: 15px;
+  margin-right: .2rem;
+}
+
+.name-avatar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
 }
 
 .header-user button{
-  padding: 3px 7px;
-  border-radius: 7px;
+  background-color: #2d3e42; 
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 27px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &:hover {
+    background-color: #1f2c2f;
+  }
 }
 
 /* Media queries */

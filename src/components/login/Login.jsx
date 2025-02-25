@@ -34,6 +34,7 @@ const Login = ({ isLoginValue }) => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
       localStorage.setItem("userName", response.data.nombre || "Usuario");
+      localStorage.setItem("lastname", response.data.apellido || "Apellido");
 
       if (response.data.message != null) {
         toast.success(response.data.message, {
@@ -105,6 +106,15 @@ const Login = ({ isLoginValue }) => {
                   {...register("nombre", { required: "El nombre es obligatorio" })}
                 />
                 {errors.nombre && <p className="error">{errors.nombre.message}</p>}
+              </div>
+              <div>
+                <label>Apellido</label>
+                <input 
+                  type="text" 
+                  placeholder="Ingresa tu apellido" 
+                  {...register("apellido", { required: "El apellido es obligatorio" })}
+                />
+                {errors.apellido && <p className="error">{errors.apellido.message}</p>}
               </div>
               <div>
                 <label>Teléfono</label>
