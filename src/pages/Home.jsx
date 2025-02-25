@@ -1,7 +1,13 @@
 // Styles
 // import "../styles/home.css";
+import { RecommendedServices } from "../components/RecommendedServices";
+import Categoria from "../components/categoria/Categoria";
+import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
+import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
+import { TitleComponent } from '../components/shared/TitleComponent'
+import WhatsAppButton from "../components/shared/WhatsAppComponent";
 
 /**
  * Home Page Component
@@ -47,12 +53,32 @@ import ServicesList from "../components/services/ServicesList";
  * - /src/routes/index.jsx - Route configuration
  */
 
+const categorias = [
+	{nombre: "Cuidado en casa", image:"/categoria1.png"}, 
+	{nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
+	{nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
+
+]
+
 const Home = () => {
 	return (
+    <>
+    <Hero/>
 		<main className="mainContainer">
-			<h1>Bienvenido a Pet Care</h1>
-			<ServicesList />
+		
+		<TitleComponent title={"Categorías"}/>
+    	<div className="categories-container">
+        {categorias.map((categoria) => (
+            <Categoria nombre={categoria.nombre} image={categoria.image} />
+          ))
+        }
+			</div>
+			<div>
+				<RecommendedServices />
+			</div>
 		</main>
+	<WhatsAppButton/>
+	</>
 	);
 };
 

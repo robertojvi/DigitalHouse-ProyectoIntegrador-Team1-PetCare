@@ -43,7 +43,7 @@ main {
 .mainContainer {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	/* align-items: flex-start; */
 	padding: 2rem;
 	width: 100%;
 	max-width: 1200px;
@@ -86,10 +86,20 @@ main {
 	align-items: flex-start;
 	gap: 2rem;
 	width: 100%;
+	position: relative;
 }
 
 .pet-image {
 	width: 200px;
 	height: auto;
 	object-fit: cover;
+}
+
+.categories-container{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }

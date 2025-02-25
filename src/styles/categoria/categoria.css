@@ -1,0 +1,31 @@
+.category-card{
+    position: relative;
+    height: auto;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.category-card img{
+    object-fit: cover;
+	height: 290px;
+    width: 290px;
+}
+
+.category-card button{
+	background: #F2BE5E;
+	font-size: 15px;
+	color: #685044;
+	padding: 1rem 2.5rem;
+	border-radius: 30px;
+	border: none;
+	font-weight: 700;
+    cursor: pointer;
+}
+
+.category-card button:hover{
+    background-color: #f5b540;
+}
