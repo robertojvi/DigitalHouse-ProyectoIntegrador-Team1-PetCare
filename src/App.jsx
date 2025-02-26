@@ -10,7 +10,7 @@ import AddProductForm from "./components/admin/AddProductForm";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
 import { AuthProvider } from "./auth/AuthContext";
-
+import { GlobalStyles } from './styles/GlobalStyles';
 /**
  * Main application component that handles routing
  * Uses React Router for navigation
@@ -21,6 +21,7 @@ import { AuthProvider } from "./auth/AuthContext";
 function App() {
 	return (
 		<AuthProvider>
+			<GlobalStyles />
 			<Routes>
 				{/* Padre de las rutas anidadas */}
 				<Route path="/" element={<Layout />}>

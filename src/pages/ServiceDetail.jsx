@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ServiceDetailImagesGrid from "../components/services/ServiceDetailImagesGrid";
+import { ServiceDetailInfo } from "../components/services/ServiceDetailInfo";
 
 const ServiceDetail = () => {
 	const { id } = useParams();
@@ -41,6 +42,7 @@ const ServiceDetail = () => {
 		<div className="mainContainer">
 			{/* <h2><PiPawPrintLight /> Servicio</h2> */}
 			<ServiceDetailImagesGrid images={service.images} />
+			<ServiceDetailInfo serviceInfo={service} />
 		</div>
 	);
 };
