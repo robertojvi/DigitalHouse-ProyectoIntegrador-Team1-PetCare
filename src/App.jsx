@@ -12,6 +12,7 @@ import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 import AddProductForm from "./components/admin/AddProductForm";
 import ServiceDetail from "./pages/ServiceDetail";
+import ServiceGallery from "./pages/ServiceGallery";
 // import Contact from "./Pages/Contact";
 // import Detail from "./Pages/Detail";
 // import Favs from "./Pages/Favs";
@@ -31,7 +32,8 @@ function App() {
 				{/* Rutas anidadas hijas */}
 				<Route path="/" element={<Home />} />
 				<Route path="/administracion" element={<AddProductForm />} />
-				<Route path="/service" element={<ServiceDetail />} />
+				<Route path="/service/:id" element={<ServiceDetail />} />
+				<Route path="/gallery" element={<ServiceGallery />} />
 
 				{/* <Route path="/contact" element={<Contact />} />
 			<Route path="/dentist/:id" element={<Detail />} />
