@@ -40,6 +40,13 @@
 	color: var(--palet-color-placeholder);
 }
 
+.search-component-ss{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+
 /* Media queries */
 @media screen and (width < 768px) {
 	.search-container {

@@ -18,25 +18,25 @@ export const SearchComponent = () => {
   return (
     <>
         <SearchInputsContainer>
-        <SelectService />
+          <div className='search-component-ss'>
+            <SelectService />
+              <DateTimeButton onClick={() => setShowPicker(!showPicker)} />
+                  {showPicker && (
+                      <DatePicker
+                      selectsRange={true}
+                      startDate={startDate}
+                      endDate={endDate}
+                      onChange={(update) => {
+                        setDateRange(update);
+                      }}
+                      withPortal
+                    />
+                  )}
+            
 
-
-        <div>
-        <DateTimeButton onClick={() => setShowPicker(!showPicker)} />
-            {showPicker && (
-                <DatePicker
-                selectsRange={true}
-                startDate={startDate}
-                endDate={endDate}
-                onChange={(update) => {
-                  setDateRange(update);
-                }}
-                withPortal
-              />
-            )}
-        </div>
-
-        <ButtonSearch/>
+            <ButtonSearch/>
+          </div>
+          
         </SearchInputsContainer>
 
     </>
