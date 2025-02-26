@@ -65,6 +65,11 @@
     background: none;
     color: #2d3e42;
     border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
   } 
 }
 
