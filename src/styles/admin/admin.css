@@ -5,6 +5,7 @@
   margin-left: auto;
   margin-right: auto;
   font-family: "Nunito", sans-serif;
+  background-color: #fffeff;
 }
 
 .admin-content {
@@ -15,7 +16,7 @@
 }
 
 .admin-section {
-  background-color: white;
+  background-color: #fffeff;
   padding: 1.5rem;
   border-radius: 0;
   box-shadow: none;
@@ -33,11 +34,13 @@
   background-color: #314549;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 1rem;
   font-family: "Nunito", sans-serif;
+  min-width: 200px;
+  width: fit-content;
 }
 
 .admin-table-container {

@@ -54,7 +54,7 @@ const Admin = () => {
       <div className="admin-content">
         <section className="admin-section">
           <h2>Productos</h2>
-          <button className="admin-button">+ Añadir Producto</button>
+          <button className="admin-button">+ Añadir Productos</button>
           <div className="admin-table-container">
             <table className="admin-table">
               <thead>
@@ -94,7 +94,7 @@ const Admin = () => {
 
         <section className="admin-section">
           <h2>Usuarios</h2>
-          <button className="admin-button">Usuario</button>
+          <button className="admin-button">Usuarios</button>
           <div className="admin-table-container">
             <table className="admin-table">
               <thead>
@@ -136,7 +136,7 @@ const Admin = () => {
 
         <section className="admin-section">
           <h2>Categorías</h2>
-          <button className="admin-button">+ Añadir Categoría</button>
+          <button className="admin-button">+ Añadir Categorías</button>
           <div className="admin-table-container">
             <table className="admin-table">
               <thead>
