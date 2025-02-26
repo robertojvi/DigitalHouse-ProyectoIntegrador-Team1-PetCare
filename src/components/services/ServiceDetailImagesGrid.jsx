@@ -12,7 +12,7 @@ const ServiceDetailImagesGrid = ({ images }) => {
 	};
 
 	return (
-		<>
+		<div>
 			<div className="images-grid-container">
 				{/* Main image */}
 				<div className="main-image">
@@ -37,7 +37,7 @@ const ServiceDetailImagesGrid = ({ images }) => {
 					Ver más
 				</button>
 			</div>
-		</>
+		</div>
 	);
 };
 
