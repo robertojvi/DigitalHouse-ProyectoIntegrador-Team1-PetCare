@@ -1,23 +1,15 @@
-// Imports
 // React
 import { Routes, Route } from "react-router-dom";
 // Styles
 import "./styles/common/app.css";
-import Footer from "./components/Footer";
 
-// Ruta padre
+// Components
 import Layout from "./layouts/Layout";
-
-// Rutas hijas
 import Home from "./pages/Home";
 import AddProductForm from "./components/admin/AddProductForm";
 import ServiceDetail from "./pages/ServiceDetail";
-import { AuthProvider } from "./auth/AuthContext";
-import Header from "./components/header/Header";
 import ServiceGallery from "./pages/ServiceGallery";
-// import Contact from "./Pages/Contact";
-// import Detail from "./Pages/Detail";
-// import Favs from "./Pages/Favs";
+import { AuthProvider } from "./auth/AuthContext";
 
 /**
  * Main application component that handles routing
@@ -28,18 +20,22 @@ import ServiceGallery from "./pages/ServiceGallery";
  */
 function App() {
 	return (
-		<Routes>
-			{/* Padre de las rutas anidadas */}
-			<Route path="/" element={<Layout />}>
-				{/* Rutas anidadas hijas */}
-				<Route path="/" element={<Home />} />
-				<Route path="/administracion" element={<AddProductForm />} />
-				<Route path="/service/:id" element={<ServiceDetail />} />
-				<Route path="/gallery" element={<ServiceGallery />} />
+		<AuthProvider>
+			<Routes>
+				{/* Padre de las rutas anidadas */}
+				<Route path="/" element={<Layout />}>
+					{/* Rutas anidadas hijas */}
+					<Route path="/" element={<Home />} />
+					<Route
+						path="/administracion"
+						element={<AddProductForm />}
+					/>
+					<Route path="/service/:id" element={<ServiceDetail />} />
+					<Route path="/gallery" element={<ServiceGallery />} />
 
 					{/* <Route path="/contact" element={<Contact />} />
-				<Route path="/dentist/:id" element={<Detail />} />
-				<Route path="/favs" element={<Favs />} /> */}
+                    <Route path="/dentist/:id" element={<Detail />} />
+                    <Route path="/favs" element={<Favs />} /> */}
 
 					<Route
 						path="*"
@@ -51,7 +47,7 @@ function App() {
 					/>
 				</Route>
 			</Routes>
-		</AuthProvider>	
+		</AuthProvider>
 	);
 }
 
