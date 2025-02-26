@@ -6,7 +6,7 @@ import "./styles/common/app.css";
 // Components
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
-import AddProductForm from "./components/admin/AddProductForm";
+import Admin from "./pages/Admin";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
 import { AuthProvider } from "./auth/AuthContext";
@@ -29,7 +29,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route
 						path="/administracion"
-						element={<AddProductForm />}
+						element={<Admin />}
 					/>
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />
