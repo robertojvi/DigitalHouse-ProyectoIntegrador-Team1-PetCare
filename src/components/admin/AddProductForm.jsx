@@ -1,7 +1,6 @@
 // src/components/AddServiceForm.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PetCareLogo from "../../images/pet-care-logo-v2.png";
 import "../../styles/admin/registro.css";
 
 /*
@@ -15,9 +14,9 @@ Criterios de Aceptación:
 */
 
 const AddServiceForm = () => {
-	// Estados para manejar el formulario (CA3)
 	const [serviceName, setServiceName] = useState("");
 	const [serviceDescription, setServiceDescription] = useState("");
+	const [serviceCategory, setServiceCategory] = useState("");
 	const [serviceImages, setServiceImages] = useState([]);
 	const [previewImages, setPreviewImages] = useState([]);
 	const [error, setError] = useState("");
@@ -30,51 +29,55 @@ const AddServiceForm = () => {
 		setServiceDescription(e.target.value);
 	};
 
-	// Manejo de múltiples imágenes (CA4)
+	const handleCategoryChange = (e) => {
+		setServiceCategory(e.target.value);
+	};
+
 	const handleImageChange = (e) => {
 		const files = Array.from(e.target.files);
 		setServiceImages(files);
 
-		// Crear URLs de previsualización
-		const previews = files.map(file => URL.createObjectURL(file));
+		const previews = files.map((file) => URL.createObjectURL(file));
 		setPreviewImages(previews);
 	};
 
 	useEffect(() => {
 		return () => {
-			previewImages.forEach(url => URL.revokeObjectURL(url));
+			previewImages.forEach((url) => URL.revokeObjectURL(url));
 		};
 	}, [previewImages]);
 
-	// Manejo del envío del formulario (CA5)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const formData = new FormData();
 		formData.append("name", serviceName);
 		formData.append("description", serviceDescription);
+		formData.append("category", serviceCategory);
 		for (let i = 0; i < serviceImages.length; i++) {
 			formData.append("images", serviceImages[i]);
 		}
 
 		try {
-			// Envío a la base de datos (CA5)
-			const response = await axios.post("/api/services", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
+			const response = await axios.post(
+				"http://localhost:8080/api/v1/servicios",
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
 
-			// Limpiar el formulario después de un guardado exitoso
 			setServiceName("");
 			setServiceDescription("");
+			setServiceCategory("");
 			setServiceImages([]);
 			setPreviewImages([]);
 			setError("");
 
 			alert("Servicio agregado con éxito!");
 		} catch (err) {
-			// Manejo de error para nombres duplicados (CA6)
 			if (
 				err.response &&
 				err.response.data &&
@@ -89,13 +92,8 @@ const AddServiceForm = () => {
 
 	return (
 		<div className="mainContainer">
-			<div className="logoContainer">
-				<img src={PetCareLogo} alt="Pet Care Logo" className="logo" />
-			</div>
-			{/* Título del formulario (CA2) */}
 			<h2 className="title">Agregar Servicio</h2>
 			<form onSubmit={handleSubmit} className="form">
-				{/* Campos para información del servicio (CA3) */}
 				<div>
 					<label className="label">Nombre del Servicio</label>
 					<input
@@ -108,6 +106,30 @@ const AddServiceForm = () => {
 					/>
 				</div>
 				<div>
+					<label className="label">Categoría</label>
+					<select
+						value={serviceCategory}
+						onChange={handleCategoryChange}
+						required
+						className="input"
+					>
+						<optgroup label="En Personas">
+							<option value="Cuidadores">Cuidadores</option>
+							<option value="Peluqueros">Peluqueros</option>
+							<option value="Paseadores">Paseadores</option>
+							<option value="Veterinarios y/o expertos">
+								Veterinarios y/o expertos
+							</option>
+						</optgroup>
+						<optgroup label="En Servicios">
+							<option value="Cuidado en casa">Cuidado en casa</option>
+							<option value="Spa">Spa</option>
+							<option value="Paseos">Paseos</option>
+							<option value="Asesorías">Asesorías</option>
+						</optgroup>
+					</select>
+				</div>
+				<div>
 					<label className="label">Descripción</label>
 					<textarea
 						value={serviceDescription}
@@ -118,7 +140,6 @@ const AddServiceForm = () => {
 						rows="4"
 					/>
 				</div>
-				{/* Campo para subir múltiples imágenes (CA4) */}
 				<div>
 					<label className="label">Imágenes del Servicio</label>
 					<label className="fileInputLabel">
@@ -140,7 +161,6 @@ const AddServiceForm = () => {
 						))}
 					</div>
 				</div>
-				{/* Mensaje de error para nombres duplicados (CA6) */}
 				{error && <div className="error">{error}</div>}
 				<button type="submit" className="button">
 					Guardar Servicio

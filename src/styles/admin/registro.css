@@ -13,7 +13,8 @@
 }
 
 /* Aseguramos que el html y body ocupen todo el ancho */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -73,13 +74,14 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #030303;
   width: 100%;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
+  /* Añadir esta línea para agregar padding top */
 }
 
-.form > div {
+.form>div {
   width: 80%;
   margin-bottom: 15px;
   display: flex;
@@ -95,6 +97,8 @@ body {
   width: 100%;
   color: #314549;
   background-color: #FFFEFF;
+  height: 40px;
+  /* Añadir esta línea para incrementar el alto */
 }
 
 .button {
@@ -106,6 +110,9 @@ body {
   cursor: pointer;
   margin-top: 20px;
   width: fit-content;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
 }
 
 .error {
@@ -121,12 +128,17 @@ body {
 
 .title {
   color: #314549;
+  text-align: center;
+  width: 100%;
+  margin-top: 40px;
+  /* Añadir esta línea para desplazar el texto hacia abajo */
 }
 
 .label {
   color: #030303;
   margin-bottom: 8px;
   align-self: flex-start;
+  /* Cambiado de center a flex-start */
 }
 
 .fileInput {
@@ -141,6 +153,11 @@ body {
   color: #FFFEFF;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  align-self: center;
+  /* Añadir esta línea */
 }
 
 .fileInputLabel:hover {
@@ -169,15 +186,35 @@ body {
   object-fit: cover;
 }
 
+.form .logoContainer {
+  width: 150px;
+  /* Añadir esta línea */
+  padding: 0;
+  /* Añadir esta línea */
+  margin: 0 auto 20px auto;
+  /* Añadir esta línea para centrar el contenedor */
+}
+
+.form .logo {
+  width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Media Queries */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
