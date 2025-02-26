@@ -10,7 +10,7 @@ import Layout from "./layouts/Layout";
 
 // Rutas hijas
 import Home from "./pages/Home";
-import AddProductForm from "./components/admin/AddProductForm";
+import Admin from "./pages/Admin";
 import ServiceDetail from "./pages/ServiceDetail";
 // import Contact from "./Pages/Contact";
 // import Detail from "./Pages/Detail";
@@ -30,7 +30,7 @@ function App() {
 			<Route path="/" element={<Layout />}>
 				{/* Rutas anidadas hijas */}
 				<Route path="/" element={<Home />} />
-				<Route path="/administracion" element={<AddProductForm />} />
+				<Route path="/administracion" element={<Admin />} />
 				<Route path="/service" element={<ServiceDetail />} />
 
 				{/* <Route path="/contact" element={<Contact />} />
