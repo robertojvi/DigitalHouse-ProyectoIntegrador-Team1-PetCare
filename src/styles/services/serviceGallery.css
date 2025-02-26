@@ -1,0 +1,112 @@
+/* Desktop and Tablet Layout Pattern */
+.gallery-container {
+	padding: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.gallery-grid {
+	display: grid;
+	gap: 1rem;
+	margin-top: 24px;
+
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-item {
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	height: 300px;
+}
+
+/* Section 1: 2 left + 1 right (full height) */
+.gallery-item:nth-child(1),
+.gallery-item:nth-child(2) {
+	grid-column: 1;
+	height: 300px;
+}
+
+.gallery-item:nth-child(3) {
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	height: calc(600px + 1rem);
+}
+
+/* Section 2: Full width */
+.gallery-item:nth-child(4) {
+	grid-column: 1 / -1;
+	height: 400px;
+}
+
+/* Section 3: 1 left + 2 right */
+.gallery-item:nth-child(5) {
+	grid-column: 1;
+	grid-row: span 2;
+	height: calc(600px + 1rem);
+}
+
+.gallery-item:nth-child(6),
+.gallery-item:nth-child(7) {
+	grid-column: 2;
+	height: 300px;
+}
+
+/* Section 4: Full width */
+.gallery-item:nth-child(8) {
+	grid-column: 1 / -1;
+	height: 400px;
+}
+
+.gallery-item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.back-button {
+	background: none;
+	border: none;
+	padding: 0.5rem;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.back-button img {
+	width: 42px;
+	height: 42px;
+}
+
+/* Mobile Layout */
+@media only screen and (width < 767px) {
+	.gallery-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.gallery-container {
+		padding: 1rem;
+	}
+
+	.gallery-item,
+	.gallery-item:nth-child(1),
+	.gallery-item:nth-child(2),
+	.gallery-item:nth-child(3),
+	.gallery-item:nth-child(4),
+	.gallery-item:nth-child(5),
+	.gallery-item:nth-child(6),
+	.gallery-item:nth-child(7),
+	.gallery-item:nth-child(8) {
+		grid-column: 1;
+		grid-row: auto;
+		height: 250px;
+	}
+}

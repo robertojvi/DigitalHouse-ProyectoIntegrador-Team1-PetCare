@@ -13,6 +13,7 @@
 	align-items: center;
 	will-change: filter;
 	transition: filter 300ms;
+	width: auto;
 }
 
 .logo:hover {
@@ -34,6 +35,12 @@
 @media screen and (width < 768px) {
 	.logo img {
 		max-width: 80px;
+	}
+}
+
+@media screen and (width <= 375px) {
+	span {
+		max-width: auto;
 	}
 }
 

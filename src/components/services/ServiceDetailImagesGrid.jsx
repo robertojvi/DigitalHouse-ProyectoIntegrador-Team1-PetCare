@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../styles/services/serviceDetailImagesGrid.css";
 
 const ServiceDetailImagesGrid = ({ images }) => {
-	const [showGallery, setShowGallery] = useState(false);
+	const navigate = useNavigate();
 
 	const handleViewMore = () => {
-		setShowGallery(true);
+		navigate("/gallery", { state: { images } });
+		window.scrollTo(0, 0); // Add scroll to top
 	};
 
 	return (
-		<>
+		<div>
 			<div className="images-grid-container">
 				{/* Main image */}
 				<div className="main-image">
@@ -35,14 +37,7 @@ const ServiceDetailImagesGrid = ({ images }) => {
 					Ver más
 				</button>
 			</div>
-
-			{/* Gallery Modal - To be implemented */}
-			{showGallery && (
-				<div className="gallery-modal">
-					{/* Gallery implementation */}
-				</div>
-			)}
-		</>
+		</div>
 	);
 };
 
