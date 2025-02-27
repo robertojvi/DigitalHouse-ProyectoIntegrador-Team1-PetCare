@@ -8,6 +8,7 @@ import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
+import { SearchComponent } from "../components/shared/SearchComponent";
 
 /**
  * Home Page Component
@@ -54,9 +55,9 @@ import WhatsAppButton from "../components/shared/WhatsAppComponent";
  */
 
 const categorias = [
-	{nombre: "Cuidado en casa", image:"/categoria1.png"}, 
-	{nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
-	{nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
+	{id: 1, nombre: "Cuidado en casa", image:"/categoria1.png"}, 
+	{id: 2, nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
+	{id: 3, nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
 
 ]
 
@@ -66,10 +67,12 @@ const Home = () => {
     <Hero/>
 		<main className="mainContainer">
 		
+		<SearchComponent/>
+
 		<TitleComponent title={"Categorías"}/>
     	<div className="categories-container">
         {categorias.map((categoria) => (
-            <Categoria nombre={categoria.nombre} image={categoria.image} />
+            <Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
           ))
         }
 			</div>

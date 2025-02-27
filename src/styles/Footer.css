@@ -71,14 +71,35 @@
 .footer-copyright {
   width: 100%;
   background-color: #685044;
-  padding: 12px 0;
-  text-align: center;
+  padding: 12px 2rem;
 }
 
 .footer-copyright p {
   margin: 0;
   color: #ffffff;
   font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Nuevo estilo para el contenedor del texto */
+.copyright-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nuevo estilo para los íconos sociales */
+.social-icons {
+  position: absolute;
+  right: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 h4 {

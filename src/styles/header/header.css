@@ -26,6 +26,7 @@
   justify-content: space-between;
   align-items: center;
   height: var(--header-height, 80px);
+  gap: 1rem;
 }
 
 /* Añadimos padding al logo */
@@ -37,6 +38,76 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.header-user-noA{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
+.header-user{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  max-width: 200px;
+
+  .logout{
+    padding: 5px 1rem;
+    width: 150px;
+    background: none;
+    color: #2d3e42;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+  } 
+}
+
+.avatar{
+  border-radius: 50%;
+  background-color: var(--palet-color-brown);
+  color: white;
+  padding: 5px 7px;
+  font-weight: bolder;
+  font-size: 15px;
+  margin-right: .2rem;
+}
+
+.name-avatar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.header-user-noA button{
+  background-color: #2d3e42; 
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 27px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &:hover {
+    background-color: #1f2c2f;
+  }
 }
 
 /* Media queries */
@@ -60,3 +131,12 @@
     height: var(--header-height, 50px);
   }
 }
+
+
+span{
+  word-wrap: break-word;
+}
+
+
+
+
