@@ -6,11 +6,11 @@ import "./styles/common/app.css";
 // Components
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
-import AddProductForm from "./components/admin/AddProductForm";
+import Admin from "./pages/Admin";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
 import { AuthProvider } from "./auth/AuthContext";
-
+import { GlobalStyles } from './styles/GlobalStyles';
 /**
  * Main application component that handles routing
  * Uses React Router for navigation
@@ -21,6 +21,7 @@ import { AuthProvider } from "./auth/AuthContext";
 function App() {
 	return (
 		<AuthProvider>
+			<GlobalStyles />
 			<Routes>
 				{/* Padre de las rutas anidadas */}
 				<Route path="/" element={<Layout />}>
@@ -28,7 +29,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route
 						path="/administracion"
-						element={<AddProductForm />}
+						element={<Admin />}
 					/>
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />

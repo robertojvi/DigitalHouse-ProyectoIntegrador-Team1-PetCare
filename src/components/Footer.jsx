@@ -2,7 +2,12 @@ import React from "react";
 import { PiWhatsappLogo } from "react-icons/pi";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
-import { FaRegCopyright, FaTiktok, FaFacebook, FaInstagram } from "react-icons/fa";
+import {
+  FaRegCopyright,
+  FaTiktok,
+  FaFacebook,
+  FaInstagram,
+} from "react-icons/fa";
 import "../styles/Footer.css";
 import petCareLogo from "../images/pet-care-logo-v2.png";
 
@@ -55,36 +60,13 @@ const Footer = () => {
       <div className="footer-copyright">
         <p>
           <div className="copyright-text">
-            <FaRegCopyright style={{ 
-              fontSize: '14px', 
-              marginRight: '5px',
-              color: '#ffffff'
-            }} />
-            <span className="desktop-only">{currentYear} </span>
-            Todos los derechos reservados Outstanding11
+            <FaRegCopyright style={{ fontSize: "14px", marginRight: "15px" }} />{" "}
+            2025 Todos los derechos reservados Pet Care
           </div>
           <div className="social-icons">
-            <FaTiktok style={{ 
-              fontSize: '16px',
-              color: '#685044',
-              backgroundColor: '#ffffff',
-              padding: '3px',
-              borderRadius: '50%'
-            }} />
-            <FaFacebook style={{ 
-              fontSize: '16px',
-              color: '#685044',
-              backgroundColor: '#ffffff',
-              padding: '3px',
-              borderRadius: '50%'
-            }} />
-            <FaInstagram style={{ 
-              fontSize: '16px',
-              color: '#685044',
-              backgroundColor: '#ffffff',
-              padding: '3px',
-              borderRadius: '50%'
-            }} />
+            <FaTiktok style={{ color: 'white', fontSize: '16px' }} />
+            <FaFacebook style={{ color: 'white', fontSize: '16px' }} />
+            <FaInstagram style={{ color: 'white', fontSize: '16px' }} />
           </div>
         </p>
       </div>
