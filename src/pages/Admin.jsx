@@ -6,6 +6,7 @@ import AddProductForm from "../components/forms/AddProductForm";
 
 const Admin = () => {
 	const [showAddForm, setShowAddForm] = useState(false);
+	const [error, setError] = useState(null);
 
 	const productos = [
 		{ id: 1, tipo: "Paseador", nombre: "Camila Pérez" },
@@ -37,8 +38,17 @@ const Admin = () => {
 		console.log(`Eliminando ${tipo}:`, item);
 	};
 
-	const handleAddProduct = (productData) => {
-		console.log("Nuevo producto:", productData);
+	const handleAddProduct = async (productData) => {
+		try {
+			// Aquí iría la llamada a la API
+			console.log("Nuevo producto:", productData);
+			// await apiService.createProduct(productData);
+			setShowAddForm(false);
+			setError(null);
+		} catch (error) {
+			setError("Error al crear el producto. Por favor, intente nuevamente.");
+			console.error("Error en la creación del producto:", error);
+		}
 	};
 
 	return (
@@ -56,6 +66,8 @@ const Admin = () => {
 				<span className="breadcrumb-current">Administración</span>
 			</div>
 
+			{error && <div className="error-message">{error}</div>}
+
 			<div className="admin-content">
 				<section className="admin-section">
 					<h2>Productos</h2>
@@ -64,7 +76,10 @@ const Admin = () => {
 					</button>
 					{showAddForm && (
 						<AddProductForm
-							onClose={() => setShowAddForm(false)}
+							onClose={() => {
+								setShowAddForm(false);
+								setError(null);
+							}}
 							onSubmit={handleAddProduct}
 						/>
 					)}
