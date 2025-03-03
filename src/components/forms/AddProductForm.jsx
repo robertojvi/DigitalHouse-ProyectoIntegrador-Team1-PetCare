@@ -93,6 +93,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 		description: "",
 		price: "",
 		category: "",
+		categoryName: "", // Added to store category name
 		images: [],
 	});
 
@@ -142,7 +143,21 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 
 		setIsSubmitting(true);
 		try {
-			const nuevoServicio = await crearServicio(formData);
+			// This will be an array of image URLs from the server
+			const imageUrls = await crearServicio(formData);
+			
+			// Create the complete service object with the returned image URLs
+			const nuevoServicio = {
+				nombre: formData.name,
+				descripcion: formData.description,
+				precio: formData.price,
+				categoria: {
+					id_categoria: parseInt(formData.category),
+					nombre: formData.categoryName
+				},
+				imagenes: imageUrls
+			};
+
 			await onSubmit(nuevoServicio);
 			onClose();
 		} catch (error) {
@@ -202,6 +217,17 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 			...prev,
 			images: prev.images.filter((_, i) => i !== index),
 		}));
+	};
+
+	// Update the category selection handler
+	const handleCategoryChange = (e) => {
+		const selectedOption = e.target.options[e.target.selectedIndex];
+		setFormData(prev => ({
+			...prev,
+			category: e.target.value,
+			categoryName: selectedOption.text
+		}));
+		setErrors({ ...errors, category: "" });
 	};
 
 	return (
@@ -266,11 +292,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							<Select
 								id="productCategory"
 								value={formData.category}
-								onChange={(e) => {
-									console.log("Selected category:", e.target.value);
-									setFormData({ ...formData, category: e.target.value });
-									setErrors({ ...errors, category: "" });
-								}}
+								onChange={handleCategoryChange}
 								required
 								disabled={isLoadingCategorias}
 							>
