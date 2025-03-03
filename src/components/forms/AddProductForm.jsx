@@ -69,6 +69,8 @@ const FileInputLabel = styled.label`
 	border-radius: 50px; // Updated to 50%
 	cursor: pointer;
 	text-align: center;
+	font-size: 14px;
+	font-weight: 700;
 
 	&:hover {
 		background: #253538; // Darker shade for hover state
@@ -206,7 +208,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						<Input
 							id="productName"
 							type="text"
-							placeholder="Nombre del producto"
+							placeholder="Ingrese el nombre del producto"
 							value={formData.name}
 							onChange={(e) => {
 								setFormData({ ...formData, name: e.target.value });
@@ -221,7 +223,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						<Label htmlFor="productDescription">Descripción</Label>
 						<TextArea
 							id="productDescription"
-							placeholder="Descripción"
+							placeholder="Ingrese la descripción"
 							value={formData.description}
 							onChange={(e) => {
 								setFormData({ ...formData, description: e.target.value });
@@ -239,7 +241,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						<Input
 							id="productPrice"
 							type="number"
-							placeholder="Precio"
+							placeholder="Ingrese el Precio"
 							value={formData.price}
 							onChange={(e) => {
 								setFormData({ ...formData, price: e.target.value });
