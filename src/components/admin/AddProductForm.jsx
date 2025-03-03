@@ -1,6 +1,7 @@
 // src/components/AddServiceForm.jsx
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import "axios";
 import PetCareLogo from "../../images/pet-care-logo-v2.png";
 import "../../styles/admin/registro.css";
 
@@ -59,11 +60,6 @@ const AddServiceForm = () => {
 
 		try {
 			// Envío a la base de datos (CA5)
-			const response = await axios.post("/api/services", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
 
 			// Limpiar el formulario después de un guardado exitoso
 			setServiceName("");

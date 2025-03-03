@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 // Styles
 import "./styles/common/app.css";
+import "./styles/GlobalStyles.css";
 
 // Components
 import Layout from "./layouts/Layout";
@@ -10,7 +11,7 @@ import Admin from "./pages/Admin";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
 import { AuthProvider } from "./auth/AuthContext";
-import { GlobalStyles } from './styles/GlobalStyles';
+
 /**
  * Main application component that handles routing
  * Uses React Router for navigation
@@ -21,16 +22,12 @@ import { GlobalStyles } from './styles/GlobalStyles';
 function App() {
 	return (
 		<AuthProvider>
-			<GlobalStyles />
 			<Routes>
 				{/* Padre de las rutas anidadas */}
 				<Route path="/" element={<Layout />}>
 					{/* Rutas anidadas hijas */}
 					<Route path="/" element={<Home />} />
-					<Route
-						path="/administracion"
-						element={<Admin />}
-					/>
+					<Route path="/administracion" element={<Admin />} />
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />
 
@@ -41,9 +38,7 @@ function App() {
 					<Route
 						path="*"
 						element={
-							<h1 className="mainContainer">
-								Page not found - Error 404
-							</h1>
+							<h1 className="mainContainer">Page not found - Error 404</h1>
 						}
 					/>
 				</Route>
