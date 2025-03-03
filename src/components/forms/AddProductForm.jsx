@@ -1,132 +1,87 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { crearServicio } from "../../services/serviciosService";
-import { obtenerCategorias } from "../../services/categoriasService";
 import petCareLogo from "../../images/pet-care-logo-v2.png";
+import { obtenerCategorias } from "../../services/categoriasService";
+import {
+	FormWrapper,
+	FormContainer,
+	Overlay,
+	Form,
+	FormGroup,
+	Input,
+	TextArea,
+	ButtonGroup,
+	Button,
+	ErrorMessage,
+	LogoContainer,
+	Label,
+	Select,
+} from "../../styles/AddProductForm.styles";
+import styled from "styled-components";
 
-const FormWrapper = styled.div`
-	font-family: "Poppins", sans-serif;
-`;
-
-const FormContainer = styled.div`
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-	width: 90%;
-	max-width: 500px;
-	z-index: 1000;
-	font-family: inherit;
-`;
-
-const Overlay = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-`;
-
-const Form = styled.form`
+const ImagePreviewContainer = styled.div`
 	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	width: 100%;
-`;
-
-const FormGroup = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-`;
-
-const Input = styled.input`
-	width: 100%;
-	padding: 8px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	box-sizing: border-box;
-	font-family: inherit;
-`;
-
-const TextArea = styled.textarea`
-	width: 100%;
-	padding: 8px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	min-height: 100px;
-	box-sizing: border-box;
-	font-family: inherit;
-`;
-
-const ButtonGroup = styled.div`
-	display: flex;
-	justify-content: flex-end;
 	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 10px;
 `;
 
-const Button = styled.button`
-	padding: 8px 16px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-
-	&.cancel {
-		background: #ddd;
-	}
-
-	&.submit {
-		background: #f2be5e;
-		color: white;
-	}
-	font-family: inherit;
-`;
-
-const ErrorMessage = styled.span`
-	color: red;
-	font-size: 12px;
-	margin-top: 4px;
-	font-family: inherit;
-`;
-
-const LogoContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-bottom: 20px;
+const ImagePreview = styled.div`
+	position: relative;
+	width: 100px;
+	height: 100px;
 
 	img {
-		height: 60px;
-		object-fit: contain;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 4px;
+	}
+
+	button {
+		position: absolute;
+		top: -8px;
+		right: -8px;
+		background: red;
+		color: white;
+		border: none;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 12px;
 	}
 `;
 
-const Label = styled.label`
-	font-family: "Poppins", sans-serif;
-	font-size: 14px;
-	font-weight: 700;
-	margin-bottom: 4px;
-	color: #333;
-	font-family: inherit;
+const FileInput = styled.input`
+	display: none;
 `;
 
-const Select = styled.select`
-	width: 100%;
-	padding: 8px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	box-sizing: border-box;
-	background-color: white;
-	font-family: inherit;
+const FileInputLabel = styled.label`
+	display: inline-block;
+	padding: 8px 16px;
+	background: #314549;
+	color: white;
+	border-radius: 50px; // Updated to 50%
+	cursor: pointer;
+	text-align: center;
 
-	option:first-child {
-		font-weight: 700;
+	&:hover {
+		background: #253538; // Darker shade for hover state
+	}
+`;
+
+const SideBySideContainer = styled.div`
+	display: flex;
+	gap: 10px;
+	width: 100%;
+
+	> ${FormGroup} {
+		flex: 1;
 	}
 `;
 
@@ -136,7 +91,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 		description: "",
 		price: "",
 		category: "",
-		image: "",
+		images: [],
 	});
 
 	const [errors, setErrors] = useState({});
@@ -167,14 +122,8 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 			newErrors.price = "El precio debe ser un número mayor a 0";
 		}
 
-		if (!formData.image.trim()) {
-			newErrors.image = "La URL de la imagen es requerida";
-		} else {
-			try {
-				new URL(formData.image);
-			} catch {
-				newErrors.image = "URL de imagen inválida";
-			}
+		if (formData.images.length === 0) {
+			newErrors.images = "Debe seleccionar al menos una imagen";
 		}
 
 		return newErrors;
@@ -204,22 +153,45 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 	};
 
 	useEffect(() => {
-		const cargarCategorias = async () => {
+		const fetchCategorias = async () => {
 			try {
+				setIsLoadingCategorias(true);
 				const data = await obtenerCategorias();
 				setCategorias(data);
 			} catch (error) {
+				console.error("Error fetching categories:", error);
 				setErrors((prev) => ({
 					...prev,
-					category: "Error al cargar categorías",
+					category: "Error al cargar las categorías",
 				}));
 			} finally {
 				setIsLoadingCategorias(false);
 			}
 		};
 
-		cargarCategorias();
+		fetchCategorias();
 	}, []);
+
+	const handleFileChange = (e) => {
+		const files = Array.from(e.target.files);
+		const newImages = files.map((file) => ({
+			file,
+			preview: URL.createObjectURL(file),
+		}));
+
+		setFormData((prev) => ({
+			...prev,
+			images: [...prev.images, ...newImages],
+		}));
+		setErrors({ ...errors, images: "" });
+	};
+
+	const removeImage = (index) => {
+		setFormData((prev) => ({
+			...prev,
+			images: prev.images.filter((_, i) => i !== index),
+		}));
+	};
 
 	return (
 		<FormWrapper>
@@ -263,7 +235,9 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 					</FormGroup>
 
 					<FormGroup>
+						<Label htmlFor="productPrice">Precio</Label>
 						<Input
+							id="productPrice"
 							type="number"
 							placeholder="Precio"
 							value={formData.price}
@@ -276,40 +250,64 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						{errors.price && <ErrorMessage>{errors.price}</ErrorMessage>}
 					</FormGroup>
 
-					<FormGroup>
-						<Select
-							id="productCategory"
-							value={formData.category}
-							onChange={(e) => {
-								setFormData({ ...formData, category: e.target.value });
-								setErrors({ ...errors, category: "" });
-							}}
-							required
-							disabled={isLoadingCategorias}
-						>
-							<option value="">Categorías</option>
-							{categorias.map((categoria) => (
-								<option key={categoria.id} value={categoria.id}>
-									{categoria.nombre}
-								</option>
-							))}
-						</Select>
-						{errors.category && <ErrorMessage>{errors.category}</ErrorMessage>}
-					</FormGroup>
+					<SideBySideContainer>
+						<FormGroup>
+							<Select
+								id="productCategory"
+								value={formData.category}
+								onChange={(e) => {
+									setFormData({ ...formData, category: e.target.value });
+									setErrors({ ...errors, category: "" });
+								}}
+								required
+								disabled={isLoadingCategorias}
+							>
+								<option value="">Categoría</option>
+								{categorias.map((category) => (
+									<option
+										key={category.idCategoria}
+										value={category.idCategoria}
+									>
+										{category.nombre}
+									</option>
+								))}
+							</Select>
+							{errors.category && (
+								<ErrorMessage>{errors.category}</ErrorMessage>
+							)}
+						</FormGroup>
 
-					<FormGroup>
-						<Input
-							type="url"
-							placeholder="URL de la imagen"
-							value={formData.image}
-							onChange={(e) => {
-								setFormData({ ...formData, image: e.target.value });
-								setErrors({ ...errors, image: "" });
-							}}
-							required
-						/>
-						{errors.image && <ErrorMessage>{errors.image}</ErrorMessage>}
-					</FormGroup>
+						<FormGroup>
+							<FileInputLabel>
+								Seleccionar Imágenes
+								<FileInput
+									id="productImages"
+									type="file"
+									accept="image/*"
+									multiple
+									onChange={handleFileChange}
+								/>
+							</FileInputLabel>
+							{errors.images && <ErrorMessage>{errors.images}</ErrorMessage>}
+						</FormGroup>
+					</SideBySideContainer>
+
+					{formData.images.length > 0 && (
+						<ImagePreviewContainer>
+							{formData.images.map((image, index) => (
+								<ImagePreview key={index}>
+									<img src={image.preview} alt={`Preview ${index + 1}`} />
+									<button onClick={() => removeImage(index)}>×</button>
+								</ImagePreview>
+							))}
+						</ImagePreviewContainer>
+					)}
+
+					{errors.server && (
+						<ErrorMessage style={{ textAlign: "center", marginBottom: "10px" }}>
+							{errors.server}
+						</ErrorMessage>
+					)}
 
 					{errors.submit && <ErrorMessage>{errors.submit}</ErrorMessage>}
 

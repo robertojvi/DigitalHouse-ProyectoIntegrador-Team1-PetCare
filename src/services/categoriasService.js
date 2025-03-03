@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/categorias';
+const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JlcnRvanZpQGdtYWlsLmNvbSIsImlhdCI6MTc0MDk2ODgyMSwiZXhwIjoxNzQxMDU1MjIxfQ.JnUcPjUokUoE6a6O5RVt1KqdqQoz3wuiYWy9Q3i9vzU';
 
 export const obtenerCategorias = async () => {
     try {
-        const response = await axios.get(`${API_URL}`);
+        const response = await axios.get("http://localhost:8080/api/categorias", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
-        console.error('Error al obtener categorías:', error.response?.data || error.message);
+        console.error("Error fetching categories", error);
         throw error;
     }
 };
+
+
