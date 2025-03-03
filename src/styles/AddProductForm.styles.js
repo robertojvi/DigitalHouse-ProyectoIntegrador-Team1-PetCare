@@ -146,21 +146,4 @@ export const Select = styled.select`
     }
 `;
 
-const FileInputLabel = styled.label`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px; // Reduced from 42px
-    padding: 0 16px;
-    background: #314549;
-    color: white;
-    border-radius: 50px;
-    cursor: pointer;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
 
-    &:hover {
-        background: #253538;
-    }
-`;
