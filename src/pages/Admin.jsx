@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import warningIcon from "../images/warning.png";
 import "../styles/admin/admin.css";
@@ -7,11 +7,10 @@ import AddProductForm from "../components/forms/AddProductForm";
 const Admin = () => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
-
-	const productos = [
+	const [productos, setProductos] = useState([
 		{ id: 1, tipo: "Paseador", nombre: "Camila Pérez" },
 		{ id: 2, tipo: "Cuidador", nombre: "Pepito López" },
-	];
+	]);
 
 	const usuarios = [
 		{ id: 1, nombre: "Juan Pérez", email: "juan@mail.com", rol: "Admin" },
@@ -38,16 +37,23 @@ const Admin = () => {
 		console.log(`Eliminando ${tipo}:`, item);
 	};
 
-	const handleAddProduct = async (productData) => {
+	const handleAddProduct = async (servicioData) => {
 		try {
-			// Aquí iría la llamada a la API
-			console.log("Nuevo producto:", productData);
-			// await apiService.createProduct(productData);
-			setShowAddForm(false);
 			setError(null);
+			setProductos((prevProductos) => [
+				...prevProductos,
+				{
+					id: servicioData.id || Date.now(),
+					tipo: "Servicio",
+					nombre: servicioData.nombre || servicioData.name,
+				},
+			]);
+
+			// Opcional: Mostrar mensaje de éxito
+			alert("Servicio creado exitosamente");
 		} catch (error) {
-			setError("Error al crear el producto. Por favor, intente nuevamente.");
-			console.error("Error en la creación del producto:", error);
+			setError(error.message || "Error al crear el servicio");
+			console.error("Error al procesar el servicio:", error);
 		}
 	};
 

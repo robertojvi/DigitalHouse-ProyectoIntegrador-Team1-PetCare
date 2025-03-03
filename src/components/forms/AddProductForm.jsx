@@ -1,7 +1,13 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
+import { crearServicio } from "../../services/serviciosService";
+import { obtenerCategorias } from "../../services/categoriasService";
+import petCareLogo from "../../images/pet-care-logo-v2.png";
+
+const FormWrapper = styled.div`
+	font-family: "Poppins", sans-serif;
+`;
 
 const FormContainer = styled.div`
 	position: fixed;
@@ -15,6 +21,7 @@ const FormContainer = styled.div`
 	width: 90%;
 	max-width: 500px;
 	z-index: 1000;
+	font-family: inherit;
 `;
 
 const Overlay = styled.div`
@@ -46,6 +53,7 @@ const Input = styled.input`
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	box-sizing: border-box;
+	font-family: inherit;
 `;
 
 const TextArea = styled.textarea`
@@ -55,6 +63,7 @@ const TextArea = styled.textarea`
 	border-radius: 4px;
 	min-height: 100px;
 	box-sizing: border-box;
+	font-family: inherit;
 `;
 
 const ButtonGroup = styled.div`
@@ -77,12 +86,48 @@ const Button = styled.button`
 		background: #f2be5e;
 		color: white;
 	}
+	font-family: inherit;
 `;
 
 const ErrorMessage = styled.span`
-  color: red;
-  font-size: 12px;
-  margin-top: 4px;
+	color: red;
+	font-size: 12px;
+	margin-top: 4px;
+	font-family: inherit;
+`;
+
+const LogoContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+
+	img {
+		height: 60px;
+		object-fit: contain;
+	}
+`;
+
+const Label = styled.label`
+	font-family: "Poppins", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 4px;
+	color: #333;
+	font-family: inherit;
+`;
+
+const Select = styled.select`
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background-color: white;
+	font-family: inherit;
+
+	option:first-child {
+		font-weight: 700;
+	}
 `;
 
 const AddProductForm = ({ onClose, onSubmit }) => {
@@ -93,28 +138,52 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 		category: "",
 		image: "",
 	});
-	
+
 	const [errors, setErrors] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [categorias, setCategorias] = useState([]);
+	const [isLoadingCategorias, setIsLoadingCategorias] = useState(true);
 
 	const validateForm = () => {
 		const newErrors = {};
-		if (!formData.name.trim()) newErrors.name = "El nombre es requerido";
-		if (!formData.description.trim()) newErrors.description = "La descripción es requerida";
-		if (!formData.price) newErrors.price = "El precio es requerido";
-		if (formData.price && formData.price <= 0) newErrors.price = "El precio debe ser mayor a 0";
-		if (!formData.category.trim()) newErrors.category = "La categoría es requerida";
-		if (!formData.image.trim()) newErrors.image = "La imagen es requerida";
-		if (formData.image && !formData.image.match(/^https?:\/\/.+\..+/)) {
-			newErrors.image = "URL de imagen inválida";
+		const numberPrice = Number(formData.price);
+
+		if (!formData.name.trim()) {
+			newErrors.name = "El nombre es requerido";
+		} else if (formData.name.length < 3) {
+			newErrors.name = "El nombre debe tener al menos 3 caracteres";
 		}
+
+		if (!formData.description.trim()) {
+			newErrors.description = "La descripción es requerida";
+		} else if (formData.description.length < 10) {
+			newErrors.description =
+				"La descripción debe tener al menos 10 caracteres";
+		}
+
+		if (!formData.price) {
+			newErrors.price = "El precio es requerido";
+		} else if (isNaN(numberPrice) || numberPrice <= 0) {
+			newErrors.price = "El precio debe ser un número mayor a 0";
+		}
+
+		if (!formData.image.trim()) {
+			newErrors.image = "La URL de la imagen es requerida";
+		} else {
+			try {
+				new URL(formData.image);
+			} catch {
+				newErrors.image = "URL de imagen inválida";
+			}
+		}
+
 		return newErrors;
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const newErrors = validateForm();
-		
+
 		if (Object.keys(newErrors).length > 0) {
 			setErrors(newErrors);
 			return;
@@ -122,24 +191,48 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 
 		setIsSubmitting(true);
 		try {
-			await onSubmit(formData);
+			const nuevoServicio = await crearServicio(formData);
+			await onSubmit(nuevoServicio);
 			onClose();
 		} catch (error) {
-			console.error('Error al guardar:', error);
-			setErrors({ submit: "Error al guardar el producto" });
+			setErrors({
+				submit: error.message || "Error al guardar el servicio",
+			});
 		} finally {
 			setIsSubmitting(false);
 		}
 	};
 
+	useEffect(() => {
+		const cargarCategorias = async () => {
+			try {
+				const data = await obtenerCategorias();
+				setCategorias(data);
+			} catch (error) {
+				setErrors((prev) => ({
+					...prev,
+					category: "Error al cargar categorías",
+				}));
+			} finally {
+				setIsLoadingCategorias(false);
+			}
+		};
+
+		cargarCategorias();
+	}, []);
+
 	return (
-		<>
+		<FormWrapper>
 			<Overlay onClick={onClose} />
 			<FormContainer>
-				<h2>Añadir Nuevo Producto/Servicio</h2>
+				<LogoContainer>
+					<img src={petCareLogo} alt="PetCare Logo" />
+				</LogoContainer>
 				<Form onSubmit={handleSubmit}>
 					<FormGroup>
+						<Label htmlFor="productName">Nombre del producto</Label>
 						<Input
+							id="productName"
 							type="text"
 							placeholder="Nombre del producto"
 							value={formData.name}
@@ -150,10 +243,12 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							required
 						/>
 						{errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
-						</FormGroup>
-					
+					</FormGroup>
+
 					<FormGroup>
+						<Label htmlFor="productDescription">Descripción</Label>
 						<TextArea
+							id="productDescription"
 							placeholder="Descripción"
 							value={formData.description}
 							onChange={(e) => {
@@ -162,8 +257,10 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							}}
 							required
 						/>
-						{errors.description && <ErrorMessage>{errors.description}</ErrorMessage>}
-						</FormGroup>
+						{errors.description && (
+							<ErrorMessage>{errors.description}</ErrorMessage>
+						)}
+					</FormGroup>
 
 					<FormGroup>
 						<Input
@@ -177,21 +274,28 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							required
 						/>
 						{errors.price && <ErrorMessage>{errors.price}</ErrorMessage>}
-						</FormGroup>
+					</FormGroup>
 
 					<FormGroup>
-						<Input
-							type="text"
-							placeholder="Categoría"
+						<Select
+							id="productCategory"
 							value={formData.category}
 							onChange={(e) => {
 								setFormData({ ...formData, category: e.target.value });
 								setErrors({ ...errors, category: "" });
 							}}
 							required
-						/>
+							disabled={isLoadingCategorias}
+						>
+							<option value="">Categorías</option>
+							{categorias.map((categoria) => (
+								<option key={categoria.id} value={categoria.id}>
+									{categoria.nombre}
+								</option>
+							))}
+						</Select>
 						{errors.category && <ErrorMessage>{errors.category}</ErrorMessage>}
-						</FormGroup>
+					</FormGroup>
 
 					<FormGroup>
 						<Input
@@ -205,7 +309,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							required
 						/>
 						{errors.image && <ErrorMessage>{errors.image}</ErrorMessage>}
-						</FormGroup>
+					</FormGroup>
 
 					{errors.submit && <ErrorMessage>{errors.submit}</ErrorMessage>}
 
@@ -219,13 +323,13 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 					</ButtonGroup>
 				</Form>
 			</FormContainer>
-		</>
+		</FormWrapper>
 	);
 };
 
 AddProductForm.propTypes = {
 	onClose: PropTypes.func.isRequired,
-	onSubmit: PropTypes.func.isRequired
+	onSubmit: PropTypes.func.isRequired,
 };
 
 export default AddProductForm;
