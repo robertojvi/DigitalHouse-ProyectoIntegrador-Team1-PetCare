@@ -5,53 +5,32 @@ export const obtenerCategorias = async () => {
         const token = localStorage.getItem('token');
 
         if (!token) {
-            throw new Error('No authentication token found');
+            throw new Error('No se encontró el token de autenticación');
         }
 
-        // Add logging to debug the token
-        console.log('Using token:', token);
+        // Simple direct request without extra configuration
+        const response = await axios.get(
+            "http://localhost:8080/api/servicios",
+            {
+                headers: {
+                Authorization: `Bearer ${token}`, 
+                "Content-Type": "application/json"
+                },
 
-        const config = {
-            method: 'get',
-            url: 'http://localhost:8080/api/categorias',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+        
             }
-        };
-
-        // Log the request configuration
-        console.log('Request config:', config);
-
-        const response = await axios(config);
-
-        // Log the response
-        console.log('API Response:', response);
-
-        if (!response.data) {
-            throw new Error('No data received from the API');
-        }
+        );
 
         return response.data;
+
     } catch (error) {
-        // Enhanced error logging
-        console.error('Error details:', {
-            message: error.message,
-            response: error.response?.data,
+        console.error('Error fetching categories:', {
             status: error.response?.status,
-            headers: error.response?.headers
+            message: error.message,
+            data: error.response?.data
         });
 
-        if (error.response?.status === 401) {
-            throw new Error('Token de autenticación inválido o expirado');
-        }
-
-        if (error.response?.status === 403) {
-            throw new Error('No tiene permisos para acceder a este recurso');
-        }
-
-        throw new Error(error.response?.data?.message || 'Error al cargar las categorías');
+        throw new Error('Error al cargar las categorías');
     }
 };
 

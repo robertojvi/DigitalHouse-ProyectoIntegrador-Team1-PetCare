@@ -158,13 +158,22 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 		const fetchCategorias = async () => {
 			try {
 				setIsLoadingCategorias(true);
+				console.log("Fetching categories...");
+				const token = localStorage.getItem("token");
+				console.log("Using token:", token);
+
 				const data = await obtenerCategorias();
+				console.log("Categories received:", data);
 				setCategorias(data);
 			} catch (error) {
-				console.error("Error fetching categories:", error);
+				console.error("Error details:", {
+					message: error.message,
+					response: error.response?.data,
+					status: error.response?.status,
+				});
 				setErrors((prev) => ({
 					...prev,
-					category: "Error al cargar las categorías",
+					category: `Error al cargar las categorías: ${error.message}`,
 				}));
 			} finally {
 				setIsLoadingCategorias(false);
@@ -258,6 +267,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 								id="productCategory"
 								value={formData.category}
 								onChange={(e) => {
+									console.log("Selected category:", e.target.value);
 									setFormData({ ...formData, category: e.target.value });
 									setErrors({ ...errors, category: "" });
 								}}
@@ -265,14 +275,17 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 								disabled={isLoadingCategorias}
 							>
 								<option value="">Categoría</option>
-								{categorias.map((category) => (
-									<option
-										key={category.idCategoria}
-										value={category.idCategoria}
-									>
-										{category.nombre}
-									</option>
-								))}
+								{categorias.map((category) => {
+									console.log("Rendering category:", category);
+									return (
+										<option
+											key={category.idCategoria}
+											value={category.idCategoria}
+										>
+											{category.nombre}
+										</option>
+									);
+								})}
 							</Select>
 							{errors.category && (
 								<ErrorMessage>{errors.category}</ErrorMessage>
