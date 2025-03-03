@@ -10,7 +10,7 @@ export const obtenerCategorias = async () => {
 
         // Simple direct request without extra configuration
         const response = await axios.get(
-            "http://localhost:8080/api/servicios",
+            "http://localhost:8080/api/categorias",
             {
                 headers: {
                 Authorization: `Bearer ${token}`, 
