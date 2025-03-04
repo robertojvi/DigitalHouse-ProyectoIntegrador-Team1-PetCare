@@ -2,10 +2,7 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
-import { PiPawPrintLight } from "react-icons/pi";
-import ServicesList from "../components/services/ServicesList";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
