@@ -1,0 +1,60 @@
+.admin-table-container {
+	width: 100%;
+	overflow-x: auto;
+	/* margin-top: 10rem; */
+}
+
+.admin-table {
+	width: 100%;
+	border-collapse: collapse;
+	border: var(--admin-table-content-border);
+	background-color: var(--admin-table-content-background-color);
+}
+
+.admin-table th,
+.admin-table td {
+	padding: 0.75rem;
+	/* text-align: center; */
+	/* border-bottom: 1px solid #ddd; */
+}
+
+.admin-table th {
+	background-color: var(--admin-table-header-background-color);
+	font-weight: 600;
+	color: var(--paragraph-font-color-light);
+}
+
+.admin-table tr:hover {
+	background-color: var(--admin-table-content-background-color-hover);
+}
+
+.icon-button {
+	background: transparent;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+	transform: scale(1.1);
+}
+
+.icon-button img {
+	width: 30px;
+	height: 30px;
+}
+
+.loading-message,
+.error-message {
+	padding: 1rem;
+	text-align: center;
+	margin: 1rem 0;
+}
+
+.error-message {
+	color: #dc3545;
+}

@@ -27,6 +27,12 @@
 	--header-menu-background-color: var(--palet-color-orange-light);
 	--footer-background-color: var(--palet-color-orange-light);
 
+	/* Admin */
+	--admin-table-header-background-color: var(--palet-color-darkgray);
+	--admin-table-content-background-color: var(--palet-color-orange-light);
+	--admin-table-content-background-color-hover: var(--palet-color-white);
+	--admin-table-content-border: 1px solid var(--palet-color-black);
+
 	/* Buttons */
 	--button-primary-font: 700 15px "Poppins", sans-serif; /* Actualizado con peso 700 */
 	--button-primary-font-color: var(--palet-color-darkgray);
@@ -68,7 +74,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #FFFEFF;
+	background-color: #fffeff;
 	font-family: var(--paragraph-font);
 	color: var(--paragraph-font-color);
 }
