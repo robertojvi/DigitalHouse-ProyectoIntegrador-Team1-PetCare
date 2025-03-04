@@ -8,8 +8,11 @@ import "./styles/GlobalStyles.css";
 import { AuthProvider } from "./auth/AuthContext";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
+
+// Pages
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
+// import Admin from "./pages/Admin";
+import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
@@ -35,7 +38,7 @@ function App() {
 					<Route path="/gallery" element={<ServiceGallery />} />
 
 					{/* Rutas del administrador */}
-					<Route path="/administracion" element={<Admin />} />
+					<Route path="/administracion" element={<AdminHome />} />
 					<Route
 						path="/administracion/service"
 						element={<AdminService />}
