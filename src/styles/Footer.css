@@ -182,10 +182,14 @@ h4 {
 
   /* Estilo específico para el ícono del email */
   .mobile-info .info-item:last-child .info-icon {
-    color: #314549; /* Volvemos al color original para el borde */
-    fill: #fae7c4; /* Color del fondo para el interior */
-    stroke: #314549; /* Color negro para el borde */
-    stroke-width: 1px; /* Grosor del borde */
+    color: #314549;
+    /* Volvemos al color original para el borde */
+    fill: #fae7c4;
+    /* Color del fondo para el interior */
+    stroke: #314549;
+    /* Color negro para el borde */
+    stroke-width: 1px;
+    /* Grosor del borde */
   }
 
   /* Ocultamos los elementos con clase desktop-only */
