@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
 
@@ -33,6 +34,23 @@ export const GridComponent = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
+	const renderPageNumbers = () => {
+		const pageNumbers = [];
+		for (let i = 1; i <= totalPages; i++) {
+			pageNumbers.push(
+				<button
+					key={i}
+					onClick={() => handlePageChange(i)}
+					className={currentPage === i ? 'active' : ''}
+					title={`Ir a página ${i}`}
+				>
+					{i}
+				</button>
+			);
+		}
+		return pageNumbers;
+	};
+
 	if (loading) return <div className="loading">Cargando...</div>;
 
 	return (
@@ -55,29 +73,31 @@ export const GridComponent = () => {
 					<button
 						onClick={() => handlePageChange(1)}
 						disabled={currentPage === 1}
+						title="Primera página"
 					>
-						Inicio
+						<MdFirstPage size={20} />
 					</button>
 					<button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
+						title="Página anterior"
 					>
-						Anterior
+						<MdNavigateBefore size={20} />
 					</button>
-					<span>
-						Página {currentPage} de {totalPages}
-					</span>
+					{renderPageNumbers()}
 					<button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === totalPages}
+						title="Página siguiente"
 					>
-						Siguiente
+						<MdNavigateNext size={20} />
 					</button>
 					<button
 						onClick={() => handlePageChange(totalPages)}
 						disabled={currentPage === totalPages}
+						title="Última página"
 					>
-						Último
+						<MdLastPage size={20} />
 					</button>
 				</div>
 			)}
