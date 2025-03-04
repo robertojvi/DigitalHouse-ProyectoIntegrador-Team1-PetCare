@@ -1,4 +1,3 @@
-import React from "react";
 import { PiWhatsappLogo } from "react-icons/pi";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
