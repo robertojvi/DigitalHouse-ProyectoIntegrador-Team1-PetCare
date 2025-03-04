@@ -6,7 +6,6 @@ import "./styles/GlobalStyles.css";
 
 // Components
 import { AuthProvider } from "./auth/AuthContext";
-import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
