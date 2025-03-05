@@ -4,28 +4,51 @@ import { ServicesFilterContainer, SelectContainer, SelectGroupContainer } from '
 
 export const ServicesFilter = () => {
     const [categories, setCategories] = useState([])
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
     useEffect(() => {
         fetch('/data/categories.json')
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(error => console.error('Error al obtener categorías:', error))
+
+        // Escuchar cambios de tamaño de pantalla
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
     }, [])
 
     return (
         <div>
             <div>
                 <p style={{
-                    "font-size": "14px",
-                    "font-weight": "bold",
-                    "color": "#333",
-                    "margin-bottom": "5px"
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "#333",
+                    marginBottom: "5px"
                 }}>Estoy buscando</p>
-                <ServicesFilterContainer>
-                    {categories.map((category, index) => (
-                        <FilterCategory key={index} name={category.name} icon={category.icon} />
-                    ))}
-                </ServicesFilterContainer>
+
+                {/* Renderiza select en móvil y lista en desktop */}
+                {isMobile ? (
+                    <SelectContainer>
+                        <div>
+                            <select>
+                                {categories.map((category, index) => (
+                                    <option key={index} value={category.name}>{category.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </SelectContainer>
+                ) : (
+                    <ServicesFilterContainer>
+                        {categories.map((category, index) => (
+                            <FilterCategory key={index} name={category.name} icon={category.icon} />
+                        ))}
+                    </ServicesFilterContainer>
+                )}
             </div>
 
             <SelectGroupContainer>
