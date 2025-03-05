@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import AddProductForm from "./components/admin/AddProductForm";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
+import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 
 /**
@@ -28,7 +29,11 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route
 						path="/administracion"
-						element={<AddProductForm />}
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AddProductForm />
+						  	</ProtectedRoute>
+						}
 					/>
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />

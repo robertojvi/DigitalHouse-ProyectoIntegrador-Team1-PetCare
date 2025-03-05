@@ -2,7 +2,7 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-import Hero from "../components/hero/hero";
+import Hero from "../components/hero/Hero";
 import "../styles/home/home.css";
 import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";

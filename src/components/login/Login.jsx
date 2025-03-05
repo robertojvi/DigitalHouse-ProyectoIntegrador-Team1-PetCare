@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "../../styles/login/login.css";
@@ -6,13 +6,10 @@ import Logo from "../header/Logo";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../auth/AuthContext";
-
 
 const Login = ({ isLoginValue }) => {
   const [isLogin, setIsLogin] = useState(isLoginValue);
   const [errorMessage, setErrorMessage] = useState("");
-  const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // React Hook Form para manejar los inputs y validaciones

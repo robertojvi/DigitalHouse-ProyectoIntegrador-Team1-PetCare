@@ -20,6 +20,4 @@ export const GlobalStyles = createGlobalStyle`
   h4{
     font-size: 16px;
   }
-
- 
 `;
