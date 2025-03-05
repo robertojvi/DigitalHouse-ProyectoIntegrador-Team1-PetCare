@@ -16,11 +16,8 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
-<<<<<<< HEAD
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
-=======
->>>>>>> 6f8660a796f936412a246c38a31a1b538af1d284
 
 /**
  * Main application component that handles routing
