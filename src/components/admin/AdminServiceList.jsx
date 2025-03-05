@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Add this import
+import PropTypes from "prop-types";
 
 // Components
 import { AuthContext } from "../../auth/AuthContext";
@@ -17,7 +18,7 @@ import trashIcon from "../../images/trash-can.png";
 // Import the LiaPawSolid icon component
 import { LiaPawSolid } from "react-icons/lia";
 
-const AdminServiceList = () => {
+const AdminServiceList = ({ onEdit }) => {
 	const { auth } = useContext(AuthContext);
 	const [services, setServices] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -67,8 +68,8 @@ const AdminServiceList = () => {
 		}
 	};
 
-	const handleEdit = (item) => {
-		console.log("Editando servicio:", item);
+	const handleEdit = (service) => {
+		onEdit(service);
 	};
 
 	const openDeleteModal = (service) => {
@@ -223,6 +224,10 @@ const AdminServiceList = () => {
 			)}
 		</>
 	);
+};
+
+AdminServiceList.propTypes = {
+	onEdit: PropTypes.func.isRequired,
 };
 
 export default AdminServiceList;

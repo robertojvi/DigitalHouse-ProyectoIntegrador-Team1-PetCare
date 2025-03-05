@@ -7,6 +7,7 @@ import axios from "axios";
 // Components
 import AdminServiceList from "../../components/admin/AdminServiceList";
 import AddProductForm from "../../components/forms/AddProductForm";
+import EditProductForm from "../../components/forms/EditProductForm";
 
 // Styles
 import "../../styles/admin/adminService.css";
@@ -22,6 +23,8 @@ const AdminService = () => {
 	const { auth, logout } = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
 	const [services, setServices] = useState([]);
+	const [selectedService, setSelectedService] = useState(null);
+	const [showEditForm, setShowEditForm] = useState(false);
 
 	const getAuthHeaders = () => {
 		if (!auth || !auth.token) return null;
@@ -84,6 +87,34 @@ const AdminService = () => {
 		}
 	};
 
+	const handleEditService = async (serviceData) => {
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
+		}
+
+		try {
+			await axios.put(
+				`http://localhost:8080/api/servicios/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
+				serviceData,
+				headers
+			);
+
+			await fetchServices();
+			setShowEditForm(false);
+			setSelectedService(null);
+			alert("Servicio actualizado exitosamente");
+		} catch (error) {
+			setError("Error al actualizar el servicio: " + error.message);
+		}
+	};
+
+	const handleServiceEdit = (service) => {
+		setSelectedService(service);
+		setShowEditForm(true);
+	};
+
 	return (
 		<main className="admin-container">
 			{/* Mobile section */}
@@ -135,14 +166,29 @@ const AdminService = () => {
 							<AddProductForm
 								onClose={() => {
 									setShowAddForm(false);
+									setSelectedService(null);
 									setError(null);
 								}}
-								onSubmit={handleAddProduct}
+								onSubmit={
+									selectedService ? handleEditService : handleAddProduct
+								}
+								initialData={selectedService}
 							/>
 						)}
 					</div>
 
-					<AdminServiceList />
+					{showEditForm && selectedService && (
+						<EditProductForm
+							service={selectedService}
+							onClose={() => {
+								setShowEditForm(false);
+								setSelectedService(null);
+							}}
+							onSubmit={handleEditService}
+						/>
+					)}
+
+					<AdminServiceList onEdit={handleServiceEdit} />
 				</section>
 			</div>
 		</main>
