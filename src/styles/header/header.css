@@ -83,14 +83,23 @@
   } 
 }
 
-.avatar{
+.name-avatar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+.avatar {
   border-radius: 50%;
   background-color: #314549;
   color: white;
   padding: 5px 7px;
   font-weight: bolder;
   font-size: 15px;
-  margin-right: .2rem;
+  margin: 0;
+  font-family: "Inter", sans-serif;
 }
 
 .name-avatar{
