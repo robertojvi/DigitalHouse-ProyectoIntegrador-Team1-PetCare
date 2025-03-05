@@ -2,15 +2,21 @@
 import { Routes, Route } from "react-router-dom";
 // Styles
 import "./styles/common/app.css";
+import "./styles/GlobalStyles.css";
 
 // Components
+import { AuthProvider } from "./auth/AuthContext";
+import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
+
+// Pages
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
+// import Admin from "./pages/Admin";
+import AdminHome from "./pages/admin/AdminHome";
+import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
-import { AuthProvider } from "./auth/AuthContext";
-import { GlobalStyles } from './styles/GlobalStyles';
+
 /**
  * Main application component that handles routing
  * Uses React Router for navigation
@@ -21,23 +27,24 @@ import { GlobalStyles } from './styles/GlobalStyles';
 function App() {
 	return (
 		<AuthProvider>
-			<GlobalStyles />
 			<Routes>
 				{/* Padre de las rutas anidadas */}
 				<Route path="/" element={<Layout />}>
 					{/* Rutas anidadas hijas */}
+
+					{/* Rutas del usuario (sitio web) */}
 					<Route path="/" element={<Home />} />
-					<Route
-						path="/administracion"
-						element={<Admin />}
-					/>
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />
 
-					{/* <Route path="/contact" element={<Contact />} />
-                    <Route path="/dentist/:id" element={<Detail />} />
-                    <Route path="/favs" element={<Favs />} /> */}
+					{/* Rutas del administrador */}
+					<Route path="/administracion" element={<AdminHome />} />
+					<Route
+						path="/administracion/service"
+						element={<AdminService />}
+					/>
 
+					{/* Ruta por defecto 404 */}
 					<Route
 						path="*"
 						element={
