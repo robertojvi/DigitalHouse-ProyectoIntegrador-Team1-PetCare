@@ -18,6 +18,7 @@ import {
 	Select,
 } from "../../styles/AddProductForm.styles";
 import petCareLogo from "../../images/pet-care-logo-v2.png";
+import AddCategoryForm from "./AddCategoryForm";
 
 const EditProductForm = ({ service, onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
@@ -31,6 +32,7 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 	const [errors, setErrors] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [categorias, setCategorias] = useState([]);
+	const [showAddCategory, setShowAddCategory] = useState(false);
 
 	useEffect(() => {
 		const fetchCategorias = async () => {
@@ -83,6 +85,15 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 		}
 	};
 
+	const handleNewCategory = async (newCategory) => {
+		setCategorias([...categorias, newCategory]);
+		setFormData((prev) => ({
+			...prev,
+			category: newCategory.idCategoria,
+			categoryName: newCategory.nombre,
+		}));
+	};
+
 	return (
 		<FormWrapper>
 			<Overlay onClick={onClose} />
@@ -129,6 +140,7 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 							onChange={(e) =>
 								setFormData({ ...formData, category: e.target.value })
 							}
+							style={{ width: "100%" }}
 						>
 							<option value="">Seleccione una categoría</option>
 							{categorias.map((cat) => (
@@ -137,6 +149,29 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 								</option>
 							))}
 						</Select>
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								marginTop: "10px",
+							}}
+						>
+							<Label style={{ fontSize: "12px", marginBottom: "2px" }}>
+								Nueva Categoria
+							</Label>
+							<Button
+								type="button"
+								onClick={() => setShowAddCategory(true)}
+								style={{
+									padding: "5px 15px",
+									backgroundColor: "#314549",
+									color: "#fffeff",
+								}}
+							>
+								Añadir Categoría
+							</Button>
+						</div>
 						{errors.category && <ErrorMessage>{errors.category}</ErrorMessage>}
 					</FormGroup>
 
@@ -150,6 +185,12 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 					</ButtonGroup>
 				</Form>
 			</FormContainer>
+			{showAddCategory && (
+				<AddCategoryForm
+					onClose={() => setShowAddCategory(false)}
+					onSubmit={handleNewCategory}
+				/>
+			)}
 		</FormWrapper>
 	);
 };
