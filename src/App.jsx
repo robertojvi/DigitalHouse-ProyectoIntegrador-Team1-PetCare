@@ -19,6 +19,7 @@ import ServiceGallery from "./pages/ServiceGallery";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 
+
 /**
  * Main application component that handles routing
  * Uses React Router for navigation
