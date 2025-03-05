@@ -5,6 +5,7 @@ import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
 
 // Components
+import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
@@ -16,9 +17,6 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import { AuthProvider } from "./auth/AuthContext";
-
 
 /**
  * Main application component that handles routing
