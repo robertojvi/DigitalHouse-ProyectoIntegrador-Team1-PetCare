@@ -70,7 +70,7 @@
 
 .footer-copyright {
   width: 100%;
-  background-color: #685044;
+  background-color: #314549;
   padding: 12px 2rem;
 }
 
@@ -91,6 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Inter", sans-serif;
 }
 
 /* Nuevo estilo para los íconos sociales */
@@ -181,10 +182,14 @@ h4 {
 
   /* Estilo específico para el ícono del email */
   .mobile-info .info-item:last-child .info-icon {
-    color: #314549; /* Volvemos al color original para el borde */
-    fill: #fae7c4; /* Color del fondo para el interior */
-    stroke: #314549; /* Color negro para el borde */
-    stroke-width: 1px; /* Grosor del borde */
+    color: #314549;
+    /* Volvemos al color original para el borde */
+    fill: #fae7c4;
+    /* Color del fondo para el interior */
+    stroke: #314549;
+    /* Color negro para el borde */
+    stroke-width: 1px;
+    /* Grosor del borde */
   }
 
   /* Ocultamos los elementos con clase desktop-only */
@@ -216,4 +221,15 @@ h4 {
   .footer-copyright p {
     font-size: 0.6rem;
   }
+}
+
+.copyright-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #ffffff;
+  font-size: 0.8rem;
 }

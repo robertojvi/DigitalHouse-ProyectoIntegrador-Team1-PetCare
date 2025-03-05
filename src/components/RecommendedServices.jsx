@@ -1,5 +1,5 @@
 
-import React from 'react'
+import 'react'
 import { TitleComponent } from './shared/TitleComponent'
 import { GridComponent } from './GridComponent'
 
