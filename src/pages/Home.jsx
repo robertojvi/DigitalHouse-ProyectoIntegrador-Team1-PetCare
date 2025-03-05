@@ -68,18 +68,11 @@ const Home = () => {
 				<div style={{ "border": "1px solid #000000", "padding": "30px 50px" }}>
 					<ServicesFilter />
 				</div>
-				<TitleComponent title={"Categorías"} />
-				<div className="categories-container">
-					{categorias.map((categoria) => (
-						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
-					))
-					}
-				</div>
-				<div>
+
+				<div style={{ "marginTop": "22px" }}>
 					<RecommendedServices />
 				</div>
 			</main>
-			<WhatsAppButton />
 		</>
 	);
 };
