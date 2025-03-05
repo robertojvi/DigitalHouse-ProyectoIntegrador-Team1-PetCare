@@ -50,15 +50,6 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Add validation for category selection
-    if (!formData.category) {
-      setErrors({
-        submit: "Debe seleccionar una categoría válida"
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -78,15 +69,6 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleCategoryChange = (e) => {
-    const newCategoryId = e.target.value;
-    console.log('Selected category:', {
-        id: newCategoryId,
-        currentService: service.idServicio
-    });
-    setFormData({ ...formData, category: newCategoryId });
   };
 
   return (
@@ -123,26 +105,17 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
           </FormGroup>
 
           <FormGroup>
-            <Label>Cambiar Categoría</Label>
+            <Label>Categoría</Label>
             <Select
               value={formData.category}
-              onChange={handleCategoryChange}
+              onChange={(e) => setFormData({...formData, category: e.target.value})}
             >
-              <option value="">Seleccionar una Categoría</option>
               {categorias.map(cat => (
-                <option 
-                    key={cat.idCategoria} 
-                    value={cat.idCategoria}
-                >
-                    {cat.nombre}
+                <option key={cat.idCategoria} value={cat.idCategoria}>
+                  {cat.nombre}
                 </option>
               ))}
             </Select>
-            {errors.submit && (
-                <ErrorMessage style={{ color: 'red' }}>
-                    {errors.submit}
-                </ErrorMessage>
-            )}
           </FormGroup>
 
           <ButtonGroup>
