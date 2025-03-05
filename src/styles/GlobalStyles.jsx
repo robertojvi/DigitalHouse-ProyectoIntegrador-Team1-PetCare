@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h2{
-    color: #685044;
+    color: #314549;
     font-size: 24px;
   }
 

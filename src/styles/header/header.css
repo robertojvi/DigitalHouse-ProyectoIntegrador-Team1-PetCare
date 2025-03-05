@@ -27,6 +27,7 @@
   align-items: center;
   height: var(--header-height, 80px);
   gap: 1rem;
+  color: #314549; 
 }
 
 /* Añadimos padding al logo */
@@ -38,6 +39,9 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+  & button{
+    color: #314549; 
+  } 
 }
 
 .header-user-noA{
@@ -63,7 +67,7 @@
     padding: 5px 1rem;
     width: 150px;
     background: none;
-    color: #2d3e42;
+    color: #314549;;
     border: none;
     cursor: pointer;
     display: flex;
@@ -75,7 +79,7 @@
 
 .avatar{
   border-radius: 50%;
-  background-color: var(--palet-color-brown);
+  background-color: #314549;
   color: white;
   padding: 5px 7px;
   font-weight: bolder;
@@ -88,10 +92,12 @@
   justify-content: center;
   align-items: center;
   gap: .5rem;
+  color: #314549; 
+  font-family: 'Poppins';
 }
 
 .header-user-noA button{
-  background-color: #2d3e42; 
+  background-color: #314549; 
   color: white;
   font-weight: bold;
   font-size: 14px;
