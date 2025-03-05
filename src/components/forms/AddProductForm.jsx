@@ -143,10 +143,8 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 
 		setIsSubmitting(true);
 		try {
-			// This will be an array of image URLs from the server
 			const imageUrls = await crearServicio(formData);
 
-			// Create the complete service object with the returned image URLs
 			const nuevoServicio = {
 				nombre: formData.name,
 				descripcion: formData.description,
@@ -156,19 +154,23 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 					nombre: formData.categoryName,
 				},
 				imagenes: imageUrls,
-			};
-			console.log(nuevoServicio);
-
-			await onSubmit(nuevoServicio);
-			onClose();
-		} catch (error) {
-			setErrors({
-				submit: error.message || "Error al guardar el servicio",
-			});
-		} finally {
-			setIsSubmitting(false);
-		}
-	};
+				};
+				
+				await onSubmit(nuevoServicio);
+				alert('Servicio creado exitosamente!');
+				setTimeout(() => {
+					window.location.href = '/administracion/service';
+					window.location.reload();
+				}, 1000);
+				onClose();
+			} catch (error) {
+				setErrors({
+					submit: error.message || "Error al guardar el servicio",
+				});
+			} finally {
+				setIsSubmitting(false);
+			}
+		};
 
 	useEffect(() => {
 		const fetchCategorias = async () => {

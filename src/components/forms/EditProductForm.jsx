@@ -70,6 +70,10 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 				categoriaId: formData.category,
 				imagenes: formData.images,
 			});
+			alert("Servicio actualizado exitosamente!");
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000);
 			onClose();
 		} catch (error) {
 			setErrors({
