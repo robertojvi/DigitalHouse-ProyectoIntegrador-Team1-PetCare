@@ -35,9 +35,7 @@
 main {
 	margin-top: calc(var(--top-bar-height, 40px) + var(--header-height, 80px));
 	width: 100%;
-	min-height: calc(
-		100vh - (var(--top-bar-height, 40px) + var(--header-height, 80px))
-	);
+	min-height: calc(100vh - (var(--top-bar-height, 40px) + var(--header-height, 80px)));
 }
 
 .mainContainer {
@@ -48,36 +46,28 @@ main {
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding-top: calc(
-		var(--top-bar-height, 100px) + var(--header-height, 80px) + 0rem
-	);
+	padding-top: calc(var(--top-bar-height, 100px) + var(--header-height, 40px) + 0rem);
 	margin-bottom: 20px;
 }
 
 /* Media queries for responsive layout */
 @media screen and (width < 1024px) {
 	.mainContainer {
-		padding-top: calc(
-			var(--top-bar-height, 35px) + var(--header-height, 70px) + 1.5rem
-		);
+		padding-top: calc(var(--top-bar-height, 35px) + var(--header-height, 70px) + 1.5rem);
 	}
 }
 
 @media screen and (width < 768px) {
 	.mainContainer {
 		padding: 1.5rem;
-		padding-top: calc(
-			var(--top-bar-height, 30px) + var(--header-height, 60px) + 1rem
-		);
+		padding-top: calc(var(--top-bar-height, 30px) + var(--header-height, 60px) + 1rem);
 	}
 }
 
-@media screen and (width <= 320px) {
+@media screen and (width <=320px) {
 	.mainContainer {
 		padding: 1rem;
-		padding-top: calc(
-			var(--top-bar-height, 25px) + var(--header-height, 50px) + 0.75rem
-		);
+		padding-top: calc(var(--top-bar-height, 25px) + var(--header-height, 50px) + 0.75rem);
 	}
 }
 

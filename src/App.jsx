@@ -5,6 +5,7 @@ import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
 
 // Components
+import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 import Layout from "./layouts/Layout";
 
@@ -40,7 +41,11 @@ function App() {
 					<Route path="/administracion" element={<AdminHome />} />
 					<Route
 						path="/administracion/service"
-						element={<AdminService />}
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AdminService />
+							</ProtectedRoute>
+						}
 					/>
 
 					{/* Ruta por defecto 404 */}
