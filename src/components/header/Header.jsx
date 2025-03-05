@@ -90,6 +90,7 @@ const Header = () => {
 				</header>
 			</div>
 
+
 			{isLoginModalOpen && (
 				<Modal onClose={closeModal}>
 					<Login isLoginValue={isLogin} />
