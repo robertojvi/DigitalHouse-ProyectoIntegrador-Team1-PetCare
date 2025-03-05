@@ -95,18 +95,34 @@ const AdminService = () => {
 		}
 
 		try {
-			await axios.put(
+			console.log('Attempting to update service:', {
+				serviceId: serviceData.idServicio,
+				categoryId: serviceData.categoriaId
+			});
+
+			const response = await axios.put(
 				`http://localhost:8080/api/servicios/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
 				serviceData,
 				headers
 			);
 
+			console.log('Update response:', response);
 			await fetchServices();
 			setShowEditForm(false);
 			setSelectedService(null);
 			alert("Servicio actualizado exitosamente");
 		} catch (error) {
-			setError("Error al actualizar el servicio: " + error.message);
+			console.error('Error details:', {
+				message: error.message,
+				status: error.response?.status,
+				data: error.response?.data
+			});
+			
+			let errorMessage = "Error al actualizar el servicio";
+			if (error.response?.status === 403) {
+				errorMessage = "No tienes permisos para asignar esta categoría";
+			}
+			setError(errorMessage);
 		}
 	};
 
