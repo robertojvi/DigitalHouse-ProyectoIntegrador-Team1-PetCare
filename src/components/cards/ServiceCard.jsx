@@ -1,8 +1,9 @@
 
-import React from 'react'
+import 'react'
 import { StarsComponent } from '../shared/StarsComponent'
 import { CardContainer, ImageContainer, Image, InfoContainer, NameContainer, ExcerptContainer, ButtonContainer, CTAContainer } from './styled-components/ServiceCard.styles';
 
+// eslint-disable-next-line react/prop-types
 export const ServiceCard = ({ name, serviceType, image, rating, excerpt }) => {
   return (
     <CardContainer>
