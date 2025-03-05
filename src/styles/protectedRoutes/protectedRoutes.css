@@ -1,0 +1,9 @@
+.no-auth-msj{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-top: 5rem;
+    width: 100%;
+    padding: 1rem;
+  }
