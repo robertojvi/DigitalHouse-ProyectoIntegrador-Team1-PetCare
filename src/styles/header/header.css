@@ -35,6 +35,12 @@
   padding-left: 6rem; /* Ajusta este valor para mover el logo más o menos a la derecha */
 }
 
+.logo-container img {
+  width: 300px; /* Aumentamos de 250px a 300px */
+  height: auto;
+  object-fit: contain;
+}
+
 .nav-section {
   display: flex;
   align-items: center;
@@ -138,8 +144,8 @@
   }
 }
 
-
-span{
+.app-header span {
+  font-family: "Inter", sans-serif;
   word-wrap: break-word;
 }
 

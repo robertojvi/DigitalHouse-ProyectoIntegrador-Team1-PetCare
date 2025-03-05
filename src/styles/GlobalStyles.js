@@ -1,8 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
-
 export const GlobalStyles = createGlobalStyle`
-  * {
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h2{
-    color: #314549;
+    color: #685044;
     font-size: 24px;
   }
 
@@ -22,5 +21,4 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
 
- 
-`;
+`; 

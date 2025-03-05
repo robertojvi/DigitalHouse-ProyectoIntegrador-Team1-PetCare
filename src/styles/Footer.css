@@ -91,6 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Inter", sans-serif;
 }
 
 /* Nuevo estilo para los íconos sociales */
