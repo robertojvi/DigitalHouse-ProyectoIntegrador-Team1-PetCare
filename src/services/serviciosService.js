@@ -1,6 +1,23 @@
 import axiosInstance from "./config/axiosConfig";
 
-const API_URL = "http://localhost:8080/api/servicios";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/servicios`;
+
+export const getServices = async () => {
+	try {
+	  const response = await axiosInstance.get(API_URL);
+	  console.log("RESPONSE:",response)
+	  return response.data;
+	} catch (error) {
+	  if (error.response) {
+		throw new Error(error.response.data.message || "Error del servidor");
+	  } else if (error.request) {
+		throw new Error("No se pudo conectar con el servidor");
+	  } else {
+		throw error;
+	  }
+	}
+  };
+  
 
 export const crearServicio = async (servicioData) => {
 	try {
