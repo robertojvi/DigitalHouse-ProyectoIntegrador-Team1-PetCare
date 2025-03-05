@@ -53,13 +53,13 @@ const Header = () => {
             ) : (
               <div className="header-user">
                 <div className="name-avatar">
+                  <h3>{auth.nombre} {auth.apellido}</h3>
                   <span className="avatar">{auth.nombre[0]}{auth.apellido[0]}</span>
-                  <h3>{auth.nombre}</h3>
                 </div>
                 <button className="logout" onClick={logout}>
                   <CiLogout/> Cerrar Sesión
                 </button>
-            </div>
+              </div>
             )}              
             </div>
           </nav>
