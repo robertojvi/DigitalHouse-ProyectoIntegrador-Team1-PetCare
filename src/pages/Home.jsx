@@ -1,6 +1,13 @@
 // Styles
 // import "../styles/home.css";
+import { RecommendedServices } from "../components/RecommendedServices";
+import Categoria from "../components/categoria/Categoria";
+import Hero from "../components/hero/Hero";
 import "../styles/home/home.css";
+import { TitleComponent } from '../components/shared/TitleComponent'
+import WhatsAppButton from "../components/shared/WhatsAppComponent";
+import { SearchComponent } from "../components/shared/SearchComponent";
+import { ServicesFilter } from "../components/ServicesFilter";
 
 /**
  * Home Page Component
@@ -46,292 +53,36 @@ import "../styles/home/home.css";
  * - /src/routes/index.jsx - Route configuration
  */
 
+const categorias = [
+	{ id: 1, nombre: "Cuidado en casa", image: "/categoria1.png" },
+	{ id: 2, nombre: "Cuidado en instalaciones", image: "/categoria2.png" },
+	{ id: 3, nombre: "Asesoria personalizada", image: "/categoria3.png" },
+
+]
+
 const Home = () => {
 	return (
-		<main className="mainContainer">
-			<h1>Home</h1>
-			<div className="home-content">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
+		<>
+		<Hero/>
+			<main className="mainContainer">
 
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Nullam in dui mauris. Vivamus hendrerit arcu sed erat
-					molestie vehicula. Sed auctor neque eu tellus rhoncus ut
-					eleifend nibh porttitor.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1517849845537-4d257902454a"
-					alt="Adorable puppy"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Praesent et diam eget libero egestas mattis sit amet vitae
-					augue. Nam tincidunt congue enim, ut porta lorem lacinia
-					consectetur.
-				</p>
-
-				<img
-					src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba"
-					alt="Cute kitten"
-					className="pet-image"
-					width="200"
-					height="100"
-				/>
-
-				<p>
-					Donec ut libero sed arcu vehicula ultricies a non tortor.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Aenean ut gravida lorem.
-				</p>
-			</div>
-		</main>
+				<SearchComponent />
+				<div style={{ "border": "1px solid #000000", "padding": "30px 50px" }}>
+					<ServicesFilter />
+				</div>
+				<TitleComponent title={"Categorías"} />
+				<div className="categories-container">
+					{categorias.map((categoria) => (
+						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
+					))
+					}
+				</div>
+				<div>
+					<RecommendedServices />
+				</div>
+			</main>
+			<WhatsAppButton />
+		</>
 	);
 };
 

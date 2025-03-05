@@ -27,6 +27,16 @@
 	--header-menu-background-color: var(--palet-color-orange-light);
 	--footer-background-color: var(--palet-color-orange-light);
 
+	/* Admin */
+	--admin-table-border: 1px solid var(--palet-color-black);
+	--admin-table-header-background-color: var(--palet-color-darkgray);
+	--admin-table-header-font: 700 16px "Nunito", sans-serif;
+	--admin-table-header-font-color: var(--palet-color-white);
+	--admin-table-row-background-color: var(--palet-color-orange-light);
+	--admin-table-row-background-color-hover: var(--palet-color-white);
+	--admin-table-row-font: 700 14px "Inter", sans-serif;
+	--admin-table-row-font-color: var(--palet-color-black);
+
 	/* Buttons */
 	--button-primary-font: 700 15px "Poppins", sans-serif; /* Actualizado con peso 700 */
 	--button-primary-font-color: var(--palet-color-darkgray);
@@ -39,9 +49,12 @@
 	--button-third-font: 700 11px "Poppins", sans-serif;
 	--button-third-font-color: var(--palet-color-white);
 	--button-third-background-color: var(--palet-color-darkgray);
+	--button-third-border-radius: 16px;
 
 	--button-user-font: 700 10px "Inter", sans-serif;
 	--button-user-font-color: var(--palet-color-white);
+
+	--button-cancel-background-color: rgba(176, 29, 31, 1);
 
 	/* Fonts */
 	--h1-font: 28px "Poppins", sans-serif;
@@ -65,7 +78,9 @@
 }
 
 body {
-	background: var(--body-background-color);
+	margin: 0;
+	padding: 0;
+	background-color: #fffeff;
 	font-family: var(--paragraph-font);
 	color: var(--paragraph-font-color);
 }

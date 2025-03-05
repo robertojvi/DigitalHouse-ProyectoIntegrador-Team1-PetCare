@@ -10,51 +10,145 @@
 
 /* Base styles for header container */
 .header-container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 /* Main header styles */
 .app-header {
-	width: 100%;
-	padding: 1rem 2rem;
-	background-color: var(--header-menu-background-color);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 1rem; /* Reduced from 2rem to bring searchbox closer to logo */
-	height: var(--header-height, 80px);
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--header-menu-background-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height, 80px);
+  gap: 1rem;
+  color: #314549; 
+}
+
+/* Añadimos padding al logo */
+.logo-container {
+  padding-left: 6rem; /* Ajusta este valor para mover el logo más o menos a la derecha */
+}
+
+.logo-container img {
+  width: 300px; /* Aumentamos de 250px a 300px */
+  height: auto;
+  object-fit: contain;
 }
 
 .nav-section {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  & button{
+    color: #314549; 
+  } 
+}
+
+.header-user-noA{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
+.header-user{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  max-width: 200px;
+
+  .logout{
+    padding: 5px 1rem;
+    width: 150px;
+    background: none;
+    color: #314549;;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+  } 
+}
+
+.avatar{
+  border-radius: 50%;
+  background-color: #314549;
+  color: white;
+  padding: 5px 7px;
+  font-weight: bolder;
+  font-size: 15px;
+  margin-right: .2rem;
+}
+
+.name-avatar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  color: #314549; 
+  font-family: 'Poppins';
+}
+
+.header-user-noA button{
+  background-color: #314549; 
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 27px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &:hover {
+    background-color: #1f2c2f;
+  }
 }
 
 /* Media queries */
 @media screen and (width < 1024px) {
-	.app-header {
-		padding: 0.75rem 1rem;
-		height: var(--header-height, 70px);
-		gap: 0.75rem; /* Reduced from 1.5rem */
-	}
+  .app-header {
+    padding: 0.75rem 1rem;
+    height: var(--header-height, 70px);
+  }
 }
 
 @media screen and (width < 768px) {
-	.app-header {
-		padding: 0.5rem;
-		height: var(--header-height, 60px);
-		gap: 0.5rem; /* Reduced from 1rem */
-	}
+  .app-header {
+    padding: 0.5rem;
+    height: var(--header-height, 60px);
+  }
 }
 
 @media screen and (width <= 320px) {
-	.app-header {
-		padding: 0.25rem 0.5rem;
-		height: var(--header-height, 50px);
-		gap: 0.35rem; /* Reduced from 0.5rem */
-	}
+  .app-header {
+    padding: 0.25rem 0.5rem;
+    height: var(--header-height, 50px);
+  }
 }
+
+.app-header span {
+  font-family: "Inter", sans-serif;
+  word-wrap: break-word;
+}
+
+
+
+

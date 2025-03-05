@@ -1,0 +1,162 @@
+[
+  {
+      "id": 1,
+      "name": "Alejandro Torres",
+      "serviceType": "Cuidador",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 2,
+      "excerpt": "Un lugar que tus peludos amarán"
+  },
+  {
+      "id": 2,
+      "name": "María López",
+      "serviceType": "Entrenadora",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 5,
+      "excerpt": "Entrenamiento con amor y disciplina"
+  },
+  {
+      "id": 3,
+      "name": "Juan Pérez",
+      "serviceType": "Veterinario",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 4,
+      "excerpt": "Cuidado profesional para tus mascotas"
+  },
+  {
+      "id": 4,
+      "name": "Luisa Fernández",
+      "serviceType": "Paseadora",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 3,
+      "excerpt": "Paseos seguros y divertidos"
+  },
+  {
+      "id": 5,
+      "name": "Carlos Ramírez",
+      "serviceType": "Cuidador",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 5,
+      "excerpt": "Un hogar temporal lleno de amor"
+  },
+  {
+      "id": 6,
+      "name": "Fernanda Gutiérrez",
+      "serviceType": "Entrenadora",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 4,
+      "excerpt": "Obediencia y felicidad en cada sesión"
+  },
+  {
+      "id": 7,
+      "name": "José Hernández",
+      "serviceType": "Veterinario",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 3,
+      "excerpt": "Salud y bienestar animal"
+  },
+  {
+      "id": 8,
+      "name": "Sofía Morales",
+      "serviceType": "Paseadora",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 2,
+      "excerpt": "Caminatas alegres y seguras"
+  },
+  {
+      "id": 9,
+      "name": "Roberto Castillo",
+      "serviceType": "Cuidador",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 5,
+      "excerpt": "Cuidado como en casa"
+  },
+  {
+      "id": 10,
+      "name": "Gabriela Ruiz",
+      "serviceType": "Entrenadora",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 4,
+      "excerpt": "Entrenamiento con paciencia y amor"
+  },
+  {
+      "id": 11,
+      "name": "Pedro Sánchez",
+      "serviceType": "Veterinario",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 4,
+      "excerpt": "Consultas y revisiones con experiencia"
+  },
+  {
+      "id": 12,
+      "name": "Camila Vargas",
+      "serviceType": "Paseadora",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 3,
+      "excerpt": "Diversión en cada paseo"
+  },
+  {
+      "id": 13,
+      "name": "Javier Ortega",
+      "serviceType": "Cuidador",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 5,
+      "excerpt": "Una estancia cómoda y segura"
+  },
+  {
+      "id": 14,
+      "name": "Laura Mendoza",
+      "serviceType": "Entrenadora",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 4,
+      "excerpt": "Métodos efectivos y amables"
+  },
+  {
+      "id": 15,
+      "name": "Diego Herrera",
+      "serviceType": "Veterinario",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 5,
+      "excerpt": "Cuidado médico especializado"
+  },
+  {
+      "id": 16,
+      "name": "Paula Núñez",
+      "serviceType": "Paseadora",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 3,
+      "excerpt": "Paseos personalizados para cada mascota"
+  },
+  {
+      "id": 17,
+      "name": "Eduardo Ríos",
+      "serviceType": "Cuidador",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 4,
+      "excerpt": "Un segundo hogar para tu mascota"
+  },
+  {
+      "id": 18,
+      "name": "Isabel Guzmán",
+      "serviceType": "Entrenadora",
+      "image": "../images/dummyImages/ValeriaGomez.jpg",
+      "rating": 2,
+      "excerpt": "Entrenamiento con refuerzo positivo"
+  },
+  {
+      "id": 19,
+      "name": "Manuel Castro",
+      "serviceType": "Veterinario",
+      "image": "../images/dummyImages/Alejandro.jpg",
+      "rating": 4,
+      "excerpt": "Salud y amor por los animales"
+  },
+  {
+      "id": 20,
+      "name": "Valentina Peña",
+      "serviceType": "Paseadora",
+      "image": "../images/dummyImages/Camila-Fernandez.jpg",
+      "rating": 5,
+      "excerpt": "Aventuras diarias para tus mascotas"
+  }
+]

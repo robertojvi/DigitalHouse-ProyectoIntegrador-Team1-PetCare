@@ -1,17 +1,26 @@
-// Imports
 // React
 import { Routes, Route } from "react-router-dom";
 // Styles
 import "./styles/common/app.css";
+import "./styles/GlobalStyles.css";
 
-// Ruta padre
+// Components
+import { AuthProvider } from "./auth/AuthContext";
+import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
 
-// Rutas hijas
+// Pages
 import Home from "./pages/Home";
-// import Contact from "./Pages/Contact";
-// import Detail from "./Pages/Detail";
-// import Favs from "./Pages/Favs";
+// import Admin from "./pages/Admin";
+import AdminHome from "./pages/admin/AdminHome";
+import AdminService from "./pages/admin/AdminService";
+import ServiceDetail from "./pages/ServiceDetail";
+import ServiceGallery from "./pages/ServiceGallery";
+<<<<<<< HEAD
+import ProtectedRoute from "./auth/ProtectedRoute";
+import { AuthProvider } from "./auth/AuthContext";
+=======
+>>>>>>> 6f8660a796f936412a246c38a31a1b538af1d284
 
 /**
  * Main application component that handles routing
@@ -22,27 +31,47 @@ import Home from "./pages/Home";
  */
 function App() {
 	return (
-		// <>
-		<Routes>
-			{/* Padre de las rutas anidadas */}
-			<Route path="/" element={<Layout />}>
-				{/* Rutas anidadas hijas */}
-				<Route path="/" element={<Home />} />
-				{/* <Route path="/contact" element={<Contact />} />
-				<Route path="/dentist/:id" element={<Detail />} />
-				<Route path="/favs" element={<Favs />} /> */}
-				<Route
-					path="*"
-					element={
-						// <h1 style="padding-top: 30vh;">
-						<h1 className="mainContainer">
-							Page not found - Error 404
-						</h1>
-					}
-				/>
-			</Route>
-		</Routes>
-		// </>
+		<AuthProvider>
+			<Routes>
+				{/* Padre de las rutas anidadas */}
+				<Route path="/" element={<Layout />}>
+					{/* Rutas anidadas hijas */}
+
+					{/* Rutas del usuario (sitio web) */}
+					<Route path="/" element={<Home />} />
+<<<<<<< HEAD
+					<Route
+						path="/administracion"
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AddProductForm />
+						  	</ProtectedRoute>
+						}
+					/>
+=======
+>>>>>>> 6f8660a796f936412a246c38a31a1b538af1d284
+					<Route path="/service/:id" element={<ServiceDetail />} />
+					<Route path="/gallery" element={<ServiceGallery />} />
+
+					{/* Rutas del administrador */}
+					<Route path="/administracion" element={<AdminHome />} />
+					<Route
+						path="/administracion/service"
+						element={<AdminService />}
+					/>
+
+					{/* Ruta por defecto 404 */}
+					<Route
+						path="*"
+						element={
+							<h1 className="mainContainer">
+								Page not found - Error 404
+							</h1>
+						}
+					/>
+				</Route>
+			</Routes>
+		</AuthProvider>
 	);
 }
 

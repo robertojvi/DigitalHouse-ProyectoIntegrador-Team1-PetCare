@@ -43,14 +43,15 @@ main {
 .mainContainer {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	/* align-items: flex-start; */
 	padding: 2rem;
 	width: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
 	padding-top: calc(
-		var(--top-bar-height, 40px) + var(--header-height, 80px) + 2rem
+		var(--top-bar-height, 100px) + var(--header-height, 80px) + 0rem
 	);
+	margin-bottom: 20px;
 }
 
 /* Media queries for responsive layout */
@@ -86,10 +87,20 @@ main {
 	align-items: flex-start;
 	gap: 2rem;
 	width: 100%;
+	position: relative;
 }
 
 .pet-image {
 	width: 200px;
 	height: auto;
 	object-fit: cover;
+}
+
+.categories-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }

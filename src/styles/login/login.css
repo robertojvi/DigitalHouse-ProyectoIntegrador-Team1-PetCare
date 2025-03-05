@@ -1,0 +1,123 @@
+
+/* Contenedor del formulario de login */
+.login-form-container {
+  width: 100%;
+  padding: 1.5rem;
+  background: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #314549;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: column;
+  max-height: 700px;
+  overflow-y: scroll;
+  p{
+    font-size: 12px
+  };
+}
+
+.login-logo{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-logo a{
+  width: auto;
+}
+
+/* Encabezado del formulario */
+.login-form-container h2 {
+  font-size: 20px;  
+  color: #314549;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Campos de entrada del formulario */
+.login-form-container {
+  input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+  background-color: #f5f5f5;
+  color: #314549;
+  margin-bottom: .5rem;
+  }
+  
+
+  .combo-input{
+    display: flex;
+    margin: 1rem 0;
+    gap: 3rem;
+    flex-wrap: wrap;    
+    justify-content: center;
+    align-items: center;
+    div{
+      max-width: 200px;
+    }
+    label {
+      font-size: 14px;
+    }
+  }
+}
+
+.login-form-container input:focus {
+  border-color: #314549;
+  box-shadow: 0px 0px 4px #314549;
+}
+
+.login-submit-container{
+  display: flex;
+  justify-content: center;
+  margin: 1.7rem 0 1rem 0;
+}
+
+
+/* Botón de enviar */
+.login-submit {
+  background: #F2BE5E;
+	font-size: 15px;
+	color: #314549;
+	padding: .5rem 2.5rem;
+	border-radius: 30px;
+	border: none;
+	font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.login-submit:hover {
+  background-color: #314549;
+  color: #F2BE5E;
+}
+
+/* Enlace de alternar entre login y registro */
+.login-toggle {
+  text-align: center;
+  color: #314549;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.login-toggle:hover {
+  text-decoration: underline;
+}
+
+
+.error-message{
+  color: red;
+}
+
+.login-form-combo {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}

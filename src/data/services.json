@@ -1,0 +1,104 @@
+{
+	"services": [
+		{
+			"id": 1,
+			"name": "Camila Fernández",
+			"service": "Paseo de Perros",
+			"city": "Medellín",
+			"yearsExperience": 7,
+			"description": "Servicio profesional de paseo para mantener a tu perro activo y feliz",
+			"mainImage": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+			"images": [
+				"https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+				"https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+				"https://images.unsplash.com/photo-1552053831-71594a27632d",
+				"https://images.unsplash.com/photo-1556866261-8763a7662333",
+				"https://images.unsplash.com/photo-1553688738-a278b9f063e0",
+				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
+				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
+			],
+			"reviews": 245,
+			"rating": 4
+		},
+		{
+			"id": 2,
+			"name": "José José",
+			"service": "Alojamiento para Mascotas",
+			"city": "Medellín",
+			"yearsExperience": 2,
+			"description": "Hospedaje cómodo y seguro para tu mascota mientras estás fuera",
+			"mainImage": "https://images.unsplash.com/photo-1604848698030-c434ba08ece1",
+			"images": [
+				"https://images.unsplash.com/photo-1604848698030-c434ba08ece1",
+				"https://images.unsplash.com/photo-1553688738-a278b9f063e0",
+				"https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993",
+				"https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+				"https://images.unsplash.com/photo-1570021974424-60e83dfee639",
+				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
+				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
+			],
+			"reviews": 120,
+			"rating": 5
+		},
+		{
+			"id": 3,
+			"name": "Juan Gabriel",
+			"service": "Cuidado a Domicilio",
+			"city": "Medellín",
+			"yearsExperience": 6,
+			"description": "Cuidadores profesionales que visitan tu hogar para atender a tu mascota",
+			"mainImage": "https://images.unsplash.com/photo-1587764379873-97837921fd44",
+			"images": [
+				"https://images.unsplash.com/photo-1587764379873-97837921fd44",
+				"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e",
+				"https://images.unsplash.com/photo-1588269845464-8993565cac3a",
+				"https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd",
+				"https://images.unsplash.com/photo-1570021974424-60e83dfee639",
+				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
+				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
+			],
+			"reviews": 356,
+			"rating": 4
+		},
+		{
+			"id": 4,
+			"name": "Simón Gómez",
+			"service": "Entrenamiento Canino",
+			"city": "Medellín",
+			"yearsExperience": 1,
+			"description": "Sesiones de entrenamiento personalizado para mejorar el comportamiento",
+			"mainImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb",
+			"images": [
+				"https://images.unsplash.com/photo-1587300003388-59208cc962cb",
+				"https://images.unsplash.com/photo-1601758174114-e711c0cbaa69",
+				"https://images.unsplash.com/photo-1591946614720-90a587da4a36",
+				"https://images.unsplash.com/photo-1567752881298-894bb81f9379",
+				"https://images.unsplash.com/photo-1534361960057-19889db9621e",
+				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
+				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
+			],
+			"reviews": 39,
+			"rating": 3
+		},
+		{
+			"id": 5,
+			"name": "Carl Jr",
+			"service": "Guardería de Día",
+			"city": "Medellín",
+			"yearsExperience": 10,
+			"description": "Cuidado durante el día para mascotas que necesitan compañía",
+			"mainImage": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+			"images": [
+				"https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
+				"https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+				"https://images.unsplash.com/photo-1593620659530-7f98c53de278",
+				"https://images.unsplash.com/photo-1576201836106-db1758fd1c97",
+				"https://images.unsplash.com/photo-1591946614720-90a587da4a36",
+				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
+				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
+			],
+			"reviews": 430,
+			"rating": 4
+		}
+	]
+}
