@@ -16,6 +16,9 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import { AuthProvider } from "./auth/AuthContext";
+
 
 /**
  * Main application component that handles routing
@@ -41,7 +44,11 @@ function App() {
 					<Route path="/administracion" element={<AdminHome />} />
 					<Route
 						path="/administracion/service"
-						element={<AdminService />}
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AdminService />
+							</ProtectedRoute>
+						}
 					/>
 
 					{/* Ruta por defecto 404 */}
