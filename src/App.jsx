@@ -5,6 +5,7 @@ import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
 
 // Components
+import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
@@ -16,11 +17,6 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
-<<<<<<< HEAD
-import ProtectedRoute from "./auth/ProtectedRoute";
-import { AuthProvider } from "./auth/AuthContext";
-=======
->>>>>>> 6f8660a796f936412a246c38a31a1b538af1d284
 
 /**
  * Main application component that handles routing
@@ -39,17 +35,6 @@ function App() {
 
 					{/* Rutas del usuario (sitio web) */}
 					<Route path="/" element={<Home />} />
-<<<<<<< HEAD
-					<Route
-						path="/administracion"
-						element={
-							<ProtectedRoute requiredRole="ADMIN">
-								<AddProductForm />
-						  	</ProtectedRoute>
-						}
-					/>
-=======
->>>>>>> 6f8660a796f936412a246c38a31a1b538af1d284
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />
 
@@ -57,7 +42,11 @@ function App() {
 					<Route path="/administracion" element={<AdminHome />} />
 					<Route
 						path="/administracion/service"
-						element={<AdminService />}
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AdminService />
+							</ProtectedRoute>
+						}
 					/>
 
 					{/* Ruta por defecto 404 */}

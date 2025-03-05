@@ -2,7 +2,6 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-import Hero from "../components/hero/Hero";
 import "../styles/home/home.css";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
@@ -63,7 +62,6 @@ const categorias = [
 const Home = () => {
 	return (
 		<>
-		<Hero/>
 			<main className="mainContainer">
 
 				<SearchComponent />
