@@ -5,28 +5,26 @@
 	margin-left: auto;
 	margin-right: auto;
 	font-family: "Nunito", sans-serif;
-	background-color: #fffeff;
+	/* background-color: #fffeff; */
 }
 
 .admin-content {
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
-	margin-top: 2rem;
 }
 
 .admin-section {
-	background-color: #fffeff;
-	padding: 1.5rem;
-	border-radius: 0;
-	box-shadow: none;
+	/* background-color: #fffeff; */
+	/* padding: 1.5rem; */
+	/* border-radius: 0; */
+	/* box-shadow: none; */
 }
 
 .admin-header {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 
 .adminService-admin-button {
@@ -44,83 +42,16 @@
 	-ms-border-radius: var(--button-third-border-radius);
 	-o-border-radius: var(--button-third-border-radius);
 	border-radius: var(--button-third-border-radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 }
-
-/* Ancho fijo para columnas ID y Acciones */
-/* .admin-table th:first-child,
-.admin-table td:first-child {
-	width: 80px; /* Para ID *
-	text-align: center;
-	padding-left: 50px; /* Añadimos espacio a la izquierda *
-} */
-
-/* .admin-table th:last-child,
-.admin-table td:last-child {
-	width: 200px; /* Para Acciones *
-	text-align: center;
-} */
-
-/* El resto de columnas se ajustarán automáticamente */
-/* .admin-table th:not(:first-child):not(:last-child),
-.admin-table td:not(:first-child):not(:last-child) {
-	text-align: center;
-} */
-
-/* .admin-table th {
-	background-color: #314549;
-	color: white;
-	padding: 0.75rem;
-	text-align: left;
-	border-bottom: 1px solid black;
-} */
-
-/* .admin-table tbody tr {
-	background-color: rgba(250, 231, 196, 0.55);
-} */
-
-/* .admin-table td {
-	color: black;
-	padding: 0.75rem;
-	text-align: left;
-	border-bottom: 1px solid black;
-} */
-
-/* .admin-table tr:last-child td {
-	border-bottom: none;
-} */
-
-/* .action-button {
-	padding: 0.25rem 0.5rem;
-	border: none;
-	border-radius: 4px;
-	margin: 0 0.25rem;
-	cursor: pointer;
-	font-family: "Nunito", sans-serif;
-} */
-
-/* .action-button.edit {
-	background-color: #314549;
-	color: white;
-} */
-
-/* .action-button.delete {
-	background-color: #cd2d2d;
-	color: white;
-} */
 
 @media (max-width: 768px) {
 	.admin-container {
 		padding: 1rem;
 	}
-
-	.admin-table {
-		font-size: 0.9rem;
-	}
-
-	/* .action-button {
-		padding: 0.2rem 0.4rem;
-		font-size: 0.8rem;
-	} */
 }
 
 .breadcrumb {
