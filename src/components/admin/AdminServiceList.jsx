@@ -153,7 +153,7 @@ const AdminServiceList = () => {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre / Servicio</th>
+							<th>Nombre</th>
 							<th>Categoría</th>
 							<th>Acciones</th>
 						</tr>
