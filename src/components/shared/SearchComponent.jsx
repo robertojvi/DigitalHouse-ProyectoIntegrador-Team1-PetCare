@@ -10,36 +10,36 @@ import ButtonSearch from './ButtonSearch';
 
 export const SearchComponent = () => {
 
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [showPicker, setShowPicker] = useState(false);
-    const [dateRange, setDateRange] = useState([null, null]);
-    const [startDate, endDate] = dateRange;
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showPicker, setShowPicker] = useState(false);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
 
   return (
     <>
-        <SearchInputsContainer>
-          <div className='search-component-ss'>
-            <SelectService />
-              <DateTimeButton onClick={() => setShowPicker(!showPicker)} />
-                  {showPicker && (
-                      <DatePicker
-                      selectsRange={true}
-                      startDate={startDate}
-                      endDate={endDate}
-                      onChange={(update) => {
-                        setDateRange(update);
-                      }}
-                      withPortal
-                    />
-                  )}
-            
+      <SearchInputsContainer>
+        <div className='search-component-ss'>
+          <SelectService />
+          <DateTimeButton onClick={() => setShowPicker(!showPicker)} />
+          {showPicker && (
+            <DatePicker
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update) => {
+                setDateRange(update);
+              }}
+              withPortal
+            />
+          )}
 
-            <ButtonSearch/>
-          </div>
-          
-        </SearchInputsContainer>
+
+          <ButtonSearch />
+        </div>
+
+      </SearchInputsContainer>
 
     </>
-        
-    );
+
+  );
 }

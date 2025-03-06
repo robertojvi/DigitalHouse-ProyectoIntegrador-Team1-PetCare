@@ -1,117 +1,142 @@
 .admin-container {
-	padding: 2rem;
-	margin-top: calc(var(--top-bar-height, 40px) + var(--header-height, 80px));
-	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: "Nunito", sans-serif;
-	/* background-color: #fffeff; */
+  padding: 2rem;
+  margin-top: calc(var(--top-bar-height, 40px) + var(--header-height, 80px));
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Nunito", sans-serif;
+  /* background-color: #fffeff; */
+}
+
+.admin-container.in-layout {
+  margin-top: 0;
+  padding: 0;
 }
 
 .admin-content {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 8px;
 }
 
 .admin-section {
-	/* background-color: #fffeff; */
-	/* padding: 1.5rem; */
-	/* border-radius: 0; */
-	/* box-shadow: none; */
+  margin-top: 0;
+  padding-top: 0;
+  /* background-color: #fffeff; */
+  /* padding: 1.5rem; */
+  /* border-radius: 0; */
+  /* box-shadow: none; */
 }
 
 .admin-header {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .adminService-admin-button {
-	width: fit-content;
-	min-width: 200px;
-	font: var(--button-third-font);
-	color: var(--button-third-font-color);
-	background-color: var(--button-third-background-color);
-	border: none;
-	padding: 0.5rem 1rem;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	-webkit-border-radius: var(--button-third-border-radius);
-	-moz-border-radius: var(--button-third-border-radius);
-	-ms-border-radius: var(--button-third-border-radius);
-	-o-border-radius: var(--button-third-border-radius);
-	border-radius: var(--button-third-border-radius);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
+  width: fit-content;
+  min-width: 250px;
+  font: var(--button-third-font);
+  color: var(--button-third-font-color);
+  background-color: var(--button-third-background-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-border-radius: var(--button-third-border-radius);
+  -moz-border-radius: var(--button-third-border-radius);
+  -ms-border-radius: var(--button-third-border-radius);
+  -o-border-radius: var(--button-third-border-radius);
+  border-radius: var(--button-third-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 @media (max-width: 768px) {
-	.admin-container {
-		padding: 1rem;
-	}
+  .admin-container {
+    padding: 1rem;
+  }
 }
 
 .breadcrumb {
-	margin-bottom: 2rem;
-	color: var(--palet-color-darkgray);
-	font-family: "Nunito", sans-serif;
+  margin-bottom: 2rem;
+  color: var(--palet-color-darkgray);
+  font-family: "Nunito", sans-serif;
 }
 
 .breadcrumb-link {
-	color: var(--palet-color-brown);
-	text-decoration: none;
+  color: var(--palet-color-brown);
+  text-decoration: none;
 }
 
 .breadcrumb-link:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .breadcrumb-separator {
-	margin: 0 0.5rem;
-	color: var(--palet-color-darkgray);
+  margin: 0 0.5rem;
+  color: var(--palet-color-darkgray);
 }
 
 .breadcrumb-current {
-	color: var(--palet-color-darkgray);
+  color: var(--palet-color-darkgray);
 }
 
 /* Mensaje para mobile */
 .mobile-message {
-	display: none;
-	flex-direction: column;
-	text-align: center;
-	padding: 2rem;
-	font-family: "Nunito", sans-serif;
-	font-size: 24px;
-	font-weight: bold;
-	color: var(--palet-color-darkgray);
-	height: 100vh;
-	align-items: center;
-	justify-content: center;
-	gap: 1rem;
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--palet-color-darkgray);
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .warning-icon {
-	width: 48px;
-	height: 48px;
-	object-fit: contain;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 /* Eliminamos los estilos anteriores de los paths */
 
 @media (max-width: 768px) {
-	.admin-content {
-		display: none;
-	}
+  .admin-content {
+    display: none;
+  }
 
-	.breadcrumb {
-		display: none;
-	}
+  .breadcrumb {
+    display: none;
+  }
 
-	.mobile-message {
-		display: flex;
-	}
+  .mobile-message {
+    display: flex;
+  }
+}
+
+/* Ajustamos los anchos de las columnas de la tabla */
+.admin-table th:nth-child(1) {
+  width: 10%; /* ID */
+}
+
+.admin-table th:nth-child(2) {
+  width: 35%; /* Nombre */
+}
+
+.admin-table th:nth-child(3) {
+  width: 35%; /* Categoría */
+}
+
+.admin-table th:nth-child(4) {
+  width: 20%; /* Acciones */
 }
