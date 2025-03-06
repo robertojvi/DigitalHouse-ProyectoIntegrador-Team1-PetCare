@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ServiceDetailImagesGrid from "../components/services/ServiceDetailImagesGrid";
 import { ServiceDetailInfo } from "../components/services/ServiceDetailInfo";
+import arrowLeft from "../images/arrow-left.png";
 
 const ServiceDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +42,24 @@ const ServiceDetail = () => {
 
   return (
     <div className="mainContainer">
-      {/* <h2><PiPawPrintLight /> Servicio</h2> */}
+      <div
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          cursor: "pointer",
+        }}
+      >
+        <img
+          src={arrowLeft}
+          alt="Volver"
+          style={{
+            width: "30px",
+            height: "30px",
+          }}
+          onClick={() => navigate("/")}
+        />
+      </div>
       <ServiceDetailImagesGrid images={service.images} />
       <ServiceDetailInfo serviceInfo={service} />
     </div>

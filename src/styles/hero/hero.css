@@ -17,8 +17,9 @@
 }
 
 .hero-slogan p{
+	font-family:'Poppins';
 	background-color: #FFFEFF;
-	color: #685044;
+	color: #314549;
 	padding: 10px 20px;
 	border-radius: 5px;
 	font-weight: 400;
@@ -36,7 +37,7 @@
 .hero-slogan button{
 	background: #F2BE5E;
 	font-size: 15px;
-	color: #685044;
+	color: #314549;
 	padding: 1rem 2.5rem;
 	border-radius: 10px;
 	border: none;

@@ -1,4 +1,3 @@
-import React from "react";
 import { PiWhatsappLogo } from "react-icons/pi";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
@@ -58,7 +57,6 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-copyright">
-        <p>
           <div className="copyright-text">
             <FaRegCopyright style={{ fontSize: "14px", marginRight: "15px" }} />{" "}
             2025 Todos los derechos reservados Pet Care
@@ -68,7 +66,6 @@ const Footer = () => {
             <FaFacebook style={{ color: 'white', fontSize: '16px' }} />
             <FaInstagram style={{ color: 'white', fontSize: '16px' }} />
           </div>
-        </p>
       </div>
     </footer>
   );
