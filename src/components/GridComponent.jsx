@@ -15,13 +15,8 @@ export const GridComponent = () => {
 			try {
 				setLoading(true);
 				const data = await getServices();
-				console.log("DATA received:", data); // Depuración
-				if (Array.isArray(data)) {
-					setProfiles(data);
-				} else {
-					console.error("Expected an array but received:", data);
-					setProfiles([]); // En caso de error, establecer un array vacío
-				}
+				console.log("DATA: ",data.listaServicios);
+				setProfiles(data);
 			} catch (error) {
 				console.error("Error loading profiles:", error);
 				setProfiles([]); // En caso de error, establecer un array vacío
