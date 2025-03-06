@@ -7,7 +7,7 @@ import { TitleComponent } from "../components/shared/TitleComponent";
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
 import { ServicesFilter } from "../components/ServicesFilter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Pagination } from "../components/Pagination";
 
 /**
@@ -60,10 +60,25 @@ const categorias = [
 	{ id: 3, nombre: "Asesoria personalizada", image: "/categoria3.png" },
 ];
 
+// Create dummy data outside component
+const DUMMY_SERVICES = Array.from({ length: 20 }, (_, i) => ({
+	id: i + 1,
+	title: `Servicio ${i + 1}`,
+	description: `Descripción ${i + 1}`,
+	price: (i + 1) * 100,
+}));
+
 const Home = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
-	const totalItems = 20; // Actualizar este número según la cantidad total de servicios
+
+	// Calculate pagination values
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentServices = DUMMY_SERVICES.slice(
+		indexOfFirstItem,
+		indexOfLastItem
+	);
 
 	return (
 		<>
@@ -74,12 +89,9 @@ const Home = () => {
 				</div>
 
 				<div style={{ marginTop: "22px" }}>
-					<RecommendedServices
-						currentPage={currentPage}
-						itemsPerPage={itemsPerPage}
-					/>
+					<RecommendedServices services={currentServices} />
 					<Pagination
-						totalItems={totalItems}
+						totalItems={DUMMY_SERVICES.length}
 						itemsPerPage={itemsPerPage}
 						currentPage={currentPage}
 						onPageChange={setCurrentPage}
