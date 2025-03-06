@@ -93,6 +93,18 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 		}));
 	};
 
+	const handleCategoryChange = (e) => {
+		const selectedValue = e.target.value;
+		if (selectedValue === "new") {
+			setShowAddCategory(true);
+		} else {
+			setFormData((prev) => ({
+				...prev,
+				category: selectedValue,
+			}));
+		}
+	};
+
 	return (
 		<FormWrapper>
 			<Overlay onClick={onClose} />
@@ -136,9 +148,7 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 						<Label>Categoría</Label>
 						<Select
 							value={formData.category}
-							onChange={(e) =>
-								setFormData({ ...formData, category: e.target.value })
-							}
+							onChange={handleCategoryChange}
 							style={{ width: "100%" }}
 						>
 							<option value="">Seleccione una categoría</option>
@@ -147,30 +157,10 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 									{cat.nombre}
 								</option>
 							))}
+							<option value="new" style={{ fontWeight: "bold" }}>
+								Nueva Categoría
+							</option>
 						</Select>
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
-								marginTop: "10px",
-							}}
-						>
-							<Label style={{ fontSize: "12px", marginBottom: "2px" }}>
-								Nueva Categoria
-							</Label>
-							<Button
-								type="button"
-								onClick={() => setShowAddCategory(true)}
-								style={{
-									padding: "5px 15px",
-									backgroundColor: "#314549",
-									color: "#fffeff",
-								}}
-							>
-								Añadir Categoría
-							</Button>
-						</div>
 						{errors.category && <ErrorMessage>{errors.category}</ErrorMessage>}
 					</FormGroup>
 

@@ -147,6 +147,10 @@ export const Select = styled.select`
     option:first-child {
         font-weight: 700;
     }
+
+    option[value="new"] {
+        font-weight: 700;
+    }
 `;
 
 

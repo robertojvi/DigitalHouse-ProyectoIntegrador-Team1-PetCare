@@ -51,15 +51,7 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 	return (
 		<FormWrapper>
 			<Overlay onClick={onClose} />
-			<FormContainer style={{ 
-				border: "2px solid #314549",
-				position: "fixed",
-				top: "50%",
-				left: "calc(50% + 300px)", // Move form to the right
-				transform: "translate(0, -50%)", // Only transform vertically
-				maxWidth: "400px", // Smaller width for the category form
-				width: "90%"
-			}}>
+			<FormContainer style={{ border: "2px solid #314549" }}>
 				<Form onSubmit={handleSubmit}>
 					<h2>Nueva Categoría</h2>
 					<FormGroup>
