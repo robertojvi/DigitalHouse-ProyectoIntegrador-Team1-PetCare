@@ -58,7 +58,6 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-copyright">
-        <p>
           <div className="copyright-text">
             <FaRegCopyright style={{ fontSize: "14px", marginRight: "15px" }} />{" "}
             2025 Todos los derechos reservados Pet Care
@@ -68,7 +67,6 @@ const Footer = () => {
             <FaFacebook style={{ color: 'white', fontSize: '16px' }} />
             <FaInstagram style={{ color: 'white', fontSize: '16px' }} />
           </div>
-        </p>
       </div>
     </footer>
   );

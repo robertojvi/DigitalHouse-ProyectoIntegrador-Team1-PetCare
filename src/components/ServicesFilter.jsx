@@ -4,7 +4,7 @@ import { ServicesFilterContainer, SelectContainer, SelectGroupContainer } from '
 
 export const ServicesFilter = () => {
     const [categories, setCategories] = useState([])
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 767)
 
     useEffect(() => {
         fetch('/data/categories.json')
