@@ -15,7 +15,7 @@ export const GridComponent = () => {
 			try {
 				setLoading(true);
 				const data = await getServices();
-				console.log("DATA: ",data.listaServicios);
+				console.log("DATA: ",data);
 				setProfiles(data);
 			} catch (error) {
 				console.error("Error loading profiles:", error);
@@ -70,7 +70,7 @@ export const GridComponent = () => {
 						key={profile.idServicio}
 						name={profile.nombre}
 						serviceType={profile.categoria}
-						image={profile.imagenUrl}
+						image={profile.imagenUrls[0]}
 						rating={profile.rating}
 						excerpt={profile.descripcion}
 					/>
