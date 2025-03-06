@@ -67,6 +67,7 @@ export const SelectGroupContainer = styled.div`
     gap: 20px;
     align-items: center; 
     width: 100%;
+    margin-top: 15px;
 
     & div.firstSelect{
         width: 27%;
