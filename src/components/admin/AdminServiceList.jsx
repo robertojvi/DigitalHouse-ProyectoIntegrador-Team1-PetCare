@@ -200,8 +200,8 @@ const AdminServiceList = ({ onEdit }) => {
 						{/* Replace text header with LiaPawSolid icon */}
 						<LiaPawSolid className="modal-icon" />
 						<p>
-							¿Estás seguro de querer eliminar el servicio "
-							{serviceToDelete?.nombre}" del listado?
+							¿Estás seguro de querer eliminar el servicio &quot;
+							{serviceToDelete?.nombre}&quot; del listado?
 						</p>
 						<div className="modal-buttons">
 							<button
