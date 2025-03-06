@@ -3,10 +3,12 @@
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
 import "../styles/home/home.css";
-import { TitleComponent } from '../components/shared/TitleComponent'
+import { TitleComponent } from "../components/shared/TitleComponent";
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
 import { ServicesFilter } from "../components/ServicesFilter";
+import { useState } from "react";
+import { Pagination } from "../components/Pagination";
 
 /**
  * Home Page Component
@@ -56,21 +58,32 @@ const categorias = [
 	{ id: 1, nombre: "Cuidado en casa", image: "/categoria1.png" },
 	{ id: 2, nombre: "Cuidado en instalaciones", image: "/categoria2.png" },
 	{ id: 3, nombre: "Asesoria personalizada", image: "/categoria3.png" },
-
-]
+];
 
 const Home = () => {
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 10;
+	const totalItems = 20; // Actualizar este número según la cantidad total de servicios
+
 	return (
 		<>
 			<main className="mainContainer">
-
 				<SearchComponent />
-				<div style={{ "border": "1px solid #000000", "padding": "30px 50px" }}>
+				<div style={{ border: "1px solid #000000", padding: "30px 50px" }}>
 					<ServicesFilter />
 				</div>
 
-				<div style={{ "marginTop": "22px" }}>
-					<RecommendedServices />
+				<div style={{ marginTop: "22px" }}>
+					<RecommendedServices
+						currentPage={currentPage}
+						itemsPerPage={itemsPerPage}
+					/>
+					<Pagination
+						totalItems={totalItems}
+						itemsPerPage={itemsPerPage}
+						currentPage={currentPage}
+						onPageChange={setCurrentPage}
+					/>
 				</div>
 			</main>
 		</>
