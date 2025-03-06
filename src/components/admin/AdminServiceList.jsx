@@ -53,7 +53,7 @@ const AdminServiceList = () => {
 
 			console.log("Servicios desde la base de datos:");
 			console.log(response.data);
-			setServices(response.data);
+			setServices(response.data.listaServicios);
 			setError(null);
 		} catch (err) {
 			const errorMessage =
