@@ -19,10 +19,15 @@ const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 	const [isLogin, setIsLogin] = useState(true);
+	const [showDropdown, setShowDropdown] = useState(false);
 	const { auth, logout } = useContext(AuthContext);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
+	};
+
+	const toggleDropdown = () => {
+		setShowDropdown(!showDropdown);
 	};
 
 	const openLoginModal = (loginMode) => {
@@ -77,14 +82,23 @@ const Header = () => {
 								<div className="header-user">
 									<div className="name-avatar">
 										<h3>{auth.nombre} {auth.apellido}</h3>
-										<span className="avatar">
-											{auth.nombre[0]}
-											{auth.apellido[0]}
-										</span>
+										<div className="avatar-container">
+											<span className="avatar" onClick={toggleDropdown}>
+												{auth.nombre[0]}
+												{auth.apellido[0]}
+											</span>
+											{showDropdown && (
+												<div className="dropdown-menu">
+													<Link to="/perfil" className="dropdown-item">
+														<CiUser /> Ver perfil
+													</Link>
+													<button onClick={logout} className="dropdown-item">
+														<CiLogout /> Cerrar Sesión
+													</button>
+												</div>
+											)}
+										</div>
 									</div>
-									<button className="logout" onClick={logout}>
-										<CiLogout /> Cerrar Sesión
-									</button>
 								</div>
 							)}
 						</div>
