@@ -1,0 +1,50 @@
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+  gap: 20px;
+}
+
+.admin-sidebar {
+  width: 300px;
+  padding: 55px 0px 20px 20px;
+}
+
+.sidebar-card {
+  border: 2px solid #000000;
+  padding: 20px;
+  background-color: transparent;
+  height: fit-content;
+}
+
+.admin-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.admin-link {
+  display: block;
+  padding: 15px 20px;
+  background-color: #fae7c4;
+  text-decoration: none;
+  color: #000000;
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.admin-link:hover {
+  background-color: #314549;
+  color: #ffffff;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 20px 0 20px 0;
+}

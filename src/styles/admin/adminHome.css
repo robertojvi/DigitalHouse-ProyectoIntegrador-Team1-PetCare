@@ -46,13 +46,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("/src/images/warning.png") no-repeat center 40%;
+    /* background: url("/src/images/warning.png") no-repeat center 40%; */
     background-size: 150px;
     padding: 20px;
   }
 
   main::after {
-    content: "NO DISPONIBLE PARA MOBILE";
+    /* content: "NO DISPONIBLE PARA MOBILE"; */
     font-family: "Nunito", sans-serif;
     font-weight: bold;
     font-size: 1.2rem;
@@ -69,7 +69,7 @@
 
 .admin-welcome-card {
   border: 2px solid #000000;
-  padding: 30px;
+  padding: 20px 8px 40px 20px;
   width: 100%;
   max-width: 600px;
   background-color: transparent;

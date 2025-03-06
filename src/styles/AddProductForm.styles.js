@@ -84,6 +84,7 @@ export const Button = styled.button`
     border: none;
     border-radius: 50px; // Updated to 50%
     cursor: pointer;
+    font-weight: bold;
 
     &.cancel {
         background: #ddd;
@@ -144,6 +145,10 @@ export const Select = styled.select`
     }
 
     option:first-child {
+        font-weight: 700;
+    }
+
+    option[value="new"] {
         font-weight: 700;
     }
 `;

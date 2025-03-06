@@ -7,7 +7,6 @@ import "./styles/GlobalStyles.css";
 // Components
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
-import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
 
 // Pages
@@ -39,12 +38,11 @@ function App() {
 					<Route path="/gallery" element={<ServiceGallery />} />
 
 					{/* Rutas del administrador */}
-					<Route path="/administracion" element={<AdminHome />} />
 					<Route
-						path="/administracion/service"
+						path="/administracion"
 						element={
 							<ProtectedRoute requiredRole="ADMIN">
-								<AdminService />
+								<AdminHome />
 							</ProtectedRoute>
 						}
 					/>

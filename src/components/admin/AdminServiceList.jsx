@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Add this import
+import PropTypes from "prop-types";
 
 // Components
 import { AuthContext } from "../../auth/AuthContext";
@@ -17,7 +18,7 @@ import trashIcon from "../../images/trash-can.png";
 // Import the LiaPawSolid icon component
 import { LiaPawSolid } from "react-icons/lia";
 
-const AdminServiceList = () => {
+const AdminServiceList = ({ onEdit }) => {
 	const { auth } = useContext(AuthContext);
 	const [services, setServices] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -52,8 +53,8 @@ const AdminServiceList = () => {
 			);
 
 			console.log("Servicios desde la base de datos:");
-			console.log(response.data);
-			setServices(response.data);
+			console.log(response.data.listaServicios);
+			setServices(response.data.listaServicios);
 			setError(null);
 		} catch (err) {
 			const errorMessage =
@@ -67,8 +68,8 @@ const AdminServiceList = () => {
 		}
 	};
 
-	const handleEdit = (item) => {
-		console.log("Editando servicio:", item);
+	const handleEdit = (service) => {
+		onEdit(service);
 	};
 
 	const openDeleteModal = (service) => {
@@ -153,7 +154,7 @@ const AdminServiceList = () => {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre / Servicio</th>
+							<th>Nombre</th>
 							<th>Categoría</th>
 							<th>Acciones</th>
 						</tr>
@@ -163,7 +164,7 @@ const AdminServiceList = () => {
 							<tr key={service.idServicio}>
 								<td>{service.idServicio}</td>
 								<td>{service.nombre}</td>
-								<td>{service.categoria.nombre}</td>
+								<td>{service.categoria?.nombre || ""}</td>
 								<td>
 									<button
 										className="icon-button"
@@ -199,8 +200,8 @@ const AdminServiceList = () => {
 						{/* Replace text header with LiaPawSolid icon */}
 						<LiaPawSolid className="modal-icon" />
 						<p>
-							¿Estás seguro de querer eliminar el servicio "
-							{serviceToDelete?.nombre}" del listado?
+							¿Estás seguro de querer eliminar el servicio &quot;
+							{serviceToDelete?.nombre}&quot; del listado?
 						</p>
 						<div className="modal-buttons">
 							<button
@@ -223,6 +224,10 @@ const AdminServiceList = () => {
 			)}
 		</>
 	);
+};
+
+AdminServiceList.propTypes = {
+	onEdit: PropTypes.func.isRequired,
 };
 
 export default AdminServiceList;

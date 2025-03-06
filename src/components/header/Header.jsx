@@ -1,5 +1,5 @@
 // React
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CiLogout, CiUser } from "react-icons/ci";
 
@@ -12,15 +12,22 @@ import Login from "../login/login";
 // Styles
 import "../../styles/header/header.css";
 import "../../styles/header/menu.css";
+import TopBar from "./TopBar";
+import Menu from "./Menu";
 
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 	const [isLogin, setIsLogin] = useState(true);
+	const [showDropdown, setShowDropdown] = useState(false);
 	const { auth, logout } = useContext(AuthContext);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
+	};
+
+	const toggleDropdown = () => {
+		setShowDropdown(!showDropdown);
 	};
 
 	const openLoginModal = (loginMode) => {
@@ -74,22 +81,30 @@ const Header = () => {
 							) : (
 								<div className="header-user">
 									<div className="name-avatar">
-										<span className="avatar">
-											{auth.nombre[0]}
-											{auth.apellido[0]}
-										</span>
-										<h3>{auth.nombre}</h3>
+										<h3>{auth.nombre} {auth.apellido}</h3>
+										<div className="avatar-container">
+											<span className="avatar" onClick={toggleDropdown}>
+												{auth.nombre[0]}
+												{auth.apellido[0]}
+											</span>
+											{showDropdown && (
+												<div className="dropdown-menu">
+													<Link to="/perfil" className="dropdown-item">
+														<CiUser /> Ver perfil
+													</Link>
+													<button onClick={logout} className="dropdown-item">
+														<CiLogout /> Cerrar Sesión
+													</button>
+												</div>
+											)}
+										</div>
 									</div>
-									<button className="logout" onClick={logout}>
-										<CiLogout /> Cerrar Sesión
-									</button>
 								</div>
 							)}
 						</div>
 					</nav>
 				</header>
 			</div>
-
 
 			{isLoginModalOpen && (
 				<Modal onClose={closeModal}>

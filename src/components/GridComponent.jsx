@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
+import { getServices } from "../services/serviciosService";
 
 export const GridComponent = () => {
 	const [profiles, setProfiles] = useState([]);
@@ -10,18 +11,26 @@ export const GridComponent = () => {
 	const itemsPerPage = 10;
 
 	useEffect(() => {
-		setLoading(true);
-		fetch("/data/profiles.json")
-			.then((response) => response.json())
-			.then((data) => {
+		const fetchServices = async () => {
+			try {
+				setLoading(true);
+				const data = await getServices();
+				console.log("DATA: ",data);
 				setProfiles(data);
-				setLoading(false);
-			})
-			.catch((error) => {
+			} catch (error) {
 				console.error("Error loading profiles:", error);
+				setProfiles([]); // En caso de error, establecer un array vacío
+			} finally {
 				setLoading(false);
-			});
+			}
+		};
+	
+		fetchServices();
 	}, []);
+	
+	  
+	  
+
 
 	// Pagination calculations
 	const indexOfLastItem = currentPage * itemsPerPage;
@@ -58,12 +67,12 @@ export const GridComponent = () => {
 			<div className="grid-container">
 				{currentItems.map((profile) => (
 					<ServiceCard
-						key={profile.id}
-						name={profile.name}
-						serviceType={profile.serviceType}
-						image={profile.image}
+						key={profile.idServicio}
+						name={profile.nombre}
+						serviceType={profile.categoria}
+						image={profile.imagenUrls[0]}
 						rating={profile.rating}
-						excerpt={profile.excerpt}
+						excerpt={profile.descripcion}
 					/>
 				))}
 			</div>
