@@ -2,7 +2,7 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-import Hero from "../components/hero/hero";
+import Hero from "../components/hero/Hero";
 import "../styles/home/home.css";
 import { PiPawPrintLight } from "react-icons/pi";
 import ServicesList from "../components/services/ServicesList";
@@ -55,33 +55,33 @@ import { SearchComponent } from "../components/shared/SearchComponent";
  */
 
 const categorias = [
-	{id: 1, nombre: "Cuidado en casa", image:"/categoria1.png"}, 
-	{id: 2, nombre: "Cuidado en instalaciones", image:"/categoria2.png"}, 
-	{id: 3, nombre: "Asesoria personalizada", image:"/categoria3.png"}, 
+	{ id: 1, nombre: "Cuidado en casa", image: "/categoria1.png" },
+	{ id: 2, nombre: "Cuidado en instalaciones", image: "/categoria2.png" },
+	{ id: 3, nombre: "Asesoria personalizada", image: "/categoria3.png" },
 
 ]
 
 const Home = () => {
 	return (
-    <>
-    <Hero/>
-		<main className="mainContainer">
-		
-		<SearchComponent/>
+		<>
+			<Hero />
+			<main className="mainContainer">
 
-		<TitleComponent title={"Categorías"}/>
-    	<div className="categories-container">
-        {categorias.map((categoria) => (
-            <Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
-          ))
-        }
-			</div>
-			<div>
-				<RecommendedServices />
-			</div>
-		</main>
-	<WhatsAppButton/>
-	</>
+				<SearchComponent />
+
+				<TitleComponent title={"Categorías"} />
+				<div className="categories-container">
+					{categorias.map((categoria) => (
+						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
+					))
+					}
+				</div>
+				<div>
+					<RecommendedServices />
+				</div>
+			</main>
+			<WhatsAppButton />
+		</>
 	);
 };
 

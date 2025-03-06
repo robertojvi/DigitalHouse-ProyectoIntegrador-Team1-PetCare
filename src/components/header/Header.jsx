@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 import Modal from "../shared/Modal/Modal";
 import { CiLogout, CiUser } from "react-icons/ci";
-import Login from "../login/login";
+import Login from "../login/Login";
 import { AuthContext } from "../../auth/AuthContext";
 
 const Header = () => {
