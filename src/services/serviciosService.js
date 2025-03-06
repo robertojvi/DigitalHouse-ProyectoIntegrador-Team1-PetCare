@@ -6,7 +6,7 @@ export const getServices = async () => {
 	try {
 	  const response = await axiosInstance.get(API_URL);
 	  console.log("RESPONSE:",response)
-	  return response.data;
+	  return response.data.listaServicios;
 	} catch (error) {
 	  if (error.response) {
 		throw new Error(error.response.data.message || "Error del servidor");
