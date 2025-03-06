@@ -1,5 +1,5 @@
 // React
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CiLogout, CiUser } from "react-icons/ci";
 
@@ -12,6 +12,8 @@ import Login from "../login/login";
 // Styles
 import "../../styles/header/header.css";
 import "../../styles/header/menu.css";
+import TopBar from "./TopBar";
+import Menu from "./Menu";
 
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,11 +76,11 @@ const Header = () => {
 							) : (
 								<div className="header-user">
 									<div className="name-avatar">
+										<h3>{auth.nombre} {auth.apellido}</h3>
 										<span className="avatar">
 											{auth.nombre[0]}
 											{auth.apellido[0]}
 										</span>
-										<h3>{auth.nombre}</h3>
 									</div>
 									<button className="logout" onClick={logout}>
 										<CiLogout /> Cerrar Sesión
@@ -89,7 +91,6 @@ const Header = () => {
 					</nav>
 				</header>
 			</div>
-
 
 			{isLoginModalOpen && (
 				<Modal onClose={closeModal}>

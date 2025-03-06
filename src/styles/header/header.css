@@ -102,6 +102,15 @@
   font-family: "Inter", sans-serif;
 }
 
+.name-avatar h3 {
+  color: #314549;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .name-avatar{
   display: flex;
   justify-content: center;
