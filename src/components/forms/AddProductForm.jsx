@@ -143,10 +143,8 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 
 		setIsSubmitting(true);
 		try {
-			// This will be an array of image URLs from the server
 			const imageUrls = await crearServicio(formData);
 
-			// Create the complete service object with the returned image URLs
 			const nuevoServicio = {
 				nombre: formData.name,
 				descripcion: formData.description,
@@ -157,9 +155,13 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 				},
 				imagenes: imageUrls,
 			};
-			console.log(nuevoServicio);
 
 			await onSubmit(nuevoServicio);
+			alert("Servicio creado exitosamente!");
+			setTimeout(() => {
+				window.location.href = "/administracion/service";
+				window.location.reload();
+			}, 1000);
 			onClose();
 		} catch (error) {
 			setErrors({
@@ -255,9 +257,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							}}
 							required
 						/>
-						{errors.name && (
-							<ErrorMessage>{errors.name}</ErrorMessage>
-						)}
+						{errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
 					</FormGroup>
 
 					<FormGroup>
@@ -296,9 +296,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							}}
 							required
 						/>
-						{errors.price && (
-							<ErrorMessage>{errors.price}</ErrorMessage>
-						)}
+						{errors.price && <ErrorMessage>{errors.price}</ErrorMessage>}
 					</FormGroup>
 
 					<SideBySideContainer>
@@ -312,10 +310,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 							>
 								<option value="">Categoría</option>
 								{categorias.map((category) => {
-									console.log(
-										"Rendering category:",
-										category
-									);
+									console.log("Rendering category:", category);
 									return (
 										<option
 											key={category.idCategoria}
@@ -342,9 +337,7 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 									onChange={handleFileChange}
 								/>
 							</FileInputLabel>
-							{errors.images && (
-								<ErrorMessage>{errors.images}</ErrorMessage>
-							)}
+							{errors.images && <ErrorMessage>{errors.images}</ErrorMessage>}
 						</FormGroup>
 					</SideBySideContainer>
 
@@ -352,13 +345,8 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						<ImagePreviewContainer>
 							{formData.images.map((image, index) => (
 								<ImagePreview key={index}>
-									<img
-										src={image.preview}
-										alt={`Preview ${index + 1}`}
-									/>
-									<button onClick={() => removeImage(index)}>
-										×
-									</button>
+									<img src={image.preview} alt={`Preview ${index + 1}`} />
+									<button onClick={() => removeImage(index)}>×</button>
 								</ImagePreview>
 							))}
 						</ImagePreviewContainer>
@@ -375,23 +363,13 @@ const AddProductForm = ({ onClose, onSubmit }) => {
 						</ErrorMessage>
 					)}
 
-					{errors.submit && (
-						<ErrorMessage>{errors.submit}</ErrorMessage>
-					)}
+					{errors.submit && <ErrorMessage>{errors.submit}</ErrorMessage>}
 
 					<ButtonGroup>
-						<Button
-							type="button"
-							className="cancel"
-							onClick={onClose}
-						>
+						<Button type="button" className="cancel" onClick={onClose}>
 							Cancelar
 						</Button>
-						<Button
-							type="submit"
-							className="submit"
-							disabled={isSubmitting}
-						>
+						<Button type="submit" className="submit" disabled={isSubmitting}>
 							{isSubmitting ? "Guardando..." : "Guardar"}
 						</Button>
 					</ButtonGroup>

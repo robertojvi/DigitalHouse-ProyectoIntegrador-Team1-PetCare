@@ -1,10 +1,13 @@
 // React
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../auth/AuthContext";
+import axios from "axios";
 
 // Components
 import AdminServiceList from "../../components/admin/AdminServiceList";
 import AddProductForm from "../../components/forms/AddProductForm";
+import EditProductForm from "../../components/forms/EditProductForm";
 
 // Styles
 import "../../styles/admin/adminService.css";
@@ -17,26 +20,99 @@ const AdminService = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const [productos, setProductos] = useState([]);
+	const { auth, logout } = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
+	const [services, setServices] = useState([]);
+	const [selectedService, setSelectedService] = useState(null);
+	const [showEditForm, setShowEditForm] = useState(false);
+
+	const getAuthHeaders = () => {
+		if (!auth || !auth.token) return null;
+		return {
+			headers: {
+				Authorization: `Bearer ${auth.token}`,
+			},
+		};
+	};
+
+	const fetchServices = async () => {
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
+		}
+
+		try {
+			setLoading(true);
+			const response = await axios.get(
+				"http://localhost:8080/api/servicios",
+				headers
+			);
+			setServices(response.data);
+			setError(null);
+		} catch (err) {
+			console.error("Error fetching services:", err);
+			setError("Error al cargar los servicios: " + err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	useEffect(() => {
+		fetchServices();
+	}, [auth.token]);
 
 	const handleAddProduct = async (servicioData) => {
-		try {
-			setError(null);
-			/* setProductos((prevProductos) => [
-				...prevProductos,
-				{
-					id: servicioData.id || Date.now(),
-					tipo: "Servicio",
-					nombre: servicioData.nombre || servicioData.name,
-				},
-			]); */
-
-			// Opcional: Mostrar mensaje de éxito
-			alert("Servicio creado exitosamente");
-			<AdminServiceList />;
-		} catch (error) {
-			setError(error.message || "Error al crear el servicio");
-			console.error("Error al procesar el servicio:", error);
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
 		}
+
+		try {
+			const response = await axios.post(
+				"http://localhost:8080/api/servicios",
+				servicioData,
+				headers
+			);
+
+			// Actualizar la lista de servicios
+			await fetchServices();
+
+			setShowAddForm(false);
+			alert("Servicio creado exitosamente");
+		} catch (error) {
+			console.error("Error creating service:", error);
+			setError("Error al crear el servicio: " + error.message);
+		}
+	};
+
+	const handleEditService = async (serviceData) => {
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
+		}
+
+		try {
+			await axios.put(
+				`http://localhost:8080/api/servicios/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
+				serviceData,
+				headers
+			);
+
+			await fetchServices();
+			setShowEditForm(false);
+			setSelectedService(null);
+			alert("Servicio actualizado exitosamente");
+		} catch (error) {
+			setError("Error al actualizar el servicio: " + error.message);
+		}
+	};
+
+	const handleServiceEdit = (service) => {
+		setSelectedService(service);
+		setShowEditForm(true);
 	};
 
 	return (
@@ -88,14 +164,29 @@ const AdminService = ({ isInAdminLayout }) => {
 							<AddProductForm
 								onClose={() => {
 									setShowAddForm(false);
+									setSelectedService(null);
 									setError(null);
 								}}
-								onSubmit={handleAddProduct}
+								onSubmit={
+									selectedService ? handleEditService : handleAddProduct
+								}
+								initialData={selectedService}
 							/>
 						)}
 					</div>
 
-					<AdminServiceList />
+					{showEditForm && selectedService && (
+						<EditProductForm
+							service={selectedService}
+							onClose={() => {
+								setShowEditForm(false);
+								setSelectedService(null);
+							}}
+							onSubmit={handleEditService}
+						/>
+					)}
+
+					<AdminServiceList onEdit={handleServiceEdit} />
 				</section>
 			</div>
 		</main>

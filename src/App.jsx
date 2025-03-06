@@ -7,7 +7,6 @@ import "./styles/GlobalStyles.css";
 // Components
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
-import { GlobalStyles } from "./styles/GlobalStyles";
 import Layout from "./layouts/Layout";
 
 // Pages
