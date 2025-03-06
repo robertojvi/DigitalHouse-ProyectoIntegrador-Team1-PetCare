@@ -15,7 +15,7 @@ import "../../styles/admin/adminService.css";
 import warningIcon from "../../images/warning.png";
 import addPlusIcon from "../../images/add-plus.png";
 
-const AdminService = () => {
+const AdminService = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const [productos, setProductos] = useState([]);
@@ -85,29 +85,27 @@ const AdminService = () => {
 	};
 
 	return (
-		<main className="admin-container">
+		<main className={`admin-container ${isInAdminLayout ? 'in-layout' : ''}`}>
 			{/* Mobile section */}
 			<div className="mobile-message">
 				<img src={warningIcon} alt="Warning" className="warning-icon" />
 				<span>NO DISPONIBLE PARA MOBILE</span>
 			</div>
 
-			{/* Breadcrumbs section */}
-			<div className="breadcrumb">
-				<Link to="/" className="breadcrumb-link">
-					Inicio
-				</Link>
-
-				<span className="breadcrumb-separator"> &gt; </span>
-
-				<Link to="/administracion" className="breadcrumb-link">
-					Administración
-				</Link>
-
-				<span className="breadcrumb-separator"> &gt; </span>
-
-				<span className="breadcrumb-current">Servicio</span>
-			</div>
+			{/* Breadcrumbs section - solo se muestra si no está en el layout */}
+			{!isInAdminLayout && (
+				<div className="breadcrumb">
+					<Link to="/" className="breadcrumb-link">
+						Inicio
+					</Link>
+					<span className="breadcrumb-separator"> &gt; </span>
+					<Link to="/administracion" className="breadcrumb-link">
+						Administración
+					</Link>
+					<span className="breadcrumb-separator"> &gt; </span>
+					<span className="breadcrumb-current">Servicio</span>
+				</div>
+			)}
 
 			{error && <div className="error-message">{error}</div>}
 
@@ -119,7 +117,7 @@ const AdminService = () => {
 							className="adminService-admin-button"
 							onClick={() => setShowAddForm(true)}
 						>
-							<span>Añadir Productos</span>
+							<span>Agregar Producto</span>
 							<img
 								src={addPlusIcon}
 								alt="Añadir"

@@ -11,7 +11,7 @@ export const ServiceCard = ({ name, serviceType, image, rating, excerpt }) => {
             <Image src={image} alt={name} />
         </ImageContainer>
         <InfoContainer>
-            <h3 className='serviceType'>{serviceType}</h3>
+            <h3 className='serviceType'>{serviceType.name}</h3>
             <NameContainer>
             <p>{name}</p>
             <StarsComponent rating={rating} />

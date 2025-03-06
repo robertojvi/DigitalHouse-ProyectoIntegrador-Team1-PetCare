@@ -52,8 +52,8 @@ const AdminServiceList = () => {
 			);
 
 			console.log("Servicios desde la base de datos:");
-			console.log(response.data);
-			setServices(response.data);
+			console.log(response.data.listaServicios);
+			setServices(response.data.listaServicios);
 			setError(null);
 		} catch (err) {
 			const errorMessage =
@@ -153,7 +153,7 @@ const AdminServiceList = () => {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre / Servicio</th>
+							<th>Nombre</th>
 							<th>Categoría</th>
 							<th>Acciones</th>
 						</tr>
@@ -163,7 +163,7 @@ const AdminServiceList = () => {
 							<tr key={service.idServicio}>
 								<td>{service.idServicio}</td>
 								<td>{service.nombre}</td>
-								<td>{service.categoria.nombre}</td>
+								<td>{service.categoria?.nombre || ""}</td>
 								<td>
 									<button
 										className="icon-button"
