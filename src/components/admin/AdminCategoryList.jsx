@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../auth/AuthContext";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const AdminCategoryList = ({ onEdit }) => {
 	const [categories, setCategories] = useState([]);
@@ -20,25 +21,8 @@ const AdminCategoryList = ({ onEdit }) => {
 				},
 			});
 			setCategories(response.data);
-		} catch (error) {
+		} catch {
 			setError("Error al cargar las categorías");
-		}
-	};
-
-	const handleDelete = async (id) => {
-		if (
-			window.confirm("¿Estás seguro de que deseas eliminar esta categoría?")
-		) {
-			try {
-				await axios.delete(`http://localhost:8080/api/categorias/${id}`, {
-					headers: {
-						Authorization: `Bearer ${auth.token}`,
-					},
-				});
-				fetchCategories(); // Recargar la lista
-			} catch (error) {
-				setError("Error al eliminar la categoría");
-			}
 		}
 	};
 
@@ -81,8 +65,8 @@ const AdminCategoryList = ({ onEdit }) => {
 									</button>
 									<button
 										className="icon-button delete"
-										onClick={() => handleDelete(category.id)}
 										title="Eliminar"
+										disabled
 									>
 										<svg
 											width="20"
@@ -105,6 +89,9 @@ const AdminCategoryList = ({ onEdit }) => {
 			</table>
 		</div>
 	);
+};
+AdminCategoryList.propTypes = {
+	onEdit: PropTypes.func.isRequired,
 };
 
 export default AdminCategoryList;

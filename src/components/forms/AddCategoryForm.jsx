@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import "../../styles/forms/formStyles.css";
 
 const AddCategoryForm = ({ onClose, onSubmit }) => {
@@ -41,5 +42,10 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 		</div>
 	);
 };
+AddCategoryForm.propTypes = {
+	onClose: PropTypes.func.isRequired,
+	onSubmit: PropTypes.func.isRequired,
+};
 
 export default AddCategoryForm;
+

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "../../styles/forms/formStyles.css";
 
 const EditCategoryForm = ({ category, onClose, onSubmit }) => {
@@ -51,5 +52,14 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 		</div>
 	);
 };
+EditCategoryForm.propTypes = {
+	category: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		nombre: PropTypes.string.isRequired,
+	}),
+	onClose: PropTypes.func.isRequired,
+	onSubmit: PropTypes.func.isRequired,
+};
 
 export default EditCategoryForm;
+

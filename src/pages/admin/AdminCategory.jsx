@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContext";
 import axios from "axios";
@@ -7,7 +8,6 @@ import "../../styles/admin/adminService.css";
 // Components
 import AdminCategoryList from "../../components/admin/AdminCategoryList";
 import AddCategoryForm from "../../components/forms/AddCategoryForm";
-import EditCategoryForm from "../../components/forms/EditCategoryForm";
 
 // Images
 import warningIcon from "../../images/warning.png";
@@ -17,8 +17,6 @@ const AdminCategory = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const { auth, logout } = useContext(AuthContext);
-	const [selectedCategory, setSelectedCategory] = useState(null);
-	const [showEditForm, setShowEditForm] = useState(false);
 
 	const getAuthHeaders = () => {
 		if (!auth || !auth.token) return null;
@@ -44,36 +42,15 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			);
 			setShowAddForm(false);
 			alert("Categoría creada exitosamente");
+			// Recargar la lista después de crear
+			const categoryList = document.querySelector(".admin-list");
+			if (categoryList) {
+				await categoryList.fetchCategories();
+			}
 		} catch (error) {
 			console.error("Error creating category:", error);
 			setError("Error al crear la categoría: " + error.message);
 		}
-	};
-
-	const handleEditCategory = async (categoryData) => {
-		const headers = getAuthHeaders();
-		if (!headers) {
-			logout();
-			return;
-		}
-
-		try {
-			await axios.put(
-				`http://localhost:8080/api/categorias/${categoryData.id}`,
-				categoryData,
-				headers
-			);
-			setShowEditForm(false);
-			setSelectedCategory(null);
-			alert("Categoría actualizada exitosamente");
-		} catch (error) {
-			setError("Error al actualizar la categoría: " + error.message);
-		}
-	};
-
-	const handleCategoryEdit = (category) => {
-		setSelectedCategory(category);
-		setShowEditForm(true);
 	};
 
 	return (
@@ -126,22 +103,15 @@ const AdminCategory = ({ isInAdminLayout }) => {
 						/>
 					)}
 
-					{showEditForm && selectedCategory && (
-						<EditCategoryForm
-							category={selectedCategory}
-							onClose={() => {
-								setShowEditForm(false);
-								setSelectedCategory(null);
-							}}
-							onSubmit={handleEditCategory}
-						/>
-					)}
-
-					<AdminCategoryList onEdit={handleCategoryEdit} />
+					<AdminCategoryList />
 				</section>
 			</div>
 		</main>
 	);
+};
+
+AdminCategory.propTypes = {
+	isInAdminLayout: PropTypes.bool.isRequired,
 };
 
 export default AdminCategory;
