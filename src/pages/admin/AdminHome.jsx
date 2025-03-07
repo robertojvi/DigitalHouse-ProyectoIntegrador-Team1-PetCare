@@ -8,7 +8,7 @@ import "../../styles/admin/adminHome.css";
 
 function AdminHome() {
 	const { auth } = useContext(AuthContext);
-	const [selectedMenu, setSelectedMenu] = useState(null);
+	const [selectedMenu, setSelectedMenu] = useState('productos');
 
 	const getInitials = (nombre, apellido) => {
 		const firstInitial = nombre ? nombre.charAt(0).toUpperCase() : "";
@@ -27,58 +27,6 @@ function AdminHome() {
 					<h2>Cargando...</h2>
 				</div>
 			</div>
-		);
-	}
-
-	// Vista inicial del panel de administración
-	if (!selectedMenu) {
-		return (
-			<main>
-				<div className="admin-navigation">
-					<Link to="/" className="breadcrumb-link">
-						Inicio
-					</Link>
-					<span className="breadcrumb-separator"> {">"} </span>
-					<span className="breadcrumb-current">Administración</span>
-				</div>
-
-				<div className="admin-home-container">
-					<div className="admin-welcome-card">
-						<h1 className="welcome-title">
-							¡Hola {auth.nombre} {auth.apellido}!
-						</h1>
-						<div className="admin-initials-circle">
-							{getInitials(auth.nombre, auth.apellido)}
-						</div>
-						<div className="admin-menu-links">
-							<button
-								className="admin-link"
-								onClick={() => handleMenuClick("productos")}
-							>
-								Lista de Productos
-							</button>
-							<button
-								className="admin-link"
-								onClick={() => handleMenuClick("usuarios")}
-							>
-								Lista de Usuarios
-							</button>
-							<button
-								className="admin-link"
-								onClick={() => handleMenuClick("categorias")}
-							>
-								Lista de Categorías
-							</button>
-							<button
-								className="admin-link"
-								onClick={() => handleMenuClick("caracteristicas")}
-							>
-								Lista de Características
-							</button>
-						</div>
-					</div>
-				</div>
-			</main>
 		);
 	}
 
