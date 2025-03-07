@@ -69,14 +69,20 @@ const AdminCategory = ({ isInAdminLayout }) => {
 				{ nombre: categoryData.nombre },
 				headers
 			);
+
 			setShowEditForm(false);
 			setSelectedCategory(null);
-			alert("Categoría actualizada exitosamente");
-			// Recargar la lista
-			const categoryList = document.querySelector(".admin-list");
-			if (categoryList) {
-				categoryList.fetchCategories();
+
+			// Recargar la lista usando el componente AdminCategoryList
+			const categoryListComponent = document.querySelector("AdminCategoryList");
+			if (categoryListComponent?.props?.onRefresh) {
+				categoryListComponent.props.onRefresh();
+			} else {
+				// Si no podemos acceder al componente directamente, forzar una recarga
+				window.location.reload();
 			}
+
+			alert("Categoría actualizada exitosamente");
 		} catch (error) {
 			console.error("Error updating category:", error);
 			setError("Error al actualizar la categoría: " + error.message);

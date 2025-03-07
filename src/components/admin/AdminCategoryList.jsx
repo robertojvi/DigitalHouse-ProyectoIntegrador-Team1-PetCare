@@ -36,6 +36,18 @@ const AdminCategoryList = ({ onEdit }) => {
 		fetchCategories();
 	}, [auth.token]);
 
+	// Make fetchCategories available to parent
+	useEffect(() => {
+		if (window) {
+			window.refreshCategoryList = fetchCategories;
+		}
+		return () => {
+			if (window) {
+				delete window.refreshCategoryList;
+			}
+		};
+	}, []);
+
 	const openDeleteModal = (category) => {
 		setCategoryToDelete(category);
 		setConfirmDelete(true);
