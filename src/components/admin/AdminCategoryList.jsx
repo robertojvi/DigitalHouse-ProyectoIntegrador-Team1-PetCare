@@ -45,8 +45,9 @@ const AdminCategoryList = ({ onEdit }) => {
 		if (!categoryToDelete) return;
 		setDeleteLoading(true);
 		try {
+			console.log("Deleting category:", categoryToDelete); // Debug log
 			const response = await axios.delete(
-				`http://localhost:8080/api/categorias/${categoryToDelete.id}`,
+				`http://localhost:8080/api/categorias/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,
@@ -67,10 +68,15 @@ const AdminCategoryList = ({ onEdit }) => {
 					theme: "light",
 				});
 
-				setCategories(categories.filter((c) => c.id !== categoryToDelete.id));
+				setCategories(
+					categories.filter(
+						(c) => c.idCategoria !== categoryToDelete.idCategoria
+					)
+				); // Changed from .id to .idCategoria
 				setError(null);
 			}
 		} catch (err) {
+			console.error("Delete error:", err); // Debug log
 			const errorMessage =
 				err.response?.status === 403
 					? "No tienes permisos para eliminar esta categoría"
@@ -114,7 +120,9 @@ const AdminCategoryList = ({ onEdit }) => {
 					</thead>
 					<tbody>
 						{categories.map((category) => (
-							<tr key={category.id} className="table-row">
+							<tr key={category.idCategoria} className="table-row">
+								{" "}
+								{/* Changed from .id to .idCategoria */}
 								<td className="table-cell">{category.nombre}</td>
 								<td className="table-cell">
 									<div className="action-buttons">
