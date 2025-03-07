@@ -2,7 +2,10 @@
 	"services": [
 		{
 			"id": 1,
-			"name": "Paseo de Perros",
+			"name": "Camila Fernández",
+			"service": "Paseo de Perros",
+			"city": "Medellín",
+			"yearsExperience": 7,
 			"description": "Servicio profesional de paseo para mantener a tu perro activo y feliz",
 			"mainImage": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
 			"images": [
@@ -13,11 +16,16 @@
 				"https://images.unsplash.com/photo-1553688738-a278b9f063e0",
 				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
 				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
-			]
+			],
+			"reviews": 245,
+			"rating": 4
 		},
 		{
 			"id": 2,
-			"name": "Alojamiento para Mascotas",
+			"name": "José José",
+			"service": "Alojamiento para Mascotas",
+			"city": "Medellín",
+			"yearsExperience": 2,
 			"description": "Hospedaje cómodo y seguro para tu mascota mientras estás fuera",
 			"mainImage": "https://images.unsplash.com/photo-1604848698030-c434ba08ece1",
 			"images": [
@@ -28,11 +36,16 @@
 				"https://images.unsplash.com/photo-1570021974424-60e83dfee639",
 				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
 				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
-			]
+			],
+			"reviews": 120,
+			"rating": 5
 		},
 		{
 			"id": 3,
-			"name": "Cuidado a Domicilio",
+			"name": "Juan Gabriel",
+			"service": "Cuidado a Domicilio",
+			"city": "Medellín",
+			"yearsExperience": 6,
 			"description": "Cuidadores profesionales que visitan tu hogar para atender a tu mascota",
 			"mainImage": "https://images.unsplash.com/photo-1587764379873-97837921fd44",
 			"images": [
@@ -43,11 +56,16 @@
 				"https://images.unsplash.com/photo-1570021974424-60e83dfee639",
 				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
 				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
-			]
+			],
+			"reviews": 356,
+			"rating": 4
 		},
 		{
 			"id": 4,
-			"name": "Entrenamiento Canino",
+			"name": "Simón Gómez",
+			"service": "Entrenamiento Canino",
+			"city": "Medellín",
+			"yearsExperience": 1,
 			"description": "Sesiones de entrenamiento personalizado para mejorar el comportamiento",
 			"mainImage": "https://images.unsplash.com/photo-1587300003388-59208cc962cb",
 			"images": [
@@ -58,11 +76,16 @@
 				"https://images.unsplash.com/photo-1534361960057-19889db9621e",
 				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
 				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
-			]
+			],
+			"reviews": 39,
+			"rating": 3
 		},
 		{
 			"id": 5,
-			"name": "Guardería de Día",
+			"name": "Carl Jr",
+			"service": "Guardería de Día",
+			"city": "Medellín",
+			"yearsExperience": 10,
 			"description": "Cuidado durante el día para mascotas que necesitan compañía",
 			"mainImage": "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0",
 			"images": [
@@ -73,7 +96,9 @@
 				"https://images.unsplash.com/photo-1591946614720-90a587da4a36",
 				"https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae",
 				"https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47"
-			]
+			],
+			"reviews": 430,
+			"rating": 4
 		}
 	]
 }

@@ -1,0 +1,202 @@
+.admin-container {
+  padding: 2rem;
+  margin-top: calc(var(--top-bar-height, 40px) + var(--header-height, 80px));
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Nunito", sans-serif;
+  background-color: #fffeff;
+}
+
+.admin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.admin-section {
+  background-color: #fffeff;
+  padding: 1.5rem;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.admin-section h2 {
+  color: var(--palet-color-darkgray);
+  margin-bottom: 1rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.admin-button {
+  background-color: #314549;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-family: "Nunito", sans-serif;
+  min-width: 200px;
+  width: fit-content;
+}
+
+.admin-table-container {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 0;
+  font-family: "Nunito", sans-serif;
+  border: 1px solid black;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: center;
+}
+
+/* Ancho fijo para columnas ID y Acciones */
+.admin-table th:first-child,
+.admin-table td:first-child {
+  width: 80px; /* Para ID */
+  text-align: center;
+  padding-left: 50px; /* Añadimos espacio a la izquierda */
+}
+
+.admin-table th:last-child,
+.admin-table td:last-child {
+  width: 200px; /* Para Acciones */
+  text-align: center;
+}
+
+/* El resto de columnas se ajustarán automáticamente */
+.admin-table th:not(:first-child):not(:last-child),
+.admin-table td:not(:first-child):not(:last-child) {
+  text-align: center;
+}
+
+.admin-table th {
+  background-color: #314549;
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+.admin-table tbody tr {
+  background-color: rgba(250, 231, 196, 0.55);
+}
+
+.admin-table td {
+  color: black;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.action-button {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+}
+
+.action-button.edit {
+  background-color: #314549;
+  color: white;
+}
+
+.action-button.delete {
+  background-color: #cd2d2d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-table {
+    font-size: 0.9rem;
+  }
+
+  .action-button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+  }
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+  color: var(--palet-color-darkgray);
+  font-family: "Nunito", sans-serif;
+}
+
+.breadcrumb-link {
+  color: var(--palet-color-brown);
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 0.5rem;
+  color: var(--palet-color-darkgray);
+}
+
+.breadcrumb-current {
+  color: var(--palet-color-darkgray);
+}
+
+/* Mensaje para mobile */
+.mobile-message {
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--palet-color-darkgray);
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.warning-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Eliminamos los estilos anteriores de los paths */
+
+@media (max-width: 768px) {
+  .admin-content {
+    display: none;
+  }
+
+  .breadcrumb {
+    display: none;
+  }
+
+  .mobile-message {
+    display: flex;
+  }
+}

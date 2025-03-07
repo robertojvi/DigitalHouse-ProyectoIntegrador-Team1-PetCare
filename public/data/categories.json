@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Cuidado en casa",
+        "icon": "/icons/House.svg"
+    },
+    {
+        "name": "Paseos",
+        "icon": "/icons/Dog.svg"
+    },
+    {
+        "name": "Spa a domicilio",
+        "icon": "/icons/Grooming.svg"
+    },
+    {
+        "name": "Asesorías",
+        "icon": "/icons/Pets.svg"
+    }
+]
