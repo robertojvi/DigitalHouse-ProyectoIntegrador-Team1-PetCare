@@ -48,6 +48,14 @@ const AdminCategoryList = ({ onEdit }) => {
 		};
 	}, []);
 
+	// Make fetchCategories available globally
+	useEffect(() => {
+		window.refreshCategoryList = fetchCategories;
+		return () => {
+			delete window.refreshCategoryList;
+		};
+	}, [fetchCategories]); // Add fetchCategories as dependency
+
 	const openDeleteModal = (category) => {
 		setCategoryToDelete(category);
 		setConfirmDelete(true);
