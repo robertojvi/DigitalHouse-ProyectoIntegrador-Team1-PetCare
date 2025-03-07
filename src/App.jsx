@@ -38,12 +38,11 @@ function App() {
 					<Route path="/gallery" element={<ServiceGallery />} />
 
 					{/* Rutas del administrador */}
-					<Route path="/administracion" element={<AdminHome />} />
 					<Route
-						path="/administracion/service"
+						path="/administracion"
 						element={
 							<ProtectedRoute requiredRole="ADMIN">
-								<AdminService />
+								<AdminHome />
 							</ProtectedRoute>
 						}
 					/>

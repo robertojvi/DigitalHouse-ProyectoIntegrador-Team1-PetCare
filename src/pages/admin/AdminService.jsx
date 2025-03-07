@@ -7,6 +7,7 @@ import axios from "axios";
 // Components
 import AdminServiceList from "../../components/admin/AdminServiceList";
 import AddProductForm from "../../components/forms/AddProductForm";
+import EditProductForm from "../../components/forms/EditProductForm";
 
 // Styles
 import "../../styles/admin/adminService.css";
@@ -15,13 +16,15 @@ import "../../styles/admin/adminService.css";
 import warningIcon from "../../images/warning.png";
 import addPlusIcon from "../../images/add-plus.png";
 
-const AdminService = () => {
+const AdminService = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const [productos, setProductos] = useState([]);
 	const { auth, logout } = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
 	const [services, setServices] = useState([]);
+	const [selectedService, setSelectedService] = useState(null);
+	const [showEditForm, setShowEditForm] = useState(false);
 
 	const getAuthHeaders = () => {
 		if (!auth || !auth.token) return null;
@@ -84,30 +87,56 @@ const AdminService = () => {
 		}
 	};
 
+	const handleEditService = async (serviceData) => {
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
+		}
+
+		try {
+			await axios.put(
+				`http://localhost:8080/api/servicios/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
+				serviceData,
+				headers
+			);
+
+			await fetchServices();
+			setShowEditForm(false);
+			setSelectedService(null);
+			alert("Servicio actualizado exitosamente");
+		} catch (error) {
+			setError("Error al actualizar el servicio: " + error.message);
+		}
+	};
+
+	const handleServiceEdit = (service) => {
+		setSelectedService(service);
+		setShowEditForm(true);
+	};
+
 	return (
-		<main className="admin-container">
+		<main className={`admin-container ${isInAdminLayout ? 'in-layout' : ''}`}>
 			{/* Mobile section */}
 			<div className="mobile-message">
 				<img src={warningIcon} alt="Warning" className="warning-icon" />
 				<span>NO DISPONIBLE PARA MOBILE</span>
 			</div>
 
-			{/* Breadcrumbs section */}
-			<div className="breadcrumb">
-				<Link to="/" className="breadcrumb-link">
-					Inicio
-				</Link>
-
-				<span className="breadcrumb-separator"> &gt; </span>
-
-				<Link to="/administracion" className="breadcrumb-link">
-					Administración
-				</Link>
-
-				<span className="breadcrumb-separator"> &gt; </span>
-
-				<span className="breadcrumb-current">Servicio</span>
-			</div>
+			{/* Breadcrumbs section - solo se muestra si no está en el layout */}
+			{!isInAdminLayout && (
+				<div className="breadcrumb">
+					<Link to="/" className="breadcrumb-link">
+						Inicio
+					</Link>
+					<span className="breadcrumb-separator"> &gt; </span>
+					<Link to="/administracion" className="breadcrumb-link">
+						Administración
+					</Link>
+					<span className="breadcrumb-separator"> &gt; </span>
+					<span className="breadcrumb-current">Servicio</span>
+				</div>
+			)}
 
 			{error && <div className="error-message">{error}</div>}
 
@@ -119,7 +148,7 @@ const AdminService = () => {
 							className="adminService-admin-button"
 							onClick={() => setShowAddForm(true)}
 						>
-							<span>Añadir Productos</span>
+							<span>Agregar Producto</span>
 							<img
 								src={addPlusIcon}
 								alt="Añadir"
@@ -135,14 +164,29 @@ const AdminService = () => {
 							<AddProductForm
 								onClose={() => {
 									setShowAddForm(false);
+									setSelectedService(null);
 									setError(null);
 								}}
-								onSubmit={handleAddProduct}
+								onSubmit={
+									selectedService ? handleEditService : handleAddProduct
+								}
+								initialData={selectedService}
 							/>
 						)}
 					</div>
 
-					<AdminServiceList />
+					{showEditForm && selectedService && (
+						<EditProductForm
+							service={selectedService}
+							onClose={() => {
+								setShowEditForm(false);
+								setSelectedService(null);
+							}}
+							onSubmit={handleEditService}
+						/>
+					)}
+
+					<AdminServiceList onEdit={handleServiceEdit} />
 				</section>
 			</div>
 		</main>

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-	"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQGNvcnJlby5jb20iLCJpYXQiOjE3NDExOTkzNjEsImV4cCI6MTc0MTI4NTc2MX0.zVVYjAL_xRCrCTjVrjQvhhkKpqFg4Ozk_FQaAQKLsYY";
 const instance = axios.create({
     baseURL: "http://localhost:8080",
     headers: {
