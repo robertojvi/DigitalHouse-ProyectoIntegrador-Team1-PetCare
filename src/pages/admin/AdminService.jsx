@@ -13,10 +13,9 @@ import EditProductForm from "../../components/forms/EditProductForm";
 import "../../styles/admin/adminService.css";
 
 // Images
-import warningIcon from "../../images/warning.png";
 import addPlusIcon from "../../images/add-plus.png";
 
-const AdminService = ({ isInAdminLayout }) => {
+const AdminService = ({ isInAdminLayout, onActionComplete }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const [productos, setProductos] = useState([]);
@@ -70,7 +69,7 @@ const AdminService = ({ isInAdminLayout }) => {
 		}
 
 		try {
-			const response = await axios.post(
+			await axios.post(
 				"http://localhost:8080/api/servicios",
 				servicioData,
 				headers
@@ -78,9 +77,10 @@ const AdminService = ({ isInAdminLayout }) => {
 
 			// Actualizar la lista de servicios
 			await fetchServices();
-
 			setShowAddForm(false);
 			alert("Servicio creado exitosamente");
+			// Notificar que la acción se completó
+			onActionComplete?.();
 		} catch (error) {
 			console.error("Error creating service:", error);
 			setError("Error al crear el servicio: " + error.message);
@@ -105,6 +105,8 @@ const AdminService = ({ isInAdminLayout }) => {
 			setShowEditForm(false);
 			setSelectedService(null);
 			alert("Servicio actualizado exitosamente");
+			// Notificar que la acción se completó
+			onActionComplete?.();
 		} catch (error) {
 			setError("Error al actualizar el servicio: " + error.message);
 		}
@@ -119,7 +121,11 @@ const AdminService = ({ isInAdminLayout }) => {
 		<main className={`admin-container ${isInAdminLayout ? 'in-layout' : ''}`}>
 			{/* Mobile section */}
 			<div className="mobile-message">
-				<img src={warningIcon} alt="Warning" className="warning-icon" />
+				<img 
+					src="/images/warning.png"
+					alt="Warning"
+					className="warning-icon"
+				/>
 				<span>NO DISPONIBLE PARA MOBILE</span>
 			</div>
 
