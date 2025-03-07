@@ -5,6 +5,7 @@ import AdminLayout from "../../layouts/AdminLayout";
 import AdminService from "./AdminService";
 import AdminCategory from "./AdminCategory";
 import "../../styles/admin/adminHome.css";
+import AdminUser from "./AdminUser";
 
 function AdminHome() {
 	const { auth } = useContext(AuthContext);
@@ -36,6 +37,9 @@ function AdminHome() {
 			<AdminLayout onMenuClick={handleMenuClick}>
 				{selectedMenu === "productos" && (
 					<AdminService isInAdminLayout={true} />
+				)}
+				{selectedMenu === "usuarios" && (
+					<AdminUser isInAdminLayout={true} />
 				)}
 				{selectedMenu === "categorias" && (
 					<AdminCategory isInAdminLayout={true} />
