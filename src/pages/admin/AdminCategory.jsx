@@ -8,6 +8,7 @@ import "../../styles/admin/adminService.css";
 // Components
 import AdminCategoryList from "../../components/admin/AdminCategoryList";
 import AddCategoryForm from "../../components/forms/AddCategoryForm";
+import EditCategoryForm from "../../components/forms/EditCategoryForm";
 
 // Images
 import warningIcon from "../../images/warning.png";
@@ -15,6 +16,8 @@ import addPlusIcon from "../../images/add-plus.png";
 
 const AdminCategory = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
+	const [showEditForm, setShowEditForm] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [error, setError] = useState(null);
 	const { auth, logout } = useContext(AuthContext);
 
@@ -50,6 +53,33 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		} catch (error) {
 			console.error("Error creating category:", error);
 			setError("Error al crear la categoría: " + error.message);
+		}
+	};
+
+	const handleEditCategory = async (categoryData) => {
+		const headers = getAuthHeaders();
+		if (!headers) {
+			logout();
+			return;
+		}
+
+		try {
+			await axios.put(
+				`http://localhost:8080/api/categorias/${categoryData.idCategoria}`,
+				{ nombre: categoryData.nombre },
+				headers
+			);
+			setShowEditForm(false);
+			setSelectedCategory(null);
+			alert("Categoría actualizada exitosamente");
+			// Recargar la lista
+			const categoryList = document.querySelector(".admin-list");
+			if (categoryList) {
+				categoryList.fetchCategories();
+			}
+		} catch (error) {
+			console.error("Error updating category:", error);
+			setError("Error al actualizar la categoría: " + error.message);
 		}
 	};
 
@@ -103,7 +133,23 @@ const AdminCategory = ({ isInAdminLayout }) => {
 						/>
 					)}
 
-					<AdminCategoryList />
+					{showEditForm && selectedCategory && (
+						<EditCategoryForm
+							category={selectedCategory}
+							onClose={() => {
+								setShowEditForm(false);
+								setSelectedCategory(null);
+							}}
+							onSubmit={handleEditCategory}
+						/>
+					)}
+
+					<AdminCategoryList
+						onEdit={(category) => {
+							setSelectedCategory(category);
+							setShowEditForm(true);
+						}}
+					/>
 				</section>
 			</div>
 		</main>

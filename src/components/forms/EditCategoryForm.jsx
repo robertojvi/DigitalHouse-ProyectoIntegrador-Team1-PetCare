@@ -4,14 +4,14 @@ import "../../styles/forms/formStyles.css";
 
 const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
-		id: "",
+		idCategoria: "",
 		nombre: "",
 	});
 
 	useEffect(() => {
 		if (category) {
 			setFormData({
-				id: category.id,
+				idCategoria: category.idCategoria,
 				nombre: category.nombre,
 			});
 		}
@@ -54,7 +54,7 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 };
 EditCategoryForm.propTypes = {
 	category: PropTypes.shape({
-		id: PropTypes.string.isRequired,
+		idCategoria: PropTypes.number.isRequired,
 		nombre: PropTypes.string.isRequired,
 	}),
 	onClose: PropTypes.func.isRequired,
@@ -62,4 +62,3 @@ EditCategoryForm.propTypes = {
 };
 
 export default EditCategoryForm;
-
