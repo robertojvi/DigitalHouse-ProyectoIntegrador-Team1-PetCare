@@ -45,10 +45,12 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			);
 			setShowAddForm(false);
 			alert("Categoría creada exitosamente");
-			// Recargar la lista después de crear
-			const categoryList = document.querySelector(".admin-list");
-			if (categoryList) {
-				await categoryList.fetchCategories();
+			// Usar la función global de actualización
+			if (window.refreshCategoryList) {
+				window.refreshCategoryList();
+			} else {
+				// Si la función no está disponible, recargar la página
+				window.location.reload();
 			}
 		} catch (error) {
 			console.error("Error creating category:", error);
