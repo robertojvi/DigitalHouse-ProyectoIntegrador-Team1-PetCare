@@ -8,9 +8,12 @@ import AdminCategory from "./AdminCategory";
 
 import "../../styles/admin/adminHome.css";
 import AdminUser from "./AdminUser";
+import { AdminProfile } from "./AdminProfile";
+
 
 function AdminHome() {
-	const { auth } = useContext(AuthContext);
+	const { auth, logout } = useContext(AuthContext);
+
 	const [selectedMenu, setSelectedMenu] = useState(() => {
 		return localStorage.getItem("adminSelectedMenu") || "productos";
 	});
@@ -39,6 +42,12 @@ function AdminHome() {
 	}, []);
 
 	const handleMenuClick = (menu) => {
+
+		if(menu === "logout"){
+			localStorage.removeItem("adminSelectedMenu")
+			logout()
+		}
+
 		if (menu === selectedMenu) {
 			setSelectedMenu(null);
 		} else {
@@ -73,6 +82,9 @@ function AdminHome() {
 				{selectedMenu === "usuarios" && <AdminUser isInAdminLayout={true} />}
 				{selectedMenu === "categorias" && (
 					<AdminCategory isInAdminLayout={true} />
+				)}
+				{selectedMenu === "perfil" && (
+					<AdminProfile isInAdminLayout={true} />
 				)}
 			</AdminLayout>
 		</main>

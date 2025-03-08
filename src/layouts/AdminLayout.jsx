@@ -142,11 +142,23 @@ const AdminLayout = ({ children, onMenuClick }) => {
                             >
                                 Lista de Categorías
                             </button>
-                            <button 
+                            {/* <button 
                                 className="admin-link"
                                 onClick={() => onMenuClick('caracteristicas')}
                             >
                                 Lista de Características
+                            </button> */}
+                            <button 
+                                className="admin-link"
+                                onClick={() => onMenuClick('perfil')}
+                            >
+                                Mi perfil
+                            </button>
+                            <button 
+                                className="admin-link"
+                                onClick={() => onMenuClick('logout')}
+                            >
+                                Cerrar sesión
                             </button>
                         </div>
                     </div>
