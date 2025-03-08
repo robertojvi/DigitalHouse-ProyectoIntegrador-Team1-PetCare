@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import {
+	MdFirstPage,
+	MdLastPage,
+	MdNavigateBefore,
+	MdNavigateNext,
+} from "react-icons/md";
 import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
 import { getServices } from "../services/serviciosService";
 
-export const GridComponent = () => {
+export const GridComponent = ({ onServiceClick }) => {
 	const [profiles, setProfiles] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
@@ -15,7 +20,7 @@ export const GridComponent = () => {
 			try {
 				setLoading(true);
 				const data = await getServices();
-				console.log("DATA: ",data);
+				console.log("DATA: ", data);
 				setProfiles(data);
 			} catch (error) {
 				console.error("Error loading profiles:", error);
@@ -24,13 +29,9 @@ export const GridComponent = () => {
 				setLoading(false);
 			}
 		};
-	
+
 		fetchServices();
 	}, []);
-	
-	  
-	  
-
 
 	// Pagination calculations
 	const indexOfLastItem = currentPage * itemsPerPage;
@@ -50,7 +51,7 @@ export const GridComponent = () => {
 				<button
 					key={i}
 					onClick={() => handlePageChange(i)}
-					className={currentPage === i ? 'active' : ''}
+					className={currentPage === i ? "active" : ""}
 					title={`Ir a página ${i}`}
 				>
 					{i}
@@ -73,6 +74,7 @@ export const GridComponent = () => {
 						image={profile.imagenUrls[0]}
 						rating={profile.rating}
 						excerpt={profile.descripcion}
+						onImageClick={() => onServiceClick(profile)}
 					/>
 				))}
 			</div>
