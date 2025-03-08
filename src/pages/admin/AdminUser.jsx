@@ -13,11 +13,12 @@ import EditCategoryForm from "../../components/forms/EditCategoryForm";
 // Images
 import warningIcon from "../../images/warning.png";
 import addPlusIcon from "../../images/add-plus.png";
+import EditUserRoleForm from "../../components/forms/EditUserRole";
 
 const AdminUser = ({ isInAdminLayout }) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
     const [error, setError] = useState(null);
     const { auth, logout } = useContext(AuthContext);
 
@@ -26,11 +27,12 @@ const AdminUser = ({ isInAdminLayout }) => {
         return {
             headers: {
                 Authorization: `Bearer ${auth.token}`,
+                ContentType: `application/json`
             },
         };
     };
 
-    const handleAddCategory = async (categoryData) => {
+    const handleAddCategory = async (userData) => {
         const headers = getAuthHeaders();
         if (!headers) {
             logout();
@@ -39,8 +41,8 @@ const AdminUser = ({ isInAdminLayout }) => {
 
         try {
             await axios.post(
-                "http://localhost:8080/api/categorias",
-                categoryData,
+                "http://localhost:8080/api/usuarios",
+                userData,
                 headers
             );
             setShowAddForm(false);
@@ -53,32 +55,34 @@ const AdminUser = ({ isInAdminLayout }) => {
                 window.location.reload();
             }
         } catch (error) {
-            console.error("Error creating category:", error);
+            console.error("Error creating user:", error);
             setError("Error al crear la categoría: " + error.message);
         }
     };
 
-    const handleEditCategory = async (categoryData) => {
+    const handleChangeRole = async (userData) => {
         const headers = getAuthHeaders();
         if (!headers) {
             logout();
             return;
         }
 
+        console.log("USERDATA", userData)
+
         try {
-            await axios.put(
-                `http://localhost:8080/api/categorias/${categoryData.idCategoria}`,
-                { nombre: categoryData.nombre },
+            await axios.patch(
+                `http://localhost:8080/api/usuarios/${userData.idUser}/${userData.role}`,
+                null,
                 headers
             );
 
             setShowEditForm(false);
-            setSelectedCategory(null);
+            setSelectedUser(null);
 
             // Recargar la lista usando el componente AdminUserList
-            const categoryListComponent = document.querySelector("AdminUserList");
-            if (categoryListComponent?.props?.onRefresh) {
-                categoryListComponent.props.onRefresh();
+            const userListComponent = document.querySelector("AdminUserList");
+            if (userListComponent?.props?.onRefresh) {
+                userListComponent.props.onRefresh();
             } else {
                 // Si no podemos acceder al componente directamente, forzar una recarga
                 window.location.reload();
@@ -86,7 +90,7 @@ const AdminUser = ({ isInAdminLayout }) => {
 
             alert("Categoría actualizada exitosamente");
         } catch (error) {
-            console.error("Error updating category:", error);
+            console.error("Error updating user:", error);
             setError("Error al actualizar la categoría: " + error.message);
         }
     };
@@ -117,21 +121,7 @@ const AdminUser = ({ isInAdminLayout }) => {
             <div className="admin-content">
                 <section className="admin-section">
                     <div className="admin-header">
-                        <button
-                            className="adminService-admin-button"
-                            onClick={() => setShowAddForm(true)}
-                        >
-                            <span>Agregar Categoría</span>
-                            <img
-                                src={addPlusIcon}
-                                alt="Añadir"
-                                style={{
-                                    width: "15px",
-                                    height: "15px",
-                                    marginLeft: "8px",
-                                }}
-                            />
-                        </button>
+                        
                     </div>
 
                     {showAddForm && (
@@ -141,20 +131,28 @@ const AdminUser = ({ isInAdminLayout }) => {
                         />
                     )}
 
-                    {showEditForm && selectedCategory && (
-                        <EditCategoryForm
-                            category={selectedCategory}
+                    {showEditForm && selectedUser && (
+                        // <EditCategoryForm
+                        //     user={selectedUser}
+                        //     onClose={() => {
+                        //         setShowEditForm(false);
+                        //         setSelectedUser(null);
+                        //     }}
+                        //     onSubmit={handleChangeRole}
+                        // />
+                        <EditUserRoleForm
+                        user={selectedUser}
                             onClose={() => {
                                 setShowEditForm(false);
-                                setSelectedCategory(null);
+                                setSelectedUser(null);
                             }}
-                            onSubmit={handleEditCategory}
+                            onSubmit={handleChangeRole}
                         />
                     )}
 
                     <AdminUserList
-                        onEdit={(category) => {
-                            setSelectedCategory(category);
+                        onEdit={(user) => {
+                            setSelectedUser(user);
                             setShowEditForm(true);
                         }}
                     />
