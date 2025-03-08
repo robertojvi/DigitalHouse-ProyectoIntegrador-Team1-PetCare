@@ -9,13 +9,19 @@ import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
 import { getServices } from "../services/serviciosService";
 
-export const GridComponent = ({ onServiceClick }) => {
+export const GridComponent = ({ onServiceClick, type, services }) => {
 	const [profiles, setProfiles] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const itemsPerPage = 10;
 
 	useEffect(() => {
+
+		if(type && type==="category"){
+			console.log("CATEGORIA", services)
+			
+		}
+
 		const fetchServices = async () => {
 			try {
 				setLoading(true);
