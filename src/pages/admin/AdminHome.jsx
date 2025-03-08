@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../auth/AuthContext";
+import { Link } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
 import AdminService from "./AdminService";
 import warningImg from '../../images/warning.png';
@@ -18,13 +19,11 @@ function AdminHome() {
     isMobile: window.innerWidth <= 768
   });
 
-  useEffect(() => {
-    if (selectedMenu) {
-      localStorage.setItem('adminSelectedMenu', selectedMenu);
-    } else {
-      localStorage.removeItem('adminSelectedMenu');
-    }
-  }, [selectedMenu]);
+	const getInitials = (nombre, apellido) => {
+		const firstInitial = nombre ? nombre.charAt(0).toUpperCase() : "";
+		const lastInitial = apellido ? apellido.charAt(0).toUpperCase() : "";
+		return `${firstInitial}${lastInitial}`;
+	};
 
   // Verificar dimensiones
   React.useEffect(() => {
