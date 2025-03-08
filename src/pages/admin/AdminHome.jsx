@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
 import AdminService from "./AdminService";
 import warningImg from '../../images/warning.png';
+import AdminCategory from "./AdminCategory";
+
 import "../../styles/admin/adminHome.css";
+import AdminUser from "./AdminUser";
 
 function AdminHome() {
   const { auth } = useContext(AuthContext);
@@ -165,15 +168,15 @@ function AdminHome() {
         shouldShowWarning={shouldShowWarning}
         selectedMenu={selectedMenu}
       >
-        {selectedMenu === "productos" && (
-          <AdminService 
-            isInAdminLayout={true}
-            onActionComplete={() => {
-              console.log('Acción completada, manteniendo vista actual');
-            }}
-          />
-        )}
-        {/* Agregar otros componentes según el menú seleccionado */}
+	      {selectedMenu === "productos" && (
+					<AdminService isInAdminLayout={true} />
+				)}
+				{selectedMenu === "usuarios" && (
+					<AdminUser isInAdminLayout={true} />
+				)}
+				{selectedMenu === "categorias" && (
+					<AdminCategory isInAdminLayout={true} />
+				)}        
       </AdminLayout>
     </main>
   );
