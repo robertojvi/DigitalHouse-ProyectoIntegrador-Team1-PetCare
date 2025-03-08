@@ -1,6 +1,5 @@
 import  { useContext, useState } from "react";
 import { AuthContext } from "../../auth/AuthContext";
-import { Link } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
 import AdminService from "./AdminService";
 import AdminCategory from "./AdminCategory";
@@ -11,11 +10,6 @@ function AdminHome() {
 	const { auth } = useContext(AuthContext);
 	const [selectedMenu, setSelectedMenu] = useState('productos');
 
-	const getInitials = (nombre, apellido) => {
-		const firstInitial = nombre ? nombre.charAt(0).toUpperCase() : "";
-		const lastInitial = apellido ? apellido.charAt(0).toUpperCase() : "";
-		return `${firstInitial}${lastInitial}`;
-	};
 
 	const handleMenuClick = (menu) => {
 		setSelectedMenu(menu);

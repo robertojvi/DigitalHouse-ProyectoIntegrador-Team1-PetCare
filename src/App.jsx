@@ -13,7 +13,6 @@ import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 // import Admin from "./pages/Admin";
 import AdminHome from "./pages/admin/AdminHome";
-import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
 

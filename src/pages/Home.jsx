@@ -3,8 +3,6 @@
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
 import "../styles/home/home.css";
-import { TitleComponent } from '../components/shared/TitleComponent'
-import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
 import { ServicesFilter } from "../components/ServicesFilter";
 
@@ -69,6 +67,11 @@ const Home = () => {
 					<ServicesFilter />
 				</div>
 
+				<div style={{ "marginTop": "22px" }}>
+					{categorias.map(categoria => (
+						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
+					))}
+				</div>
 				<div style={{ "marginTop": "22px" }}>
 					<RecommendedServices />
 				</div>

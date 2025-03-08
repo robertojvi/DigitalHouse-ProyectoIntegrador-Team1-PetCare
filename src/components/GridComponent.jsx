@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import {
 	MdFirstPage,
 	MdLastPage,
@@ -27,7 +28,11 @@ export const GridComponent = ({ onServiceClick }) => {
 				setProfiles([]); // En caso de error, establecer un array vacío
 			} finally {
 				setLoading(false);
-			}
+		};
+		
+		GridComponent.propTypes = {
+			onServiceClick: PropTypes.func.isRequired,
+		};
 		};
 
 		fetchServices();
