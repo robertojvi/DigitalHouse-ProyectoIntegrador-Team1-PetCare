@@ -38,12 +38,6 @@ function AdminHome() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const getInitials = (nombre, apellido) => {
-    const firstInitial = nombre ? nombre.charAt(0).toUpperCase() : "";
-    const lastInitial = apellido ? apellido.charAt(0).toUpperCase() : "";
-    return `${firstInitial}${lastInitial}`;
-  };
-
   const handleMenuClick = (menu) => {
     if (menu === selectedMenu) {
       setSelectedMenu(null);
