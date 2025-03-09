@@ -2,10 +2,6 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-<<<<<<< HEAD
-import Hero from "../components/hero/Hero";
-=======
->>>>>>> refs/remotes/origin/main
 import "../styles/home/home.css";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
