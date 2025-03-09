@@ -62,25 +62,6 @@ const categorias = [
 const Home = () => {
 	return (
 		<>
-<<<<<<< HEAD
-			<Hero />
-			<main className="mainContainer">
-
-				<SearchComponent />
-
-				<TitleComponent title={"Categorías"} />
-				<div className="categories-container">
-					{categorias.map((categoria) => (
-						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
-					))
-					}
-				</div>
-				<div>
-					<RecommendedServices />
-				</div>
-			</main>
-			<WhatsAppButton />
-=======
 			<main className="mainContainer">
 
 				<SearchComponent />
@@ -92,7 +73,6 @@ const Home = () => {
 					<RecommendedServices />
 				</div>
 			</main>
->>>>>>> refs/remotes/origin/main
 		</>
 	);
 };
