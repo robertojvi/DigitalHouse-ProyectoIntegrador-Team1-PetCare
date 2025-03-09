@@ -15,11 +15,19 @@ export const GridComponent = ({ onServiceClick, type, services }) => {
 	const [loading, setLoading] = useState(true);
 	const itemsPerPage = 10;
 
-	useEffect(() => {
+	// Función para mezclar aleatoriamente un array (algoritmo Fisher-Yates)
+	const shuffleArray = (array) => {
+		const shuffled = [...array];
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+		return shuffled;
+	};
 
-		if(type && type==="category"){
-			console.log("CATEGORIA", services)
-			
+	useEffect(() => {
+		if (type && type === "category") {
+			console.log("CATEGORIA", services);
 		}
 
 		const fetchServices = async () => {
@@ -27,7 +35,10 @@ export const GridComponent = ({ onServiceClick, type, services }) => {
 				setLoading(true);
 				const data = await getServices();
 				console.log("DATA: ", data);
-				setProfiles(data);
+
+				// Mezclar los servicios en un orden aleatorio
+				const randomizedServices = shuffleArray(data);
+				setProfiles(randomizedServices);
 			} catch (error) {
 				console.error("Error loading profiles:", error);
 				setProfiles([]); // En caso de error, establecer un array vacío

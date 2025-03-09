@@ -13,10 +13,18 @@ export const RecommendedServices = () => {
 		setShowDetail(true);
 	};
 
+	const handleGoBack = () => {
+		setShowDetail(false);
+		setSelectedService(null);
+	};
+
 	if (showDetail && selectedService) {
 		return (
 			<div>
-				<ServiceDetailImagesGrid images={selectedService.imagenUrls} />
+				<ServiceDetailImagesGrid
+					images={selectedService.imagenUrls}
+					onGoBack={handleGoBack}
+				/>
 				<ServiceDetailInfo
 					serviceInfo={{
 						name: selectedService.nombre,
