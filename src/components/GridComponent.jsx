@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
 	MdFirstPage,
 	MdLastPage,
@@ -10,13 +9,19 @@ import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
 import { getServices } from "../services/serviciosService";
 
-export const GridComponent = ({ onServiceClick }) => {
+export const GridComponent = ({ onServiceClick, type, services }) => {
 	const [profiles, setProfiles] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const itemsPerPage = 10;
 
 	useEffect(() => {
+
+		if(type && type==="category"){
+			console.log("CATEGORIA", services)
+			
+		}
+
 		const fetchServices = async () => {
 			try {
 				setLoading(true);
@@ -28,11 +33,7 @@ export const GridComponent = ({ onServiceClick }) => {
 				setProfiles([]); // En caso de error, establecer un array vacío
 			} finally {
 				setLoading(false);
-		};
-		
-		GridComponent.propTypes = {
-			onServiceClick: PropTypes.func.isRequired,
-		};
+			}
 		};
 
 		fetchServices();
