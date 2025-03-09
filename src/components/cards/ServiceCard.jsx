@@ -1,4 +1,4 @@
-import "react";
+import PropTypes from "prop-types";
 import { StarsComponent } from "../shared/StarsComponent";
 import {
 	CardContainer,
@@ -12,6 +12,16 @@ import {
 } from "./styled-components/ServiceCard.styles";
 
 // eslint-disable-next-line react/prop-types
+ServiceCard.propTypes = {
+	name: PropTypes.string.isRequired,
+	serviceType: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+	}).isRequired,
+	image: PropTypes.string.isRequired,
+	rating: PropTypes.number.isRequired,
+	excerpt: PropTypes.string.isRequired,
+	onImageClick: PropTypes.func.isRequired,
+};
 export const ServiceCard = ({
 	name,
 	serviceType,
@@ -26,7 +36,7 @@ export const ServiceCard = ({
 				<Image src={image} alt={name} style={{ cursor: "pointer" }} />
 			</ImageContainer>
 			<InfoContainer>
-				<h3 className="serviceType">{serviceType?.name}</h3>
+				<h3 className="serviceType">{serviceType.name}</h3>
 				<NameContainer>
 					<p>{name}</p>
 					<StarsComponent rating={rating} />
