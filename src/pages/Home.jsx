@@ -2,13 +2,15 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
+<<<<<<< HEAD
 import Hero from "../components/hero/Hero";
+=======
+>>>>>>> refs/remotes/origin/main
 import "../styles/home/home.css";
-import { PiPawPrintLight } from "react-icons/pi";
-import ServicesList from "../components/services/ServicesList";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
+import { ServicesFilter } from "../components/ServicesFilter";
 
 /**
  * Home Page Component
@@ -64,6 +66,7 @@ const categorias = [
 const Home = () => {
 	return (
 		<>
+<<<<<<< HEAD
 			<Hero />
 			<main className="mainContainer">
 
@@ -81,6 +84,19 @@ const Home = () => {
 				</div>
 			</main>
 			<WhatsAppButton />
+=======
+			<main className="mainContainer">
+
+				<SearchComponent />
+				<div style={{ "border": "1px solid #000000", "padding": "30px 50px" }}>
+					<ServicesFilter />
+				</div>
+
+				<div style={{ "marginTop": "22px" }}>
+					<RecommendedServices />
+				</div>
+			</main>
+>>>>>>> refs/remotes/origin/main
 		</>
 	);
 };

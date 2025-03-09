@@ -1,0 +1,110 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        padding: 1rem;
+    }
+}
+
+.grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+}
+
+.pagination button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: #314549;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Override for both number and navigation buttons hover */
+.pagination button:hover:not(:disabled) {
+    background-color: #f5f5f5;
+}
+
+/* Override for navigation buttons */
+.pagination button:has(svg) {
+    border: 1px solid #314549;
+    background-color: #314549;
+}
+
+.pagination button:has(svg) svg {
+    color: white;
+}
+
+.pagination button:has(svg):disabled {
+    background-color: #FFFEFF;
+    border-color: #ccc;
+    opacity: 0.7;
+}
+
+.pagination button:has(svg):hover:not(:disabled) {
+    background-color: #253538;
+    border-color: #253538;
+}
+
+.pagination button svg {
+    color: #666;
+}
+
+.pagination button:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.pagination button:disabled svg {
+    color: #ccc;
+}
+
+.pagination button.active {
+    background-color: #F2BE5E;
+    color: white;
+    border-color: #F2BE5E;
+}
+
+.pagination button.active:hover {
+    background-color: #e0ad4d; /* slightly darker shade for hover */
+}
+
+.pagination button.active svg {
+    color: white;
+}
+
+.pagination span {
+    font-size: 0.9rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #666;
+}
