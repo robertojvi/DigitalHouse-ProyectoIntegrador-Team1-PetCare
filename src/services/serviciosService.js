@@ -1,10 +1,10 @@
 import axiosInstance from "./config/axiosConfig";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/servicios`;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const getServices = async () => {
 	try {
-	  const response = await axiosInstance.get(API_URL);
+		const response = await axiosInstance.get(`${API_URL}/api/servicios`);
 	  console.log("RESPONSE:",response)
 	  return response.data.listaServicios;
 	} catch (error) {

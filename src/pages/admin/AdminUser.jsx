@@ -73,7 +73,7 @@ const AdminUser = ({ isInAdminLayout }) => {
 
         try {
             await axios.patch(
-                `API_URL/${userData.idUser}/${userData.role}`,
+                `${API_URL}/${userData.idUser}/${userData.role}`,
                 null,
                 headers
             );

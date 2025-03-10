@@ -69,7 +69,7 @@ const AdminCategoryList = ({ onEdit }) => {
 		try {
 			console.log("Deleting category:", categoryToDelete); // Debug log
 			const response = await axios.delete(
-				`API_URL/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
+				`${API_URL}/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,

@@ -101,7 +101,7 @@ const AdminService = ({ isInAdminLayout }) => {
 
 		try {
 			await axios.put(
-				`API_URL/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
+				`${API_URL}/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
 				serviceData,
 				headers
 			);

@@ -69,7 +69,7 @@ const AdminCategory = ({ isInAdminLayout }) => {
 
 		try {
 			await axios.put(
-				`API_URL/${categoryData.idCategoria}`,
+				`${API_URL}/${categoryData.idCategoria}`,
 				{ nombre: categoryData.nombre },
 				headers
 			);
