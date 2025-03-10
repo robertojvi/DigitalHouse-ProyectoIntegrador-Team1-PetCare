@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL
+const BASE_URL = import.meta.env.VITE_API_URL || "";
 
 const instance = axios.create({
-    baseURL: API_URL,
+    baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json",
     },
@@ -17,14 +17,16 @@ instance.interceptors.request.use(
 
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
-        } else {
-            console.warn('No token found in localStorage');
         }
 
-        console.log("Request:", {
-            url: config.url,
-            headers: config.headers,
-        });
+        // Solo mostrar logs en desarrollo
+        if (import.meta.env.DEV) {
+            console.log("Request:", {
+                url: config.url,
+                method: config.method,
+                // No mostrar headers para proteger datos sensibles
+            });
+        }
 
         return config;
     },
@@ -35,22 +37,26 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (response) => {
-        console.log("Response:", response.status, response.data);
+        // Solo mostrar logs en desarrollo
+        if (import.meta.env.DEV) {
+            console.log("Response:", response.status);
+        }
         return response;
     },
     (error) => {
         // Handle 401 (Unauthorized) or 403 (Forbidden) errors
         if (error.response?.status === 401 || error.response?.status === 403) {
-            console.error('Authentication error:', error.response.status);
-            localStorage.removeItem('token'); // Clear invalid token
-            window.location.href = '/'; // Redirect to home/login
+            localStorage.removeItem('token');
+            window.location.href = '/';
         }
 
-        console.error("Error:", {
-            status: error.response?.status,
-            data: error.response?.data,
-            message: error.message,
-        });
+        // Solo mostrar logs en desarrollo
+        if (import.meta.env.DEV) {
+            console.error("Error:", {
+                status: error.response?.status,
+                message: error.message,
+            });
+        }
 
         return Promise.reject(error);
     }

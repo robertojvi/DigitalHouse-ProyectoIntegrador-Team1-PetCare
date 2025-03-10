@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const obtenerCategoria = async ({id}) => {
+export const obtenerCategoria = async ({ id }) => {
 
     const API_URL = import.meta.env.VITE_API_URL + "/api/categorias";
 
@@ -16,11 +16,11 @@ export const obtenerCategoria = async ({id}) => {
             `API_URL/${id}`,
             {
                 headers: {
-                Authorization: `Bearer ${token}`, 
-                "Content-Type": "application/json"
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
                 },
 
-        
+
             }
         );
 

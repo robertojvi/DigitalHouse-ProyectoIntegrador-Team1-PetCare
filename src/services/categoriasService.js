@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export const obtenerCategorias = async () => {
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/categorias`;
 
-    const API_URL = import.meta.env.VITE_API_URL + "/api/categorias";
+export const obtenerCategorias = async () => {
 
     try {
         const token = localStorage.getItem('token');
@@ -16,11 +17,9 @@ export const obtenerCategorias = async () => {
             API_URL,
             {
                 headers: {
-                Authorization: `Bearer ${token}`, 
-                "Content-Type": "application/json"
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
                 },
-
-        
             }
         );
 

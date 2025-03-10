@@ -21,7 +21,8 @@ const AdminCategory = ({ isInAdminLayout }) => {
 	const [error, setError] = useState(null);
 	const { auth, logout } = useContext(AuthContext);
 
-	const API_URL = import.meta.env.VITE_API_URL + "/api/categorias";
+	const BASE_URL = import.meta.env.VITE_API_URL || "";
+	const API_URL = `${BASE_URL}/api/categorias`;
 
 	const getAuthHeaders = () => {
 		if (!auth || !auth.token) return null;
@@ -77,12 +78,11 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			setShowEditForm(false);
 			setSelectedCategory(null);
 
-			// Recargar la lista usando el componente AdminCategoryList
-			const categoryListComponent = document.querySelector("AdminCategoryList");
-			if (categoryListComponent?.props?.onRefresh) {
-				categoryListComponent.props.onRefresh();
+			// Recargar la lista usando la función global de actualización
+			if (window.refreshCategoryList) {
+				window.refreshCategoryList();
 			} else {
-				// Si no podemos acceder al componente directamente, forzar una recarga
+				// Si la función no está disponible, recargar la página
 				window.location.reload();
 			}
 

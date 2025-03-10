@@ -6,7 +6,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LiaPawSolid } from "react-icons/lia";
 
-const API_URL = import.meta.env.VITE_API_URL + "/api/categorias";
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/categorias`;
 
 const AdminCategoryList = ({ onEdit }) => {
 	const [categories, setCategories] = useState([]);

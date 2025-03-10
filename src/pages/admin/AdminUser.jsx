@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContext";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles/admin/adminService.css";
 
 // Components
 import AdminUserList from "../../components/admin/AdminUserList";
 import AddCategoryForm from "../../components/forms/AddCategoryForm";
-import EditCategoryForm from "../../components/forms/EditCategoryForm";
+import EditUserRoleForm from "../../components/forms/EditUserRole";
 
 // Images
 import warningIcon from "../../images/warning.png";
-import addPlusIcon from "../../images/add-plus.png";
-import EditUserRoleForm from "../../components/forms/EditUserRole";
 
 const AdminUser = ({ isInAdminLayout }) => {
     const [showAddForm, setShowAddForm] = useState(false);
@@ -22,19 +22,20 @@ const AdminUser = ({ isInAdminLayout }) => {
     const [error, setError] = useState(null);
     const { auth, logout } = useContext(AuthContext);
 
-    const API_URL = import.meta.env.VITE_API_URL + "/api/usuarios";
+    const BASE_URL = import.meta.env.VITE_API_URL || "";
+    const API_URL = `${BASE_URL}/api/usuarios`;
 
     const getAuthHeaders = () => {
         if (!auth || !auth.token) return null;
         return {
             headers: {
                 Authorization: `Bearer ${auth.token}`,
-                ContentType: `application/json`
+                "Content-Type": "application/json"
             },
         };
     };
 
-    const handleAddCategory = async (userData) => {
+    const handleAddUser = async (userData) => {
         const headers = getAuthHeaders();
         if (!headers) {
             logout();
@@ -48,17 +49,17 @@ const AdminUser = ({ isInAdminLayout }) => {
                 headers
             );
             setShowAddForm(false);
-            alert("Categoría creada exitosamente");
-            // Usar la función global de actualización
-            if (window.refreshCategoryList) {
-                window.refreshCategoryList();
+            toast.success("Usuario creado exitosamente");
+
+            if (window.refreshUserList) {
+                window.refreshUserList();
             } else {
-                // Si la función no está disponible, recargar la página
                 window.location.reload();
             }
         } catch (error) {
             console.error("Error creating user:", error);
-            setError("Error al crear la categoría: " + error.message);
+            setError("Error al crear el usuario: " + error.message);
+            toast.error("Error al crear el usuario: " + error.message);
         }
     };
 
@@ -69,7 +70,7 @@ const AdminUser = ({ isInAdminLayout }) => {
             return;
         }
 
-        console.log("USERDATA", userData)
+        console.log("USERDATA", userData);
 
         try {
             await axios.patch(
@@ -77,28 +78,27 @@ const AdminUser = ({ isInAdminLayout }) => {
                 null,
                 headers
             );
-
             setShowEditForm(false);
             setSelectedUser(null);
 
-            // Recargar la lista usando el componente AdminUserList
-            const userListComponent = document.querySelector("AdminUserList");
-            if (userListComponent?.props?.onRefresh) {
-                userListComponent.props.onRefresh();
+            toast.success("Usuario actualizado exitosamente");
+
+            if (window.refreshUserList) {
+                window.refreshUserList();
             } else {
-                // Si no podemos acceder al componente directamente, forzar una recarga
                 window.location.reload();
             }
-
-            alert("Categoría actualizada exitosamente");
         } catch (error) {
             console.error("Error updating user:", error);
-            setError("Error al actualizar la categoría: " + error.message);
+            setError("Error al actualizar el usuario: " + error.message);
+            toast.error("Error al actualizar el usuario: " + error.message);
         }
     };
 
     return (
         <main className={`admin-container ${isInAdminLayout ? "in-layout" : ""}`}>
+            <ToastContainer />
+
             <div className="mobile-message">
                 <img src={warningIcon} alt="Warning" className="warning-icon" />
                 <span>NO DISPONIBLE PARA MOBILE</span>
@@ -114,7 +114,7 @@ const AdminUser = ({ isInAdminLayout }) => {
                         Administración
                     </Link>
                     <span className="breadcrumb-separator"> &gt; </span>
-                    <span className="breadcrumb-current">Categorías</span>
+                    <span className="breadcrumb-current">Usuarios</span>
                 </div>
             )}
 
@@ -123,27 +123,19 @@ const AdminUser = ({ isInAdminLayout }) => {
             <div className="admin-content">
                 <section className="admin-section">
                     <div className="admin-header">
-                        
+
                     </div>
 
                     {showAddForm && (
                         <AddCategoryForm
                             onClose={() => setShowAddForm(false)}
-                            onSubmit={handleAddCategory}
+                            onSubmit={handleAddUser}
                         />
                     )}
 
                     {showEditForm && selectedUser && (
-                        // <EditCategoryForm
-                        //     user={selectedUser}
-                        //     onClose={() => {
-                        //         setShowEditForm(false);
-                        //         setSelectedUser(null);
-                        //     }}
-                        //     onSubmit={handleChangeRole}
-                        // />
                         <EditUserRoleForm
-                        user={selectedUser}
+                            user={selectedUser}
                             onClose={() => {
                                 setShowEditForm(false);
                                 setSelectedUser(null);
