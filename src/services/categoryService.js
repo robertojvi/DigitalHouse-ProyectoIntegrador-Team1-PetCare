@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const obtenerCategorias = async () => {
+export const obtenerCategoria = async ({id}) => {
 
     const API_URL = import.meta.env.VITE_API_URL + "/api/categorias";
 
@@ -13,7 +13,7 @@ export const obtenerCategorias = async () => {
 
         // Simple direct request without extra configuration
         const response = await axios.get(
-            API_URL,
+            `API_URL/${id}`,
             {
                 headers: {
                 Authorization: `Bearer ${token}`, 

@@ -27,6 +27,8 @@ const AdminServiceList = ({ onEdit }) => {
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [serviceToDelete, setServiceToDelete] = useState(null);
 
+	const API_URL = import.meta.env.VITE_API_URL + "/api/servicios";
+
 	useEffect(() => {
 		fetchServices();
 	}, []);
@@ -43,7 +45,7 @@ const AdminServiceList = ({ onEdit }) => {
 
 		try {
 			const response = await axios.get(
-				"http://localhost:8080/api/servicios",
+				API_URL,
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,
@@ -83,7 +85,7 @@ const AdminServiceList = ({ onEdit }) => {
 		setDeleteLoading(true);
 		try {
 			const response = await axios.delete(
-				`http://localhost:8080/api/servicios/${serviceToDelete.idServicio}`,
+				`API_URL/${serviceToDelete.idServicio}`,
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,
