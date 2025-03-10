@@ -2,10 +2,7 @@
 // import "../styles/home.css";
 import { RecommendedServices } from "../components/RecommendedServices";
 import Categoria from "../components/categoria/Categoria";
-import Hero from "../components/hero/hero";
 import "../styles/home/home.css";
-import { PiPawPrintLight } from "react-icons/pi";
-import ServicesList from "../components/services/ServicesList";
 import { TitleComponent } from '../components/shared/TitleComponent'
 import WhatsAppButton from "../components/shared/WhatsAppComponent";
 import { SearchComponent } from "../components/shared/SearchComponent";
@@ -71,18 +68,11 @@ const Home = () => {
 				<div style={{ "border": "1px solid #000000", "padding": "30px 50px" }}>
 					<ServicesFilter />
 				</div>
-				<TitleComponent title={"Categorías"} />
-				<div className="categories-container">
-					{categorias.map((categoria) => (
-						<Categoria key={categoria.id} nombre={categoria.nombre} image={categoria.image} />
-					))
-					}
-				</div>
-				<div>
+
+				<div style={{ "marginTop": "22px" }}>
 					<RecommendedServices />
 				</div>
 			</main>
-			<WhatsAppButton />
 		</>
 	);
 };

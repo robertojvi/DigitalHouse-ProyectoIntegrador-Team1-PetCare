@@ -27,6 +27,7 @@
   align-items: center;
   height: var(--header-height, 80px);
   gap: 1rem;
+  color: #314549; 
 }
 
 /* Añadimos padding al logo */
@@ -44,6 +45,9 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+  & button{
+    color: #314549; 
+  } 
 }
 
 .header-user-noA{
@@ -64,29 +68,40 @@
   gap: 5px;
   position: relative;
   max-width: 200px;
-
-  .logout{
-    padding: 5px 1rem;
-    width: 150px;
-    background: none;
-    color: #2d3e42;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .25rem;
-  } 
 }
 
-.avatar{
+.name-avatar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar {
   border-radius: 50%;
-  background-color: var(--palet-color-brown);
+  background-color: #314549;
   color: white;
   padding: 5px 7px;
   font-weight: bolder;
   font-size: 15px;
-  margin-right: .2rem;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+}
+
+.name-avatar h3 {
+  color: #314549;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .name-avatar{
@@ -94,10 +109,12 @@
   justify-content: center;
   align-items: center;
   gap: .5rem;
+  color: #314549; 
+  font-family: 'Poppins';
 }
 
 .header-user-noA button{
-  background-color: #2d3e42; 
+  background-color: #314549; 
   color: white;
   font-weight: bold;
   font-size: 14px;
@@ -141,6 +158,57 @@
 .app-header span {
   font-family: "Inter", sans-serif;
   word-wrap: break-word;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-width: 180px;
+  z-index: 1000;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item:first-child {
+  color: #000000;
+}
+
+.dropdown-item:last-child {
+  color: #B01D1F;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-item svg {
+  font-size: 18px;
+}
+
+/* Removemos el botón de logout anterior */
+.logout {
+  display: none;
 }
 
 
