@@ -40,7 +40,7 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 						/>
 					</div>
 					<div className="form-buttons">
-							<button
+						<button
 							type="submit"
 							style={{
 								backgroundColor: "#F2BE5E",
