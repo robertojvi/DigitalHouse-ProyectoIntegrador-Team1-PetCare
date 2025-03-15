@@ -34,6 +34,20 @@ const AdminServiceList = ({ onEdit }) => {
 		fetchServices();
 	}, []);
 
+	// Fix this useEffect to not depend on fetchServices
+	useEffect(() => {
+		// Listen for custom update events
+		const handleServiceUpdate = () => {
+			fetchServices(); // Call the function directly
+		};
+
+		window.addEventListener("serviceUpdated", handleServiceUpdate);
+
+		return () => {
+			window.removeEventListener("serviceUpdated", handleServiceUpdate);
+		};
+	}, []); // Remove fetchServices from dependencies
+
 	const fetchServices = async () => {
 		console.log("Token:" + auth.token);
 		console.log("Role:" + auth.role);
@@ -45,15 +59,12 @@ const AdminServiceList = ({ onEdit }) => {
 		}
 
 		try {
-			const response = await axios.get(
-				API_URL,
-				{
-					headers: {
-						Authorization: `Bearer ${auth.token}`,
-						"Content-Type": "application/json",
-					},
-				}
-			);
+			const response = await axios.get(API_URL, {
+				headers: {
+					Authorization: `Bearer ${auth.token}`,
+					"Content-Type": "application/json",
+				},
+			});
 
 			console.log("Servicios desde la base de datos:");
 			console.log(response.data);

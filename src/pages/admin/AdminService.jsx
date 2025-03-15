@@ -1,5 +1,5 @@
 // React
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContext";
 import axios from "axios";
@@ -39,32 +39,68 @@ const AdminService = ({ isInAdminLayout }) => {
 		};
 	};
 
-	const fetchServices = async () => {
-		const headers = getAuthHeaders();
-		if (!headers) {
+	// Fix the fetchServices function to avoid circular dependencies
+	const fetchServices = useCallback(async () => {
+		console.log("Fetching services...");
+		
+		if (!auth || !auth.token) {
 			logout();
 			return;
 		}
+		
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${auth.token}`,
+				"Content-Type": "application/json"
+			}
+		};
 
 		try {
 			setLoading(true);
-			const response = await axios.get(
-				API_URL,
-				headers
-			);
+			const response = await axios.get(API_URL, headers);
+			console.log("Services fetched:", response.data);
 			setServices(response.data);
 			setError(null);
+			
+			// Set localStorage to mark we're on the products tab
+			localStorage.setItem("adminSelectedMenu", "productos");
+			
 		} catch (err) {
 			console.error("Error fetching services:", err);
-			setError("Error al cargar los servicios: " + err.message);
+			setError("Error al cargar los servicios: " + (err.message || 'Error desconocido'));
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, [API_URL, auth, logout]);
 
+	// Initial fetch
 	useEffect(() => {
 		fetchServices();
-	}, [auth.token]);
+	}, [fetchServices]);
+
+	// Setup global refresh function and event listeners
+	useEffect(() => {
+		console.log("Setting up refresh functions and listeners");
+		
+		// Make refresh functions available globally
+		window.refreshServiceList = fetchServices;
+		window.refreshProductList = fetchServices;
+		
+		// Listen for the custom event
+		const handleServiceUpdated = (event) => {
+			console.log("Service updated event received", event.detail);
+			fetchServices();
+		};
+		
+		window.addEventListener('serviceUpdated', handleServiceUpdated);
+		
+		return () => {
+			console.log("Cleaning up refresh functions and listeners");
+			delete window.refreshServiceList;
+			delete window.refreshProductList;
+			window.removeEventListener('serviceUpdated', handleServiceUpdated);
+		};
+	}, [fetchServices]);
 
 	const handleAddProduct = async () => {
 		const headers = getAuthHeaders();
