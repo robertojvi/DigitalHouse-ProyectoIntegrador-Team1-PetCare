@@ -82,6 +82,7 @@ const AdminLayout = ({ children, onMenuClick, selectedMenu }) => {
 				backgroundColor: "#314549",
 				color: "#FFFEFF",
 				fontWeight: "bold",
+                fontSize: "0.8rem",
 			};
 		}
 		return {};
