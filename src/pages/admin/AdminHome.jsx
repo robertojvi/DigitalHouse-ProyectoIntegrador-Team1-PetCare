@@ -1,19 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../auth/AuthContext";
-import { Link } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
 import AdminService from "./AdminService";
-import warningImg from "../../images/warning.png";
 import AdminCategory from "./AdminCategory";
-
-import "../../styles/admin/adminHome.css";
 import AdminUser from "./AdminUser";
 import { AdminProfile } from "./AdminProfile";
-
+import "../../styles/admin/adminHome.css";
 
 function AdminHome() {
 	const { auth, logout } = useContext(AuthContext);
-
 	const [selectedMenu, setSelectedMenu] = useState(() => {
 		return localStorage.getItem("adminSelectedMenu") || "productos";
 	});
@@ -41,21 +36,37 @@ function AdminHome() {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
+	// Fix the storage event listener - use a simpler approach
+	useEffect(() => {
+		// Check localStorage on component mount
+		const storedMenu = localStorage.getItem("adminSelectedMenu");
+		if (storedMenu && storedMenu !== selectedMenu) {
+			setSelectedMenu(storedMenu);
+		}
+
+		// This is a simpler approach since storage events only fire in other tabs
+		const checkStorageInterval = setInterval(() => {
+			const currentMenu = localStorage.getItem("adminSelectedMenu");
+			if (currentMenu && currentMenu !== selectedMenu) {
+				setSelectedMenu(currentMenu);
+			}
+		}, 1000); // Check every second
+
+		return () => clearInterval(checkStorageInterval);
+	}, []);
+
 	const handleMenuClick = (menu) => {
-
-		if(menu === "logout"){
-			localStorage.removeItem("adminSelectedMenu")
-			logout()
+		if (menu === "logout") {
+			localStorage.removeItem("adminSelectedMenu");
+			logout();
+			return;
 		}
 
-		if (menu === selectedMenu) {
-			setSelectedMenu(null);
-		} else {
-			setSelectedMenu(menu);
-		}
+		setSelectedMenu(menu);
+		localStorage.setItem("adminSelectedMenu", menu);
 	};
 
-	if (!auth.token) {
+	if (!auth || !auth.token) {
 		return (
 			<div className="admin-home-container">
 				<div className="admin-welcome-card">
@@ -83,9 +94,7 @@ function AdminHome() {
 				{selectedMenu === "categorias" && (
 					<AdminCategory isInAdminLayout={true} />
 				)}
-				{selectedMenu === "perfil" && (
-					<AdminProfile isInAdminLayout={true} />
-				)}
+				{selectedMenu === "perfil" && <AdminProfile isInAdminLayout={true} />}
 			</AdminLayout>
 		</main>
 	);

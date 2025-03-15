@@ -4,12 +4,14 @@ import "../../styles/forms/formStyles.css";
 
 const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
+		idCategoria: "",
 		nombre: "",
 	});
 
 	useEffect(() => {
 		if (category) {
 			setFormData({
+				idCategoria: category.idCategoria || "",
 				nombre: category.nombre || "",
 			});
 		}
@@ -17,6 +19,7 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("Submitting with ID:", formData.idCategoria); // Debug log
 		onSubmit(formData);
 	};
 

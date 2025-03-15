@@ -41,11 +41,7 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		}
 
 		try {
-			await axios.post(
-				API_URL,
-				categoryData,
-				headers
-			);
+			await axios.post(API_URL, categoryData, headers);
 			setShowAddForm(false);
 			alert("Categoría creada exitosamente");
 			// Usar la función global de actualización
@@ -68,7 +64,20 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			return;
 		}
 
+		// Check if ID is present in the data
+		if (!categoryData.idCategoria) {
+			console.error("Missing category ID:", categoryData);
+			setError("Error: ID de categoría faltante");
+			return;
+		}
+
 		try {
+			console.log("Sending update request:", {
+				url: `${API_URL}/${categoryData.idCategoria}`,
+				data: { nombre: categoryData.nombre },
+				headers: headers.headers,
+			});
+
 			await axios.put(
 				`${API_URL}/${categoryData.idCategoria}`,
 				{ nombre: categoryData.nombre },
@@ -89,7 +98,17 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			alert("Categoría actualizada exitosamente");
 		} catch (error) {
 			console.error("Error updating category:", error);
-			setError("Error al actualizar la categoría: " + error.message);
+			if (error.response) {
+				console.error("Response status:", error.response.status);
+				console.error("Response data:", error.response.data);
+				setError(
+					`Error al actualizar la categoría: ${
+						error.response.data.mensaje || error.message
+					}`
+				);
+			} else {
+				setError("Error al actualizar la categoría: " + error.message);
+			}
 		}
 	};
 
