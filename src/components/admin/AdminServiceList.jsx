@@ -34,6 +34,20 @@ const AdminServiceList = ({ onEdit }) => {
 		fetchServices();
 	}, []);
 
+	// Fix this useEffect to not depend on fetchServices
+	useEffect(() => {
+		// Listen for custom update events
+		const handleServiceUpdate = () => {
+			fetchServices(); // Call the function directly
+		};
+
+		window.addEventListener("serviceUpdated", handleServiceUpdate);
+
+		return () => {
+			window.removeEventListener("serviceUpdated", handleServiceUpdate);
+		};
+	}, []); // Remove fetchServices from dependencies
+
 	const fetchServices = async () => {
 		console.log("Token:" + auth.token);
 		console.log("Role:" + auth.role);
@@ -45,15 +59,12 @@ const AdminServiceList = ({ onEdit }) => {
 		}
 
 		try {
-			const response = await axios.get(
-				API_URL,
-				{
-					headers: {
-						Authorization: `Bearer ${auth.token}`,
-						"Content-Type": "application/json",
-					},
-				}
-			);
+			const response = await axios.get(API_URL, {
+				headers: {
+					Authorization: `Bearer ${auth.token}`,
+					"Content-Type": "application/json",
+				},
+			});
 
 			console.log("Servicios desde la base de datos:");
 			console.log(response.data);
@@ -109,9 +120,7 @@ const AdminServiceList = ({ onEdit }) => {
 
 				// Actualizar la lista inmediatamente
 				setServices(
-					services.filter(
-						(s) => s.idServicio !== serviceToDelete.idServicio
-					)
+					services.filter((s) => s.idServicio !== serviceToDelete.idServicio)
 				);
 				setError(null);
 			}
@@ -175,20 +184,14 @@ const AdminServiceList = ({ onEdit }) => {
 										onClick={() => handleEdit(service)}
 										disabled={deleteLoading}
 									>
-										<img
-											src={pencilIcon}
-											alt="Editar servicio"
-										/>
+										<img src={pencilIcon} alt="Editar servicio" />
 									</button>
 									<button
 										className="icon-button"
 										onClick={() => openDeleteModal(service)}
 										disabled={deleteLoading}
 									>
-										<img
-											src={trashIcon}
-											alt="Eliminar servicio"
-										/>
+										<img src={trashIcon} alt="Eliminar servicio" />
 									</button>
 								</td>
 							</tr>
