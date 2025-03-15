@@ -32,8 +32,21 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 						/>
 					</div>
 					<div className="form-buttons">
-						<button type="submit">Guardar</button>
-						<button type="button" onClick={onClose}>
+						<button
+							type="submit"
+							style={{
+								backgroundColor: "#F2BE5E",
+								color: "#FFFEFF",
+								borderRadius: "20px",
+							}}
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							onClick={onClose}
+							style={{ borderRadius: "20px" }}
+						>
 							Cancelar
 						</button>
 					</div>
@@ -48,4 +61,3 @@ AddCategoryForm.propTypes = {
 };
 
 export default AddCategoryForm;
-

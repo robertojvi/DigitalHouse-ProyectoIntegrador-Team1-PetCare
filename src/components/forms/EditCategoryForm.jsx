@@ -4,15 +4,13 @@ import "../../styles/forms/formStyles.css";
 
 const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
-		idCategoria: "",
 		nombre: "",
 	});
 
 	useEffect(() => {
 		if (category) {
 			setFormData({
-				idCategoria: category.idCategoria,
-				nombre: category.nombre,
+				nombre: category.nombre || "",
 			});
 		}
 	}, [category]);
@@ -42,8 +40,21 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 						/>
 					</div>
 					<div className="form-buttons">
-						<button type="submit">Actualizar</button>
-						<button type="button" onClick={onClose}>
+						<button
+							type="submit"
+							style={{
+								backgroundColor: "#F2BE5E",
+								color: "#FFFEFF",
+								borderRadius: "20px",
+							}}
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							onClick={onClose}
+							style={{ borderRadius: "20px" }}
+						>
 							Cancelar
 						</button>
 					</div>
@@ -52,11 +63,9 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 		</div>
 	);
 };
+
 EditCategoryForm.propTypes = {
-	category: PropTypes.shape({
-		idCategoria: PropTypes.number.isRequired,
-		nombre: PropTypes.string.isRequired,
-	}),
+	category: PropTypes.object.isRequired,
 	onClose: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 };
