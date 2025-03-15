@@ -71,28 +71,27 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 				categoriaId: formData.category,
 				imagenes: formData.images,
 			});
-			
+
 			// Close the form first
 			onClose();
-			
-			 // Set selected menu - simpler approach
+
+			// Set selected menu - simpler approach
 			localStorage.setItem("adminSelectedMenu", "productos");
-			
+
 			// Try different refresh methods
-			if (typeof window.refreshProductList === 'function') {
+			if (typeof window.refreshProductList === "function") {
 				console.log("Refreshing product list via global function");
 				window.refreshProductList();
-			} else if (typeof window.refreshServiceList === 'function') {
+			} else if (typeof window.refreshServiceList === "function") {
 				console.log("Refreshing service list via global function");
 				window.refreshServiceList();
 			}
-			
+
 			// Also dispatch a custom event for components listening to it
-			const event = new CustomEvent('serviceUpdated', {
-				detail: { serviceId: service.idServicio }
+			const event = new CustomEvent("serviceUpdated", {
+				detail: { serviceId: service.idServicio },
 			});
 			window.dispatchEvent(event);
-			
 		} catch (error) {
 			setErrors({
 				submit: error.message || "Error al actualizar el servicio",

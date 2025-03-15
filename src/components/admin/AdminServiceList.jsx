@@ -120,9 +120,7 @@ const AdminServiceList = ({ onEdit }) => {
 
 				// Actualizar la lista inmediatamente
 				setServices(
-					services.filter(
-						(s) => s.idServicio !== serviceToDelete.idServicio
-					)
+					services.filter((s) => s.idServicio !== serviceToDelete.idServicio)
 				);
 				setError(null);
 			}
@@ -186,20 +184,14 @@ const AdminServiceList = ({ onEdit }) => {
 										onClick={() => handleEdit(service)}
 										disabled={deleteLoading}
 									>
-										<img
-											src={pencilIcon}
-											alt="Editar servicio"
-										/>
+										<img src={pencilIcon} alt="Editar servicio" />
 									</button>
 									<button
 										className="icon-button"
 										onClick={() => openDeleteModal(service)}
 										disabled={deleteLoading}
 									>
-										<img
-											src={trashIcon}
-											alt="Eliminar servicio"
-										/>
+										<img src={trashIcon} alt="Eliminar servicio" />
 									</button>
 								</td>
 							</tr>
