@@ -73,13 +73,43 @@ const AdminUserList = ({ onEdit }) => {
 		};
 	}, []);
 
-	// Make fetchUsers available globally
+	// Make fetchUsers available globally with the correct name
 	useEffect(() => {
+		window.refreshUserList = fetchUsers;
+		// Still keep refreshCategoryList for backward compatibility
 		window.refreshCategoryList = fetchUsers;
-		return () => {
-			delete window.refreshCategoryList;
+
+		// Listen for custom refresh events
+		const handleCustomRefresh = (event) => {
+			if (event.detail && event.detail.users) {
+				const mappedUsers = event.detail.users.map((user) => {
+					const roleValue =
+						user.rol ||
+						user.role ||
+						user.userRole ||
+						user.tipo ||
+						user.tipo_usuario ||
+						user.user_type ||
+						"No asignado";
+					return {
+						...user,
+						rol: roleValue,
+					};
+				});
+				setUsers(mappedUsers);
+			} else {
+				fetchUsers();
+			}
 		};
-	}, [fetchUsers]); // Add fetchUsers as dependency
+
+		window.addEventListener("userListRefresh", handleCustomRefresh);
+
+		return () => {
+			delete window.refreshUserList;
+			delete window.refreshCategoryList;
+			window.removeEventListener("userListRefresh", handleCustomRefresh);
+		};
+	}, [fetchUsers]);
 
 	const openDeleteModal = (user) => {
 		setUserToDelete(user);

@@ -40,11 +40,11 @@ const EditUserRoleForm = ({ user, onClose, onSubmit }) => {
 				<form onSubmit={handleSubmit}>
 					<FormGroup>
 						<Select
-							value={formData.user}
+							value={formData.role}
 							style={{ width: "100%" }}
 							onChange={handleChange}
 						>
-							<option value="">Seleccione una categoría</option>
+							<option value="">Seleccione un rol</option>
 							<option value="CLIENTE">Cliente</option>
 							<option value="ADMIN">Administrador</option>
 						</Select>
