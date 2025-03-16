@@ -33,8 +33,18 @@ const AdminCategoryList = ({ onEdit }) => {
 					Authorization: `Bearer ${auth.token}`,
 				},
 			});
+			console.log("Categories fetched from API:", response.data);
+			// Log the first category to inspect its structure
+			if (response.data && response.data.length > 0) {
+				console.log("First category object:", response.data[0]);
+				console.log(
+					"Image URL field in first category:",
+					response.data[0].imagenUrl
+				);
+			}
 			setCategories(response.data);
-		} catch {
+		} catch (error) {
+			console.error("Error fetching categories:", error);
 			setError("Error al cargar las categorías");
 		}
 	};
@@ -141,6 +151,7 @@ const AdminCategoryList = ({ onEdit }) => {
 				<table className="admin-table">
 					<thead>
 						<tr>
+							<th className="table-header">Imagen</th>
 							<th className="table-header">Nombre</th>
 							<th className="table-header">Acciones</th>
 						</tr>
@@ -148,8 +159,38 @@ const AdminCategoryList = ({ onEdit }) => {
 					<tbody>
 						{categories.map((category) => (
 							<tr key={category.idCategoria} className="table-row">
-								{" "}
-								{/* Changed from .id to .idCategoria */}
+								<td className="table-cell">
+									{category.imagenUrl ? (
+										<img
+											src={category.imagenUrl}
+											alt={`Imagen de ${category.nombre}`}
+											style={{
+												width: "20px",
+												height: "20px",
+												objectFit: "cover",
+												borderRadius: "4px",
+											}}
+											onError={(e) => {
+												console.error(
+													"Failed to load image:",
+													category.imagenUrl
+												);
+												e.target.onerror = null;
+												e.target.src = "https://via.placeholder.com/20";
+											}}
+										/>
+									) : (
+										<div
+											style={{
+												width: "20px",
+												height: "20px",
+												backgroundColor: "#e0e0e0",
+												borderRadius: "4px",
+												display: "inline-block",
+											}}
+										></div>
+									)}
+								</td>
 								<td className="table-cell">{category.nombre}</td>
 								<td className="table-cell">
 									<div className="action-buttons">

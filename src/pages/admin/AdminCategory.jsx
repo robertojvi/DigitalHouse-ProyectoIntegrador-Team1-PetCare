@@ -41,7 +41,22 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		}
 
 		try {
-			await axios.post(API_URL, categoryData, headers);
+			// Check if categoryData is FormData (contains file) or regular object
+			if (categoryData instanceof FormData) {
+				// For FormData, we need to modify headers to handle multipart data
+				const multipartHeaders = {
+					...headers.headers,
+					"Content-Type": "multipart/form-data",
+				};
+
+				await axios.post(API_URL, categoryData, {
+					headers: multipartHeaders,
+				});
+			} else {
+				// Regular JSON data without image
+				await axios.post(API_URL, categoryData, headers);
+			}
+
 			setShowAddForm(false);
 			alert("Categoría creada exitosamente");
 			// Usar la función global de actualización
@@ -65,7 +80,8 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		}
 
 		// Check if ID is present in the data
-		if (!categoryData.idCategoria) {
+		const categoryId = categoryData.idCategoria;
+		if (!categoryId) {
 			console.error("Missing category ID:", categoryData);
 			setError("Error: ID de categoría faltante");
 			return;
@@ -73,14 +89,23 @@ const AdminCategory = ({ isInAdminLayout }) => {
 
 		try {
 			console.log("Sending update request:", {
-				url: `${API_URL}/${categoryData.idCategoria}`,
-				data: { nombre: categoryData.nombre },
+				url: `${API_URL}/${categoryId}`,
+				data: {
+					nombre: categoryData.nombre,
+					descripcion: categoryData.descripcion,
+					imagenUrl: categoryData.imagenUrl, // Include the imagenUrl in the update
+				},
 				headers: headers.headers,
 			});
 
+			// Regular JSON data with imagenUrl included
 			await axios.put(
-				`${API_URL}/${categoryData.idCategoria}`,
-				{ nombre: categoryData.nombre },
+				`${API_URL}/${categoryId}`,
+				{
+					nombre: categoryData.nombre,
+					descripcion: categoryData.descripcion,
+					imagenUrl: categoryData.imagenUrl, // Include the imagenUrl in the request
+				},
 				headers
 			);
 
