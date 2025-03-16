@@ -33,7 +33,7 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		};
 	};
 
-	const handleAddCategory = async (categoryData) => {
+	const handleAddCategory = async (formData) => {
 		const headers = getAuthHeaders();
 		if (!headers) {
 			logout();
@@ -41,34 +41,45 @@ const AdminCategory = ({ isInAdminLayout }) => {
 		}
 
 		try {
-			// Check if categoryData is FormData (contains file) or regular object
-			if (categoryData instanceof FormData) {
-				// For FormData, we need to modify headers to handle multipart data
-				const multipartHeaders = {
-					...headers.headers,
-					"Content-Type": "multipart/form-data",
-				};
+			// For FormData, we need to modify headers to handle multipart data
+			// but remove Content-Type so boundary is set automatically
+			const multipartHeaders = {
+				...headers.headers,
+			};
 
-				await axios.post(API_URL, categoryData, {
-					headers: multipartHeaders,
-				});
-			} else {
-				// Regular JSON data without image
-				await axios.post(API_URL, categoryData, headers);
+			console.log("Sending category creation request with FormData");
+
+			// Display FormData entries for debugging
+			for (let pair of formData.entries()) {
+				console.log(pair[0], pair[1]);
 			}
 
+			const response = await axios.post(API_URL, formData, {
+				headers: multipartHeaders,
+			});
+
+			console.log("Category created successfully:", response.data);
 			setShowAddForm(false);
 			alert("Categoría creada exitosamente");
-			// Usar la función global de actualización
+
+			// Reload category list
 			if (window.refreshCategoryList) {
 				window.refreshCategoryList();
 			} else {
-				// Si la función no está disponible, recargar la página
 				window.location.reload();
 			}
 		} catch (error) {
 			console.error("Error creating category:", error);
-			setError("Error al crear la categoría: " + error.message);
+			if (error.response) {
+				console.error("Response data:", error.response.data);
+				setError(
+					`Error al crear la categoría: ${
+						error.response.data.mensaje || error.message
+					}`
+				);
+			} else {
+				setError("Error al crear la categoría: " + error.message);
+			}
 		}
 	};
 

@@ -6,18 +6,15 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
 		nombre: "",
 		descripcion: "",
-		imagen: null,
 	});
+	const [imagen, setImagen] = useState(null);
 	const [imagePreview, setImagePreview] = useState(null);
 	const fileInputRef = useRef(null);
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			setFormData({
-				...formData,
-				imagen: file,
-			});
+			setImagen(file);
 
 			// Create a preview URL for the selected image
 			const reader = new FileReader();
@@ -31,16 +28,25 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		// Create form data to handle image upload
-		if (formData.imagen) {
-			const submitData = new FormData();
-			submitData.append("nombre", formData.nombre);
-			submitData.append("descripcion", formData.descripcion);
-			submitData.append("imagen", formData.imagen);
-			onSubmit(submitData);
-		} else {
-			onSubmit(formData);
+		// Create FormData object to match the API requirements
+		const submitFormData = new FormData();
+
+		// Create JSON string for 'datos' key containing nombre and descripcion
+		const datosJson = JSON.stringify({
+			nombre: formData.nombre,
+			descripcion: formData.descripcion,
+		});
+
+		// Add the 'datos' key with the JSON string
+		submitFormData.append("datos", datosJson);
+
+		// Add the imagen file if it exists
+		if (imagen) {
+			submitFormData.append("imagen", imagen);
 		}
+
+		// Submit the form data
+		onSubmit(submitFormData);
 	};
 
 	return (

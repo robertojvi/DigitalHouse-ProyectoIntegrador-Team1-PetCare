@@ -113,10 +113,10 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 										}}
 									/>
 									{/* Hidden input to store the imagenUrl value */}
-									<input 
-										type="hidden" 
-										name="imagenUrl" 
-										value={formData.imagenUrl} 
+									<input
+										type="hidden"
+										name="imagenUrl"
+										value={formData.imagenUrl}
 									/>
 								</>
 							) : (
