@@ -1,15 +1,52 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "../../styles/forms/formStyles.css";
 
 const AddCategoryForm = ({ onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
 		nombre: "",
+		descripcion: "",
 	});
+	const [imagen, setImagen] = useState(null);
+	const [imagePreview, setImagePreview] = useState(null);
+	const fileInputRef = useRef(null);
+
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setImagen(file);
+
+			// Create a preview URL for the selected image
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImagePreview(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		onSubmit(formData);
+
+		// Create FormData object to match the API requirements
+		const submitFormData = new FormData();
+
+		// Create JSON string for 'datos' key containing nombre and descripcion
+		const datosJson = JSON.stringify({
+			nombre: formData.nombre,
+			descripcion: formData.descripcion,
+		});
+
+		// Add the 'datos' key with the JSON string
+		submitFormData.append("datos", datosJson);
+
+		// Add the imagen file if it exists
+		if (imagen) {
+			submitFormData.append("imagen", imagen);
+		}
+
+		// Submit the form data
+		onSubmit(submitFormData);
 	};
 
 	return (
@@ -31,6 +68,64 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 							required
 						/>
 					</div>
+
+					<div className="form-group">
+						<label>Descripción:</label>
+						<textarea
+							value={formData.descripcion}
+							onChange={(e) =>
+								setFormData({
+									...formData,
+									descripcion: e.target.value,
+								})
+							}
+							rows={4}
+							placeholder="Descripción de la categoría"
+						/>
+					</div>
+
+					<div className="form-group">
+						<label>Imagen:</label>
+						<div className="image-upload-container">
+							<input
+								type="file"
+								accept="image/*"
+								onChange={handleImageChange}
+								style={{ display: "none" }}
+								ref={fileInputRef}
+							/>
+							<button
+								type="button"
+								onClick={() => fileInputRef.current.click()}
+								className="upload-button"
+								style={{
+									backgroundColor: "#F2BE5E",
+									color: "#FFFEFF",
+									borderRadius: "20px",
+									padding: "8px 16px",
+									marginBottom: "10px",
+								}}
+							>
+								Seleccionar Imagen
+							</button>
+
+							{imagePreview && (
+								<div className="image-preview">
+									<img
+										src={imagePreview}
+										alt="Vista previa"
+										style={{
+											maxWidth: "100%",
+											maxHeight: "200px",
+											marginTop: "10px",
+											borderRadius: "8px",
+										}}
+									/>
+								</div>
+							)}
+						</div>
+					</div>
+
 					<div className="form-buttons">
 						<button
 							type="submit"
@@ -55,6 +150,7 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 		</div>
 	);
 };
+
 AddCategoryForm.propTypes = {
 	onClose: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
