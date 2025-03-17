@@ -152,7 +152,8 @@ function CalendarReservasServicio({ reservedDates, setCuidadoInicial, setCuidado
   return (
     <div className="calendarReservasContainer">
       <ToastContainer />
-      <p>Selecciona las fechas en que deseas programar tu cita</p>
+      <p>Selecciona las fechas en que deseas </p>
+      <p>programar tu cuidado</p>
       <Calendar
         onClickDay={handleDateClick} 
         tileClassName={tileClassName}

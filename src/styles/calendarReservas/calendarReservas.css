@@ -6,6 +6,11 @@
     color: black;
     width: auto; 
     padding: 2rem 1rem;
+    & p{
+        font-family: "Nunito";
+        font-size: 14px;
+        font-weight: 700;
+    }
 
 }
 
