@@ -7,14 +7,11 @@ export const ServiceDetailInfoContainer = styled.div`
 export const ReviewContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 20px 10px;
   margin-bottom: 30px;
   border: 1px solid #000000;
   border-radius: 10px;
   width: 100%;
-
+  
   & p{
     font-size:12px;
     font-weight: 600;

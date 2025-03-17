@@ -22,6 +22,7 @@ const ServiceDetail = ({ selectedService, onGoBack }) => {
 
 	if (!service) return <div>Service not found</div>;
 
+	console.log(service);
 	return (
 		<div className="mainContainer">
 			<div
@@ -52,6 +53,7 @@ const ServiceDetail = ({ selectedService, onGoBack }) => {
 					yearsExperience: service.yearsExperience || 0,
 					rating: service.rating,
 					reviews: service.reviews || 0,
+					id_servicio: service.idServicio
 				}}
 			/>
 		</div>

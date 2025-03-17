@@ -35,6 +35,7 @@ const Login = ({ isLoginValue }) => {
       // Guardar el token en el localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
+      localStorage.setItem("idUser", response.data.idUsuario);
       localStorage.setItem("userName", response.data.nombre || "Usuario");
       localStorage.setItem("lastname", response.data.apellido || "Apellido");
 

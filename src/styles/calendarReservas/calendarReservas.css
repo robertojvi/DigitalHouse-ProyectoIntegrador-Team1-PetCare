@@ -1,0 +1,33 @@
+.calendarReservasContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    width: auto; 
+    padding: 2rem 1rem;
+
+}
+
+.calendarReservasContainer .react-calendar__month-view__weekdays__weekday {
+    font-family: 'Inter';
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(83, 83, 83)
+}
+
+.calendarReservasContainer .react-calendar {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendarReservasContainer .react-calendar .react-calendar__viewContainer{
+    width: 300px;
+}
+
+.calendarReservasContainer .react-calendar .react-calendar__viewContainer button{
+    padding: 3px 10px;
+}
