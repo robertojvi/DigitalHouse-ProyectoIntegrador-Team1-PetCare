@@ -44,7 +44,7 @@ const ServiceImagesMain = ({ images, onGoBack }) => {
 			<div className="images-grid-container">
 				{/* Main image */}
 				<div className="main-image">
-					<img src={images[0]} alt="Main service view" />
+					<img src={images[0]?.imagenUrl} alt="Main service view" />
 				</div>
 
 				{/* Grid of 4 smaller images */}
@@ -52,7 +52,7 @@ const ServiceImagesMain = ({ images, onGoBack }) => {
 					{images.slice(1, 5).map((image, index) => (
 						<div key={index} className="grid-image">
 							<img
-								src={image}
+								src={image?.imagenUrl}
 								alt={`Service view ${index + 2}`}
 							/>
 						</div>

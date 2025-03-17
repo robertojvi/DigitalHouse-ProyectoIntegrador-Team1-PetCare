@@ -50,7 +50,7 @@ const ServiceDetailImagesGrid = ({ images, onGoBack }) => {
 				<div className="secondary-images">
 					{images.slice(1, 5).map((image, index) => (
 						<div key={index} className="grid-image">
-							<img src={image} alt={`Service view ${index + 2}`} />
+							<img src={image.imagenUrl} alt={`Service view ${index + 2}`} />
 						</div>
 					))}
 				</div>
