@@ -20,10 +20,11 @@ export const ServiceCard = ({
 	excerpt,
 	onImageClick,
 }) => {
+	console.log(image?.imagenUrl)
 	return (
 		<CardContainer>
 			<ImageContainer onClick={() => onImageClick()}>
-				<Image src={image} alt={name} style={{ cursor: "pointer" }} />
+				<Image src={image?.imagenUrl || "https://via.placeholder.com/150"} alt={name} />
 			</ImageContainer>
 			<InfoContainer>
 				<h3 className="serviceType">{serviceType?.name}</h3>
