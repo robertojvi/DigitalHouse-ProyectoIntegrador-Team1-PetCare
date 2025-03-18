@@ -27,22 +27,42 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("Submitting category form data");
+
+		// Validate form inputs
+		if (!formData.nombre.trim()) {
+			alert("Por favor ingrese un nombre para la categoría");
+			return;
+		}
 
 		// Create FormData object to match the API requirements
 		const submitFormData = new FormData();
 
+		// Log what we're sending
+		console.log("Category data to send:", {
+			nombre: formData.nombre,
+			descripcion: formData.descripcion || "",
+		});
+
 		// Create JSON string for 'datos' key containing nombre and descripcion
 		const datosJson = JSON.stringify({
 			nombre: formData.nombre,
-			descripcion: formData.descripcion,
+			descripcion: formData.descripcion || "",
 		});
 
 		// Add the 'datos' key with the JSON string
 		submitFormData.append("datos", datosJson);
 
+		// Also add direct fields for APIs that might expect them
+		submitFormData.append("nombre", formData.nombre);
+		submitFormData.append("descripcion", formData.descripcion || "");
+
 		// Add the imagen file if it exists
 		if (imagen) {
 			submitFormData.append("imagen", imagen);
+			console.log("Adding image to form data");
+		} else {
+			console.log("No image selected");
 		}
 
 		// Submit the form data

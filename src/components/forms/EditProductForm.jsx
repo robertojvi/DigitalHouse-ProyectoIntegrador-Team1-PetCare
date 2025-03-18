@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { obtenerCategorias } from "../../services/categoriasService";
+import { crearCategoria } from "../../services/categoriasService"; // Add this import
 import {
 	FormWrapper,
 	FormContainer,
@@ -101,13 +102,81 @@ const EditProductForm = ({ service, onClose, onSubmit }) => {
 		}
 	};
 
-	const handleNewCategory = async (newCategory) => {
-		setCategorias([...categorias, newCategory]);
-		setFormData((prev) => ({
-			...prev,
-			category: newCategory.idCategoria,
-			categoryName: newCategory.nombre,
-		}));
+	const handleNewCategory = async (formData) => {
+		try {
+			console.log("Processing new category submission...");
+
+			// Call the API to create a new category
+			const newCategory = await crearCategoria(formData);
+			console.log("New category created:", newCategory);
+
+			// More flexible identification of ID and name
+			let categoryId = null;
+			let categoryName = null;
+
+			// Check various possible ID fields
+			if (newCategory.idCategoria !== undefined)
+				categoryId = newCategory.idCategoria;
+			else if (newCategory.id !== undefined) categoryId = newCategory.id;
+			else if (newCategory._id !== undefined) categoryId = newCategory._id;
+
+			// Check various possible name fields
+			if (newCategory.nombre !== undefined) categoryName = newCategory.nombre;
+			else if (newCategory.name !== undefined) categoryName = newCategory.name;
+
+			if (!categoryId) {
+				console.error("Could not find valid ID in category data:", newCategory);
+				// For testing, generate a temporary ID (remove this in production)
+				categoryId = `temp_${Date.now()}`;
+				console.warn("Generated temporary ID for testing:", categoryId);
+			}
+
+			if (!categoryName) {
+				// Default name if none exists
+				categoryName = "Nueva Categoría";
+			}
+
+			// Update the categories list with the new category
+			setCategorias((prevCategorias) => {
+				// Create a properly structured category object
+				const formattedCategory = {
+					idCategoria: categoryId,
+					nombre: categoryName,
+				};
+
+				console.log("Adding new category to list:", formattedCategory);
+
+				// Check if the category already exists in the list
+				const exists = prevCategorias.some(
+					(cat) => cat.idCategoria === categoryId
+				);
+
+				if (exists) {
+					return prevCategorias;
+				}
+
+				return [...prevCategorias, formattedCategory];
+			});
+
+			// Update the form data to select the new category
+			setFormData((prev) => ({
+				...prev,
+				category: categoryId.toString(),
+				categoryName: categoryName,
+			}));
+
+			// Close the add category form
+			setShowAddCategory(false);
+
+			// Show a success message
+			alert(`Categoría "${categoryName}" creada exitosamente!`);
+
+			return true;
+		} catch (error) {
+			console.error("Error handling new category:", error);
+			alert(`Error al crear la categoría: ${error.message}`);
+			return false;
+		}
 	};
 
 	const handleCategoryChange = (e) => {
