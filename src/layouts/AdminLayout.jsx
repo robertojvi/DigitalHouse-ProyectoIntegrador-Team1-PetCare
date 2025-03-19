@@ -82,7 +82,7 @@ const AdminLayout = ({ children, onMenuClick, selectedMenu }) => {
 				backgroundColor: "#314549",
 				color: "#FFFEFF",
 				fontWeight: "bold",
-                fontSize: "0.8rem",
+				fontSize: "0.8rem",
 			};
 		}
 		return {};
@@ -163,12 +163,12 @@ const AdminLayout = ({ children, onMenuClick, selectedMenu }) => {
 							>
 								Lista de Categorías
 							</button>
-							{/* <button 
+														{/* <button 
                                 className="admin-link"
                                 onClick={() => onMenuClick('caracteristicas')}
                             >
                                 Lista de Características
-                            </button> */}
+                            </button> 
 							<button
 								className="admin-link"
 								onClick={() => onMenuClick("perfil")}
@@ -182,7 +182,8 @@ const AdminLayout = ({ children, onMenuClick, selectedMenu }) => {
 								style={getButtonStyle("logout")}
 							>
 								Cerrar sesión
-							</button>
+							</button>*/}
+
 						</div>
 					</div>
 				</div>
