@@ -14,14 +14,16 @@ const UserProfile = () => {
 	const API_URL = `${BASE_URL}/api/usuarios`;
 
 	useEffect(() => {
-		// Log auth object to see what data we have
 		console.log("Auth object:", auth);
 
-		if (auth && auth.id) {
-			fetchUserData(auth.id);
-		} else if (auth && auth.idUsuario) {
-			// Try using idUsuario if it exists
-			fetchUserData(auth.idUsuario);
+		if (auth?.role === "CLIENTE" || auth?.role === "USER") {
+			// For client/user roles, just use the auth data from context
+			console.log("Using auth data from context for client/user role");
+			setUserData(auth);
+			setLoading(false);
+		} else if (auth && (auth.id || auth.idUsuario)) {
+			// Only try API fetch for admin users
+			fetchUserData(auth.id || auth.idUsuario);
 		} else if (auth && auth.token) {
 			console.log("Auth object without ID:", auth);
 			setUserData(auth);
@@ -53,7 +55,6 @@ const UserProfile = () => {
 			let role = apiData.role;
 			if (!role && apiData.authorities && apiData.authorities.length > 0) {
 				const authority = apiData.authorities[0].authority;
-				// Convert ROLE_ADMIN to ADMIN
 				role = authority.replace("ROLE_", "");
 			}
 
@@ -64,19 +65,27 @@ const UserProfile = () => {
 				email: apiData.email || apiData.username,
 				telefono: apiData.telefono,
 				role: role,
-				// Include other fields from API if needed
 				fechaRegistro: apiData.fechaRegistro,
 				fechaActualizacion: apiData.fechaActualizacion,
-				// Keep original data for dynamic display
 				originalData: apiData,
 			};
 
 			setUserData(processedUserData);
 			setLoading(false);
+			setError(null); // Clear any previous errors
 		} catch (err) {
 			console.error("Error fetching user data:", err);
-			setUserData(auth);
-			setError(`Error al cargar datos del perfil: ${err.message}`);
+
+			// Handle 403 forbidden errors gracefully
+			if (err.response && err.response.status === 403) {
+				console.log("Access forbidden - using data from auth context");
+				setUserData(auth);
+				// No need to show error to user for expected permission issues
+				setError(null);
+			} else {
+				setUserData(auth);
+				setError(`Error al cargar datos del perfil: ${err.message}`);
+			}
 			setLoading(false);
 		}
 	};
