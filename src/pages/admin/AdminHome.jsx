@@ -79,6 +79,99 @@ function AdminHome() {
 	// Verificar si debemos mostrar el warning
 	const shouldShowWarning = dimensions.isMobile && auth?.role === "ADMIN";
 
+	// Vista inicial del panel de administración
+	if (!selectedMenu) {
+		return (
+		  <main>
+			{shouldShowWarning && (
+			  <div 
+				style={{
+				  position: 'fixed',
+				  top: 'var(--header-height)',              top: 'var(--header-height)',
+				  left: 0,
+				  right: 0,
+				  bottom: 'var(--footer-height)',              bottom: 'var(--footer-height)',
+				  backgroundColor: '#ffffff',
+				  zIndex: 9999,
+				  display: 'flex',
+				  flexDirection: 'column',
+				  justifyContent: 'center',
+				  alignItems: 'center',
+				  padding: '2rem'
+				}}
+			  >
+				<img 
+				  src={warningImg}
+				  alt="Warning" 
+				  style={{
+					width: '80px',
+					height: '80px',                height: '80px',
+					marginBottom: '1.5rem'
+				  }}
+				/>
+				<span 
+				  style={{
+					fontFamily: 'Nunito, sans-serif',
+					fontSize: '24px',
+					fontWeight: 'bold',
+					color: '#314549'
+				  }}
+				>
+				  NO DISPONIBLE PARA MOBILE
+				</span>
+			  </div>
+			)}
+	
+			<div style={{ display: shouldShowWarning ? 'none' : 'block' }}>
+			  <div className="admin-navigation">
+				<Link to="/" className="breadcrumb-link">
+				  Inicio
+				</Link>
+				<span className="breadcrumb-separator"> {">"} </span>
+				<span className="breadcrumb-current">Administración</span>
+			  </div>
+	
+			  <div className="admin-home-container">
+				<div className="admin-welcome-card">
+				  <h1 className="welcome-title">
+					¡Hola {auth.nombre} {auth.apellido}!
+				  </h1>
+				  <div className="admin-initials-circle">
+					{getInitials(auth.nombre, auth.apellido)}
+				  </div>
+				  <div className="admin-menu-links">
+					<button
+					  className="admin-link"
+					  onClick={() => handleMenuClick("productos")}
+					>
+					  Lista de Productos
+					</button>
+					<button
+					  className="admin-link"
+					  onClick={() => handleMenuClick("usuarios")}
+					>
+					  Lista de Usuarios
+					</button>
+					<button
+					  className="admin-link"
+					  onClick={() => handleMenuClick("categorias")}
+					>
+					  Lista de Categorías
+					</button>
+					<button
+					  className="admin-link"
+					  onClick={() => handleMenuClick("caracteristicas")}
+					>
+					  Lista de Características
+					</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </main>
+		);
+	  }
+	  
 	// Vista con menú lateral y contenido dinámico
 	return (
 		<main>
