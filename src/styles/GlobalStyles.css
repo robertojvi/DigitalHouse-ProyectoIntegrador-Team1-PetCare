@@ -1,18 +1,34 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  /* ... otras variables ... */
+
+  /* Admin */
+  --admin-table-border: 1px solid var(--palet-color-black);
+  --admin-table-header-background-color: var(--palet-color-darkgray);
+  --admin-table-header-font: 700 16px "Nunito", sans-serif;
+  --admin-table-header-font-color: var(--palet-color-white);
+  --admin-table-row-background-color: rgba(250, 231, 196, 0.36); /* Color naranja con 36% de opacidad */
+  --admin-table-row-background-color-hover: var(--palet-color-white);
+  --admin-table-row-font: 700 14px "Inter", sans-serif;
+  --admin-table-row-font-color: var(--palet-color-black);
+
+  /* ... resto de las variables ... */
 }

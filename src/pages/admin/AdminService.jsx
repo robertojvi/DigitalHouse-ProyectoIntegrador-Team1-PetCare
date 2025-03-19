@@ -17,7 +17,7 @@ import "../../styles/admin/adminService.css";
 import addPlusIcon from "../../images/add-plus.png";
 
 // eslint-disable-next-line react/prop-types
-const AdminService = ({ isInAdminLayout }) => {
+const AdminService = ({ isInAdminLayout, onActionComplete }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
 	const { auth, logout } = useContext(AuthContext);
@@ -103,24 +103,16 @@ const AdminService = ({ isInAdminLayout }) => {
 		};
 	}, [fetchServices]);
 
-	const handleAddProduct = async () => {
-		const headers = getAuthHeaders();
-		if (!headers) {
-			logout();
-			return;
-		}
-
+	const handleAddProduct = async (servicioData) => {
 		try {
-			await axios.post(API_URL, servicioData, headers);
-
-			// Actualizar la lista de servicios
-			await fetchServices();
+			await axios.post(API_URL, servicioData, getAuthHeaders());
+			await fetchServices(); // Recargar la lista
 			setShowAddForm(false);
 			toast.success("Servicio creado exitosamente");
+			onActionComplete?.(); // Notificar que la acción se completó
 		} catch (error) {
 			console.error("Error creating service:", error);
 			setError("Error al crear el servicio: " + error.message);
-			toast.error("Error al crear el servicio: " + error.message);
 		}
 	};
 
@@ -132,19 +124,32 @@ const AdminService = ({ isInAdminLayout }) => {
 		}
 
 		try {
+			// Corregimos la URL para incluir la categoría
 			await axios.put(
 				`${API_URL}/${serviceData.idServicio}/categorias/${serviceData.categoriaId}`,
 				serviceData,
 				headers
 			);
 
-			await fetchServices();
+			await fetchServices(); // Recargar la lista
 			setShowEditForm(false);
 			setSelectedService(null);
 			toast.success("Servicio actualizado exitosamente");
+			onActionComplete?.(); // Notificar que la acción se completó
 		} catch (error) {
 			setError("Error al actualizar el servicio: " + error.message);
 			toast.error("Error al actualizar el servicio: " + error.message);
+		}
+	};
+
+	const handleDeleteService = async (id) => {
+		try {
+			await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+			await fetchServices(); // Recargar la lista
+			toast.success("Servicio eliminado exitosamente");
+			onActionComplete?.(); // Notificar que la acción se completó
+		} catch (error) {
+			setError("Error al eliminar el servicio: " + error.message);
 		}
 	};
 

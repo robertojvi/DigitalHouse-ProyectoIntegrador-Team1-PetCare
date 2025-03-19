@@ -1,6 +1,6 @@
 // React
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiDesktop, CiLogout, CiUser } from "react-icons/ci";
 
 // Components
@@ -21,6 +21,7 @@ const Header = () => {
 	const [isLogin, setIsLogin] = useState(true);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const { auth, logout } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -37,6 +38,12 @@ const Header = () => {
 
 	const closeModal = () => {
 		setIsLoginModalOpen(false);
+	};
+
+	const handleAdminPanel = () => {
+		localStorage.removeItem("adminSelectedMenu");
+		navigate("/administracion");
+		setShowDropdown(false);
 	};
 
 	return (
@@ -85,15 +92,17 @@ const Header = () => {
 														<CiUser /> Ver perfil
 													</Link>
 													{auth.role === "ADMIN" && (
-														<Link
-															to="/administracion"
+														<button 
+															onClick={handleAdminPanel}
 															className="dropdown-item"
 														>
 															<CiDesktop /> Panel administración
-														</Link>
+														</button>
 													)}
-
-													<button onClick={logout} className="dropdown-item">
+													<button 
+														onClick={logout} 
+														className="dropdown-item"
+													>
 														<CiLogout /> Cerrar Sesión
 													</button>
 												</div>
