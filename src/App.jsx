@@ -7,17 +7,17 @@ import AdminHome from "./pages/admin/AdminHome";
 import ServiceDetail from "./pages/services/ServiceDetail";
 import ServiceImagesGallery from "./pages/services/ServiceImagesGallery";
 import { Categories } from "./pages/Categories";
+import UserProfile from "./pages/profile/UserProfile";
+import { AdminProfile } from "./pages/admin/AdminProfile";
 
 // Components
-import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 import Layout from "./layouts/Layout";
+import ProtectedRoute from "./auth/ProtectedRoute"; // Updated import path
 
 // Styles
 import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
-
-// Images
 
 function App() {
 	return (
@@ -34,6 +34,7 @@ function App() {
 					{/* y el botón "Ver más" me lleva a la galería de imágenes de ese servicio */}
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
+					<Route path="/mi-perfil" element={<UserProfile />} />
 
 					{/* Rutas del administrador */}
 					<Route
@@ -49,9 +50,7 @@ function App() {
 					<Route
 						path="*"
 						element={
-							<h1 className="mainContainer">
-								Page not found - Error 404
-							</h1>
+							<h1 className="mainContainer">Page not found - Error 404</h1>
 						}
 					/>
 				</Route>

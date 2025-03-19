@@ -1,27 +1,24 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import "../styles/protectedRoutes/protectedRoutes.css";
 
-function ProtectedRoute({ children, requiredRole }) {
-const { auth } = useContext(AuthContext);
+const ProtectedRoute = ({ children, requiredRole }) => {
+	const { auth } = useContext(AuthContext);
+	const location = useLocation();
 
-  if (!auth.role) {
-    return <Navigate to="/" replace />; 
-  }
+	// If not authenticated, redirect to homepage
+	if (!auth || !auth.token) {
+		return <Navigate to="/" state={{ from: location }} replace />;
+	}
 
-  if (requiredRole && auth.role !== requiredRole) {
-    return( 
-            <>
-            <div className="no-auth-msj">
-                <h2>No tienes permiso para acceder a esta página.</h2>                
-            </div>
-                
-            </>
-        ); 
-  }
+	// If role is required and user doesn't have it, redirect to homepage
+	if (requiredRole && auth.role !== requiredRole) {
+		return <Navigate to="/" state={{ from: location }} replace />;
+	}
 
-  return children;
-}
+	// If authenticated and has required role (if any), render the children
+	return children;
+};
 
 export default ProtectedRoute;
