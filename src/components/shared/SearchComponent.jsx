@@ -11,6 +11,7 @@ import { SearchInputsContainer } from "./styled-components/SearchComponent.style
 import DateTimeButton from "./DateTimeButton";
 import SelectService from "./SelectService";
 import ButtonSearch from "./ButtonSearch";
+import SearchBarComponent from "./SearchBarComponent";
 
 export const SearchComponent = () => {
 	const [showPicker, setShowPicker] = useState(false);
@@ -20,7 +21,7 @@ export const SearchComponent = () => {
 	return (
 		<SearchInputsContainer>
 			<div className="search-component-ss">
-				<SelectService />
+				<SearchBarComponent/> {/**COMPONENTE DE BÚSQUEDA */}
 				<DateTimeButton onClick={() => setShowPicker(!showPicker)} />
 				{showPicker && (
 					<DatePicker
@@ -33,7 +34,7 @@ export const SearchComponent = () => {
 						withPortal
 					/>
 				)}
-
+				<SelectService />
 				<ButtonSearch />
 			</div>
 		</SearchInputsContainer>

@@ -59,9 +59,9 @@ const Option = styled.div`
 
 const SelectService = () => {
   const [showOptions, setShowOptions] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Servicio");
+  const [selectedOption, setSelectedOption] = useState("Número de mascotas");
 
-  const options = ["Baño", "Corte", "Vacunación", "Consulta"];
+  const options = ["1", "2", "3", "4"];
 
   const handleSelect = (option) => {
     setSelectedOption(option);
