@@ -93,11 +93,11 @@ const AdminLayout = ({ children, onMenuClick, selectedMenu }) => {
 			{shouldShowWarning && (
 				<div
 					style={{
-						position: "fixed",
-						top: "var(--header-height)", // Dejamos espacio para el header
-						left: 0,
-						right: 0,
-						bottom: "var(--footer-height)", // Dejamos espacio para el footer
+						//position: "fixed",
+						//top: "var(--header-height)", // Dejamos espacio para el header
+						//left: 0,
+						//right: 0,
+						//bottom: "var(--footer-height)", // Dejamos espacio para el footer
 						backgroundColor: "#ffffff",
 						zIndex: 9999,
 						display: "flex",
