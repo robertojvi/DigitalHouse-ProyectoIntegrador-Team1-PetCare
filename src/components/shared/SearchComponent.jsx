@@ -7,6 +7,7 @@ import DateTimeButton from "./DateTimeButton";
 import SelectService from "./SelectService";
 import ButtonSearch from "./ButtonSearch";
 import SearchBarComponent from "./SearchBarComponent";
+import { getAppUrl } from "../../services/getAppUrl";
 
 export const SearchComponent = ({ onSearch }) => {
   const [showPicker, setShowPicker] = useState(false);
@@ -14,7 +15,7 @@ export const SearchComponent = ({ onSearch }) => {
   const [startDate, endDate] = dateRange;
   const [searchTerm, setSearchTerm] = useState(""); 
   const [selectedService, setSelectedService] = useState("");
-
+  
   // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
     if (!date) return "";
@@ -29,7 +30,7 @@ export const SearchComponent = ({ onSearch }) => {
     if (endDate) queryParams.append("endDate", formatDate(endDate));
     if (selectedService) queryParams.append("petsQty", selectedService);
 
-    const url = `http://localhost:8080/api/servicios/filters?${queryParams.toString()}`;
+    const url = `${getAppUrl}/api/servicios/filters?${queryParams.toString()}`;
     console.log("URL generada:", url); 
 
     try {
