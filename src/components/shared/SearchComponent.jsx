@@ -18,7 +18,7 @@ export const SearchComponent = ({ onSearch }) => {
   // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
     if (!date) return "";
-    return date.toISOString().split("T")[0]; // Obtiene solo la parte de la fecha
+    return date.toISOString().split("T")[0];
   };
 
   const handleSearch = async () => {
@@ -27,9 +27,10 @@ export const SearchComponent = ({ onSearch }) => {
     if (searchTerm) queryParams.append("name", searchTerm);
     if (startDate) queryParams.append("startDate", formatDate(startDate));
     if (endDate) queryParams.append("endDate", formatDate(endDate));
+    if (selectedService) queryParams.append("petsQty", selectedService);
 
     const url = `http://localhost:8080/api/servicios/filters?${queryParams.toString()}`;
-    console.log("URL generada:", url); // 🔍 Verificar URL generada
+    console.log("URL generada:", url); 
 
     try {
       const response = await fetch(url);
@@ -46,7 +47,7 @@ export const SearchComponent = ({ onSearch }) => {
       <div className="search-component-ss">
         <SearchBarComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <DateTimeButton dateRange={dateRange} setDateRange={setDateRange} />
-        <SelectService value={selectedService} onChange={(e) => setSelectedService(e.target.value)} />
+        <SelectService selectedService={selectedService} setSelectedService={setSelectedService} />
         <ButtonSearch onClick={handleSearch} />
       </div>
     </SearchInputsContainer>
