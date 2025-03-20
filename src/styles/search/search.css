@@ -1,0 +1,212 @@
+/* Contenedor principal de búsqueda */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  padding: 0 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Estilos compartidos para todos los componentes */
+.search-input,
+.calendar-button,
+.select-button,
+.search-button {
+  height: 48px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  width: 280px;
+  background-color: #f4b55a;
+  color: #2d2d2d;
+}
+
+/* Input de búsqueda */
+.search-input {
+  display: flex;
+  align-items: center;
+}
+
+.search-input::placeholder {
+  color: #2d2d2d;
+}
+
+/* Botón de calendario */
+.calendar-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 16px;
+  line-height: 48px;
+  width: 100%;
+}
+
+/* Botón de selección */
+.select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* Botón de búsqueda */
+.search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #314549;
+  color: white;
+  cursor: pointer;
+}
+
+/* Estilos hover */
+.search-input:hover,
+.calendar-button:hover,
+.select-button:hover {
+  background-color: #e0a54e;
+}
+
+.search-button:hover {
+  background-color: #253538;
+}
+
+/* Mantener el resto de los estilos para los contenedores de calendario y opciones */
+
+/* Estilos del contenedor del calendario */
+.calendar-wrapper {
+  position: relative;
+  width: 280px;
+}
+
+/* Estilos para el rango de fechas */
+.date-range-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+  padding: 6px 0;
+}
+
+.date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
+}
+
+.date-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #314549;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 14px;
+}
+
+.date-value {
+  font-size: 14px;
+  color: #2d2d2d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 16px;
+  margin-top: 2px;
+}
+
+.options-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+  z-index: 1000;
+}
+
+.option {
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f4b55a;
+  color: white;
+}
+
+/* Contenedor del calendario */
+.calendar-container {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  /* Contenedor principal */
+  .sc-FEMpB {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .search-component-ss {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* Mantener solo el componente de búsqueda */
+  .search-component-ss > *:not(.sc-kfeOyU) {
+    display: none !important;
+  }
+
+  /* Contenedor del input y el icono */
+  .sc-kfeOyU {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Estilo del input */
+  .sc-hRDKVd {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    padding-right: 40px !important; /* Espacio para el icono */
+  }
+
+  /* Estilo del icono de la lupa */
+  .sc-jBIHhB {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #2d2d2d;
+  }
+}

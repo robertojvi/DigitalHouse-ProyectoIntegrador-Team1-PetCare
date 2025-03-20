@@ -1,42 +1,66 @@
-import React from "react";
-import styled from "styled-components";
-import { FaCalendarAlt } from "react-icons/fa";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import "react-calendar/dist/Calendar.css";
+import "../../styles/calendarReservas/calendarReservas.css";
+import "../../styles/search/search.css";
 
-// Estilos para el botón
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: #f4b55a;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 16px;
-  font-size: 16px;
-  color: #2d2d2d;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.3s ease;
+const DateTimeButton = () => {
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [dateRange, setDateRange] = useState(null);
 
-  &:hover {
-    background-color: #e0a54e;
-  }
+  const handleCalendarClick = () => {
+    setShowCalendar(!showCalendar);
+  };
 
-  @media (max-width: 767px){
-    display: none;
-  }
-`;
+  const handleDateChange = (value) => {
+    setDateRange(value);
+    setShowCalendar(false);
+  };
 
-// Estilos para el icono
-const Icon = styled(FaCalendarAlt)`
-  font-size: 20px;
-`;
+  const formatDate = (date) => {
+    return date.toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    });
+  };
 
-const DateTimeButton = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
-      <Icon />
-      ¿Cuándo quieres agendar?
-    </Button>
+    <div className="calendar-wrapper">
+      <button className="calendar-button" onClick={handleCalendarClick}>
+        {!dateRange ? (
+          <>
+            <FaRegCalendarAlt />
+            ¿Cuándo quieres agendar?
+          </>
+        ) : (
+          <div className="date-range-container">
+            <div className="date-block">
+              <div className="date-label">Fecha inicial</div>
+              <div className="date-value">{formatDate(dateRange[0])}</div>
+            </div>
+            <div className="date-block">
+              <div className="date-label">Fecha final</div>
+              <div className="date-value">{formatDate(dateRange[1])}</div>
+            </div>
+          </div>
+        )}
+      </button>
+
+      {showCalendar && (
+        <div className="calendar-container">
+          <Calendar
+            onChange={handleDateChange}
+            value={dateRange}
+            selectRange={true}
+            minDate={new Date()}
+            className="custom-calendar"
+            locale="es-ES"
+          />
+        </div>
+      )}
+    </div>
   );
 };
 
