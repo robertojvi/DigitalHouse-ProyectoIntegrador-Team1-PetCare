@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { getAppUrl } from '../../services/getAppUrl';
 
-// Contenedor de la barra de búsqueda
 const SearchContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: #f4b55a;
   border-radius: 20px;
@@ -14,13 +15,19 @@ const SearchContainer = styled.div`
   font-weight: 500;
   width: 250px;
   transition: background 0.3s ease;
+  position: relative;
 
   &:hover {
     background-color: #e0a54e;
   }
 `;
 
-// Input de búsqueda
+const SearchInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
 const SearchInput = styled.input`
   flex: 1;
   border: none;
@@ -35,31 +42,83 @@ const SearchInput = styled.input`
   }
 `;
 
-// Icono de búsqueda
 const IconRight = styled(FaSearch)`
   font-size: 18px;
   color: #2d2d2d;
 `;
 
+const SuggestionsList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: white;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 150px;
+  overflow-y: auto;
+`;
+
+const SuggestionItem = styled.li`
+  padding: 8px;
+  cursor: pointer;
+  color: #2d2d2d;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
 const SearchBarComponent = () => {
   const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
 
-  const handleSearch = (event) => {
-    setSearchText(event.target.value);
-  };
+  useEffect(() => {
+    if (searchText.length > 1) {
+      fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchText}`)
+        .then(response => response.json())
+        .then(data => {
+          setSuggestions(data);
+          setShowSuggestions(true);
+        })
+        .catch(error => console.error("Error fetching suggestions:", error));
+    } else {
+      setShowSuggestions(false);
+    }
+  }, [searchText]);
 
   return (
     <SearchContainer>
-      <SearchInput 
-        type="text" 
-        placeholder="Buscar..." 
-        value={searchText} 
-        onChange={handleSearch}
-      />
-      <IconRight />
+      <SearchInputWrapper>
+        <SearchInput 
+          type="text" 
+          placeholder="Buscar..." 
+          value={searchText} 
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <IconRight />
+      </SearchInputWrapper>
+      {showSuggestions && (
+        <SuggestionsList>
+          {suggestions.length > 0 ? (
+            suggestions.map((suggestion, index) => (
+              <SuggestionItem key={index} onClick={() => setSearchText(suggestion)}>
+                {suggestion}
+              </SuggestionItem>
+            ))
+          ) : (
+            <SuggestionItem>No hay sugerencias</SuggestionItem>
+          )}
+        </SuggestionsList>
+      )}
     </SearchContainer>
   );
 };
 
 export default SearchBarComponent;
-
