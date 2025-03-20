@@ -29,23 +29,18 @@ const DateTimeButton = () => {
   return (
     <div className="calendar-wrapper">
       <button className="calendar-button" onClick={handleCalendarClick}>
-        {!dateRange ? (
-          <>
-            <FaRegCalendarAlt />
-            ¿Cuándo quieres agendar?
-          </>
-        ) : (
-          <div className="date-range-container">
-            <div className="date-block">
-              <div className="date-label">Fecha inicial</div>
-              <div className="date-value">{formatDate(dateRange[0])}</div>
-            </div>
-            <div className="date-block">
-              <div className="date-label">Fecha final</div>
-              <div className="date-value">{formatDate(dateRange[1])}</div>
-            </div>
+        <FaRegCalendarAlt />
+        ¿Cuándo quieres agendar?
+        {/*<div className="date-range-container">
+          <div className="date-block">
+            <div className="date-label">Fecha inicial</div>
+            <div className="date-value">{formatDate(dateRange[0])}</div>
           </div>
-        )}
+          <div className="date-block">
+            <div className="date-label">Fecha final</div>
+            <div className="date-value">{formatDate(dateRange[1])}</div>
+          </div>
+        </div> */}
       </button>
 
       {showCalendar && (
