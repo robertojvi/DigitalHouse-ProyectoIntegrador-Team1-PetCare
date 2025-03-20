@@ -5,9 +5,8 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendarReservas/calendarReservas.css";
 import "../../styles/search/search.css";
 
-const DateTimeButton = () => {
+const DateTimeButton = ({ dateRange, setDateRange }) => {
   const [showCalendar, setShowCalendar] = useState(false);
-  const [dateRange, setDateRange] = useState(null);
 
   const handleCalendarClick = () => {
     setShowCalendar(!showCalendar);
@@ -18,18 +17,15 @@ const DateTimeButton = () => {
     setShowCalendar(false);
   };
 
+  // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
-    return date.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-    });
+    return date ? date.toISOString().split("T")[0] : "No seleccionada";
   };
 
   return (
     <div className="calendar-wrapper">
       <button className="calendar-button" onClick={handleCalendarClick}>
-        {!dateRange ? (
+        {!dateRange || !dateRange[0] ? (
           <>
             <FaRegCalendarAlt />
             ¿Cuándo quieres agendar?
@@ -65,3 +61,4 @@ const DateTimeButton = () => {
 };
 
 export default DateTimeButton;
+

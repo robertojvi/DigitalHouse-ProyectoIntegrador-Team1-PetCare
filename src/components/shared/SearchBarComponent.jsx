@@ -73,15 +73,13 @@ const SuggestionItem = styled.li`
   }
 `;
 
-const SearchBarComponent = () => {
-  const [searchText, setSearchText] = useState("");
+const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
 
   useEffect(() => {
-    if (searchText.length > 1) {
-      fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchText}`)
+    if (searchTerm.length > 1) {
+      fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchTerm}`)
         .then(response => response.json())
         .then(data => {
           setSuggestions(data);
@@ -91,7 +89,7 @@ const SearchBarComponent = () => {
     } else {
       setShowSuggestions(false);
     }
-  }, [searchText]);
+  }, [searchTerm]);
 
   return (
     <SearchContainer>
@@ -99,8 +97,8 @@ const SearchBarComponent = () => {
         <SearchInput 
           type="text" 
           placeholder="Buscar..." 
-          value={searchText} 
-          onChange={(e) => setSearchText(e.target.value)}
+          value={searchTerm} 
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <IconRight />
       </SearchInputWrapper>
@@ -108,7 +106,7 @@ const SearchBarComponent = () => {
         <SuggestionsList>
           {suggestions.length > 0 ? (
             suggestions.map((suggestion, index) => (
-              <SuggestionItem key={index} onClick={() => setSearchText(suggestion)}>
+              <SuggestionItem key={index} onClick={() => setSearchTerm(suggestion)}>
                 {suggestion}
               </SuggestionItem>
             ))
