@@ -57,21 +57,20 @@ const Option = styled.div`
   }
 `;
 
-const SelectService = () => {
+const SelectService = ({ selectedService, setSelectedService }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Número de mascotas");
 
   const options = ["1", "2", "3", "4"];
 
   const handleSelect = (option) => {
-    setSelectedOption(option);
+    setSelectedService(option); // ✅ Actualiza `selectedService` en `SearchComponent`
     setShowOptions(false);
   };
 
   return (
     <SelectContainer onClick={() => setShowOptions(!showOptions)}>
       <IconLeft />
-      {selectedOption}
+      {selectedService || "Número de mascotas"}
       <IconRight />
       <OptionsContainer $isVisible={showOptions}>
         {options.map((option, index) => (

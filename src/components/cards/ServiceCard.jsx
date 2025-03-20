@@ -20,12 +20,11 @@ export const ServiceCard = ({
   excerpt,
   onImageClick,
 }) => {
-  console.log(image?.imagenUrl);
+  // console.log(image?.imagenUrl);
   return (
     <CardContainer>
       <ImageContainer onClick={() => onImageClick()}>
         <Image
-          src={image?.imagenUrl || "https://via.placeholder.com/150"}
           alt={name}
         />
       </ImageContainer>

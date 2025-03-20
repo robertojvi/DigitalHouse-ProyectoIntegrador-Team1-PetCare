@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { getAppUrl } from '../../services/getAppUrl';
 
-// Contenedor de la barra de búsqueda
 const SearchContainer = styled.div`
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: #f4b55a;
   border-radius: 20px;
@@ -15,18 +15,19 @@ const SearchContainer = styled.div`
   font-weight: 500;
   width: 250px;
   transition: background 0.3s ease;
+  position: relative;
 
   &:hover {
     background-color: #e0a54e;
   }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    min-width: 100%;
-  }
 `;
 
-// Input de búsqueda
+const SearchInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
 const SearchInput = styled.input`
   flex: 1;
   border: none;
@@ -35,121 +36,84 @@ const SearchInput = styled.input`
   font-size: 16px;
   color: #2d2d2d;
   padding: 5px;
-  padding-right: 40px; /* Espacio para el icono */
 
   &::placeholder {
     color: #2d2d2d;
   }
 `;
 
-// Icono de búsqueda
 const IconRight = styled(FaSearch)`
   font-size: 18px;
   color: #2d2d2d;
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
 `;
 
-// Contenedor de sugerencias
-const SuggestionsContainer = styled.div`
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
+const SuggestionsList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  max-height: 200px;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 150px;
   overflow-y: auto;
-  z-index: 9999;
 `;
 
-const SuggestionItem = styled.div`
-  padding: 12px 16px;
+const SuggestionItem = styled.li`
+  padding: 8px;
   cursor: pointer;
   color: #2d2d2d;
-  font-size: 14px;
-  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #f4b55a;
-    color: white;
+    background-color: #f0f0f0;
   }
 `;
 
-const SearchBarComponent = () => {
-  const [searchText, setSearchText] = useState("");
+const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const searchRef = useRef(null);
-
-  // Lista de ejemplo - Esto debería venir de tu API
-  const serviceSuggestions = [
-    "Paseo de perros",
-    "Peluquería canina",
-    "Cuidado de gatos",
-    "Pensión para mascotas",
-    "Adiestramiento canino",
-    "Veterinaria a domicilio",
-    "Cuidado de aves",
-    "Baño y limpieza",
-  ];
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSearch = (event) => {
-    const value = event.target.value;
-    setSearchText(value);
-
-    if (value.trim()) {
-      const filtered = serviceSuggestions.filter((suggestion) =>
-        suggestion.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filtered);
-      setShowSuggestions(true);
+    if (searchTerm.length > 1) {
+      fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchTerm}`)
+        .then(response => response.json())
+        .then(data => {
+          setSuggestions(data);
+          setShowSuggestions(true);
+        })
+        .catch(error => console.error("Error fetching suggestions:", error));
     } else {
-      setSuggestions([]);
       setShowSuggestions(false);
     }
-  };
-
-  const handleSuggestionClick = (suggestion) => {
-    setSearchText(suggestion);
-    setShowSuggestions(false);
-  };
+  }, [searchTerm]);
 
   return (
-    <SearchContainer ref={searchRef}>
-      <SearchInput
-        type="text"
-        placeholder="Buscar..."
-        value={searchText}
-        onChange={handleSearch}
-        onFocus={() => searchText && setShowSuggestions(true)}
-      />
-      <IconRight />
-      {showSuggestions && suggestions.length > 0 && (
-        <SuggestionsContainer>
-          {suggestions.map((suggestion, index) => (
-            <SuggestionItem
-              key={index}
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              {suggestion}
-            </SuggestionItem>
-          ))}
-        </SuggestionsContainer>
+    <SearchContainer>
+      <SearchInputWrapper>
+        <SearchInput 
+          type="text" 
+          placeholder="Buscar..." 
+          value={searchTerm} 
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <IconRight />
+      </SearchInputWrapper>
+      {showSuggestions && (
+        <SuggestionsList>
+          {suggestions.length > 0 ? (
+            suggestions.map((suggestion, index) => (
+              <SuggestionItem key={index} onClick={() => setSearchTerm(suggestion)}>
+                {suggestion}
+              </SuggestionItem>
+            ))
+          ) : (
+            <SuggestionItem>No hay sugerencias</SuggestionItem>
+          )}
+        </SuggestionsList>
       )}
     </SearchContainer>
   );

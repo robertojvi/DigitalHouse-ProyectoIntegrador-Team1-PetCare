@@ -5,9 +5,8 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendarReservas/calendarReservas.css";
 import "../../styles/search/search.css";
 
-const DateTimeButton = () => {
+const DateTimeButton = ({ dateRange, setDateRange }) => {
   const [showCalendar, setShowCalendar] = useState(false);
-  const [dateRange, setDateRange] = useState(null);
 
   const handleCalendarClick = () => {
     setShowCalendar(!showCalendar);
@@ -18,29 +17,31 @@ const DateTimeButton = () => {
     setShowCalendar(false);
   };
 
+  // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
-    return date.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-    });
+    return date ? date.toISOString().split("T")[0] : "No seleccionada";
   };
 
   return (
     <div className="calendar-wrapper">
       <button className="calendar-button" onClick={handleCalendarClick}>
-        <FaRegCalendarAlt />
-        ¿Cuándo quieres agendar?
-        {/*<div className="date-range-container">
-          <div className="date-block">
-            <div className="date-label">Fecha inicial</div>
-            <div className="date-value">{formatDate(dateRange[0])}</div>
+        {!dateRange || !dateRange[0] ? (
+          <>
+            <FaRegCalendarAlt />
+            ¿Cuándo quieres agendar?
+          </>
+        ) : (
+          <div className="date-range-container">
+            <div className="date-block">
+              <div className="date-label">Fecha inicial</div>
+              <div className="date-value">{formatDate(dateRange[0])}</div>
+            </div>
+            <div className="date-block">
+              <div className="date-label">Fecha final</div>
+              <div className="date-value">{formatDate(dateRange[1])}</div>
+            </div>
           </div>
-          <div className="date-block">
-            <div className="date-label">Fecha final</div>
-            <div className="date-value">{formatDate(dateRange[1])}</div>
-          </div>
-        </div> */}
+        )}
       </button>
 
       {showCalendar && (
@@ -60,3 +61,4 @@ const DateTimeButton = () => {
 };
 
 export default DateTimeButton;
+

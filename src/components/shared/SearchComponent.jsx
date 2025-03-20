@@ -1,78 +1,55 @@
-// React
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-
-// Styles
 import "../../styles/searchBox.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { SearchInputsContainer } from "./styled-components/SearchComponent.styles";
-import styled from "styled-components";
-
-// Components
 import DateTimeButton from "./DateTimeButton";
 import SelectService from "./SelectService";
 import ButtonSearch from "./ButtonSearch";
 import SearchBarComponent from "./SearchBarComponent";
 
-const SearchWrapper = styled(SearchInputsContainer)`
-  width: 100%;
-  display: flex;
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    padding: 0 16px;
-    margin-bottom: 20px;
-  }
-`;
-
-const ComponentsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  margin: 20px 0;
-
-  @media (max-width: 768px) {
-    margin: 0;
-
-    & > :nth-child(2),
-    & > :nth-child(3),
-    & > :nth-child(4),
-    & > :nth-child(5) {
-      display: none !important;
-    }
-
-    & > :first-child {
-      width: 100% !important;
-      display: block !important;
-    }
-  }
-`;
-
-export const SearchComponent = () => {
+export const SearchComponent = ({ onSearch }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const [searchTerm, setSearchTerm] = useState(""); 
+  const [selectedService, setSelectedService] = useState("");
+
+  // Función para formatear fecha en YYYY-MM-DD
+  const formatDate = (date) => {
+    if (!date) return "";
+    return date.toISOString().split("T")[0];
+  };
+
+  const handleSearch = async () => {
+    const queryParams = new URLSearchParams();
+
+    if (searchTerm) queryParams.append("name", searchTerm);
+    if (startDate) queryParams.append("startDate", formatDate(startDate));
+    if (endDate) queryParams.append("endDate", formatDate(endDate));
+    if (selectedService) queryParams.append("petsQty", selectedService);
+
+    const url = `http://localhost:8080/api/servicios/filters?${queryParams.toString()}`;
+    console.log("URL generada:", url); 
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("DATAAA: ", data);
+      onSearch(data);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
 
   return (
-    <SearchWrapper>
-      <ComponentsContainer className="search-component-ss">
-        <SearchBarComponent />
-        <DateTimeButton onClick={() => setShowPicker(!showPicker)} />
-        {showPicker && (
-          <DatePicker
-            selectsRange={true}
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(update) => {
-              setDateRange(update);
-            }}
-            withPortal
-          />
-        )}
-        <SelectService />
-        <ButtonSearch />
-      </ComponentsContainer>
-    </SearchWrapper>
+    <SearchInputsContainer>
+      <div className="search-component-ss">
+        <SearchBarComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <DateTimeButton dateRange={dateRange} setDateRange={setDateRange} />
+        <SelectService selectedService={selectedService} setSelectedService={setSelectedService} />
+        <ButtonSearch onClick={handleSearch} />
+      </div>
+    </SearchInputsContainer>
   );
 };
