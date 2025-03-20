@@ -104,29 +104,39 @@ function CalendarReservasServicio({ reservedDates, setCuidadoInicial, setCuidado
    const tileClassName = ({ date, view }) => {
     if (view === "month") {
       const formattedDate = date.toISOString().split("T")[0];
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const classes = [];
 
-      // Fechas reservadas (opcional)
+      // Fechas pasadas
+      if (date < today) {
+        classes.push('past-date');
+      }
+
+      // Día actual
+      if (date.toDateString() === today.toDateString()) {
+        classes.push('current-date');
+      }
+
+      // Fechas reservadas
       if (reservedDates.includes(formattedDate)) {
-         // Estilo para fechas reservadas
-        return "highlight";
+        classes.push("highlight");
       }
 
-      // Fechas seleccionadas dentro del rango
+      // Fechas seleccionadas
       if (startDate && endDate && date >= startDate && date <= endDate) {
-        // Estilo para el rango
-        return "selected-range"; 
+        classes.push("selected-range");
       }
 
-      // Fecha inicial seleccionada
       if (startDate && date.getTime() === startDate.getTime()) {
-        // Estilo para el rango
-        return "start-date"; 
+        classes.push("start-date");
       }
 
-      // Fecha final seleccionada
       if (endDate && date.getTime() === endDate.getTime()) {
-        return "end-date"; 
+        classes.push("end-date");
       }
+
+      return classes.join(' ');
     }
     return null;
   };
@@ -167,20 +177,36 @@ function CalendarReservasServicio({ reservedDates, setCuidadoInicial, setCuidado
             pointer-events: none;
           }
           .selected-range {
-            background-color: rgba(98, 168, 243, 0.5); /* Fondo azul claro */
+            background-color: rgba(98, 168, 243, 0.5);
             color: white;
             border-radius: 10px;
-            text-decoration: line-through;
           }
           .start-date {
-            background-color: #007bff; /* Fondo azul */
+            background-color: #007bff;
             color: white;
             border-radius: 10px;
           }
           .end-date {
-            background-color: #28a745; /* Fondo verde */
+            background-color: #28a745;
             color: white;
             border-radius: 50%;
+          }
+          .past-date {
+            position: relative;
+            color: #999;
+          }
+          .past-date::after {
+            content: '';
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            top: 50%;
+            border-top: 2px solid #ff0000;
+          }
+          .current-date {
+            font-weight: 900 !important;
+            color: #314549 !important;
+            background-color: #f4b55a !important;
           }
         `}
       </style>
