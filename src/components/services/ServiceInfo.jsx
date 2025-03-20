@@ -184,7 +184,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 				<div className="reviewContainer">
 					<div className="reviewStartContainer">
 						<p>Calificación y reseña del servicio</p>
-						<StarsComponent rating={rating} />
+						<StarsComponent rating={rating} key={name} />
 						<div className="textReview">
 							<p> cantidad </p><p>de reseñas</p>
 						</div>
