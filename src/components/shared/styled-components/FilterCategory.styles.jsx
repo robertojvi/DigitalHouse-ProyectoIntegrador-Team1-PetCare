@@ -15,3 +15,9 @@ export const FilterCategoryContainer = styled.div`
   padding: 0px 20px;
   }
 `;
+
+export const FilterCategoryLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;

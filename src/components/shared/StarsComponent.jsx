@@ -5,7 +5,7 @@ export const StarsComponent = ({rating}) => {
   return (
     <div style={{ display: 'flex', gap: '0px' }}>
         {Array.from({ length: rating }, (_, index) => (
-        <img key={index} src={Star} alt="Star" height={40} />
+        <img key={index} src={Star} alt="Star" height={30} />
       ))}
     </div>
   )
