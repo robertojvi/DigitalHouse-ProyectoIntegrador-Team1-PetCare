@@ -32,7 +32,7 @@ export const ServiceCard = ({
         <h3 className="serviceType">{serviceType?.name}</h3>
         <NameContainer>
           <p>{name}</p>
-          <StarsComponent rating={rating} />
+          <StarsComponent rating={rating} key={name} />
         </NameContainer>
         <ExcerptContainer>
           <p>{excerpt}</p>

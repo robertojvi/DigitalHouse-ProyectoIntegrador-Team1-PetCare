@@ -13,7 +13,7 @@ export const obtenerCategoria = async ({ id }) => {
 
         // Simple direct request without extra configuration
         const response = await axios.get(
-            `API_URL/${id}`,
+            `${API_URL}/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
