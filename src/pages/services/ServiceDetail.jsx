@@ -50,7 +50,7 @@ const ServiceDetail = ({ selectedService, onGoBack }) => {
 					description: service.descripcion,
 					service: service.categoria.name,
 					city: service.ciudad,
-					yearsExperience: service.yearsExperience || 0,
+					caracteristicas: service.caracteristicas,
 					rating: service.rating,
 					reviews: service.reviews || 0,
 					id_servicio: service.idServicio

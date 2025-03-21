@@ -43,7 +43,7 @@ const ServiceDetailImagesGrid = ({ images, onGoBack }) => {
 			<div className="images-grid-container">
 				{/* Main image */}
 				<div className="main-image">
-					<img src={images[0]} alt="Main service view" />
+					<img src={images[0].imagenUrl} alt="Main service view" />
 				</div>
 
 				{/* Grid of 4 smaller images */}

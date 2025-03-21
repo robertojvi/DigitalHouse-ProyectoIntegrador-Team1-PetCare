@@ -31,7 +31,7 @@ export const RecommendedServices = () => {
 						description: selectedService.descripcion,
 						service: selectedService.categoria.name,
 						city: selectedService.ciudad,
-						yearsExperience: selectedService.yearsExperience || 0,
+						caracteristicas: selectedService.caracteristicas,
 						rating: selectedService.rating,
 						reviews: selectedService.reviews || 0,
 					}}
