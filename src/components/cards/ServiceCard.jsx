@@ -25,6 +25,7 @@ export const ServiceCard = ({
     <CardContainer>
       <ImageContainer onClick={() => onImageClick()}>
         <Image
+          src={image}
           alt={name}
         />
       </ImageContainer>
