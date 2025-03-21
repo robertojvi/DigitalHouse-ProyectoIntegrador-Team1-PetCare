@@ -7,6 +7,7 @@ const SearchSuggestions = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const searchRef = useRef(null);
 
   // Lista de ejemplo - Esto debería venir de tu API
@@ -20,6 +21,16 @@ const SearchSuggestions = () => {
     "Cuidado de aves",
     "Baño y limpieza",
   ];
+
+  // Detectar cambios en el tamaño de la ventana
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -60,6 +71,7 @@ const SearchSuggestions = () => {
   return (
     <div className="search-container">
       <div className="search-component-ss">
+        {/* Input de búsqueda siempre visible */}
         <div
           className="sc-kfeOyU hgkRwz"
           ref={searchRef}
@@ -86,36 +98,12 @@ const SearchSuggestions = () => {
             <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
           </svg>
           {showSuggestions && suggestions.length > 0 && (
-            <div
-              style={{
-                position: "absolute",
-                top: "100%",
-                left: 0,
-                right: 0,
-                background: "white",
-                borderRadius: "8px",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
-                maxHeight: "200px",
-                overflowY: "auto",
-                zIndex: 9999,
-                marginTop: "8px",
-              }}
-            >
+            <div className="suggestions-container">
               {suggestions.map((suggestion, index) => (
                 <div
                   key={index}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  style={{
-                    padding: "12px 16px",
-                    cursor: "pointer",
-                    color: "#2d2d2d",
-                    fontSize: "14px",
-                    transition: "all 0.2s ease",
-                    ":hover": {
-                      backgroundColor: "#f4b55a",
-                      color: "white",
-                    },
-                  }}
+                  className="suggestion-item"
                 >
                   {suggestion}
                 </div>
@@ -124,9 +112,15 @@ const SearchSuggestions = () => {
           )}
         </div>
       </div>
-      <DateTimeButton />
-      <SelectService />
-      <button className="search-button">Buscar</button>
+
+      {/* Otros componentes solo visibles en desktop */}
+      {!isMobile && (
+        <>
+          <DateTimeButton />
+          <SelectService />
+          <button className="search-button">Buscar</button>
+        </>
+      )}
     </div>
   );
 };

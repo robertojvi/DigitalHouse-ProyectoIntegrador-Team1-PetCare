@@ -210,7 +210,8 @@
 }
 
 /* Responsive */
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 300px) {
   /* Contenedor principal */
   .sc-FEMpB {
     width: 100%;
@@ -286,4 +287,63 @@
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+  .search-container {
+    padding: 0 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .search-component-ss {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Contenedor del input */
+  .sc-kfeOyU {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Input de búsqueda */
+  .sc-hRDKVd {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ocultar elementos específicos en mobile */
+  .calendar-button,
+  .select-button,
+  .search-button,
+  .sc-gnOvAp,
+  .sc-gIIpAQ,
+  .sc-VGvyN {
+    display: none !important;
+  }
+
+  /* Contenedor de sugerencias */
+  .suggestions-container {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Resetear cualquier ancho fijo */
+  .search-input-wrapper,
+  .sc-kFkjun,
+  .sc-ihGilW {
+    width: 80% !important;
+    /*max-width: 100% !important;
+    min-width: 100% !important;*/
+  }
 }

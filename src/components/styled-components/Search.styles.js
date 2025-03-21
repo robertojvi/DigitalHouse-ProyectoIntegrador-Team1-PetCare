@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SuggestionsContainer = styled.div`
   position: absolute;
@@ -25,4 +25,4 @@ export const SuggestionItem = styled.div`
     background-color: #f4b55a;
     color: white;
   }
-`; 
+`;
