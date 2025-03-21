@@ -30,7 +30,7 @@ export const ServiceCard = ({
         />
       </ImageContainer>
       <InfoContainer>
-        <h3 className="serviceType">{serviceType?.name}</h3>
+        <h3 className="serviceType">{serviceType?.nombre}</h3>
         <NameContainer>
           <p>{name}</p>
           <StarsComponent rating={rating} key={name} />
