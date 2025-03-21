@@ -30,7 +30,9 @@ export const SearchComponent = ({ onSearch }) => {
     if (endDate) queryParams.append("endDate", formatDate(endDate));
     if (selectedService) queryParams.append("petsQty", selectedService);
 
-    const url = `${getAppUrl}/api/servicios/filters?${queryParams.toString()}`;
+    const BASE_URL = import.meta.env.VITE_API_URL || "";
+
+    const url = `${BASE_URL}/api/servicios/filters?${queryParams.toString()}`;
     console.log("URL generada:", url);
 
     try {
