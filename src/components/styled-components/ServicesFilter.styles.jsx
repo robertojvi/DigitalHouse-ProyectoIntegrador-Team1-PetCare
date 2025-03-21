@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ServicesFilterContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const ServicesFilterContainer = styled.div`
   margin-bottom: 30px;
   padding: 10px 0px;
 
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     flex-flow: wrap;
   }
 `;
@@ -49,7 +49,7 @@ export const SelectContainer = styled.div`
 
     /* Flecha personalizada */
     &::after {
-      content: '▼';
+      content: "▼";
       position: absolute;
       top: 50%;
       right: 15px;
@@ -61,25 +61,34 @@ export const SelectContainer = styled.div`
   }
 `;
 
-
 export const SelectGroupContainer = styled.div`
-    display: flex;
-    gap: 20px;
-    align-items: center; 
-    width: 100%;
-    margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
 
-    & div.firstSelect{
-        width: 27%;
+  & div.firstSelect {
+    width: 27%;
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 0 10px;
+
+    & div.firstSelect {
+      width: 48%;
     }
 
-    @media (max-width: 767px){
-        flex-flow: wrap;
-
-         & div.firstSelect{
-            width: 100%;
-        }
+    & div[style*="width: 100%"] {
+      width: 48% !important;
     }
 
-   
-`
+    & select {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+`;

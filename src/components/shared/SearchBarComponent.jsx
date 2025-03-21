@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { getAppUrl } from '../../services/getAppUrl';
+import { getAppUrl } from "../../services/getAppUrl";
 
 const SearchContainer = styled.div`
   display: flex;
@@ -80,12 +80,12 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
   useEffect(() => {
     if (searchTerm.length > 1) {
       fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchTerm}`)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           setSuggestions(data);
           setShowSuggestions(true);
         })
-        .catch(error => console.error("Error fetching suggestions:", error));
+        .catch((error) => console.error("Error fetching suggestions:", error));
     } else {
       setShowSuggestions(false);
     }
@@ -94,10 +94,10 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
   return (
     <SearchContainer>
       <SearchInputWrapper>
-        <SearchInput 
-          type="text" 
-          placeholder="Buscar..." 
-          value={searchTerm} 
+        <SearchInput
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <IconRight />
@@ -106,7 +106,10 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
         <SuggestionsList>
           {suggestions.length > 0 ? (
             suggestions.map((suggestion, index) => (
-              <SuggestionItem key={index} onClick={() => setSearchTerm(suggestion)}>
+              <SuggestionItem
+                key={index}
+                onClick={() => setSearchTerm(suggestion)}
+              >
                 {suggestion}
               </SuggestionItem>
             ))
