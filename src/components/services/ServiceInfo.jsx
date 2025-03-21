@@ -22,6 +22,7 @@ import { data } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LiaPawSolid } from "react-icons/lia";
+import { MdHeight } from "react-icons/md";
 
 
 // Images
@@ -33,12 +34,14 @@ export const ServiceInfo = ({ serviceInfo }) => {
 	const { auth } = useContext(AuthContext);
 	const [isConfirmReserva, setIsConfirmReserva] = useState(false);
 	const [rangoFechas, setRangoFechas] = useState([]);
+	const [especies, setEspecies] = useState([]);
+	const [error, setError] = useState("");
 	const {
 		name,
 		description,
 		service,
 		city,
-		yearsExperience,
+		caracteristicas,
 		rating,
 		reviews,
 		id_servicio
@@ -58,8 +61,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 			fechas: rangoFechas,
 			estado: "CONFIRMADA",
 			idUsuario: auth.idUsuario,
-			idMascota: 2,
-			idEstablecimiento: 1,
+			idEspecie: 1,
 			idServicio: id_servicio,
 		};
 
@@ -100,7 +102,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 			}
 		} catch (error) {
 			const errorMessage =
-				err.response?.status === 403
+				error.response?.status === 403
 					? "No tienes permisos para crear una reserva"
 					: "Error al crear la reserva";
 			setError(errorMessage);
@@ -127,8 +129,19 @@ export const ServiceInfo = ({ serviceInfo }) => {
 		}
 	};
 
+	const fetchEspecie = async () => {
+		try {
+			const response = await axios.get(`${BASE_URL}/api/especies`);
+			console.log(response)
+			setEspecies(response.data);
+		} catch (error) {
+			console.error("Error fetching especies: ", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchReservedDates();
+		fetchEspecie();
 	}, []);
 
 
@@ -195,7 +208,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 					<p className="name">{name}</p>
 					<div>
 						<p className="details">
-							Medellin | {yearsExperience} años de experiencia
+						{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de experiencia
 						</p>
 					</div>
 
@@ -203,20 +216,16 @@ export const ServiceInfo = ({ serviceInfo }) => {
 				</div>
 
 				<div className="features">
-					<div className="featureRow">
-						<img src="/icons/calendar.png" alt="calendar" height={40} />
-						<p>Disponibilidad 24/7</p>
-					</div>
-
-					<div className="featureRow">
-						<img src="/icons/location.png" alt="location" height={40} />
-						<p>Cobertura: Bello- Medellín- Envigado- Sabaneta 24/7</p>
-					</div>
-
-					<div className="featureRow">
-						<img src="/icons/paw.png" alt="paw" height={40} />
-						<p>Confiable: Tus mascotas en manos expertas</p>
-					</div>
+					{caracteristicas.map((caracteristica) => (
+						<div className="featureRow" key={caracteristica.idCaracteristica}>
+							{caracteristica?.icon && (
+								<>
+								<img src={caracteristica.icon} alt={caracteristica?.nombre} height={40} />
+								<p>{caracteristica?.nombre} : {caracteristica?.valor}</p>
+								</>
+							)}							
+						</div>
+					))}				
 
 				</div>
 			</div>
@@ -237,7 +246,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 								<input
 									type="text"
 									id="cuidadoInicial"
-									value={cuidadoInicial} // Vincula el estado aquí
+									value={cuidadoInicial} 
 									readOnly
 								/>
 							</div>
@@ -246,7 +255,7 @@ export const ServiceInfo = ({ serviceInfo }) => {
 								<input
 									type="text"
 									id="cuidadoFinal"
-									value={cuidadoFinal} // Vincula el estado aquí
+									value={cuidadoFinal}
 									readOnly
 								/>
 							</div>
@@ -266,10 +275,11 @@ export const ServiceInfo = ({ serviceInfo }) => {
 
 						<div className="formReservaMascotasTipo formReservaGral">
 							<label htmlFor="">Tipo de mascota</label>
-							<select className="select" name="" id="">
-								<option value="">Perro</option>
-								<option value="">Gato</option>
-								<option value="">Pez</option>
+							<select className="select" name="especies">
+							{especies.map(especie => (
+								<option key={especie.idEspecie} value={especie.idEspecie}>{especie.nombreEspecie}</option>
+							))}
+
 							</select>
 						</div>
 

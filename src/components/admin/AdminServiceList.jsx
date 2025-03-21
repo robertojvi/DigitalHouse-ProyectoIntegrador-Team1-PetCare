@@ -19,7 +19,7 @@ import trashIcon from "../../images/trash-can.png";
 import { LiaPawSolid } from "react-icons/lia";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
-const API_URL = `${BASE_URL}/api/servicios`;
+const API_URL = `${BASE_URL}/api/servicios/servicio-list`;
 
 const AdminServiceList = ({ onEdit }) => {
 	const { auth } = useContext(AuthContext);
@@ -68,8 +68,8 @@ const AdminServiceList = ({ onEdit }) => {
 
 			console.log("Servicios desde la base de datos:");
 			console.log(response.data);
-			console.log(response.data.listaServicios);
-			setServices(response.data.listaServicios);
+			console.log(response.data);
+			setServices(response.data);
 			setError(null);
 		} catch (err) {
 			const errorMessage =
@@ -177,7 +177,7 @@ const AdminServiceList = ({ onEdit }) => {
 							<tr key={service.idServicio}>
 								<td>{service.idServicio}</td>
 								<td>{service.nombre}</td>
-								<td>{service.categoria?.nombre || ""}</td>
+								<td>{service.categoriaNombre || ""}</td>
 								<td>
 									<button
 										className="icon-button"

@@ -51,11 +51,13 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
         {currentItems.map((profile) => (
           <ServiceCard
             key={profile.idServicio}
+            id={profile.idServicio}
             name={profile.nombre}
             serviceType={profile.categoria}
             image={profile?.imagenUrls[0]?.imagenUrl}
             rating={profile.rating}
             excerpt={profile.descripcion}
+			      caracteristicas={profile.caracteristicas}
             onImageClick={() => onServiceClick(profile)}
           />
         ))}

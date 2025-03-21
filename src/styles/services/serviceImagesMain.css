@@ -65,21 +65,23 @@
 .button-container {
 	display: flex;
 	justify-content: flex-end;
-	width: 250px;
-	height: 41px;
+	width: 100%;
 	padding: 1rem 0;
 }
 
-.view-more-button {
-	width: 90px;
+.view-more-button {	
 	font: var(--button-third-font);
 	color: var(--button-third-font-color);
 	background-color: var(--button-third-background-color);
 	border-radius: var(--button-third-border-radius);
 	border: none;
-	padding: 0.5rem 1rem;
+	padding: .5rem 3rem;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	margin-bottom: 2rem ;
 }
 
 .view-more-button:hover {
@@ -133,6 +135,10 @@
 
 	.grid-image {
 		height: 100%;
+	}
+
+	.button-container{
+		justify-content: center;
 	}
 }
 

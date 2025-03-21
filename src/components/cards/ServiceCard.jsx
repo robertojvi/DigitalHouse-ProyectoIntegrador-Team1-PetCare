@@ -13,6 +13,7 @@ import {
 
 // eslint-disable-next-line react/prop-types
 export const ServiceCard = ({
+  id,
   name,
   serviceType,
   image,
@@ -32,7 +33,7 @@ export const ServiceCard = ({
       <InfoContainer>
         <h3 className="serviceType">{serviceType?.nombre}</h3>
         <NameContainer>
-          <p>{name}</p>
+          <p>{name} {id}</p>
           <StarsComponent rating={rating} key={name} />
         </NameContainer>
         <ExcerptContainer>
