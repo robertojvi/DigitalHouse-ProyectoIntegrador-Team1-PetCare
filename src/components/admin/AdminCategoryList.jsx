@@ -11,7 +11,7 @@ import pencilIcon from "../../images/pencil.png"; // For edit button
 import trashIcon from "../../images/trash-can.png"; // For delete button
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
-const API_URL = `${BASE_URL}/api/categorias`;
+const API_URL = `${BASE_URL}/api/categorias/categoria-list`;
 
 const AdminCategoryList = ({ onEdit }) => {
   const [categories, setCategories] = useState([]);
@@ -39,7 +39,7 @@ const AdminCategoryList = ({ onEdit }) => {
         console.log("First category object:", response.data[0]);
         console.log(
           "Image URL field in first category:",
-          response.data[0].imagenUrl
+          response.data[0]?.imagenUrl
         );
       }
       setCategories(response.data);
@@ -176,7 +176,7 @@ const AdminCategoryList = ({ onEdit }) => {
                           category.imagenUrl
                         );
                         e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/20";
+                        e.target.src = "https://images-s3-test.s3.us-east-1.amazonaws.com/logo/002bd4cd-4d9d-4507-b37a-8ac22622a83b_pet-care-logo-v2.png";
                       }}
                     />
                   ) : (

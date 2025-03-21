@@ -389,7 +389,7 @@ function AdminHome() {
                   {characteristics.map((characteristic) => (
                     <tr key={characteristic.id}>
                       <td>{characteristic.nombre}</td>
-                      <td>{characteristic.icon ? "Icono" : "Sin icono"}</td>
+                      <td>{characteristic.icon ? <img src={characteristic.icon} height={30} /> : "Sin icono"}</td>
                       <td>
                         <button className="icon-button">
                           <img src={pencilIcon} alt="Editar característica" />

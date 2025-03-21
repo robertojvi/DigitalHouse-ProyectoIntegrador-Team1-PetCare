@@ -11,7 +11,7 @@ import pencilIcon from "../../images/pencil.png";
 import trashIcon from "../../images/trash-can.png";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
-const API_URL = `${BASE_URL}/api/usuarios`;
+const API_URL = `${BASE_URL}/api/usuarios/usuario-list`;
 
 const AdminUserList = ({ onEdit }) => {
   const [users, setUsers] = useState([]);
@@ -38,7 +38,7 @@ const AdminUserList = ({ onEdit }) => {
       console.log("User data from API:", response.data);
 
       // Check if we need to transform the role property
-      const mappedUsers = response.data.map((user) => {
+      const mappedUsers = response.data?.map((user) => {
         // Check if role exists with different property name
         // Common variations: role, userRole, tipo, tipo_usuario, etc.
         const roleValue =
@@ -227,6 +227,8 @@ const AdminUserList = ({ onEdit }) => {
           <thead>
             <tr>
               <th className="table-header">Nombre</th>
+              <th className="table-header">Apellido</th>
+              <th className="table-header">Email</th>
               <th className="table-header">Rol</th>
               <th className="table-header">Acciones</th>
             </tr>
@@ -235,6 +237,8 @@ const AdminUserList = ({ onEdit }) => {
             {filteredUsers.map((user) => (
               <tr key={user.id} className="table-row">
                 <td className="table-cell">{user.nombre}</td>
+                <td className="table-cell">{user.apellido}</td>
+                <td className="table-cell">{user.email}</td>
                 <td className="table-cell">{user.rol}</td>
                 <td className="table-cell">
                   <div className="action-buttons">
