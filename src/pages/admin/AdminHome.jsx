@@ -7,6 +7,109 @@ import AdminCategory from "./AdminCategory";
 import AdminUser from "./AdminUser";
 import warningImg from "../../images/warning.png";
 import "../../styles/admin/adminHome.css";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import addPlusIcon from "../../images/add-plus.png";
+import pencilIcon from "../../images/pencil.png";
+import trashIcon from "../../images/trash-can.png";
+import {
+  FormWrapper,
+  FormContainer,
+  Overlay,
+  Form,
+  FormGroup,
+  Input,
+  ButtonGroup,
+  Button,
+  LogoContainer,
+  Label,
+} from "../../styles/AddProductForm.styles";
+import petCareLogo from "../../images/pet-care-logo-v2.png";
+
+// Componente del formulario
+const AddCharacteristicForm = ({ onClose, onSubmit }) => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    icon: null,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("nombre", formData.nombre);
+    if (formData.icon) {
+      data.append("icon", formData.icon);
+    }
+    onSubmit(data);
+  };
+
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({ ...formData, icon: e.target.files[0] });
+    }
+  };
+
+  return (
+    <FormWrapper>
+      <Overlay onClick={onClose} />
+      <FormContainer>
+        <LogoContainer>
+          <img src={petCareLogo} alt="PetCare Logo" />
+        </LogoContainer>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label>Característica:</Label>
+            <Input
+              type="text"
+              value={formData.nombre}
+              onChange={(e) =>
+                setFormData({ ...formData, nombre: e.target.value })
+              }
+              required
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <Label>Icon:</Label>
+            <Label
+              className="fileInputLabel"
+              style={{
+                backgroundColor: "#314549",
+                color: "#FFFFFF",
+                padding: "8px 16px",
+                borderRadius: "20px",
+                cursor: "pointer",
+                display: "inline-block",
+                marginTop: "8px",
+                width: "fit-content",
+                minWidth: "120px",
+                textAlign: "center",
+              }}
+            >
+              Seleccionar Icon
+              <input
+                type="file"
+                onChange={handleFileChange}
+                accept="image/*"
+                style={{ display: "none" }}
+              />
+            </Label>
+          </FormGroup>
+
+          <ButtonGroup>
+            <Button type="button" className="cancel" onClick={onClose}>
+              Cancelar
+            </Button>
+            <Button type="submit" className="submit">
+              Guardar
+            </Button>
+          </ButtonGroup>
+        </Form>
+      </FormContainer>
+    </FormWrapper>
+  );
+};
 
 function AdminHome() {
   const { auth } = useContext(AuthContext);
@@ -19,6 +122,9 @@ function AdminHome() {
     width: window.innerWidth,
     isMobile: window.innerWidth <= 768,
   });
+  const [characteristics, setCharacteristics] = useState([]);
+  const BASE_URL = import.meta.env.VITE_API_URL || "";
+  const [showAddForm, setShowAddForm] = useState(false);
 
   // Guardar el menú seleccionado cuando cambie
   useEffect(() => {
@@ -40,6 +146,12 @@ function AdminHome() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (selectedMenu === "caracteristicas") {
+      fetchCharacteristics();
+    }
+  }, [selectedMenu]);
+
   const getInitials = (nombre, apellido) => {
     const firstInitial = nombre ? nombre.charAt(0).toUpperCase() : "";
     const lastInitial = apellido ? apellido.charAt(0).toUpperCase() : "";
@@ -54,6 +166,62 @@ function AdminHome() {
   const handleActionComplete = () => {
     // No hacemos nada aquí, solo mantenemos el estado actual
     console.log("Acción completada, manteniendo vista actual");
+  };
+
+  const fetchCharacteristics = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/caracteristicas`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      });
+      setCharacteristics(response.data);
+    } catch (error) {
+      toast.error("Error al cargar las características");
+      console.error("Error:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de eliminar esta característica?")) {
+      try {
+        await axios.delete(`${BASE_URL}/api/caracteristicas/${id}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        toast.success("Característica eliminada con éxito");
+        fetchCharacteristics();
+      } catch (error) {
+        toast.error("Error al eliminar la característica");
+      }
+    }
+  };
+
+  // Función para manejar el envío del formulario
+  const handleAddCharacteristic = async (formData) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/caracteristicas`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        toast.success("Característica agregada exitosamente");
+        setShowAddForm(false);
+        fetchCharacteristics();
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Error al agregar la característica"
+      );
+    }
   };
 
   if (!auth.token) {
@@ -148,12 +316,12 @@ function AdminHome() {
                 >
                   Lista de Categorías
                 </button>
-                {/* <button
-									className="admin-link"
-									onClick={() => handleMenuClick("caracteristicas")}
-								>
-									Lista de Características
-								</button> */}
+                <button
+                  className="admin-link"
+                  onClick={() => handleMenuClick("caracteristicas")}
+                >
+                  Lista de Características
+                </button>
               </div>
             </div>
           </div>
@@ -183,6 +351,62 @@ function AdminHome() {
             isInAdminLayout={true}
             onActionComplete={handleActionComplete}
           />
+        )}
+        {selectedMenu === "caracteristicas" && (
+          <section className="admin-section">
+            <ToastContainer />
+            <div className="admin-header">
+              <button
+                className="adminService-admin-button"
+                onClick={() => setShowAddForm(true)}
+              >
+                <span>Agregar Característica</span>
+                <img
+                  src={addPlusIcon}
+                  alt="Añadir"
+                  style={{ width: "15px", height: "15px", marginLeft: "8px" }}
+                />
+              </button>
+            </div>
+
+            {showAddForm && (
+              <AddCharacteristicForm
+                onClose={() => setShowAddForm(false)}
+                onSubmit={handleAddCharacteristic}
+              />
+            )}
+
+            <div className="admin-table-container">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Característica</th>
+                    <th>Icon</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {characteristics.map((characteristic) => (
+                    <tr key={characteristic.id}>
+                      <td>{characteristic.nombre}</td>
+                      <td>{characteristic.icon ? "Icono" : "Sin icono"}</td>
+                      <td>
+                        <button className="icon-button">
+                          <img src={pencilIcon} alt="Editar característica" />
+                        </button>
+                        <button
+                          className="icon-button"
+                          onClick={() => handleDelete(characteristic.id)}
+                        >
+                          <img src={trashIcon} alt="Eliminar característica" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
         )}
       </AdminLayout>
     </main>

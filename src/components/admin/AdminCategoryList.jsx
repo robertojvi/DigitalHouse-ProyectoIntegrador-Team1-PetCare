@@ -84,7 +84,7 @@ const AdminCategoryList = ({ onEdit }) => {
     try {
       console.log("Deleting category:", categoryToDelete); // Debug log
       const response = await axios.delete(
-        `${API_URL}/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
+        `${API_URL}/${categoryToDelete.id_categoria}`, // Changed from .id to .id_categoria
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -107,9 +107,9 @@ const AdminCategoryList = ({ onEdit }) => {
 
         setCategories(
           categories.filter(
-            (c) => c.idCategoria !== categoryToDelete.idCategoria
+            (c) => c.id_categoria !== categoryToDelete.id_categoria
           )
-        ); // Changed from .id to .idCategoria
+        ); // Changed from .id to .id_categoria
         setError(null);
       }
     } catch (err) {
@@ -158,7 +158,7 @@ const AdminCategoryList = ({ onEdit }) => {
           </thead>
           <tbody>
             {categories.map((category) => (
-              <tr key={category.idCategoria} className="table-row">
+              <tr key={category.id_categoria} className="table-row">
                 <td className="table-cell">
                   {category.imagenUrl ? (
                     <img

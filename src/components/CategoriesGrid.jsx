@@ -4,6 +4,7 @@ import { GridComponent } from './GridComponent'
 import { obtenerCategoria } from '../services/categoryService'
 import { ServiceCard } from './cards/ServiceCard'
 
+
 export const CategoriesGrid = (id) => {
     const [categoria, setCategoria] = useState([]);
     const [isLoadingCategorias, setIsLoadingCategorias] = useState(true);

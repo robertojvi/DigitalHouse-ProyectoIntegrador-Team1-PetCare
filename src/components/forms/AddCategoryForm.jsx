@@ -1,173 +1,111 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import "../../styles/forms/formStyles.css";
+import {
+	FormWrapper,
+	FormContainer,
+	Overlay,
+	Form,
+	FormGroup,
+	Input,
+	ButtonGroup,
+	Button,
+	LogoContainer,
+	Label,
+} from "../../styles/AddProductForm.styles";
+import petCareLogo from "../../images/pet-care-logo-v2.png";
 
 const AddCategoryForm = ({ onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
 		nombre: "",
 		descripcion: "",
+		imagenUrl: null
 	});
-	const [imagen, setImagen] = useState(null);
-	const [imagePreview, setImagePreview] = useState(null);
-	const fileInputRef = useRef(null);
-
-	const handleImageChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			setImagen(file);
-
-			// Create a preview URL for the selected image
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setImagePreview(reader.result);
-			};
-			reader.readAsDataURL(file);
-		}
-	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submitting category form data");
-
-		// Validate form inputs
-		if (!formData.nombre.trim()) {
-			alert("Por favor ingrese un nombre para la categoría");
-			return;
+		const data = new FormData();
+		data.append("nombre", formData.nombre);
+		data.append("descripcion", formData.descripcion);
+		if (formData.imagenUrl) {
+			data.append("imagenUrl", formData.imagenUrl);
 		}
+		onSubmit(data);
+	};
 
-		// Create FormData object to match the API requirements
-		const submitFormData = new FormData();
-
-		// Log what we're sending
-		console.log("Category data to send:", {
-			nombre: formData.nombre,
-			descripcion: formData.descripcion || "",
-		});
-
-		// Create JSON string for 'datos' key containing nombre and descripcion
-		const datosJson = JSON.stringify({
-			nombre: formData.nombre,
-			descripcion: formData.descripcion || "",
-		});
-
-		// Add the 'datos' key with the JSON string
-		submitFormData.append("datos", datosJson);
-
-		// Also add direct fields for APIs that might expect them
-		submitFormData.append("nombre", formData.nombre);
-		submitFormData.append("descripcion", formData.descripcion || "");
-
-		// Add the imagen file if it exists
-		if (imagen) {
-			submitFormData.append("imagen", imagen);
-			console.log("Adding image to form data");
-		} else {
-			console.log("No image selected");
+	const handleFileChange = (e) => {
+		if (e.target.files && e.target.files[0]) {
+			setFormData({ ...formData, imagenUrl: e.target.files[0] });
 		}
-
-		// Submit the form data
-		onSubmit(submitFormData);
 	};
 
 	return (
-		<div className="form-overlay">
-			<div className="form-container">
-				<h2>Agregar Nueva Categoría</h2>
-				<form onSubmit={handleSubmit}>
-					<div className="form-group">
-						<label>Nombre:</label>
-						<input
+		<FormWrapper>
+			<Overlay onClick={onClose} />
+			<FormContainer>
+				<LogoContainer>
+					<img src={petCareLogo} alt="PetCare Logo" />
+				</LogoContainer>
+				<Form onSubmit={handleSubmit}>
+					<FormGroup>
+						<Label>Nombre:</Label>
+						<Input
 							type="text"
 							value={formData.nombre}
 							onChange={(e) =>
-								setFormData({
-									...formData,
-									nombre: e.target.value,
-								})
+								setFormData({ ...formData, nombre: e.target.value })
 							}
 							required
 						/>
-					</div>
+					</FormGroup>
 
-					<div className="form-group">
-						<label>Descripción:</label>
-						<textarea
+					<FormGroup>
+						<Label>Descripción:</Label>
+						<Input
+							as="textarea"
 							value={formData.descripcion}
 							onChange={(e) =>
-								setFormData({
-									...formData,
-									descripcion: e.target.value,
-								})
+								setFormData({ ...formData, descripcion: e.target.value })
 							}
 							rows={4}
 							placeholder="Descripción de la categoría"
 						/>
-					</div>
+					</FormGroup>
 
-					<div className="form-group">
-						<label>Imagen:</label>
-						<div className="image-upload-container">
+					<FormGroup>
+						<Label>Imagen:</Label>
+						<Label className="fileInputLabel" style={{
+							backgroundColor: "#314549",
+							color: "#FFFFFF",
+							padding: "8px 16px",
+							borderRadius: "20px",
+							cursor: "pointer",
+							display: "inline-block",
+							marginTop: "8px",
+							width: "fit-content",
+							minWidth: "120px",
+							textAlign: "center"
+						}}>
+							Seleccionar Imagen
 							<input
 								type="file"
+								onChange={handleFileChange}
 								accept="image/*"
-								onChange={handleImageChange}
-								style={{ display: "none" }}
-								ref={fileInputRef}
+								style={{ display: 'none' }}
 							/>
-							<button
-								type="button"
-								onClick={() => fileInputRef.current.click()}
-								className="upload-button"
-								style={{
-									backgroundColor: "#F2BE5E",
-									color: "#FFFEFF",
-									borderRadius: "20px",
-									padding: "8px 16px",
-									marginBottom: "10px",
-								}}
-							>
-								Seleccionar Imagen
-							</button>
+						</Label>
+					</FormGroup>
 
-							{imagePreview && (
-								<div className="image-preview">
-									<img
-										src={imagePreview}
-										alt="Vista previa"
-										style={{
-											maxWidth: "100%",
-											maxHeight: "200px",
-											marginTop: "10px",
-											borderRadius: "8px",
-										}}
-									/>
-								</div>
-							)}
-						</div>
-					</div>
-
-					<div className="form-buttons">
-						<button
-							type="submit"
-							style={{
-								backgroundColor: "#F2BE5E",
-								color: "#FFFEFF",
-								borderRadius: "20px",
-							}}
-						>
-							Guardar
-						</button>
-						<button
-							type="button"
-							onClick={onClose}
-							style={{ borderRadius: "20px" }}
-						>
+					<ButtonGroup>
+						<Button type="button" className="cancel" onClick={onClose}>
 							Cancelar
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
+						</Button>
+						<Button type="submit" className="submit">
+							Guardar
+						</Button>
+					</ButtonGroup>
+				</Form>
+			</FormContainer>
+		</FormWrapper>
 	);
 };
 
