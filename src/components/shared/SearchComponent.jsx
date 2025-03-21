@@ -13,9 +13,9 @@ export const SearchComponent = ({ onSearch }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedService, setSelectedService] = useState("");
-  
+
   // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
     if (!date) return "";
@@ -31,7 +31,7 @@ export const SearchComponent = ({ onSearch }) => {
     if (selectedService) queryParams.append("petsQty", selectedService);
 
     const url = `${getAppUrl}/api/servicios/filters?${queryParams.toString()}`;
-    console.log("URL generada:", url); 
+    console.log("URL generada:", url);
 
     try {
       const response = await fetch(url);
@@ -46,9 +46,15 @@ export const SearchComponent = ({ onSearch }) => {
   return (
     <SearchInputsContainer>
       <div className="search-component-ss">
-        <SearchBarComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchBarComponent
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         <DateTimeButton dateRange={dateRange} setDateRange={setDateRange} />
-        <SelectService selectedService={selectedService} setSelectedService={setSelectedService} />
+        <SelectService
+          selectedService={selectedService}
+          setSelectedService={setSelectedService}
+        />
         <ButtonSearch onClick={handleSearch} />
       </div>
     </SearchInputsContainer>
