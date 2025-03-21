@@ -77,9 +77,12 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const BASE_URL = import.meta.env.VITE_API_URL || "";
+
+
   useEffect(() => {
     if (searchTerm.length > 1) {
-      fetch(`${getAppUrl}/api/servicios/suggestions?query=${searchTerm}`)
+      fetch(`${BASE_URL}/api/servicios/suggestions?query=${searchTerm}`)
         .then((response) => response.json())
         .then((data) => {
           setSuggestions(data);
@@ -108,9 +111,9 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
             suggestions.map((suggestion, index) => (
               <SuggestionItem
                 key={index}
-                onClick={() => setSearchTerm(suggestion)}
+                onClick={() => setSearchTerm(suggestion.categoriaNombre)}
               >
-                {suggestion}
+                {suggestion.categoriaNombre}
               </SuggestionItem>
             ))
           ) : (
