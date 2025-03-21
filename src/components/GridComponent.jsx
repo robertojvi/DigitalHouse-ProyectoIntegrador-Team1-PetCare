@@ -54,7 +54,7 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
             id={profile.idServicio}
             name={profile.nombre}
             serviceType={profile.categoria}
-            image={profile.imagenUrls[0]}
+            image={profile?.imagenUrls[0]?.imagenUrl}
             rating={profile.rating}
             excerpt={profile.descripcion}
 			      caracteristicas={profile.caracteristicas}

@@ -52,7 +52,7 @@ export const CategoriesGrid = (id) => {
                     key={profile.idServicio}
                     name={profile.nombre}
                     serviceType=""
-                    image={profile.imagenUrls[0]}
+                    image={profile?.imagenUrls[0]?.imagenUrl}
                     rating={profile.rating}
                     excerpt={profile.descripcion}
                     onImageClick={() => onServiceClick(profile)}
