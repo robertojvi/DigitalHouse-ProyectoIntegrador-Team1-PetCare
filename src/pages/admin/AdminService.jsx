@@ -16,6 +16,9 @@ import "../../styles/admin/adminService.css";
 // Images
 import addPlusIcon from "../../images/add-plus.png";
 
+// Services
+import { crearServicio } from "../../services/serviciosService";
+
 // eslint-disable-next-line react/prop-types
 const AdminService = ({ isInAdminLayout, onActionComplete }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
@@ -105,7 +108,7 @@ const AdminService = ({ isInAdminLayout, onActionComplete }) => {
 
 	const handleAddProduct = async (servicioData) => {
 		try {
-			await axios.post(API_URL, servicioData, getAuthHeaders());
+			await crearServicio(servicioData);
 			await fetchServices(); // Recargar la lista
 			setShowAddForm(false);
 			toast.success("Servicio creado exitosamente");
@@ -113,6 +116,7 @@ const AdminService = ({ isInAdminLayout, onActionComplete }) => {
 		} catch (error) {
 			console.error("Error creating service:", error);
 			setError("Error al crear el servicio: " + error.message);
+			toast.error("Error al crear el servicio: " + error.message);
 		}
 	};
 

@@ -4,9 +4,6 @@ const BASE_URL = import.meta.env.VITE_API_URL || "";
 
 const instance = axios.create({
 	baseURL: BASE_URL,
-	headers: {
-		"Content-Type": "application/json",
-	},
 });
 
 // Add a request interceptor to include the token in every request
@@ -32,11 +29,17 @@ instance.interceptors.request.use(
 			config.headers.Authorization = `Bearer ${token}`;
 		}
 
+		// Only set Content-Type if it's not already set and not a FormData request
+		if (!config.headers['Content-Type'] && !(config.data instanceof FormData)) {
+			config.headers['Content-Type'] = 'application/json';
+		}
+
 		// Solo mostrar logs en desarrollo
 		if (import.meta.env.DEV) {
 			console.log("Request:", {
 				url: config.url,
 				method: config.method,
+				contentType: config.headers['Content-Type'],
 				// No mostrar headers para proteger datos sensibles
 			});
 		}
