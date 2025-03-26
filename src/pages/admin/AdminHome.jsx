@@ -26,6 +26,7 @@ import {
   Label,
 } from "../../styles/AddProductForm.styles";
 import petCareLogo from "../../images/pet-care-logo-v2.png";
+import AdminFeature from "./AdminFeature";
 
 // Componente del formulario
 const AddCharacteristicForm = ({ onClose, onSubmit }) => {
@@ -353,60 +354,10 @@ function AdminHome() {
           />
         )}
         {selectedMenu === "caracteristicas" && (
-          <section className="admin-section">
-            <ToastContainer />
-            <div className="admin-header">
-              <button
-                className="adminService-admin-button"
-                onClick={() => setShowAddForm(true)}
-              >
-                <span>Agregar Característica</span>
-                <img
-                  src={addPlusIcon}
-                  alt="Añadir"
-                  style={{ width: "15px", height: "15px", marginLeft: "8px" }}
-                />
-              </button>
-            </div>
-
-            {showAddForm && (
-              <AddCharacteristicForm
-                onClose={() => setShowAddForm(false)}
-                onSubmit={handleAddCharacteristic}
-              />
-            )}
-
-            <div className="admin-table-container">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Característica</th>
-                    <th>Icon</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {characteristics.map((characteristic) => (
-                    <tr key={characteristic.id}>
-                      <td>{characteristic.nombre}</td>
-                      <td>{characteristic.icon ? <img src={characteristic.icon} height={30} /> : "Sin icono"}</td>
-                      <td>
-                        <button className="icon-button">
-                          <img src={pencilIcon} alt="Editar característica" />
-                        </button>
-                        <button
-                          className="icon-button"
-                          onClick={() => handleDelete(characteristic.id)}
-                        >
-                          <img src={trashIcon} alt="Eliminar característica" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+          <AdminFeature
+            isInAdminLayout={true}
+            onActionComplete={handleActionComplete}
+          />
         )}
       </AdminLayout>
     </main>

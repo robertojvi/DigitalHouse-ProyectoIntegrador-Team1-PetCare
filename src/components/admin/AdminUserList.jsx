@@ -147,11 +147,14 @@ const AdminUserList = ({ onEdit }) => {
         },
       });
 
-      if (response.status === 204) {
-        toast.success("Usuario eliminado exitosamente");
-        setUsers(users.filter((u) => u.id !== userToDelete.id));
-        setError(null);
-      }
+
+      toast.success("Usuario eliminado exitosamente");
+      setUsers(users.filter((u) => u.id !== userToDelete.id));
+      setError(null);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+   
     } catch (err) {
       const errorMessage =
         err.response?.status === 403
@@ -284,14 +287,12 @@ const AdminUserList = ({ onEdit }) => {
               <button
                 className="modal-button cancel"
                 onClick={handleDeleteCancel}
-                disabled={deleteLoading}
               >
                 Cancelar
               </button>
               <button
                 className="modal-button confirm"
                 onClick={handleDeleteConfirmed}
-                disabled={deleteLoading}
               >
                 Aceptar
               </button>

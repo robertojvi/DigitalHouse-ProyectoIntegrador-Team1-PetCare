@@ -1,30 +1,50 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../styles/forms/formStyles.css";
+import {
+  FormWrapper,
+  FormContainer,
+  Overlay,
+  Form,
+  FormGroup,
+  Input,
+  TextArea,
+  ButtonGroup,
+  Button,
+  LogoContainer,
+  Label,
+} from "../../styles/AddProductForm.styles";
+import petCareLogo from "../../images/pet-care-logo-v2.png";
 
 const EditCategoryForm = ({ category, onClose, onSubmit }) => {
+  console.log("Initial category data:", category); // Debug log
+
   const [formData, setFormData] = useState({
-    id_categoria: "",
-    nombre: "",
-    descripcion: "",
-    imagenUrl: "", // Added imagenUrl to the form data
+    id_categoria: category.id || category.id_categoria, // Intentar ambos formatos de ID
+    nombre: category.nombre || "",
+    descripcion: category.descripcion || "",
+    imagenUrl: category.imagenUrl || "",
   });
 
   useEffect(() => {
-    if (category) {
-      setFormData({
-        id_categoria: category.id_categoria || "",
-        nombre: category.nombre || "",
-        descripcion: category.descripcion || "",
-        imagenUrl: category.imagenUrl || "", // Preserve the imagenUrl
-      });
-    }
+    console.log("Category received:", category);
+    console.log("Category ID formats:", {
+      id: category.id,
+      id_categoria: category.id_categoria,
+    });
   }, [category]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting with ID:", formData.id_categoria);
-    onSubmit(formData);
+    console.log("Form data before submit:", formData);
+
+    const dataToSubmit = {
+      ...formData,
+      id_categoria: category.id || category.id_categoria, // Intentar ambos formatos de ID
+    };
+
+    console.log("Final data to submit:", dataToSubmit);
+    onSubmit(dataToSubmit);
   };
 
   // Specific debug for imagenUrl field
@@ -53,13 +73,16 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
   }
 
   return (
-    <div className="form-overlay">
-      <div className="form-container">
-        <h2>Editar Categoría</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Nombre:</label>
-            <input
+    <FormWrapper>
+      <Overlay onClick={onClose} />
+      <FormContainer>
+        <LogoContainer>
+          <img src={petCareLogo} alt="PetCare Logo" />
+        </LogoContainer>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label>Nombre:</Label>
+            <Input
               type="text"
               value={formData.nombre}
               onChange={(e) =>
@@ -70,11 +93,11 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
               }
               required
             />
-          </div>
+          </FormGroup>
 
-          <div className="form-group">
-            <label>Descripción:</label>
-            <textarea
+          <FormGroup>
+            <Label>Descripción:</Label>
+            <TextArea
               value={formData.descripcion}
               onChange={(e) =>
                 setFormData({
@@ -85,11 +108,10 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
               rows={4}
               placeholder="Descripción de la categoría"
             />
-          </div>
+          </FormGroup>
 
-          {/* Display image using the correct imagenUrl field */}
-          <div className="form-group">
-            <label>Imagen:</label>
+          <FormGroup>
+            <Label>Imagen:</Label>
             <div className="image-display">
               {category && category.imagenUrl ? (
                 <>
@@ -123,30 +145,19 @@ const EditCategoryForm = ({ category, onClose, onSubmit }) => {
                 <p>Esta categoría no tiene imagen</p>
               )}
             </div>
-          </div>
+          </FormGroup>
 
-          <div className="form-buttons">
-            <button
-              type="submit"
-              style={{
-                backgroundColor: "#F2BE5E",
-                color: "#FFFEFF",
-                borderRadius: "20px",
-              }}
-            >
-              Guardar
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              style={{ borderRadius: "20px" }}
-            >
+          <ButtonGroup>
+            <Button type="button" className="cancel" onClick={onClose}>
               Cancelar
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+            </Button>
+            <Button type="submit" className="submit">
+              Guardar
+            </Button>
+          </ButtonGroup>
+        </Form>
+      </FormContainer>
+    </FormWrapper>
   );
 };
 

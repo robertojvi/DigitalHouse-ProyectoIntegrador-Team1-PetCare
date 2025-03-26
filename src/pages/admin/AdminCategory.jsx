@@ -211,7 +211,12 @@ const AdminCategory = ({ isInAdminLayout }) => {
 
           <AdminCategoryList
             onEdit={(category) => {
-              setSelectedCategory(category);
+              console.log("Category being edited:", category);
+              console.log("Category ID:", category.id);
+              setSelectedCategory({
+                ...category,
+                id_categoria: category.id,
+              });
               setShowEditForm(true);
             }}
           />

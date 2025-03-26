@@ -313,8 +313,8 @@ const AddProductForm = ({ onClose, onSubmit }) => {
                   console.log("Rendering category:", category);
                   return (
                     <option
-                      key={category.id_categoria}
-                      value={category.id_categoria}
+                      key={category.idCategoria}
+                      value={category.idCategoria}
                     >
                       {category.nombre}
                     </option>

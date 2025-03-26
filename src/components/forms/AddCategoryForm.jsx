@@ -24,8 +24,11 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const data = new FormData();
-		data.append("nombre", formData.nombre);
-		data.append("descripcion", formData.descripcion);
+		const datos = {
+		 		"nombre": formData.nombre,
+		 		"descripcion": formData.descripcion
+		 	}
+		data.append("datos", JSON.stringify(datos));
 		if (formData.imagenUrl) {
 			data.append("imagenUrl", formData.imagenUrl);
 		}

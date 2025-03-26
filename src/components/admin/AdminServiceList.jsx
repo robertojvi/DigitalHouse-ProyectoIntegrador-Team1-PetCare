@@ -19,7 +19,7 @@ import trashIcon from "../../images/trash-can.png";
 import { LiaPawSolid } from "react-icons/lia";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
-const API_URL = `${BASE_URL}/api/servicios/servicio-list`;
+const API_URL = `${BASE_URL}/api/servicios`;
 
 const AdminServiceList = ({ onEdit }) => {
 	const { auth } = useContext(AuthContext);
@@ -59,7 +59,7 @@ const AdminServiceList = ({ onEdit }) => {
 		}
 
 		try {
-			const response = await axios.get(API_URL, {
+			const response = await axios.get(`${API_URL}/servicio-list`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`,
 					"Content-Type": "application/json",

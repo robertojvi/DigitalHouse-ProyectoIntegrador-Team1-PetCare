@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { getAppUrl } from "../../services/getAppUrl";
 
 const SearchContainer = styled.div`
   display: flex;
@@ -111,9 +110,9 @@ const SearchBarComponent = ({ searchTerm, setSearchTerm }) => {
             suggestions.map((suggestion, index) => (
               <SuggestionItem
                 key={index}
-                onClick={() => setSearchTerm(suggestion.categoriaNombre)}
+                onClick={() => setSearchTerm(suggestion)}
               >
-                {suggestion.categoriaNombre}
+                {suggestion}
               </SuggestionItem>
             ))
           ) : (
