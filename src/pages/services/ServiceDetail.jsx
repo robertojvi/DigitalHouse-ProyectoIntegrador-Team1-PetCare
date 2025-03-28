@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 // Components
 import ServiceImagesMain from "../../components/services/ServiceImagesMain";
-import { ServiceInfo } from "../../components/services/ServiceInfo";
+import ServiceInfo from "../../components/services/ServiceInfo";
 
 // Styles
 
