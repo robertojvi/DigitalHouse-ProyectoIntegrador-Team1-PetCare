@@ -187,6 +187,15 @@ const ServiceInfo = ({ serviceInfo }) => {
 		setIsConfirmReserva(true);
 	};
 
+	const redirectToLogin = () => {
+		setIsLoginModalOpen(false);
+		setShowLoginForm(true);
+	};
+
+	const closeLoginForm = () => {
+		setShowLoginForm(false);
+	};
+
 	// Date formatting
 	const formatDates = (initialDate, finalDate) => {
 		const parseDate = (dateString) => {
@@ -451,13 +460,19 @@ const ServiceInfo = ({ serviceInfo }) => {
 							</button>
 							<button
 								className="modal-button confirm"
-								onClick={() => navigate("/login")}
+								onClick={redirectToLogin}
 							>
 								Ir a login
 							</button>
 						</div>
 					</div>
 				</div>
+			)}
+
+			{showLoginForm && (
+				<Modal onClose={closeLoginForm}>
+					<Login isLoginValue={true} returnUrl={currentServiceUrl} />
+				</Modal>
 			)}
 		</div>
 	);
