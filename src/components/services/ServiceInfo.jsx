@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { LiaPawSolid } from "react-icons/lia";
 
 // Components
 import { StarsComponent } from "../shared/StarsComponent";
@@ -68,11 +67,13 @@ const ServiceInfo = ({ serviceInfo }) => {
 	const [rangoFechas, setRangoFechas] = useState([]);
 	const [especies, setEspecies] = useState([]);
 	const [selectedEspecie, setSelectedEspecie] = useState(1);
+	const [selectedNumPets, setSelectedNumPets] = useState(1);
 	const [error, setError] = useState("");
 	const [currentServiceUrl, setCurrentServiceUrl] = useState("");
 	const [reservedDates, setReservedDates] = useState([]);
 	const [cuidadoInicial, setCuidadoInicial] = useState("");
 	const [cuidadoFinal, setCuidadoFinal] = useState("");
+	const [serviceDetails, setServiceDetails] = useState(null);
 
 	// Service info destructuring
 	const { name, description, caracteristicas, rating, reviews, id_servicio } =
@@ -172,9 +173,22 @@ const ServiceInfo = ({ serviceInfo }) => {
 		}
 	};
 
+	const fetchServiceDetails = async () => {
+		try {
+			const response = await axios.get(
+				`${BASE_URL}/api/servicios/${id_servicio}`
+			);
+			console.log("Service details:", response.data);
+			setServiceDetails(response.data);
+		} catch (error) {
+			console.error("Error fetching service details:", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchReservedDates();
 		fetchEspecies();
+		fetchServiceDetails();
 		setCurrentServiceUrl(window.location.href);
 	}, []);
 
@@ -227,6 +241,27 @@ const ServiceInfo = ({ serviceInfo }) => {
 				</p>
 			</div>
 		);
+	};
+
+	// Extract service image
+	const getServiceImage = () => {
+		if (serviceDetails?.imagenUrls?.[0]?.imagenUrl) {
+			console.log(
+				"Using image from serviceDetails:",
+				serviceDetails.imagenUrls[0].imagenUrl
+			);
+			return serviceDetails.imagenUrls[0].imagenUrl;
+		}
+		console.log("No image found in serviceDetails");
+		return null;
+	};
+
+	// Get selected species name
+	const getSelectedEspecieName = () => {
+		const selected = especies.find(
+			(especie) => especie.idEspecie === selectedEspecie
+		);
+		return selected ? selected.nombreEspecie : "Desconocido";
 	};
 
 	// Terms modal component
@@ -368,7 +403,10 @@ const ServiceInfo = ({ serviceInfo }) => {
 
 					<div className="formReservaMascotas formReservaGral">
 						<label>Cantidad de mascotas</label>
-						<select>
+						<select
+							value={selectedNumPets}
+							onChange={(e) => setSelectedNumPets(Number(e.target.value))}
+						>
 							{[1, 2, 3, 4].map((num) => (
 								<option key={num} value={num}>
 									{num} Mascota{num > 1 ? "s" : ""}
@@ -407,14 +445,48 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{/* Modales */}
 			{isConfirmReserva && (
 				<div className="modal-overlay">
-					<div className="modal-container">
-						<LiaPawSolid className="modal-icon" />
+					<div className="modal-container reservation-modal">
 						{cuidadoInicial && cuidadoFinal ? (
 							<>
-								<p>
-									<strong>Periodo de reserva:</strong>
-								</p>
-								{formatDates(cuidadoInicial, cuidadoFinal)}
+								<h2 className="reservation-title">
+									{serviceInfo.nombre || name}
+								</h2>
+
+								<div className="reservation-image">
+									{getServiceImage() && (
+										<img
+											src={getServiceImage()}
+											alt={serviceDetails?.nombre || name}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+												display: "block",
+											}}
+										/>
+									)}
+								</div>
+
+								<div className="reservation-description">
+									<p>{serviceInfo.descripcion || description}</p>
+								</div>
+
+								<div className="reservation-details">
+									<h3>Detalles de la reserva:</h3>
+									<div className="reservation-dates">
+										{formatDates(cuidadoInicial, cuidadoFinal)}
+									</div>
+									<div className="reservation-pets">
+										<p>
+											<strong>Cantidad de mascotas:</strong> {selectedNumPets}
+										</p>
+										<p>
+											<strong>Tipo de mascota:</strong>{" "}
+											{getSelectedEspecieName()}
+										</p>
+									</div>
+								</div>
+
 								<div className="modal-buttons">
 									<button
 										className="modal-button cancel"
@@ -448,7 +520,6 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{isLoginModalOpen && (
 				<div className="modal-overlay">
 					<div className="modal-container">
-						<LiaPawSolid className="modal-icon" />
 						<h3>Inicio de sesión requerido</h3>
 						<p>Para realizar reservas necesitas estar autenticado</p>
 						<div className="modal-buttons">
@@ -493,6 +564,11 @@ ServiceInfo.propTypes = {
 		rating: PropTypes.number.isRequired,
 		reviews: PropTypes.array.isRequired,
 		id_servicio: PropTypes.number.isRequired,
+		imagenUrls: PropTypes.arrayOf(
+			PropTypes.shape({
+				imagenUrl: PropTypes.string.isRequired,
+			})
+		).isRequired,
 	}).isRequired,
 };
 
