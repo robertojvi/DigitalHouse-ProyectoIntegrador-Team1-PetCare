@@ -476,9 +476,12 @@ input[type="radio"]:checked+.custom-radio::after {
 }
 
 .reservation-image {
-  width: 100%;
-  height: 200px;
-  margin: 1rem 0;
+  width: 350px;
+  /* Set fixed width */
+  height: 350px;
+  /* Set equal height */
+  margin: 1rem auto;
+  /* Center the image container */
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -521,24 +524,38 @@ input[type="radio"]:checked+.custom-radio::after {
   font-size: 0.9rem;
 }
 
+.reservation-price {
+  background: #e8f5e9;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.reservation-price p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2e7d32;
+  text-align: center;
+}
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
+  height: 2.5rem;
 }
 
 .modal-button {
   flex: 1;
   padding: 1.2rem;
-  /* Increased from 0.8rem */
   border-radius: 20px;
   border: none;
   font-family: 'Poppins';
-  font-size: 1.1rem;
-  /* Increased from 0.9rem */
-  font-weight: 600;
-  /* Added for better visibility */
+  font-size: 2.5rem;
+  /* Increased from 1.3rem */
+  font-weight: 700;
+  /* Increased from 600 */
   cursor: pointer;
   transition: all 0.3s ease;
 }

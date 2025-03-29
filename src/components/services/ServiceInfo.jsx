@@ -473,6 +473,12 @@ const ServiceInfo = ({ serviceInfo }) => {
 
 								<div className="reservation-details">
 									<h3>Detalles de la reserva:</h3>
+									<div className="reservation-price">
+										<p>
+											<strong>Precio por día:</strong> $
+											{serviceDetails?.precio || 0}
+										</p>
+									</div>
 									<div className="reservation-dates">
 										{formatDates(cuidadoInicial, cuidadoFinal)}
 									</div>
