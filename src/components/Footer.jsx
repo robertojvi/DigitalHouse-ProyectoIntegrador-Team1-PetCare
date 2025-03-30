@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import "../styles/Footer.css";
 import petCareLogo from "../images/pet-care-logo-v2.png";
+import WhatsAppButton from "./shared/WhatsAppComponent";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -69,6 +70,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <WhatsAppButton />
     </footer>
   );
 };

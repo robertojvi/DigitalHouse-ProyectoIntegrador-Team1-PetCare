@@ -3,11 +3,20 @@ import { TitleComponent } from './shared/TitleComponent'
 import { GridComponent } from './GridComponent'
 import { obtenerCategoria } from '../services/categoryService'
 import { ServiceCard } from './cards/ServiceCard'
+import { useNavigate } from 'react-router-dom';
 
 
 export const CategoriesGrid = (id) => {
     const [categoria, setCategoria] = useState([]);
     const [isLoadingCategorias, setIsLoadingCategorias] = useState(true);
+    const navigate = useNavigate();
+
+    const handleServiceClick = (service) => {
+        navigate(`/service/${service.idServicio}`, {
+          state: { selectedService: service },
+        });
+        window.scrollTo(0, 0);
+      };
 
  useEffect(() => {
         const fetchCategorias = async () => {
@@ -55,7 +64,7 @@ export const CategoriesGrid = (id) => {
                     image={profile?.imagenUrls[0]?.imagenUrl}
                     rating={profile.rating}
                     excerpt={profile.descripcion}
-                    onImageClick={() => onServiceClick(profile)}
+                    onImageClick={() => handleServiceClick(profile)}
                 />
             ))}
         </div>

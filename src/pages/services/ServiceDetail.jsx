@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 // Components
 import ServiceImagesMain from "../../components/services/ServiceImagesMain";
-import { ServiceInfo } from "../../components/services/ServiceInfo";
+import ServiceInfo from "../../components/services/ServiceInfo";
 
 // Styles
 
@@ -46,9 +46,9 @@ const ServiceDetail = ({ selectedService, onGoBack }) => {
 			/>
 			<ServiceInfo
 				serviceInfo={{
-					name: service.nombre,
+					name: service?.nombre,
 					description: service.descripcion,
-					service: service.categoria.name,
+					service: service?.categoria?.name,
 					city: service.ciudad,
 					caracteristicas: service.caracteristicas,
 					rating: service.rating,

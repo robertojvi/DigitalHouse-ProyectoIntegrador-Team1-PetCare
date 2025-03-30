@@ -1,5 +1,6 @@
 import "react";
 import { StarsComponent } from "../shared/StarsComponent";
+
 import {
   CardContainer,
   ImageContainer,
@@ -10,6 +11,7 @@ import {
   ButtonContainer,
   CTAContainer,
 } from "./styled-components/ServiceCard.styles";
+import { FavoriteButton } from "../shared/FavoriteButton";
 
 // eslint-disable-next-line react/prop-types
 export const ServiceCard = ({
@@ -29,6 +31,7 @@ export const ServiceCard = ({
       </ImageContainer>
       <InfoContainer>
         <h3 className="serviceType">{serviceType?.nombre}</h3>
+        <FavoriteButton serviceId={id} initialFavorite={false} onToggle={(fav) => console.log("Favorito:", fav)} />
         <NameContainer>
           <p>{name}</p>
           <StarsComponent rating={rating} key={name} />
