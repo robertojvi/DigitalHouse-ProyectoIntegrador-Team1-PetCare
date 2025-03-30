@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LiaPawSolid } from "react-icons/lia";
 
 // Components
 import { StarsComponent } from "../shared/StarsComponent";
@@ -446,6 +447,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{isConfirmReserva && (
 				<div className="modal-overlay">
 					<div className="modal-container reservation-modal">
+						<LiaPawSolid className="modal-icon" />
 						{cuidadoInicial && cuidadoFinal ? (
 							<>
 								<h2 className="reservation-title">
@@ -526,6 +528,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{isLoginModalOpen && (
 				<div className="modal-overlay">
 					<div className="modal-container">
+						<LiaPawSolid className="modal-icon" />
 						<h3>Inicio de sesión requerido</h3>
 						<p>Para realizar reservas necesitas estar autenticado</p>
 						<div className="modal-buttons">
