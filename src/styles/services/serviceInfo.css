@@ -264,8 +264,27 @@ input[type="radio"]:checked+.custom-radio::after {
 }
 
 .periodoFechasConfirm {
-  line-height: 8px;
-  padding: .2rem;
+  line-height: 14px;
+  /* Reduced from 16px */
+  padding: .5rem;
+}
+
+.periodoFechasConfirm p {
+  margin-bottom: 6px;
+  /* Reduced from 8px */
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  /* Added smaller font size */
+}
+
+.periodoFechasConfirm span {
+  display: block;
+  margin-top: 3px;
+  /* Reduced from 4px */
+  font-weight: 500;
+  font-size: 0.8rem;
+  /* Added even smaller font size for the date */
 }
 
 
@@ -547,11 +566,17 @@ input[type="radio"]:checked+.custom-radio::after {
 
 .reservation-pets p {
   margin: 0.5rem 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  /* Updated to match dates */
+}
+
+.reservation-pets p strong {
+  font-size: 0.85rem;
+  /* Added to match text size */
 }
 
 .reservation-price {
-  background: #e8f5e9;
+  background: #f9f9f9;
   padding: 0.8rem;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -559,9 +584,15 @@ input[type="radio"]:checked+.custom-radio::after {
 
 .reservation-price p {
   margin: 0;
-  font-size: 1.1rem;
-  color: #2e7d32;
+  font-size: 0.85rem;
+  /* Updated to match dates */
+  color: #314549;
   text-align: center;
+}
+
+.reservation-price p strong {
+  font-size: 0.85rem;
+  /* Added to match text size */
 }
 
 .modal-buttons {
@@ -581,7 +612,7 @@ input[type="radio"]:checked+.custom-radio::after {
   font-size: 2.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: font-weight 0.3s ease;
+  transition: font-weight 0.5s ease;
 }
 
 .modal-button:hover {
@@ -594,7 +625,7 @@ input[type="radio"]:checked+.custom-radio::after {
 }
 
 .modal-button.confirm {
-  background: #F2BE5E;
+  background: #314549;
   color: white;
 }
 
@@ -614,4 +645,60 @@ input[type="radio"]:checked+.custom-radio::after {
   color: #F2BE5E;
   margin-bottom: 0.1rem;
   align-self: center;
+}
+
+.reservation-details-grid {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.reservation-calendar {
+  flex: 1;
+  max-width: 300px;
+}
+
+.readonly-calendar .react-calendar {
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+.readonly-calendar .react-calendar button {
+  pointer-events: none;
+}
+
+.readonly-calendar .selected-date {
+  background-color: rgba(242, 190, 94, 0.3) !important;
+}
+
+.readonly-calendar .selected-date:hover {
+  background-color: rgba(242, 190, 94, 0.3) !important;
+}
+
+.readonly-calendar .react-calendar__tile--active {
+  background-color: rgba(242, 190, 94, 0.7) !important;
+  color: black !important;
+}
+
+.readonly-calendar .react-calendar__tile--now {
+  background: transparent;
+}
+
+.readonly-calendar .selected-date {
+  background: #F2BE5E !important;
+  color: white;
+}
+
+.readonly-calendar .react-calendar__tile--now {
+  background: transparent;
+}
+
+.reservation-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
 }
