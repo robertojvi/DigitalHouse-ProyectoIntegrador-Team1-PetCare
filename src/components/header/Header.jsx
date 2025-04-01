@@ -91,6 +91,9 @@ const Header = () => {
 													<Link to="/mi-perfil" className="dropdown-item">
 														<CiUser /> Ver perfil
 													</Link>
+													<Link to="/mis-reservaciones" className="dropdown-item">
+														<CiUser /> Mis reservaciones
+													</Link>
 													{auth.role === "ADMIN" && (
 														<button 
 															onClick={handleAdminPanel}
