@@ -76,6 +76,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 	const [cuidadoInicial, setCuidadoInicial] = useState("");
 	const [cuidadoFinal, setCuidadoFinal] = useState("");
 	const [serviceDetails, setServiceDetails] = useState(null);
+	const [idReserva, setIdReserva] = useState(null);
 
 	// Service info destructuring
 	const { name, description, caracteristicas, rating, reviews, id_servicio } =
@@ -133,6 +134,8 @@ const ServiceInfo = ({ serviceInfo }) => {
 			if ([200, 201].includes(response.status)) {
 				toast.success("¡Reserva creada con éxito!");
 				fetchReservedDates();
+				navigate(`/mi-reserva/${response.data.idReserva}`);
+
 			}
 		} catch (error) {
 			handleReservationError(error);
