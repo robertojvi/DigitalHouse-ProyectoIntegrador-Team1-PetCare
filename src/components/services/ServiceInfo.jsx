@@ -447,30 +447,33 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{isConfirmReserva && (
 				<div className="modal-overlay">
 					<div className="modal-container reservation-modal">
-						<LiaPawSolid className="modal-icon" />
 						{cuidadoInicial && cuidadoFinal ? (
 							<>
-								<h2 className="reservation-title">
-									{serviceInfo.nombre || name}
-								</h2>
-
-								<div className="reservation-image">
-									{getServiceImage() && (
-										<img
-											src={getServiceImage()}
-											alt={serviceDetails?.nombre || name}
-											style={{
-												width: "100%",
-												height: "100%",
-												objectFit: "cover",
-												display: "block",
-											}}
-										/>
-									)}
-								</div>
-
-								<div className="reservation-description">
-									<p>{serviceInfo.descripcion || description}</p>
+								<div className="modal-header">
+									<div className="reservation-image">
+										{getServiceImage() && (
+											<img
+												src={getServiceImage()}
+												alt={serviceDetails?.nombre || name}
+												style={{
+													width: "100%",
+													height: "100%",
+													objectFit: "cover",
+													display: "block",
+												}}
+											/>
+										)}
+									</div>
+									<div className="reservation-header-content">
+										<LiaPawSolid className="modal-icon" />
+										<div className="reservation-title">
+											<p className="title-prefix">Confirma tu Reserva:</p>
+											<p className="title-name">{serviceInfo.nombre || name}</p>
+										</div>
+										<div className="reservation-description">
+											<p>{serviceInfo.descripcion || description}</p>
+										</div>
+									</div>
 								</div>
 
 								<div className="reservation-details">
