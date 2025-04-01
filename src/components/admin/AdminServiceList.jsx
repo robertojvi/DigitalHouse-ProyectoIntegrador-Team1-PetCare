@@ -177,7 +177,7 @@ const AdminServiceList = ({ onEdit }) => {
 							<tr key={service.idServicio}>
 								<td>{service.idServicio}</td>
 								<td>{service.nombre}</td>
-								<td>{service.categoriaNombre || ""}</td>
+								<td>{service.categoria?.nombre || "Sin categoría"}</td>
 								<td>
 									<button
 										className="icon-button"
