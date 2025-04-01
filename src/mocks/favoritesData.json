@@ -1,0 +1,37 @@
+{
+  "favorites": [
+    {
+      "id": 1,
+      "name": "Paseo de Perros Premium",
+      "description": "Servicio de paseo personalizado con atención individual. Nuestros paseadores profesionales brindan atención personalizada y ejercicio adecuado para tu mascota.",
+      "image": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+      "serviceType": {
+        "id": 1,
+        "nombre": "Paseos"
+      },
+      "rating": 4.8
+    },
+    {
+      "id": 2,
+      "name": "Guardería Canina VIP",
+      "description": "Cuidado de mascotas en ambiente familiar y seguro. Ofrecemos supervisión las 24 horas, áreas de juego amplias y personal capacitado para el cuidado de tu mascota.",
+      "image": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+      "serviceType": {
+        "id": 2,
+        "nombre": "Guardería"
+      },
+      "rating": 4.9
+    },
+    {
+      "id": 3,
+      "name": "Peluquería y Spa Mascota",
+      "description": "Servicio completo de belleza y relajación para tu mascota. Incluye baño, corte de pelo, limpieza de oídos y corte de uñas por expertos en grooming.",
+      "image": "https://images.unsplash.com/photo-1516734212186-65266f46771f",
+      "serviceType": {
+        "id": 3,
+        "nombre": "Peluquería"
+      },
+      "rating": 4.7
+    }
+  ]
+}

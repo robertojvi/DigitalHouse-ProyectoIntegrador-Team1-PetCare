@@ -9,6 +9,7 @@ import ServiceImagesGallery from "./pages/services/ServiceImagesGallery";
 import { Categories } from "./pages/Categories";
 import UserProfile from "./pages/profile/UserProfile";
 import { AdminProfile } from "./pages/admin/AdminProfile";
+import Favorites from "./pages/Favorites";
 
 // Components
 import { AuthProvider } from "./auth/AuthContext";
@@ -21,6 +22,7 @@ import "./styles/GlobalStyles.css";
 import ReservationHistory from "./pages/clients/ReservationHistory";
 
 function App() {
+
 	return (
 		<AuthProvider>
 			<Routes>
@@ -36,6 +38,7 @@ function App() {
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
 					<Route path="/mi-perfil" element={<UserProfile />} />
+          <Route path="/mis-favoritos" element={<Favorites />} />
 					<Route path="/mis-reservaciones" element={<ReservationHistory/>} />
 
 					{/* Rutas del administrador */}
