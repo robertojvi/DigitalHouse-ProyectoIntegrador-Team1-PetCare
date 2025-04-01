@@ -18,6 +18,7 @@ import ProtectedRoute from "./auth/ProtectedRoute"; // Updated import path
 // Styles
 import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
+import ReservationHistory from "./pages/clients/ReservationHistory";
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
 					<Route path="/mi-perfil" element={<UserProfile />} />
+					<Route path="/mis-reservaciones" element={<ReservationHistory/>} />
 
 					{/* Rutas del administrador */}
 					<Route
