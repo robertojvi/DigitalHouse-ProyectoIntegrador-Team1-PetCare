@@ -9,17 +9,13 @@ import "../../styles/admin/adminService.css";
 
 // Components
 import EditFeatureForm from "../../components/forms/EditFeatureForm";
+import AddFeatureForm from "../../components/forms/AddFeatureForm";
 
 // Images
 import addPlusIcon from "../../images/add-plus.png";
 import pencilIcon from "../../images/pencil.png";
 import trashIcon from "../../images/trash-can.png";
 import warningIcon from "../../images/warning.png";
-
-// Form Component
-const AddCharacteristicForm = ({ onClose, onSubmit }) => {
-  // ... mantener el mismo código del formulario que estaba en AdminHome ...
-};
 
 const AdminFeature = ({ isInAdminLayout }) => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -31,20 +27,37 @@ const AdminFeature = ({ isInAdminLayout }) => {
   const BASE_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
+    if (!auth.token || auth.role !== "ADMIN") {
+      toast.error("No tienes permisos para acceder a esta sección");
+      return;
+    }
     fetchCharacteristics();
-  }, []);
+  }, [auth]);
 
   const fetchCharacteristics = async () => {
     try {
+      console.log("Making request with token:", auth.token);
+      console.log("User role:", auth.role);
+
       const response = await axios.get(`${BASE_URL}/api/caracteristicas`, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       });
       setCharacteristics(response.data);
     } catch (error) {
-      toast.error("Error al cargar las características");
-      console.error("Error:", error);
+      console.error("Authorization error:", {
+        token: auth.token,
+        role: auth.role,
+        error: error.response?.data,
+      });
+      if (error.response?.status === 403) {
+        toast.error("No tienes permisos para ver las características");
+      } else {
+        toast.error("Error al cargar las características");
+      }
     }
   };
 
@@ -64,28 +77,57 @@ const AdminFeature = ({ isInAdminLayout }) => {
     }
   };
 
-  const handleAddCharacteristic = async (formData) => {
+  const handleAddFeature = async (formData) => {
     try {
+      // Check auth first
+      if (!auth.token) {
+        toast.error("No hay sesión activa");
+        return;
+      }
+
+      // Create data object manually to better control what we're sending
+      const data = {
+        nombre: formData.get('nombre'),
+      };
+
+      // Log what we're about to send
+      console.log("Sending data:", data);
+      console.log("Auth token:", auth.token);
+
       const response = await axios.post(
         `${BASE_URL}/api/caracteristicas`,
-        formData,
+        data,
         {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
-            "Content-Type": "application/json",
-          },
+            'Authorization': `Bearer ${auth.token}`,
+            'Content-Type': 'application/json',
+          }
         }
       );
 
-      if (response.status === 201) {
+      console.log("Server response:", response);
+
+      if (response.status === 201 || response.status === 200) {
         toast.success("Característica agregada exitosamente");
         setShowAddForm(false);
         fetchCharacteristics();
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Error al agregar la característica"
-      );
+      console.error("Error details:", {
+        status: error?.response?.status,
+        data: error?.response?.data,
+        message: error.message,
+        headers: error?.response?.headers
+      });
+
+      // More specific error messages
+      if (error.response?.status === 403) {
+        toast.error("No tienes autorización para agregar características");
+      } else if (error.response?.status === 401) {
+        toast.error("Sesión expirada o inválida");
+      } else {
+        toast.error("Error al agregar la característica");
+      }
     }
   };
 
@@ -156,9 +198,9 @@ const AdminFeature = ({ isInAdminLayout }) => {
           </div>
 
           {showAddForm && (
-            <AddCharacteristicForm
+            <AddFeatureForm
               onClose={() => setShowAddForm(false)}
-              onSubmit={handleAddCharacteristic}
+              onSubmit={handleAddFeature}
             />
           )}
 
@@ -207,7 +249,9 @@ const AdminFeature = ({ isInAdminLayout }) => {
                         </button>
                         <button
                           className="icon-button"
-                          onClick={() => handleDelete(characteristic.idCaracteristica)}
+                          onClick={() =>
+                            handleDelete(characteristic.idCaracteristica)
+                          }
                         >
                           <img src={trashIcon} alt="Eliminar característica" />
                         </button>
