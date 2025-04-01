@@ -46,62 +46,67 @@ const Header = () => {
     setShowDropdown(false);
   };
 
-  return (
-    <div className="header-container">
-      <div className="fixed-header">
-        <header className="app-header">
-          <Logo />
-          <Link to="/" className="logo">
-            <span>La mejor compañia para tu mejor amigo</span>
-          </Link>
-          <nav className="nav-section">
-            <button
-              className="menu-toggle"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? "✕" : "☰"}
-            </button>
-            <div className={`nav-container ${isMenuOpen ? "show" : ""}`}>
-              {/* <Menu /> */}
-              {!auth.token ? (
-                <>
-                  <div className="header-user-noA">
-                    <button onClick={() => openLoginModal(false)}>
-                      Crear cuenta
-                    </button>
-                    <button onClick={() => openLoginModal(true)}>
-                      Iniciar sesión
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="header-user">
-                  <div className="name-avatar">
-                    <h3>
-                      {auth.nombre} {auth.apellido}
-                    </h3>
-                    <div className="avatar-container">
-                      <span className="avatar" onClick={toggleDropdown}>
-                        {auth.nombre[0]}
-                        {auth.apellido[0]}
-                      </span>
-                      {showDropdown && (
-                        <div className="dropdown-menu">
-                          <Link to="/mi-perfil" className="dropdown-item">
-                            <CiUser /> Ver perfil
-                          </Link>
+
+	return (
+		<div className="header-container">
+			<div className="fixed-header">
+				<header className="app-header">
+					<Logo />
+					<Link to="/" className="logo">
+						<span>La mejor compañia para tu mejor amigo</span>
+					</Link>
+					<nav className="nav-section">
+						<button
+							className="menu-toggle"
+							onClick={toggleMenu}
+							aria-label="Toggle menu"
+						>
+							{isMenuOpen ? "✕" : "☰"}
+						</button>
+						<div className={`nav-container ${isMenuOpen ? "show" : ""}`}>
+							{/* <Menu /> */}
+							{!auth.token ? (
+								<>
+									<div className="header-user-noA">
+										<button onClick={() => openLoginModal(false)}>
+											Crear cuenta
+										</button>
+										<button onClick={() => openLoginModal(true)}>
+											Iniciar sesión
+										</button>
+									</div>
+								</>
+							) : (
+								<div className="header-user">
+									<div className="name-avatar">
+										<h3>
+											{auth.nombre} {auth.apellido}
+										</h3>
+										<div className="avatar-container">
+											<span className="avatar" onClick={toggleDropdown}>
+												{auth.nombre[0]}
+												{auth.apellido[0]}
+											</span>
+											{showDropdown && (
+												<div className="dropdown-menu">
+													<Link to="/mi-perfil" className="dropdown-item">
+														<CiUser /> Ver perfil
+													</Link>
                           <Link to="/mis-favoritos" className="dropdown-item">
                             <CiHeart /> Mis Favoritos
                           </Link>
-                          {auth.role === "ADMIN" && (
-                            <button
-                              onClick={handleAdminPanel}
-                              className="dropdown-item"
-                            >
-                              <CiDesktop /> Panel administración
-                            </button>
-                          )}
+													<Link to="/mis-reservaciones" className="dropdown-item">
+														<CiUser /> Mis reservaciones
+													</Link>
+													{auth.role === "ADMIN" && (
+														<button 
+															onClick={handleAdminPanel}
+															className="dropdown-item"
+														>
+															<CiDesktop /> Panel administración
+														</button>
+													)}
+
 													<button 
 														onClick={logout} 
 														className="dropdown-item"

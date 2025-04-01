@@ -11,6 +11,7 @@ import { StarsComponent } from "../shared/StarsComponent";
 import Modal from "../shared/Modal/Modal";
 import Login from "../login/Login";
 import CalendarReservasServicio from "../shared/calendar/CalendarReservasServicio";
+import ReadOnlyCalendar from "../shared/calendar/ReadOnlyCalendar";
 
 // Context
 import { AuthContext } from "../../auth/AuthContext";
@@ -229,7 +230,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 		return (
 			<div className="periodoFechasConfirm">
 				<p>
-					del{" "}
+					Desde el{" "}
 					<span>
 						{start.dayName} {start.date} de {start.monthName} del {start.year}
 					</span>
@@ -447,51 +448,65 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{isConfirmReserva && (
 				<div className="modal-overlay">
 					<div className="modal-container reservation-modal">
-						<LiaPawSolid className="modal-icon" />
 						{cuidadoInicial && cuidadoFinal ? (
 							<>
-								<h2 className="reservation-title">
-									{serviceInfo.nombre || name}
-								</h2>
-
-								<div className="reservation-image">
-									{getServiceImage() && (
-										<img
-											src={getServiceImage()}
-											alt={serviceDetails?.nombre || name}
-											style={{
-												width: "100%",
-												height: "100%",
-												objectFit: "cover",
-												display: "block",
-											}}
-										/>
-									)}
-								</div>
-
-								<div className="reservation-description">
-									<p>{serviceInfo.descripcion || description}</p>
+								<div className="modal-header">
+									<div className="reservation-image">
+										{getServiceImage() && (
+											<img
+												src={getServiceImage()}
+												alt={serviceDetails?.nombre || name}
+												style={{
+													width: "100%",
+													height: "100%",
+													objectFit: "cover",
+													display: "block",
+												}}
+											/>
+										)}
+									</div>
+									<div className="reservation-header-content">
+										<LiaPawSolid className="modal-icon" />
+										<div className="reservation-title">
+											<p className="title-prefix">Confirma tu Reserva:</p>
+											<p className="title-name">{serviceInfo.nombre || name}</p>
+										</div>
+										<div className="reservation-description">
+											<p>{serviceInfo.descripcion || description}</p>
+										</div>
+									</div>
 								</div>
 
 								<div className="reservation-details">
 									<h3>Detalles de la reserva:</h3>
-									<div className="reservation-price">
-										<p>
-											<strong>Precio por día:</strong> $
-											{serviceDetails?.precio || 0}
-										</p>
-									</div>
-									<div className="reservation-dates">
-										{formatDates(cuidadoInicial, cuidadoFinal)}
-									</div>
-									<div className="reservation-pets">
-										<p>
-											<strong>Cantidad de mascotas:</strong> {selectedNumPets}
-										</p>
-										<p>
-											<strong>Tipo de mascota:</strong>{" "}
-											{getSelectedEspecieName()}
-										</p>
+									<div className="reservation-details-grid">
+										<div className="reservation-calendar">
+											<ReadOnlyCalendar
+												initialDate={cuidadoInicial}
+												finalDate={cuidadoFinal}
+											/>
+										</div>
+										<div className="reservation-info">
+											<div className="reservation-price">
+												<p>
+													<strong>Precio por día:</strong> $
+													{serviceDetails?.precio || 0}
+												</p>
+											</div>
+											<div className="reservation-dates">
+												{formatDates(cuidadoInicial, cuidadoFinal)}
+											</div>
+											<div className="reservation-pets">
+												<p>
+													<strong>Cantidad de mascotas:</strong>{" "}
+													{selectedNumPets}
+												</p>
+												<p>
+													<strong>Tipo de mascota:</strong>{" "}
+													{getSelectedEspecieName()}
+												</p>
+											</div>
+										</div>
 									</div>
 								</div>
 

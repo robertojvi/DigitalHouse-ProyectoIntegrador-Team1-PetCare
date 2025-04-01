@@ -19,46 +19,49 @@ import ProtectedRoute from "./auth/ProtectedRoute"; // Updated import path
 // Styles
 import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
+import ReservationHistory from "./pages/clients/ReservationHistory";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Routes>
-        {/* Padre de las rutas anidadas */}
-        <Route path="/" element={<Layout />}>
-          {/* Rutas anidadas hijas */}
 
-          {/* Rutas del usuario (sitio web) */}
-          <Route path="/" element={<Home />} />
-          <Route path="/categories/:id" element={<Categories />} />
-          {/* Al darle click a la imagen del card en el home, me redirige al detalle del servicio */}
-          {/* y el botón "Ver más" me lleva a la galería de imágenes de ese servicio */}
-          <Route path="/service/:id" element={<ServiceDetail />} />
-          <Route path="/gallery" element={<ServiceImagesGallery />} />
-          <Route path="/mi-perfil" element={<UserProfile />} />
+	return (
+		<AuthProvider>
+			<Routes>
+				{/* Padre de las rutas anidadas */}
+				<Route path="/" element={<Layout />}>
+					{/* Rutas anidadas hijas */}
+
+					{/* Rutas del usuario (sitio web) */}
+					<Route path="/" element={<Home />} />
+					<Route path="/categories/:id" element={<Categories />} />
+					{/* Al darle click a la imagen del card en el home, me redirige al detalle del servicio */}
+					{/* y el botón "Ver más" me lleva a la galería de imágenes de ese servicio */}
+					<Route path="/service/:id" element={<ServiceDetail />} />
+					<Route path="/gallery" element={<ServiceImagesGallery />} />
+					<Route path="/mi-perfil" element={<UserProfile />} />
           <Route path="/mis-favoritos" element={<Favorites />} />
+					<Route path="/mis-reservaciones" element={<ReservationHistory/>} />
 
-          {/* Rutas del administrador */}
-          <Route
-            path="/administracion"
-            element={
-              <ProtectedRoute requiredRole="ADMIN">
-                <AdminHome />
-              </ProtectedRoute>
-            }
-          />
+					{/* Rutas del administrador */}
+					<Route
+						path="/administracion"
+						element={
+							<ProtectedRoute requiredRole="ADMIN">
+								<AdminHome />
+							</ProtectedRoute>
+						}
+					/>
 
-          {/* Ruta por defecto 404 */}
-          <Route
-            path="*"
-            element={
-              <h1 className="mainContainer">Page not found - Error 404</h1>
-            }
-          />
-        </Route>
-      </Routes>
-    </AuthProvider>
-  );
+					{/* Ruta por defecto 404 */}
+					<Route
+						path="*"
+						element={
+							<h1 className="mainContainer">Page not found - Error 404</h1>
+						}
+					/>
+				</Route>
+			</Routes>
+		</AuthProvider>
+	);
 }
 
 export default App;
