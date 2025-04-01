@@ -1,13 +1,22 @@
+// React
 import { useState, useContext } from "react"; // Add useContext
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import "../../styles/login/login.css";
-import Logo from "../header/Logo";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import axios from "axios";
+
+// Pages
+
+// Components
 import { AuthContext } from "../../auth/AuthContext"; // Import AuthContext
+import Logo from "../header/Logo";
+
+// Styles
+import "../../styles/login/login.css";
+
+// Images
 
 const Login = ({ isLoginValue, returnUrl = null }) => {
 	const [isLogin, setIsLogin] = useState(isLoginValue);
@@ -24,6 +33,7 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		getValues, // Para obtener el valor de la contraseña y compararlo en la confirmación
 	} = useForm();
 
 	// Función para manejar el envío del formulario
@@ -56,7 +66,9 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 					} else {
 						// Otherwise use default redirect
 						window.location.href =
-							response.data.role === "ADMIN" ? "/administracion" : "/";
+							response.data.role === "ADMIN"
+								? "/administracion"
+								: "/";
 					}
 				}, 2000);
 			}
@@ -92,7 +104,9 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 				</div>
 				<h2>{isLogin ? "Iniciar Sesión" : "Crear Cuenta"}</h2>
 
-				{errorMessage && <div className="error-alert">{errorMessage}</div>}
+				{errorMessage && (
+					<div className="error-alert">{errorMessage}</div>
+				)}
 
 				<form onSubmit={handleSubmit(onSubmit)}>
 					{!isLogin ? (
@@ -104,11 +118,14 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										type="text"
 										placeholder="Ingresa tu nombre"
 										{...register("nombre", {
-											required: "El nombre es obligatorio",
+											required:
+												"El nombre es obligatorio",
 										})}
 									/>
 									{errors.nombre && (
-										<p className="error">{errors.nombre.message}</p>
+										<p className="error">
+											{errors.nombre.message}
+										</p>
 									)}
 								</div>
 
@@ -118,11 +135,14 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										type="text"
 										placeholder="Ingresa tu apellido"
 										{...register("apellido", {
-											required: "El apellido es obligatorio",
+											required:
+												"El apellido es obligatorio",
 										})}
 									/>
 									{errors.apellido && (
-										<p className="error">{errors.apellido.message}</p>
+										<p className="error">
+											{errors.apellido.message}
+										</p>
 									)}
 								</div>
 							</div>
@@ -142,7 +162,9 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										})}
 									/>
 									{errors.email && (
-										<p className="error">{errors.email.message}</p>
+										<p className="error">
+											{errors.email.message}
+										</p>
 									)}
 								</div>
 
@@ -152,11 +174,14 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										type="tel"
 										placeholder="Ingresa tu número de teléfono"
 										{...register("telefono", {
-											required: "El teléfono es obligatorio",
+											required:
+												"El teléfono es obligatorio",
 										})}
 									/>
 									{errors.telefono && (
-										<p className="error">{errors.telefono.message}</p>
+										<p className="error">
+											{errors.telefono.message}
+										</p>
 									)}
 								</div>
 							</div>
@@ -168,12 +193,23 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										type="password"
 										placeholder="********"
 										{...register("contrasenia", {
-											required: "La contraseña es obligatoria",
-											minLength: { value: 6, message: "Mínimo 6 caracteres" },
+											required:
+												"La contraseña es obligatoria",
+											minLength: {
+												value: 6,
+												message: "Mínimo 6 caracteres",
+											},
+											pattern: {
+												value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+												message:
+													"La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.",
+											},
 										})}
 									/>
 									{errors.contrasenia && (
-										<p className="error">{errors.contrasenia.message}</p>
+										<p className="error">
+											{errors.contrasenia.message}
+										</p>
 									)}
 								</div>
 
@@ -183,12 +219,22 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										type="password"
 										placeholder="********"
 										{...register("contrasenia1", {
-											required: "Las contraseñas no coinciden",
-											minLength: { value: 6, message: "Mínimo 6 caracteres" },
+											required:
+												"Las contraseñas no coinciden",
+											minLength: {
+												value: 6,
+												message: "Mínimo 6 caracteres",
+											},
+											validate: (value) =>
+												value ===
+													getValues("contrasenia") ||
+												"Las contraseñas no coinciden",
 										})}
 									/>
-									{errors.contrasenia && (
-										<p className="error">{errors.contrasenia.message}</p>
+									{errors.contrasenia1 && (
+										<p className="error">
+											{errors.contrasenia1.message}
+										</p>
 									)}
 								</div>
 							</div>
@@ -209,7 +255,9 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 									})}
 								/>
 								{errors.email && (
-									<p className="error">{errors.email.message}</p>
+									<p className="error">
+										{errors.email.message}
+									</p>
 								)}
 							</div>
 							<div className="login-form-combo">
@@ -218,12 +266,18 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 									type="password"
 									placeholder="********"
 									{...register("contrasenia", {
-										required: "La contraseña es obligatoria",
-										minLength: { value: 6, message: "Mínimo 6 caracteres" },
+										required:
+											"La contraseña es obligatoria",
+										minLength: {
+											value: 6,
+											message: "Mínimo 6 caracteres",
+										},
 									})}
 								/>
 								{errors.contrasenia && (
-									<p className="error">{errors.contrasenia.message}</p>
+									<p className="error">
+										{errors.contrasenia.message}
+									</p>
 								)}
 							</div>
 						</>
@@ -236,7 +290,10 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 					</div>
 				</form>
 
-				<p className="login-toggle" onClick={() => setIsLogin(!isLogin)}>
+				<p
+					className="login-toggle"
+					onClick={() => setIsLogin(!isLogin)}
+				>
 					{isLogin
 						? "¿No tienes cuenta? Regístrate"
 						: "¿Ya tienes cuenta? Inicia Sesión"}
