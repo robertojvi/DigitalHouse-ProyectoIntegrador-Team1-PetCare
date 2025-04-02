@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ReservationCard from "../../components/reservation/ReservationCard";
 import axios from "axios";
 import { AuthContext } from "../../auth/AuthContext";
+import "../../styles/pages/reservationHistory.css";
 
 const ReservationHistory = () => {
   const [reservas, setReservas] = useState([]);
@@ -35,10 +36,8 @@ const ReservationHistory = () => {
   }
 
   return (
-    <div style={{ maxWidth: "900px", margin: "80px auto", padding: "24px", textAlign: "center" }}>
-      <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "24px" }}>
-        Historial de Reservas
-      </h2>
+    <div className="reservation-history-container">
+      <h2 className="reservation-history-title">Historial de Reservas</h2>
       {reservas.length === 0 ? (
         <p>No tienes reservas aún.</p>
       ) : (

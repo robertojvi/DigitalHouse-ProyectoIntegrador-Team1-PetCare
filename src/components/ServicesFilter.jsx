@@ -76,7 +76,7 @@ export const ServicesFilter = () => {
                 key={index}
                 name={category.name}
                 icon={category.icon}
-                id={index}
+                id={category.id}
               />
             ))}
           </ServicesFilterContainer>

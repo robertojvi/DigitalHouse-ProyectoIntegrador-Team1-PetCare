@@ -1,77 +1,69 @@
+import pawprint from "../../assets/icons/pawprint.svg";
+import { Icon } from "../shared/styled-components/TitleComponents.styles";
+import { useNavigate } from "react-router-dom";
+import "../../styles/pages/reservationHistory.css";
 
-import pawprint from '../../assets/icons/pawprint.svg'
-import { Icon } from '../shared/styled-components/TitleComponents.styles';
+const ReservationCard = ({ reserva }) => {
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate(`/mi-reserva/${reserva.idReserva}`);
+  };
 
-const cardStyle = {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: "24px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    borderRadius: "8px",
-    overflow: "hidden",
+  const generarCodigoConfirmacion = () => {
+    const fecha = new Date(reserva.fechaInicio);
+    const fechaFormateada = `${fecha.getDate()}${(fecha.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}${fecha.getFullYear().toString().slice(2)}`;
+    return `RSV-${reserva.nombreCategoria
+      ?.substring(0, 3)
+      .toUpperCase()}-${fechaFormateada}-${reserva.idReserva}`;
   };
-  
-  const imageStyle = {
-    width: "33.33%",
-    height: "auto",
-    objectFit: "cover",
-  };
-  
-  const contentStyle = {
-    padding: "20px",
-    flex: 1,
-    fontSize: "14px",
-  };
-  
-  const sectionStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "16px",
-    color: "#555",
-  };
-  
-  const labelStyle = {
-    fontWeight: "bold",
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-  };
-  
-  const ReservationCard = ({ reserva }) => {
-    return (
-      <div style={cardStyle}>
-        <img
-          src={reserva.imagenServicio}
-          alt="Imagen reserva"
-          style={imageStyle}
-        />
-        <div style={contentStyle}>
-          <div style={sectionStyle}>
-            <div>
-              <div style={labelStyle}>
-                <Icon src={pawprint} alt="Pawprint icon" /> Fecha Inicial
-              </div>
-              <div>{reserva.fechaInicio}</div>
+
+  const codigoConfirmacion =
+    reserva.codigoConfirmacion || generarCodigoConfirmacion();
+
+  return (
+    <div
+      className="reservation-card"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
+      <img
+        src={reserva.imagenServicio}
+        alt="Imagen reserva"
+        className="reservation-image"
+      />
+      <div className="reservation-content">
+        <div className="reservation-dates">
+          <div>
+            <div className="date-label">
+              <Icon src={pawprint} alt="Pawprint icon" /> Fecha Inicial
             </div>
-            <div>
-              <div style={labelStyle}>
-                <Icon src={pawprint} alt="Pawprint icon" /> Fecha Final
-              </div>
-              <div>{reserva.fechaFin}</div>
-            </div>
-          </div>
-          <div style={{ marginBottom: "8px" }}>
-            <strong>Detalles de la reserva: </strong><br />
-            {reserva.nombreCategoria}
+            <div className="date-value">{reserva.fechaInicio}</div>
           </div>
           <div>
-            <strong>Estado:</strong><br />
-            {reserva.estado}
+            <div className="date-label">
+              <Icon src={pawprint} alt="Pawprint icon" /> Fecha Final
+            </div>
+            <div className="date-value">{reserva.fechaFin}</div>
           </div>
         </div>
+        <div className="reservation-details">
+          <div className="reservation-details-label">
+            Detalles de la Reserva:
+          </div>
+          <div className="reservation-details-value">
+            {reserva.nombreCategoria}
+          </div>
+        </div>
+        <div>
+          <div className="confirmation-code-label">Código de confirmación</div>
+          <div className="confirmation-code-value">{codigoConfirmacion}</div>
+        </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export default ReservationCard;
+export default ReservationCard;

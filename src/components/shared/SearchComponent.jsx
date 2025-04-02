@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "../../styles/searchBox.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +8,7 @@ import SelectService from "./SelectService";
 import ButtonSearch from "./ButtonSearch";
 import SearchBarComponent from "./SearchBarComponent";
 import { getAppUrl } from "../../services/getAppUrl";
+import { AuthContext } from "../../auth/AuthContext";
 
 export const SearchComponent = ({ onSearch }) => {
   const [showPicker, setShowPicker] = useState(false);
@@ -15,6 +16,7 @@ export const SearchComponent = ({ onSearch }) => {
   const [startDate, endDate] = dateRange;
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedService, setSelectedService] = useState("");
+  const { setIdCategoria } = useContext(AuthContext);
 
   // Función para formatear fecha en YYYY-MM-DD
   const formatDate = (date) => {
@@ -40,6 +42,8 @@ export const SearchComponent = ({ onSearch }) => {
       const data = await response.json();
       console.log("DATAAA: ", data);
       onSearch(data);
+      setIdCategoria(undefined);
+      sessionStorage.setItem("servicesFiltered", []);
     } catch (error) {
       console.error("Error fetching services:", error);
     }

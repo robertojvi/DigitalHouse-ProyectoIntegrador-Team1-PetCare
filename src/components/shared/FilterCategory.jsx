@@ -1,16 +1,44 @@
 import React from 'react'
+import { useContext } from "react";
 import { FilterCategoryContainer, FilterCategoryLink } from './styled-components/FilterCategory.styles'
-import { getAppUrl } from '../../services/getAppUrl'
-
-const BASE_APP_URL = import.meta.env.VITE_APP_URL || "";
-
+import { AuthContext } from "../../auth/AuthContext.jsx";
 
 export const FilterCategory = ({ name, icon, id }) => {
+    const { setIdCategoria } = useContext(AuthContext);
 
+    const handleClick = async () => {
+        console.log("Categoria id: " + (id))
+        try {
+           
+            // const servicesFiltered = await getServices(id)
+            const storedServices = JSON.parse(sessionStorage.getItem("services"));
+            
+            if(id !== 99){
+                const servicesFiltered = storedServices.filter(service => service.categoria.id_categoria === id);
+                console.log("servicesFiltered: " + servicesFiltered)
+                sessionStorage.setItem(
+                    "servicesFiltered",
+                    JSON.stringify(servicesFiltered)
+                );
+            }else{
+                sessionStorage.setItem("servicesFiltered", sessionStorage.getItem("services"))
+            }
+            
+
+            setIdCategoria(id)
+        } catch (error) {
+            console.error("Error al obtener servicios filtrados:", error.message);
+        }
+    };
     return (
         <FilterCategoryContainer>
-            <FilterCategoryLink href={`${BASE_APP_URL}/categories/${id+1}`}>
-            <img src={icon} alt={`${name} icon`} />
+            <FilterCategoryLink onClick={handleClick}>
+                {id === 99 ? (
+                    <img src={icon} alt={`${name} icon`} height={25} />
+                ): (
+                    <img src={icon} alt={`${name} icon`} />
+                )}
+            
             <p>{name}</p>
             </FilterCategoryLink>
         </FilterCategoryContainer>

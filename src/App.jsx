@@ -40,7 +40,7 @@ function App() {
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
 					<Route path="/mi-perfil" element={<UserProfile />} />
           <Route path="/mis-favoritos" element={<Favorites />} />
-					<Route path="/mis-reservaciones" element={<ReservationHistory/>} />
+					<Route path="/mis-reservas" element={<ReservationHistory/>} />
 					<Route path="/mi-reserva/:id" element={<Reservation />}/>
 					{/* Rutas del administrador */}
 					<Route

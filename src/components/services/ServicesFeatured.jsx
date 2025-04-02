@@ -1,7 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { TitleComponent } from "../shared/TitleComponent";
 import { GridComponent } from "../GridComponent";
+import { AuthContext } from "../../auth/AuthContext";
 import { getServices } from "../../services/serviciosService";
 
 export const ServicesFeatured = ({ services = [] }) => {
@@ -10,6 +11,7 @@ export const ServicesFeatured = ({ services = [] }) => {
 	const [randomizedServices, setRandomizedServices] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const firstRender = useRef(true);
+	const {idCategoria} = useContext(AuthContext);
 
 	// Store previous location to detect back navigation
 	useEffect(() => {
@@ -68,10 +70,18 @@ export const ServicesFeatured = ({ services = [] }) => {
 			setLoading(true);
 
 			// Use provided services or fetch them
-			let servicesToUse = services;
-			if (!services || services.length === 0) {
-				servicesToUse = await getServices();
+			let servicesToUse = [];
+			if (!services || services.length === 0 || !idCategoria) {
+				if(sessionStorage.getItem("services")){
+					servicesToUse = JSON.parse(sessionStorage.getItem("services"))
+				} else {
+					servicesToUse = await getServices();
+				}	
 			}
+
+			let servicesStoraged = (sessionStorage.getItem("servicesFiltered") && sessionStorage.getItem("servicesFiltered").length > 0) && JSON.parse(sessionStorage.getItem("servicesFiltered"));
+			servicesToUse = servicesStoraged && servicesStoraged.length > 0 ? servicesStoraged : (services.length>0 ? services : servicesToUse);
+			
 
 			if (servicesToUse && servicesToUse.length > 0) {
 				// Create a copy of the services array
@@ -112,9 +122,10 @@ export const ServicesFeatured = ({ services = [] }) => {
 			// Only randomize if we're not on the first render
 			// First render is handled by the location effect above
 			console.log("Services changed, re-randomizing");
-			randomizeServices();
-		}
-	}, [services]);
+			randomizeServices();		
+		}		
+			idCategoria && randomizeServices();	
+	}, [services, idCategoria]);
 
 	const handleServiceClick = (service) => {
 		// Before navigating to service detail, store the current path
