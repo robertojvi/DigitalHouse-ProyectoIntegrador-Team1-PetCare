@@ -1,7 +1,7 @@
 // React
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CiDesktop, CiLogout, CiUser } from "react-icons/ci";
+import { CiDesktop, CiLogout, CiUser, CiHeart } from "react-icons/ci";
 
 // Components
 import { AuthContext } from "../../auth/AuthContext";
@@ -16,35 +16,36 @@ import TopBar from "./TopBar";
 import Menu from "./Menu";
 
 const Header = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-	const [isLogin, setIsLogin] = useState(true);
-	const [showDropdown, setShowDropdown] = useState(false);
-	const { auth, logout } = useContext(AuthContext);
-	const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { auth, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-	const toggleDropdown = () => {
-		setShowDropdown(!showDropdown);
-	};
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
-	const openLoginModal = (loginMode) => {
-		setIsLogin(loginMode);
-		setIsLoginModalOpen(true);
-	};
+  const openLoginModal = (loginMode) => {
+    setIsLogin(loginMode);
+    setIsLoginModalOpen(true);
+  };
 
-	const closeModal = () => {
-		setIsLoginModalOpen(false);
-	};
+  const closeModal = () => {
+    setIsLoginModalOpen(false);
+  };
 
-	const handleAdminPanel = () => {
-		localStorage.removeItem("adminSelectedMenu");
-		navigate("/administracion");
-		setShowDropdown(false);
-	};
+  const handleAdminPanel = () => {
+    localStorage.removeItem("adminSelectedMenu");
+    navigate("/administracion");
+    setShowDropdown(false);
+  };
+
 
 	return (
 		<div className="header-container">
@@ -91,6 +92,12 @@ const Header = () => {
 													<Link to="/mi-perfil" className="dropdown-item">
 														<CiUser /> Ver perfil
 													</Link>
+                          <Link to="/mis-favoritos" className="dropdown-item">
+                            <CiHeart /> Mis Favoritos
+                          </Link>
+													<Link to="/mis-reservaciones" className="dropdown-item">
+														<CiUser /> Mis reservaciones
+													</Link>
 													{auth.role === "ADMIN" && (
 														<button 
 															onClick={handleAdminPanel}
@@ -99,30 +106,31 @@ const Header = () => {
 															<CiDesktop /> Panel administración
 														</button>
 													)}
+
 													<button 
 														onClick={logout} 
 														className="dropdown-item"
 													>
-														<CiLogout /> Cerrar Sesión
-													</button>
-												</div>
-											)}
-										</div>
-									</div>
-								</div>
-							)}
-						</div>
-					</nav>
-				</header>
-			</div>
+                            <CiLogout /> Cerrar Sesión
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </nav>
+        </header>
+      </div>
 
-			{isLoginModalOpen && (
-				<Modal onClose={closeModal}>
-					<Login isLoginValue={isLogin} />
-				</Modal>
-			)}
-		</div>
-	);
+      {isLoginModalOpen && (
+        <Modal onClose={closeModal}>
+          <Login isLoginValue={isLogin} />
+        </Modal>
+      )}
+    </div>
+  );
 };
 
 export default Header;
