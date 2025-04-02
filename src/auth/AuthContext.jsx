@@ -70,9 +70,12 @@ export const AuthProvider = ({ children }) => {
 		});
 	};
 
+	const [idCategoria, setIdCategoria] = useState([]);
+
+
 	return (
 		<AuthContext.Provider
-			value={{ auth, login, logout, updateAuthFromLocalStorage }}
+			value={{ auth, login, logout, updateAuthFromLocalStorage, idCategoria, setIdCategoria }}
 		>
 			{children}
 		</AuthContext.Provider>
