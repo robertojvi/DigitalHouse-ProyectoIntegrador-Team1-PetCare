@@ -86,7 +86,19 @@
 }
 
 .estrellas {
-  font-size: 20px;
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+}
+
+.estrella {
+  padding: 0 2px;
+  transition: color 0.2s ease;
+}
+
+.estrella:hover,
+.estrella.active {
   color: #ffc107;
 }
 

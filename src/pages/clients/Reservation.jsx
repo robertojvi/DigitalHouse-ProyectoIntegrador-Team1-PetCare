@@ -11,6 +11,8 @@ export default function Reservation() {
   const { id } = useParams();
   const [reserva, setReserva] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [rating, setRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
 
   const { auth } = useContext(AuthContext);
   const BASE_URL = import.meta.env.VITE_API_URL || "";
@@ -48,10 +50,51 @@ export default function Reservation() {
     nombreCategoria,
     fechas,
     idReserva,
+    codigoConfirmacion: codigoReserva,
   } = reserva;
 
-  const codigoConfirmacion = `RSV-${idReserva}`;
+  // Si el backend no proporciona el código, generamos uno basado en la información de la reserva
+  const codigoConfirmacion =
+    codigoReserva ||
+    (() => {
+      const fecha = new Date(fechaInicio);
+      const fechaFormateada = `${fecha.getDate()}${(fecha.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}${fecha.getFullYear().toString().slice(2)}`;
+      return `RSV-${nombreCategoria
+        ?.substring(0, 3)
+        .toUpperCase()}-${fechaFormateada}-${idReserva}`;
+    })();
+
   const requerimientos = "No hay requerimientos especiales"; // placeholder
+
+  const handleStarClick = (selectedRating) => {
+    setRating(selectedRating);
+  };
+
+  const handleStarHover = (hoveredValue) => {
+    setHoveredRating(hoveredValue);
+  };
+
+  const handleStarLeave = () => {
+    setHoveredRating(0);
+  };
+
+  const renderStars = () => {
+    return [1, 2, 3, 4, 5].map((starValue) => (
+      <span
+        key={starValue}
+        className={`estrella ${
+          (hoveredRating || rating) >= starValue ? "active" : ""
+        }`}
+        onClick={() => handleStarClick(starValue)}
+        onMouseEnter={() => handleStarHover(starValue)}
+        onMouseLeave={handleStarLeave}
+      >
+        ★
+      </span>
+    ));
+  };
 
   return (
     <div className="card-container">
@@ -100,7 +143,7 @@ export default function Reservation() {
             Valora El Servicio de {nombreServicio}, de 1 a 5, siendo 1 muy
             insatisfecho y 5 muy satisfecho
           </p>
-          <div className="estrellas">★★★★★</div>
+          <div className="estrellas">{renderStars()}</div>
         </div>
         <div className="comentario">
           <textarea

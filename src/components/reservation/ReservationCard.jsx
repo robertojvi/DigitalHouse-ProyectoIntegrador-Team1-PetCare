@@ -10,7 +10,18 @@ const ReservationCard = ({ reserva }) => {
     navigate(`/mi-reserva/${reserva.idReserva}`);
   };
 
-  const codigoConfirmacion = `RSV-${reserva.idReserva}`;
+  const generarCodigoConfirmacion = () => {
+    const fecha = new Date(reserva.fechaInicio);
+    const fechaFormateada = `${fecha.getDate()}${(fecha.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}${fecha.getFullYear().toString().slice(2)}`;
+    return `RSV-${reserva.nombreCategoria
+      ?.substring(0, 3)
+      .toUpperCase()}-${fechaFormateada}-${reserva.idReserva}`;
+  };
+
+  const codigoConfirmacion =
+    reserva.codigoConfirmacion || generarCodigoConfirmacion();
 
   return (
     <div
