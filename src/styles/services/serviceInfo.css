@@ -631,7 +631,6 @@ input[type="radio"]:checked+.custom-radio::after {
 }
 
 .reservation-details {
-  background: #f9f9f9;
   padding: 0.5rem;
   border-radius: 8px;
   margin: 0.5rem 0;

@@ -1,122 +1,175 @@
 .card-container {
-    max-width: 500px;
-    margin: 80px auto;
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: sans-serif;
-  }
-  
-  .titulo {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .imagen-principal {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-bottom: 20px;
-  }
-  
-  .fechas {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .fecha .emoji {
-    font-size: 24px;
-  }
-  
-  .etiqueta {
-    font-weight: 600;
-    margin-top: 5px;
-  }
-  
-  .valor {
-    color: #666;
-    font-size: 14px;
-  }
-  
-  .subtitulo {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .texto {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 6px;
-  }
-  
-  .seccion-valoracion {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  .valoracion {
-    width: 50%;
-    text-align: center;
-  }
-  
-  .estrellas {
-    font-size: 20px;
-    color: #ffc107;
-  }
-  
-  .comentario {
-    width: 50%;
-  }
-  
-  .input-textarea {
-    width: 100%;
-    min-height: 60px;
-    padding: 8px;
-    font-size: 13px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    resize: vertical;
-  }
-  
-  .boton {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .boton.gris {
-    background-color: #ddd;
-    color: #333;
-  }
-  
-  .boton.azul {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .boton.rojo {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .acciones {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
+  max-width: 500px;
+  margin: 80px auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #314549;
+  margin-bottom: 20px;
+  font-family: "Nunito", sans-serif;
+}
+
+.imagen-principal {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.fechas {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 15px 20px 15px;
+  text-align: center;
+}
+
+.fecha .emoji {
+  font-size: 24px;
+}
+
+.etiqueta {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-top: 5px;
+  color: #314549;
+}
+
+.valor {
+  font-family: "Inter", sans-serif;
+  color: #000000;
+  font-size: 14px;
+}
+
+.subtitulo {
+  font-family: "Nunito", sans-serif;
+  font-size: 21px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  color: #314549;
+}
+
+.texto {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
+.texto strong {
+  font-family: "Nunito", sans-serif;
+  color: #314549;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.seccion-valoracion {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.valoracion {
+  width: 50%;
+  text-align: center;
+}
+
+.estrellas {
+  font-size: 20px;
+  color: #ffc107;
+}
+
+.comentario {
+  width: 50%;
+}
+
+.texto-valoracion {
+  font-family: "Inter", sans-serif;
+  color: #314549;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.input-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: "Inter", sans-serif;
+  color: #314549;
+}
+
+.input-textarea::placeholder {
+  font-family: "Inter", sans-serif;
+  color: #314549;
+}
+
+.boton {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton.gris {
+  background-color: #ddd;
+  color: #333;
+}
+
+.boton.azul {
+  background-color: #314549;
+  color: #ffffff;
+}
+
+.boton.rojo {
+  background-color: #b01d1f;
+  color: #ffffff;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.enviar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.texto-enviar {
+  font-family: "Nunito", sans-serif;
+  color: #314549;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.icono-enviar {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
