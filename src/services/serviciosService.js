@@ -4,12 +4,14 @@ const BASE_URL = import.meta.env.VITE_API_URL || "";
 const API_URL = `${BASE_URL}/api/servicios`;
 
 // Obtener todos los servicios
-export const getServices = async () => {
+export const getServices = async (categoryId) => {
 	try {
 		const response = await axiosInstance.get(API_URL);
 		console.log("Obtener todos los servicios");
-		console.log(response.data.listaServicios);
-		return response.data.listaServicios;
+		console.log(response.data);
+		console.log("categoryId: " + categoryId);
+		sessionStorage.setItem("services", JSON.stringify(response.data));
+		return response.data;
 	} catch (error) {
 		if (error.response) {
 			throw new Error(

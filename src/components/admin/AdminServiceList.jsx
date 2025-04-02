@@ -59,17 +59,25 @@ const AdminServiceList = ({ onEdit }) => {
 		}
 
 		try {
-			const response = await axios.get(`${API_URL}/servicio-list`, {
-				headers: {
-					Authorization: `Bearer ${auth.token}`,
-					"Content-Type": "application/json",
-				},
-			});
+			let response = [];
+			if(sessionStorage.getItem("services")){
+				response = JSON.parse(sessionStorage.getItem("services"))
+				setServices(response);
+			}else{
+				response = await axios.get(API_URL, {
+					headers: {
+						Authorization: `Bearer ${auth.token}`,
+						"Content-Type": "application/json",
+					},
+				});
+				sessionStorage.setItem("services", JSON.stringify(response.data))
+				setServices(response.data);
+			}
+			
 
 			console.log("Servicios desde la base de datos:");
 			console.log(response.data);
-			console.log(response.data);
-			setServices(response.data);
+			
 			setError(null);
 		} catch (err) {
 			const errorMessage =

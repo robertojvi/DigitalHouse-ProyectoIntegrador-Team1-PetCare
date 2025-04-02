@@ -77,7 +77,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 	const [cuidadoFinal, setCuidadoFinal] = useState("");
 	const [serviceDetails, setServiceDetails] = useState(null);
 	const [idReserva, setIdReserva] = useState(null);
-
+	
 	// Service info destructuring
 	const { name, description, caracteristicas, rating, reviews, id_servicio } =
 		serviceInfo;
