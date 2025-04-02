@@ -42,3 +42,21 @@
   font-size: 1.2rem;
   padding: 2rem;
 }
+
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .favorites-grid {
+    grid-template-columns: 1fr; /* Una sola columna en mobile */
+    max-width: 100%; /* Usar todo el ancho disponible */
+    padding: 1rem 0.5rem; /* Reducir el padding horizontal */
+  }
+
+  .favorites-title h1 {
+    font-size: 2rem; /* Reducir tamaño del título en mobile */
+  }
+
+  .favorites-title .pawprint {
+    width: 25px; /* Reducir tamaño de las huellas en mobile */
+    height: 25px;
+  }
+}
