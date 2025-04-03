@@ -28,7 +28,7 @@
 
   & p {
     word-wrap: break-word;
-    color: #314549;
+    color: #000000;
   }
 }
 
@@ -38,9 +38,11 @@
   border-left: 1px solid black;
   text-align: center;
   padding-left: 10px;
+
+  & p {
+    color: #314549;
+  }
 }
-
-
 
 .detailInfoContainer {
   font-family: 'Poppins';
@@ -415,7 +417,7 @@ input[type="radio"]:checked+.custom-radio::after {
   object-fit: contain;
 }
 
-.terms-section-content>div {
+.terms-section-content > div {
   flex: 1;
 }
 
@@ -603,7 +605,7 @@ input[type="radio"]:checked+.custom-radio::after {
 
 .reservation-title {
   margin-bottom: 1rem;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .title-prefix {
@@ -693,7 +695,7 @@ input[type="radio"]:checked+.custom-radio::after {
   padding: 1.2rem;
   border-radius: 20px;
   border: none;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-size: 2.5rem;
   font-weight: 600;
   cursor: pointer;
@@ -727,7 +729,7 @@ input[type="radio"]:checked+.custom-radio::after {
 
 .modal-icon {
   font-size: 3.5rem;
-  color: #F2BE5E;
+  color: #f2be5e;
   margin-bottom: 0.1rem;
   align-self: center;
 }
@@ -771,7 +773,7 @@ input[type="radio"]:checked+.custom-radio::after {
 }
 
 .readonly-calendar .selected-date {
-  background: #F2BE5E !important;
+  background: #f2be5e !important;
   color: white;
 }
 
@@ -788,8 +790,6 @@ input[type="radio"]:checked+.custom-radio::after {
   padding: 1rem;
 }
 
-
-
-.description{
+.description {
   max-width: 420px;
 }

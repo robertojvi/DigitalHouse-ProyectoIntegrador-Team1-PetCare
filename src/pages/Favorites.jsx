@@ -19,15 +19,17 @@ const Favorites = () => {
   useEffect(() => {
     if (auth.token) {
       const fetchFromAPI = async () => {
-        
         try {
-          const responseUsuario = await axios.get(`${API_URL_GET_USER}/${auth.idUsuario}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`
+          const responseUsuario = await axios.get(
+            `${API_URL_GET_USER}/${auth.idUsuario}`,
+            {
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              },
             }
-          });
-          
-          console.log(responseUsuario)
+          );
+
+          console.log(responseUsuario);
           setFavorites(responseUsuario.data.favoritos);
         } catch (error) {
           console.error("Error fetching favorites:", error);
