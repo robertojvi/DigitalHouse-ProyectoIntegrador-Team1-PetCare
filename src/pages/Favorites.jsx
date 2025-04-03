@@ -5,46 +5,49 @@ import pawprint from "../assets/icons/pawprint.svg";
 import mockFavorites from "../mocks/favoritesData.json";
 import "../styles/pages/favorites.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_API_URL || "";
+  const API_URL_GET_USER = `${BASE_URL}/api/usuarios`;
 
   useEffect(() => {
     // Simulamos una llamada a la API con un pequeño retraso
-    const fetchFavorites = async () => {
-      try {
-        // Simulamos un delay para que parezca una llamada real
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setFavorites(mockFavorites.favorites);
-      } catch (error) {
-        console.error("Error fetching favorites:", error);
-      }
-    };
+    // const fetchFavorites = async () => {
+    //   try {
+    //     // Simulamos un delay para que parezca una llamada real
+    //     await new Promise((resolve) => setTimeout(resolve, 500));
+    //     JSON.parse(localStorage.getItem("favorites"))
+    //     setFavorites(mockFavorites.favorites);
+    //   } catch (error) {
+    //     console.error("Error fetching favorites:", error);
+    //   }
+    // };
 
-    fetchFavorites();
+    // fetchFavorites();
 
     // Comentamos la llamada real a la API por ahora
-    /* if (auth.token) {
+    if (auth.token) {
       const fetchFromAPI = async () => {
+        
         try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/api/favorites/${auth.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${auth.token}`,
-              },
+          const responseUsuario = await axios.get(`${API_URL_GET_USER}/${auth.idUsuario}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`
             }
-          );
-          const data = await response.json();
-          setFavorites(data);
+          });
+          
+          console.log(responseUsuario)
+          setFavorites(responseUsuario.data.favoritos);
         } catch (error) {
           console.error("Error fetching favorites:", error);
         }
       };
       fetchFromAPI();
-    } */
+    } 
   }, []);
 
   const handleImageClick = (serviceId) => {
@@ -62,14 +65,15 @@ const Favorites = () => {
         <div className="favorites-grid">
           {favorites.map((service) => (
             <ServiceCard
-              key={service.id}
-              id={service.id}
-              name={service.name}
-              serviceType={service.serviceType}
-              image={service.image}
+              key={service.idServicio}
+              id={service.idServicio}
+              name={service.nombre}
+              serviceType={service.categoria.nombre}
+              image={service.imagenUrls[0]?.imagenUrl}
               rating={service.rating}
-              excerpt={service.description}
-              onImageClick={() => handleImageClick(service.id)}
+              excerpt={service.descripcion}
+              onImageClick={() => handleImageClick(service.idService)}
+              isFavorito={true}
             />
           ))}
         </div>

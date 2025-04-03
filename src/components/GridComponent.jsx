@@ -3,13 +3,13 @@ import { MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext } from "react
 import { ServiceCard } from "./cards/ServiceCard";
 import "../styles/GridComponent.css";
 import { getServices } from "../services/serviciosService";
-
+import { AuthContext } from "../auth/AuthContext";
 
 export const GridComponent = ({ onServiceClick, type, services = [] }) => {
   const [profiles, setProfiles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  
+  const { favoritos } = useContext(AuthContext);
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
       try {
         const storedServices = sessionStorage.getItem("services");
         const randomizedServices = sessionStorage.getItem("randomizedServices");
+       
         console.log("Servicios almacenados en sessionStorage:", storedServices);
     
         if (randomizedServices && randomizedServices !== undefined && randomizedServices.length > 0) {
@@ -41,7 +42,6 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
     
         setLoading(true);        
         const data = await getServices();
-        console.log("dataaaa: " + data)
         sessionStorage.setItem("services", JSON.stringify(data));
         setProfiles(data);        
         setLoading(false);
@@ -53,19 +53,20 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
     };
 
     fetchServices();
-  }, [services]);
+  }, [services, favoritos]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = profiles.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(profiles.length / itemsPerPage);
-
+  
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) return <div className="loading">Cargando...</div>;
+  const favoritosIds = favoritos.map(favorito => favorito.idServicio);
 
   return (
     <div className="grid-wrapper">
@@ -81,6 +82,7 @@ export const GridComponent = ({ onServiceClick, type, services = [] }) => {
             excerpt={profile.descripcion}
 			      caracteristicas={profile.caracteristicas}
             onImageClick={() => onServiceClick(profile)}
+            isFavorito={favoritosIds.includes(profile.idServicio)}
           />
         ))}
       </div>
