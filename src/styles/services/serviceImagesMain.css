@@ -1,3 +1,102 @@
+.share-button{
+	align-items: center;
+	background-color:transparent;  
+	border-radius: var(--button-third-border-radius);
+	border: none;
+	cursor: pointer;
+	display: flex;
+	font-family: 'Inter';
+	font-weight: 600;
+	font-size:12px;
+	justify-content: space-around;
+	padding: 10px 1em;
+	position: absolute;
+	top: 5.8rem;
+	width: 120px;
+}
+/* Modal */
+.share-modal {
+	background: white;
+	padding: 30px 120px;
+	border-radius: 20px;
+	max-width: 800px;
+	width: 90%;
+	position: relative;
+	max-height: 80vh;
+	overflow-y: auto;
+}
+.share-close-icon {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease;
+}
+.share-close-icon img {
+	width: 40px;
+	height: 40px;
+}
+
+.share-close-icon:hover {
+	transform: scale(1.1);
+}
+
+.share-close-button {
+	display: none;
+}
+/* Tarjeta con información */
+.info-service-container{
+	background-color: aqua;
+	height: 200px;	
+}
+
+/* Botones dentro del modal */
+.general-share-container{
+	height: 300px;
+	display: flex;
+	justify-content: center;
+}
+.right-container,.left-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	padding: 10px;
+}
+
+.share-btn-modal{
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #212121;
+    cursor: pointer;
+	display: flex;
+	/* justify-content:space-evenly; */
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+	font: var(--button-third-font);
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out;
+	width: 210px;
+}
+
+.share-btn-modal:hover {
+    background: #F5F5F5;
+}
+
+.share-icon{
+    width: 18px;
+    height: 18px;
+	margin-right: 10px;
+}
+
 .back-button {
 	background: none;
 	border: none;

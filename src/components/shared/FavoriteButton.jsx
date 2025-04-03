@@ -39,7 +39,6 @@ export const FavoriteButton = ({ serviceId, initialFavorite, onToggle }) => {
               "Content-Type": "application/json",
             },
           }); 
-          alert("Este servicio se actualizo en tus favoritos")
           setFavorited(!favorited);
         }
       
