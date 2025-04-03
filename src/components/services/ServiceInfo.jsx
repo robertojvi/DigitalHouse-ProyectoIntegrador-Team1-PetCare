@@ -340,45 +340,47 @@ const ServiceInfo = ({ serviceInfo }) => {
 	return (
 		<div className="serviceInfoContainer">
 			{/* Sección izquierda - Información del servicio */}
-			<div>
-				<div className="reviewContainer">
-					<div className="reviewStartContainer">
-						<p>Calificación y reseña del servicio</p>
-						<StarsComponent rating={rating} />
-						<div className="textReview">
-							<p>{reviews.length} reseñas</p>
+			<div >
+				<div className="serviceInfo">
+					<div className="reviewContainer">
+						<div className="reviewStartContainer">
+							<p>Calificación y reseña del servicio</p>
+							<StarsComponent rating={rating} />
+							<div className="textReview">
+								<p>{reviews.length} reseñas</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div className="detailInfoContainer">
-					<h1 className="name">{name}</h1>
-					<p className="details">
-						{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de
-						experiencia
-					</p>
-					<p className="description">"{description}"</p>
-				</div>
+					<div className="detailInfoContainer">
+						<h1 className="name">{name}</h1>
+						<p className="details">
+							{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de
+							experiencia
+						</p>
+						<p className="description">"{description}"</p>
+					</div>
 
-				<div className="features">
-					{caracteristicas.map((caracteristica) => (
-						<div className="featureRow" key={caracteristica.idCaracteristica}>
-							{caracteristica?.icon && (
-								<>
-									<img
-										src={caracteristica.icon}
-										alt={caracteristica.nombre}
-										height={40}
-									/>
-									<p>
-										{caracteristica.nombre}: {caracteristica.valor}
-									</p>
-								</>
-							)}
-						</div>
-					))}
+					<div className="features">
+						{caracteristicas.map((caracteristica) => (
+							<div className="featureRow" key={caracteristica.idCaracteristica}>
+								{caracteristica?.icon && (
+									<>
+										<img
+											src={caracteristica.icon}
+											alt={caracteristica.nombre}
+											height={40}
+										/>
+										<p>
+											{caracteristica.nombre}: {caracteristica.valor}
+										</p>
+									</>
+								)}
+							</div>
+						))}
+					</div>
 				</div>
-
+				
 				<button className="terms-button" onClick={() => setShowTerms(true)}>
 					Ver políticas de uso
 				</button>
