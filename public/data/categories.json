@@ -1,18 +1,27 @@
 [
     {
+        "id": 5,
         "name": "Cuidado en casa",
         "icon": "https://images-s3-test.s3.us-east-1.amazonaws.com/icons/House.svg"
     },
     {
+        "id": 3,
         "name": "Paseos",
         "icon": "https://images-s3-test.s3.us-east-1.amazonaws.com/icons/Dog.svg"
     },
     {
+        "id": 4,
         "name": "Spa a domicilio",
         "icon": "https://images-s3-test.s3.us-east-1.amazonaws.com/icons/Grooming.svg"
     },
     {
+        "id": 2,
         "name": "Asesorías",
         "icon": "https://images-s3-test.s3.us-east-1.amazonaws.com/icons/Pets.svg"
+    },
+    {
+        "id": 99,
+        "name": "Mostrar Todos",
+        "icon": "/icons/paw.png"
     }
 ]

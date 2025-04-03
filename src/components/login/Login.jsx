@@ -22,12 +22,12 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 	const [isLogin, setIsLogin] = useState(isLoginValue);
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState("");
-	const { login } = useContext(AuthContext); // Use AuthContext
+	const { login, setFavoritos } = useContext(AuthContext); 
 
 	const BASE_URL = import.meta.env.VITE_API_URL || "";
 	const API_URL_LOGIN = `${BASE_URL}/api/auth/login`;
 	const API_URL_REGISTER = `${BASE_URL}/api/auth/register`;
-
+	
 	// React Hook Form para manejar los inputs y validaciones
 	const {
 		register,
@@ -44,6 +44,7 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 
 			// Directly update auth context with login function
 			login(response.data);
+			console.log("response data: " + response.data.idUsuario)
 
 			// Display success message
 			if (response.data.message != null) {

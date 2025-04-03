@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import axios from "axios";
+import { AuthContext } from "../../auth/AuthContext";
 
 const HeartIcon = styled.div`
   position: absolute;
@@ -17,27 +19,45 @@ const HeartIcon = styled.div`
   }
 `;
 
-export const FavoriteButton = ({ serviceId, onToggle }) => {
-  const [favorited, setFavorited] = useState(false);
+export const FavoriteButton = ({ serviceId, initialFavorite, onToggle }) => {
+  const [favorited, setFavorited] = useState(initialFavorite);
+  const BASE_URL = import.meta.env.VITE_API_URL || "";
+  const API_URL = `${BASE_URL}/api/favoritos`;
+  const API_URL_GET_USER = `${BASE_URL}/api/usuarios`;
+  const { auth, setFavoritos } = useContext(AuthContext);
 
-  // Cargar estado desde localStorage
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorited(storedFavorites.includes(serviceId));
-  }, [serviceId]);
+  const handleClick = async () => {
+       
+      try {
+        let response = [];
+        if(!localStorage.getItem("token")){
+          alert("Tienes que iniciar sesion para poder actualizar tus favoritos");
+        }else{
+          response = await axios.post(`${API_URL}/${serviceId}`, {}, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }); 
+          alert("Este servicio se actualizo en tus favoritos")
+          setFavorited(!favorited);
+        }
+      
+      } catch (err) {
+        const errorMessage =
+          err.response?.status === 403
+            ? "No tienes permisos para acceder a esta información"
+            : "Error al marcar favorito";
+        console.error("Error fetching favoritos:", err);
+      };
 
-  const handleClick = () => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    let updatedFavorites;
+      const responseUsuario = await axios.get(`${API_URL_GET_USER}/${auth.idUsuario}`, {
+				headers: {
+					Authorization: `Bearer ${auth.token}`
+				}
+			});
 
-    if (favorited) {
-      updatedFavorites = storedFavorites.filter((id) => id !== serviceId);
-    } else {
-      updatedFavorites = [...storedFavorites, serviceId];
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    setFavorited(!favorited);
+			setFavoritos(responseUsuario.data.favoritos);
 
     if (onToggle) onToggle(!favorited);
   };

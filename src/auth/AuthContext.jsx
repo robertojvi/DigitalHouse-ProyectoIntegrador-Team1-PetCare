@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 		idUsuario: localStorage.getItem("idUser") || null,
 		nombre: localStorage.getItem("userName") || "Usuario",
 		apellido: localStorage.getItem("lastname") || "Apellido",
-		isAuthenticated: !!localStorage.getItem("token"),
+		isAuthenticated: !!localStorage.getItem("token")
 	});
 
 	useEffect(() => {
@@ -54,12 +54,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const logout = () => {
-		localStorage.removeItem("token");
-		localStorage.removeItem("role");
-		localStorage.removeItem("idUser");
-		localStorage.removeItem("userName");
-		localStorage.removeItem("lastname");
-
+		localStorage.clear();
 		setAuth({
 			token: null,
 			role: null,
@@ -70,9 +65,13 @@ export const AuthProvider = ({ children }) => {
 		});
 	};
 
+	const [idCategoria, setIdCategoria] = useState([]);
+	const [favoritos, setFavoritos] = useState([]);
+
+
 	return (
 		<AuthContext.Provider
-			value={{ auth, login, logout, updateAuthFromLocalStorage }}
+			value={{ auth, login, logout, updateAuthFromLocalStorage, idCategoria, setIdCategoria, favoritos ,setFavoritos }}
 		>
 			{children}
 		</AuthContext.Provider>

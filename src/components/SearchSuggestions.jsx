@@ -80,6 +80,7 @@ const SearchSuggestions = () => {
           <input
             placeholder="Buscar..."
             className="sc-hRDKVd diQIVz"
+            style={"max-width: 20px"}
             type="text"
             value={searchTerm}
             onChange={handleInputChange}

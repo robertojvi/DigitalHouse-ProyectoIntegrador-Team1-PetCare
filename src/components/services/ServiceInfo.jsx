@@ -11,6 +11,7 @@ import { StarsComponent } from "../shared/StarsComponent";
 import Modal from "../shared/Modal/Modal";
 import Login from "../login/Login";
 import CalendarReservasServicio from "../shared/calendar/CalendarReservasServicio";
+import ReadOnlyCalendar from "../shared/calendar/ReadOnlyCalendar";
 
 // Context
 import { AuthContext } from "../../auth/AuthContext";
@@ -68,12 +69,15 @@ const ServiceInfo = ({ serviceInfo }) => {
 	const [rangoFechas, setRangoFechas] = useState([]);
 	const [especies, setEspecies] = useState([]);
 	const [selectedEspecie, setSelectedEspecie] = useState(1);
+	const [selectedNumPets, setSelectedNumPets] = useState(1);
 	const [error, setError] = useState("");
 	const [currentServiceUrl, setCurrentServiceUrl] = useState("");
 	const [reservedDates, setReservedDates] = useState([]);
 	const [cuidadoInicial, setCuidadoInicial] = useState("");
 	const [cuidadoFinal, setCuidadoFinal] = useState("");
-
+	const [serviceDetails, setServiceDetails] = useState(null);
+	const [idReserva, setIdReserva] = useState(null);
+	
 	// Service info destructuring
 	const { name, description, caracteristicas, rating, reviews, id_servicio } =
 		serviceInfo;
@@ -130,6 +134,8 @@ const ServiceInfo = ({ serviceInfo }) => {
 			if ([200, 201].includes(response.status)) {
 				toast.success("¡Reserva creada con éxito!");
 				fetchReservedDates();
+				navigate(`/mi-reserva/${response.data.idReserva}`);
+
 			}
 		} catch (error) {
 			handleReservationError(error);
@@ -172,9 +178,22 @@ const ServiceInfo = ({ serviceInfo }) => {
 		}
 	};
 
+	const fetchServiceDetails = async () => {
+		try {
+			const response = await axios.get(
+				`${BASE_URL}/api/servicios/${id_servicio}`
+			);
+			console.log("Service details:", response.data);
+			setServiceDetails(response.data);
+		} catch (error) {
+			console.error("Error fetching service details:", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchReservedDates();
 		fetchEspecies();
+		fetchServiceDetails();
 		setCurrentServiceUrl(window.location.href);
 	}, []);
 
@@ -185,6 +204,15 @@ const ServiceInfo = ({ serviceInfo }) => {
 			return;
 		}
 		setIsConfirmReserva(true);
+	};
+
+	const redirectToLogin = () => {
+		setIsLoginModalOpen(false);
+		setShowLoginForm(true);
+	};
+
+	const closeLoginForm = () => {
+		setShowLoginForm(false);
 	};
 
 	// Date formatting
@@ -205,7 +233,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 		return (
 			<div className="periodoFechasConfirm">
 				<p>
-					del{" "}
+					Desde el{" "}
 					<span>
 						{start.dayName} {start.date} de {start.monthName} del {start.year}
 					</span>
@@ -218,6 +246,27 @@ const ServiceInfo = ({ serviceInfo }) => {
 				</p>
 			</div>
 		);
+	};
+
+	// Extract service image
+	const getServiceImage = () => {
+		if (serviceDetails?.imagenUrls?.[0]?.imagenUrl) {
+			console.log(
+				"Using image from serviceDetails:",
+				serviceDetails.imagenUrls[0].imagenUrl
+			);
+			return serviceDetails.imagenUrls[0].imagenUrl;
+		}
+		console.log("No image found in serviceDetails");
+		return null;
+	};
+
+	// Get selected species name
+	const getSelectedEspecieName = () => {
+		const selected = especies.find(
+			(especie) => especie.idEspecie === selectedEspecie
+		);
+		return selected ? selected.nombreEspecie : "Desconocido";
 	};
 
 	// Terms modal component
@@ -291,45 +340,47 @@ const ServiceInfo = ({ serviceInfo }) => {
 	return (
 		<div className="serviceInfoContainer">
 			{/* Sección izquierda - Información del servicio */}
-			<div>
-				<div className="reviewContainer">
-					<div className="reviewStartContainer">
-						<p>Calificación y reseña del servicio</p>
-						<StarsComponent rating={rating} />
-						<div className="textReview">
-							<p>{reviews.length} reseñas</p>
+			<div >
+				<div className="serviceInfo">
+					<div className="reviewContainer">
+						<div className="reviewStartContainer">
+							<p>Calificación y reseña del servicio</p>
+							<StarsComponent rating={rating} />
+							<div className="textReview">
+								<p>{reviews.length} reseñas</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div className="detailInfoContainer">
-					<h1 className="name">{name}</h1>
-					<p className="details">
-						{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de
-						experiencia
-					</p>
-					<p className="description">"{description}"</p>
-				</div>
+					<div className="detailInfoContainer">
+						<h1 className="name">{name}</h1>
+						<p className="details">
+							{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de
+							experiencia
+						</p>
+						<p className="description">"{description}"</p>
+					</div>
 
-				<div className="features">
-					{caracteristicas.map((caracteristica) => (
-						<div className="featureRow" key={caracteristica.idCaracteristica}>
-							{caracteristica?.icon && (
-								<>
-									<img
-										src={caracteristica.icon}
-										alt={caracteristica.nombre}
-										height={40}
-									/>
-									<p>
-										{caracteristica.nombre}: {caracteristica.valor}
-									</p>
-								</>
-							)}
-						</div>
-					))}
+					<div className="features">
+						{caracteristicas.map((caracteristica) => (
+							<div className="featureRow" key={caracteristica.idCaracteristica}>
+								{caracteristica?.icon && (
+									<>
+										<img
+											src={caracteristica.icon}
+											alt={caracteristica.nombre}
+											height={40}
+										/>
+										<p>
+											{caracteristica.nombre}: {caracteristica.valor}
+										</p>
+									</>
+								)}
+							</div>
+						))}
+					</div>
 				</div>
-
+				
 				<button className="terms-button" onClick={() => setShowTerms(true)}>
 					Ver políticas de uso
 				</button>
@@ -359,7 +410,10 @@ const ServiceInfo = ({ serviceInfo }) => {
 
 					<div className="formReservaMascotas formReservaGral">
 						<label>Cantidad de mascotas</label>
-						<select>
+						<select
+							value={selectedNumPets}
+							onChange={(e) => setSelectedNumPets(Number(e.target.value))}
+						>
 							{[1, 2, 3, 4].map((num) => (
 								<option key={num} value={num}>
 									{num} Mascota{num > 1 ? "s" : ""}
@@ -398,14 +452,69 @@ const ServiceInfo = ({ serviceInfo }) => {
 			{/* Modales */}
 			{isConfirmReserva && (
 				<div className="modal-overlay">
-					<div className="modal-container">
-						<LiaPawSolid className="modal-icon" />
+					<div className="modal-container reservation-modal">
 						{cuidadoInicial && cuidadoFinal ? (
 							<>
-								<p>
-									<strong>Periodo de reserva:</strong>
-								</p>
-								{formatDates(cuidadoInicial, cuidadoFinal)}
+								<div className="modal-header">
+									<div className="reservation-image">
+										{getServiceImage() && (
+											<img
+												src={getServiceImage()}
+												alt={serviceDetails?.nombre || name}
+												style={{
+													width: "100%",
+													height: "100%",
+													objectFit: "cover",
+													display: "block",
+												}}
+											/>
+										)}
+									</div>
+									<div className="reservation-header-content">
+										<LiaPawSolid className="modal-icon" />
+										<div className="reservation-title">
+											<p className="title-prefix">Confirma tu Reserva:</p>
+											<p className="title-name">{serviceInfo.nombre || name}</p>
+										</div>
+										<div className="reservation-description">
+											<p>{serviceInfo.descripcion || description}</p>
+										</div>
+									</div>
+								</div>
+
+								<div className="reservation-details">
+									<h3>Detalles de la reserva:</h3>
+									<div className="reservation-details-grid">
+										<div className="reservation-calendar">
+											<ReadOnlyCalendar
+												initialDate={cuidadoInicial}
+												finalDate={cuidadoFinal}
+											/>
+										</div>
+										<div className="reservation-info">
+											<div className="reservation-price">
+												<p>
+													<strong>Precio por día:</strong> $
+													{serviceDetails?.precio || 0}
+												</p>
+											</div>
+											<div className="reservation-dates">
+												{formatDates(cuidadoInicial, cuidadoFinal)}
+											</div>
+											<div className="reservation-pets">
+												<p>
+													<strong>Cantidad de mascotas:</strong>{" "}
+													{selectedNumPets}
+												</p>
+												<p>
+													<strong>Tipo de mascota:</strong>{" "}
+													{getSelectedEspecieName()}
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<div className="modal-buttons">
 									<button
 										className="modal-button cancel"
@@ -451,13 +560,19 @@ const ServiceInfo = ({ serviceInfo }) => {
 							</button>
 							<button
 								className="modal-button confirm"
-								onClick={() => navigate("/login")}
+								onClick={redirectToLogin}
 							>
 								Ir a login
 							</button>
 						</div>
 					</div>
 				</div>
+			)}
+
+			{showLoginForm && (
+				<Modal onClose={closeLoginForm}>
+					<Login isLoginValue={true} returnUrl={currentServiceUrl} />
+				</Modal>
 			)}
 		</div>
 	);
@@ -478,6 +593,11 @@ ServiceInfo.propTypes = {
 		rating: PropTypes.number.isRequired,
 		reviews: PropTypes.array.isRequired,
 		id_servicio: PropTypes.number.isRequired,
+		imagenUrls: PropTypes.arrayOf(
+			PropTypes.shape({
+				imagenUrl: PropTypes.string.isRequired,
+			})
+		).isRequired,
 	}).isRequired,
 };
 

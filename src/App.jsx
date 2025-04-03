@@ -9,6 +9,7 @@ import ServiceImagesGallery from "./pages/services/ServiceImagesGallery";
 import { Categories } from "./pages/Categories";
 import UserProfile from "./pages/profile/UserProfile";
 import { AdminProfile } from "./pages/admin/AdminProfile";
+import Favorites from "./pages/Favorites";
 
 // Components
 import { AuthProvider } from "./auth/AuthContext";
@@ -18,8 +19,11 @@ import ProtectedRoute from "./auth/ProtectedRoute"; // Updated import path
 // Styles
 import "./styles/common/app.css";
 import "./styles/GlobalStyles.css";
+import ReservationHistory from "./pages/clients/ReservationHistory";
+import Reservation from "./pages/clients/Reservation";
 
 function App() {
+
 	return (
 		<AuthProvider>
 			<Routes>
@@ -35,7 +39,9 @@ function App() {
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
 					<Route path="/mi-perfil" element={<UserProfile />} />
-
+          <Route path="/mis-favoritos" element={<Favorites />} />
+					<Route path="/mis-reservas" element={<ReservationHistory/>} />
+					<Route path="/mi-reserva/:id" element={<Reservation />}/>
 					{/* Rutas del administrador */}
 					<Route
 						path="/administracion"
