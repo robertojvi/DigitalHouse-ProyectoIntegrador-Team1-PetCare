@@ -13,6 +13,7 @@ import {
   Label,
 } from "../../styles/AddProductForm.styles";
 import petCareLogo from "../../images/pet-care-logo-v2.png";
+import { toast } from "react-toastify";
 
 const AddFeatureForm = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -23,16 +24,21 @@ const AddFeatureForm = ({ onClose, onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Create FormData with just the nombre field for now
-    const formDataToSubmit = new FormData();
-    formDataToSubmit.append('nombre', formData.nombre.trim());
+    const nombre = formData.nombre.trim();
     
-    // For debugging
+    if (!nombre) {
+      toast.error("El nombre es requerido");
+      return;
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('nombre', nombre);
+    
     console.log('Submitting feature:', {
-      nombre: formData.nombre.trim()
+      nombre: nombre
     });
     
-    onSubmit(formDataToSubmit);
+    onSubmit(formDataToSend);
   };
 
   const handleFileChange = (e) => {
