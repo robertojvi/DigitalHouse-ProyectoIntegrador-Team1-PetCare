@@ -130,7 +130,7 @@ export default function Reservation() {
         </h2>
       )}
 
-      {estado == "FINALIZADA" && (
+      {estado == "COMPLETADA" && (
         <h2 className="titulo">
           Servicio de {nombreCategoria} con {nombreServicio}
         </h2>
@@ -169,7 +169,7 @@ export default function Reservation() {
         <strong>Requerimientos especiales:</strong> {requerimientos}
       </p>
 
-      {estado === "FINALIZADA" && (
+      {estado === "COMPLETADA" && (
         <div className="seccion-valoracion">
           <div className="valoracion">
             <p className="texto-valoracion">
@@ -193,7 +193,7 @@ export default function Reservation() {
 
       {estado === "CONFIRMADA" && (
         <div className="acciones">
-          <button className="boton azul">Edita Tu Reserva</button>
+          {/* <button className="boton azul">Edita Tu Reserva</button> */}
           <button className="boton rojo" onClick={() => setShowModal(true)}>
             Cancela Tu Reserva
           </button>
