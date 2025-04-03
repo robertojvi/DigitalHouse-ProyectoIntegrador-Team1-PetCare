@@ -4,6 +4,7 @@ import { TitleComponent } from "../shared/TitleComponent";
 import { GridComponent } from "../GridComponent";
 import { AuthContext } from "../../auth/AuthContext";
 import { getServices } from "../../services/serviciosService";
+import axios from "axios";
 
 export const ServicesFeatured = ({ services = [] }) => {
 	const navigate = useNavigate();
@@ -11,8 +12,9 @@ export const ServicesFeatured = ({ services = [] }) => {
 	const [randomizedServices, setRandomizedServices] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const firstRender = useRef(true);
-	const {idCategoria} = useContext(AuthContext);
-
+	const {idCategoria, setFavoritos, auth, favoritos} = useContext(AuthContext);
+	const BASE_URL = import.meta.env.VITE_API_URL || "";
+	const API_URL_GET_USER = `${BASE_URL}/api/usuarios`;
 	// Store previous location to detect back navigation
 	useEffect(() => {
 		// On component mount, check if we're coming back (this will run once)
@@ -63,6 +65,15 @@ export const ServicesFeatured = ({ services = [] }) => {
 			}
 		}
 	}, [location]);
+
+	const fetchFavoritos = async () => {
+		const responseUsuario = await axios.get(`${API_URL_GET_USER}/${auth.idUsuario}`, {
+			headers: {
+				Authorization: `Bearer ${auth.token}`
+			}
+		});		
+		setFavoritos(responseUsuario.data.favoritos);
+	}
 
 	// Handle service randomization
 	const randomizeServices = async () => {
@@ -125,6 +136,7 @@ export const ServicesFeatured = ({ services = [] }) => {
 			randomizeServices();		
 		}		
 			idCategoria && randomizeServices();	
+			fetchFavoritos();
 	}, [services, idCategoria]);
 
 	const handleServiceClick = (service) => {

@@ -15,7 +15,6 @@ export const FilterCategory = ({ name, icon, id }) => {
             
             if(id !== 99){
                 const servicesFiltered = storedServices.filter(service => service.categoria.id_categoria === id);
-                console.log("servicesFiltered: " + servicesFiltered)
                 sessionStorage.setItem(
                     "servicesFiltered",
                     JSON.stringify(servicesFiltered)
