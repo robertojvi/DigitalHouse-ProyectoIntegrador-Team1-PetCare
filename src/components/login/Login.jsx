@@ -22,12 +22,12 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 	const [isLogin, setIsLogin] = useState(isLoginValue);
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState("");
-	const { login, setFavoritos } = useContext(AuthContext); 
+	const { login, setFavoritos } = useContext(AuthContext);
 
 	const BASE_URL = import.meta.env.VITE_API_URL || "";
 	const API_URL_LOGIN = `${BASE_URL}/api/auth/login`;
 	const API_URL_REGISTER = `${BASE_URL}/api/auth/register`;
-	
+
 	// React Hook Form para manejar los inputs y validaciones
 	const {
 		register,
@@ -44,7 +44,7 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 
 			// Directly update auth context with login function
 			login(response.data);
-			console.log("response data: " + response.data.idUsuario)
+			console.log("response data: " + response.data.idUsuario);
 
 			// Display success message
 			if (response.data.message != null) {
@@ -121,6 +121,15 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										{...register("nombre", {
 											required:
 												"El nombre es obligatorio",
+											minLength: {
+												value: 3,
+												message: "Mínimo 3 caracteres",
+											},
+											pattern: {
+												value: /^[A-Za-zÀ-ÿ\s]+$/,
+												message:
+													"Solo se permiten letras",
+											},
 										})}
 									/>
 									{errors.nombre && (
@@ -138,6 +147,15 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										{...register("apellido", {
 											required:
 												"El apellido es obligatorio",
+											minLength: {
+												value: 3,
+												message: "Mínimo 3 caracteres",
+											},
+											pattern: {
+												value: /^[A-Za-zÀ-ÿ\s]+$/,
+												message:
+													"Solo se permiten letras",
+											},
 										})}
 									/>
 									{errors.apellido && (
@@ -177,6 +195,15 @@ const Login = ({ isLoginValue, returnUrl = null }) => {
 										{...register("telefono", {
 											required:
 												"El teléfono es obligatorio",
+											pattern: {
+												value: /^[0-9]+$/,
+												message:
+													"Solo se permiten números",
+											},
+											minLength: {
+												value: 10,
+												message: "Mínimo 10 caracteres",
+											},
 										})}
 									/>
 									{errors.telefono && (
