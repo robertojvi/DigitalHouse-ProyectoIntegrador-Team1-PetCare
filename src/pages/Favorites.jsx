@@ -9,27 +9,14 @@ import axios from "axios";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
+  const { favoritos } = useContext(AuthContext);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_API_URL || "";
   const API_URL_GET_USER = `${BASE_URL}/api/usuarios`;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulamos una llamada a la API con un pequeño retraso
-    // const fetchFavorites = async () => {
-    //   try {
-    //     // Simulamos un delay para que parezca una llamada real
-    //     await new Promise((resolve) => setTimeout(resolve, 500));
-    //     JSON.parse(localStorage.getItem("favorites"))
-    //     setFavorites(mockFavorites.favorites);
-    //   } catch (error) {
-    //     console.error("Error fetching favorites:", error);
-    //   }
-    // };
-
-    // fetchFavorites();
-
-    // Comentamos la llamada real a la API por ahora
     if (auth.token) {
       const fetchFromAPI = async () => {
         
@@ -47,12 +34,18 @@ const Favorites = () => {
         }
       };
       fetchFromAPI();
+      setLoading(false);
     } 
-  }, []);
+  }, [favoritos]);
 
-  const handleImageClick = (serviceId) => {
-    navigate(`/service/${serviceId}`);
+  const handleImageClick = (service) => {
+    navigate(`/service/${service.idServicio}`, {
+      state: { selectedService: service },
+    });
+    window.scrollTo(0, 0);
   };
+
+  
 
   return (
     <div className="favorites-container">
@@ -61,25 +54,32 @@ const Favorites = () => {
         <h1>Mis Favoritos</h1>
         <img src={pawprint} alt="Huella" className="pawprint" />
       </div>
-      {favorites.length > 0 ? (
-        <div className="favorites-grid">
-          {favorites.map((service) => (
-            <ServiceCard
-              key={service.idServicio}
-              id={service.idServicio}
-              name={service.nombre}
-              serviceType={service.categoria.nombre}
-              image={service.imagenUrls[0]?.imagenUrl}
-              rating={service.rating}
-              excerpt={service.descripcion}
-              onImageClick={() => handleImageClick(service.idService)}
-              isFavorito={true}
-            />
-          ))}
-        </div>
+      { !loading ? (
+        <>
+        {favorites.length > 0 ? (
+          <div className="favorites-grid">
+            {favorites.map((service) => (
+              <ServiceCard
+                key={service.idServicio}
+                id={service.idServicio}
+                name={service.nombre}
+                serviceType={service.categoria.nombre}
+                image={service.imagenUrls[0]?.imagenUrl}
+                rating={service.rating}
+                excerpt={service.descripcion}
+                onImageClick={() => handleImageClick(service)}
+                isFavorito={true}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="no-favorites">No tienes servicios favoritos guardados.</p>
+        )}
+        </>
       ) : (
-        <p className="no-favorites">No tienes servicios favoritos guardados.</p>
+          <p className="no-favorites">Cargando...</p>
       )}
+      
     </div>
   );
 };

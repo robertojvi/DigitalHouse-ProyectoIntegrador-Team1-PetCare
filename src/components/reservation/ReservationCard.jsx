@@ -57,10 +57,17 @@ const ReservationCard = ({ reserva }) => {
             {reserva.nombreCategoria}
           </div>
         </div>
-        <div>
-          <div className="confirmation-code-label">Código de confirmación</div>
-          <div className="confirmation-code-value">{codigoConfirmacion}</div>
-        </div>
+
+        {reserva.estado === "ELIMINADO" ? (
+          <div className="text-red">Reservación cancelada</div>
+        ): (
+          <>
+          <div>
+            <div className="confirmation-code-label">Código de confirmación</div>
+            <div className="confirmation-code-value">{codigoConfirmacion}</div>
+          </div>
+          </>
+        )} 
       </div>
     </div>
   );
