@@ -6,6 +6,8 @@ import { AuthContext } from "../../auth/AuthContext";
 import { Icon } from "../../components/shared/styled-components/TitleComponents.styles";
 import pawprint from "../../assets/icons/pawprint.svg";
 import sent from "../../images/sent.png";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Reservation() {
   const { id } = useParams();
@@ -13,10 +15,11 @@ export default function Reservation() {
   const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
-
+  const [showModal, setShowModal] = useState(false); // <-- Modal visible o no
   const { auth } = useContext(AuthContext);
   const BASE_URL = import.meta.env.VITE_API_URL || "";
   const API_URL = `${BASE_URL}/api/reservas/${id}`;
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -35,12 +38,30 @@ export default function Reservation() {
       });
   }, [API_URL, auth.token]);
 
+  const cancelarReserva = async () => {
+    try {
+      await axios.delete(
+        `${API_URL}`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+      toast.success("Reserva cancelada con éxito.");
+      setShowModal(false);
+      navigate("/mis-reservas");
+    } catch (err) {
+      console.error("Error al cancelar reserva:", err);
+      alert("Ocurrió un error al cancelar la reserva.");
+    }
+  };
+
   if (loading)
     return <p style={{ textAlign: "center" }}>Cargando reserva...</p>;
   if (!reserva)
     return <p style={{ textAlign: "center" }}>Reserva no encontrada</p>;
 
-  // Estructura desde la respuesta
   const {
     nombreServicio,
     imagenServicio,
@@ -53,7 +74,6 @@ export default function Reservation() {
     codigoConfirmacion: codigoReserva,
   } = reserva;
 
-  // Si el backend no proporciona el código, generamos uno basado en la información de la reserva
   const codigoConfirmacion =
     codigoReserva ||
     (() => {
@@ -66,7 +86,7 @@ export default function Reservation() {
         .toUpperCase()}-${fechaFormateada}-${idReserva}`;
     })();
 
-  const requerimientos = "No hay requerimientos especiales"; // placeholder
+  const requerimientos = "No hay requerimientos especiales";
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
@@ -103,6 +123,18 @@ export default function Reservation() {
           ¡Confirmado! Servicio de {nombreCategoria} con {nombreServicio}
         </h2>
       )}
+
+      {estado === "ELIMINADO" && (
+        <h2 className="titulo">
+          <span className="text-red">¡Cancelado!</span> Servicio de {nombreCategoria} con {nombreServicio}
+        </h2>
+      )}
+
+      {estado == "FINALIZADA" && (
+        <h2 className="titulo">
+          Servicio de {nombreCategoria} con {nombreServicio}
+        </h2>
+      )}
       <img
         src={imagenServicio || "/mascotas.jpg"}
         alt="Cuidador de mascotas"
@@ -137,30 +169,52 @@ export default function Reservation() {
         <strong>Requerimientos especiales:</strong> {requerimientos}
       </p>
 
-      <div className="seccion-valoracion">
-        <div className="valoracion">
-          <p className="texto-valoracion">
-            Valora El Servicio de {nombreServicio}, de 1 a 5, siendo 1 muy
-            insatisfecho y 5 muy satisfecho
-          </p>
-          <div className="estrellas">{renderStars()}</div>
-        </div>
-        <div className="comentario">
-          <textarea
-            className="input-textarea"
-            placeholder="Agrega un comentario sobre el servicio (opcional)"
-          ></textarea>
-          <div className="enviar-container">
-            <span className="texto-enviar">Enviar</span>
-            <img src={sent} alt="Enviar" className="icono-enviar" />
+      {estado === "FINALIZADA" && (
+        <div className="seccion-valoracion">
+          <div className="valoracion">
+            <p className="texto-valoracion">
+              Valora El Servicio de {nombreServicio}, de 1 a 5, siendo 1 muy
+              insatisfecho y 5 muy satisfecho
+            </p>
+            <div className="estrellas">{renderStars()}</div>
+          </div>
+          <div className="comentario">
+            <textarea
+              className="input-textarea"
+              placeholder="Agrega un comentario sobre el servicio (opcional)"
+            ></textarea>
+            <div className="enviar-container">
+              <span className="texto-enviar">Enviar</span>
+              <img src={sent} alt="Enviar" className="icono-enviar" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {estado === "CONFIRMADA" && (
         <div className="acciones">
           <button className="boton azul">Edita Tu Reserva</button>
-          <button className="boton rojo">Cancela Tu Reserva</button>
+          <button className="boton rojo" onClick={() => setShowModal(true)}>
+            Cancela Tu Reserva
+          </button>
+        </div>
+      )}
+
+      {/* MODAL DE CONFIRMACIÓN */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>¿Cancelar reserva?</h3>
+            <p>¿Estás seguro de que deseas cancelar esta reserva?</p>
+            <div className="modal-buttons">
+              <button className="boton gris" onClick={() => setShowModal(false)}>
+                Cancelar
+              </button>
+              <button className="boton rojo" onClick={cancelarReserva}>
+                Confirmar
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
