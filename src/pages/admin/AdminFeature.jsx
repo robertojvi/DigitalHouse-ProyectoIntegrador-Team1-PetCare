@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/admin/adminService.css";
+import { LiaPawSolid } from "react-icons/lia";
 
 // Components
 import EditFeatureForm from "../../components/forms/EditFeatureForm";
@@ -16,6 +17,14 @@ import addPlusIcon from "../../images/add-plus.png";
 import pencilIcon from "../../images/pencil.png";
 import trashIcon from "../../images/trash-can.png";
 import warningIcon from "../../images/warning.png";
+
+const DEFAULT_PET_ICONS = [
+  "https://img.icons8.com/ios-filled/50/314549/dog-footprint.png",
+  "https://img.icons8.com/ios-filled/50/314549/cat-footprint.png",
+  "https://img.icons8.com/ios-filled/50/314549/hamster.png",
+  "https://img.icons8.com/ios-filled/50/314549/bird.png",
+  "https://img.icons8.com/ios-filled/50/314549/fish.png",
+];
 
 const AdminFeature = ({ isInAdminLayout }) => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -79,28 +88,25 @@ const AdminFeature = ({ isInAdminLayout }) => {
 
   const handleAddFeature = async (formData) => {
     try {
-      // Check auth first
-      if (!auth.token) {
-        toast.error("No hay sesión activa");
+      if (!auth.token || auth.role !== "ADMIN") {
+        toast.error("No tienes permisos para realizar esta acción");
         return;
       }
 
-      // Create data object manually to better control what we're sending
-      const data = {
-        nombre: formData.get('nombre'),
+      // Create a simple JSON object instead of FormData
+      const featureData = {
+        nombre: formData.get('nombre')
       };
 
-      // Log what we're about to send
-      console.log("Sending data:", data);
-      console.log("Auth token:", auth.token);
+      console.log("Sending feature data:", featureData);
 
       const response = await axios.post(
         `${BASE_URL}/api/caracteristicas`,
-        data,
+        featureData,
         {
           headers: {
             'Authorization': `Bearer ${auth.token}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           }
         }
       );
@@ -110,23 +116,19 @@ const AdminFeature = ({ isInAdminLayout }) => {
       if (response.status === 201 || response.status === 200) {
         toast.success("Característica agregada exitosamente");
         setShowAddForm(false);
-        fetchCharacteristics();
+        await fetchCharacteristics();
       }
     } catch (error) {
-      console.error("Error details:", {
-        status: error?.response?.status,
-        data: error?.response?.data,
+      console.error("Error creating feature:", {
         message: error.message,
-        headers: error?.response?.headers
+        status: error.response?.status,
+        data: error.response?.data
       });
-
-      // More specific error messages
-      if (error.response?.status === 403) {
-        toast.error("No tienes autorización para agregar características");
-      } else if (error.response?.status === 401) {
-        toast.error("Sesión expirada o inválida");
+      
+      if (error.response?.status === 400) {
+        toast.error("Datos inválidos. Verifique la información");
       } else {
-        toast.error("Error al agregar la característica");
+        toast.error("Error al crear la característica. Por favor, intente nuevamente.");
       }
     }
   };
@@ -156,6 +158,11 @@ const AdminFeature = ({ isInAdminLayout }) => {
       console.error("Error completo:", error.response || error); // Debug mejorado
       toast.error("Error al actualizar la característica");
     }
+  };
+
+  const getRandomPetIcon = () => {
+    const randomIndex = Math.floor(Math.random() * DEFAULT_PET_ICONS.length);
+    return DEFAULT_PET_ICONS[randomIndex];
   };
 
   return (
@@ -231,11 +238,12 @@ const AdminFeature = ({ isInAdminLayout }) => {
                     <tr key={characteristic.idCaracteristica}>
                       <td>{characteristic.nombre}</td>
                       <td>
-                        {characteristic.icon ? (
-                          <img src={characteristic.icon} height={30} />
-                        ) : (
-                          "Sin icono"
-                        )}
+                        <img 
+                          src={characteristic.icon ? `${BASE_URL}${characteristic.icon}` : getRandomPetIcon()} 
+                          alt={characteristic.nombre}
+                          height={30} 
+                          style={{ objectFit: 'contain' }}
+                        />
                       </td>
                       <td>
                         <button
