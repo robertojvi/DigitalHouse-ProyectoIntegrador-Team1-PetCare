@@ -239,7 +239,7 @@ const AdminFeature = ({ isInAdminLayout }) => {
                       <td>{characteristic.nombre}</td>
                       <td>
                         <img 
-                          src={characteristic.icon ? `${BASE_URL}${characteristic.icon}` : getRandomPetIcon()} 
+                          src={characteristic.icon ? characteristic.icon : getRandomPetIcon()} 
                           alt={characteristic.nombre}
                           height={30} 
                           style={{ objectFit: 'contain' }}
