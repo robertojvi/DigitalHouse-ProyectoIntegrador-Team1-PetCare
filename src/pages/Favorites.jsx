@@ -32,26 +32,33 @@ const Favorites = () => {
     // Comentamos la llamada real a la API por ahora
     if (auth.token) {
       const fetchFromAPI = async () => {
-        
         try {
-          const responseUsuario = await axios.get(`${API_URL_GET_USER}/${auth.idUsuario}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`
+          const responseUsuario = await axios.get(
+            `${API_URL_GET_USER}/${auth.idUsuario}`,
+            {
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              },
             }
-          });
-          
-          console.log(responseUsuario)
+          );
+
+          console.log(responseUsuario);
           setFavorites(responseUsuario.data.favoritos);
         } catch (error) {
           console.error("Error fetching favorites:", error);
         }
       };
       fetchFromAPI();
-    } 
+    }
   }, []);
 
   const handleImageClick = (serviceId) => {
-    navigate(`/service/${serviceId}`);
+    const selectedService = favorites.find(
+      (service) => service.idServicio === serviceId
+    );
+    navigate(`/service/${serviceId}`, {
+      state: { selectedService },
+    });
   };
 
   return (
@@ -72,7 +79,7 @@ const Favorites = () => {
               image={service.imagenUrls[0]?.imagenUrl}
               rating={service.rating}
               excerpt={service.descripcion}
-              onImageClick={() => handleImageClick(service.idService)}
+              onImageClick={() => handleImageClick(service.idServicio)}
               isFavorito={true}
             />
           ))}
