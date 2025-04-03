@@ -44,6 +44,14 @@ const ServiceImagesMain = ({ images, onGoBack }) => {
 		}
 	};
 
+	// copiar link
+	const handleCopy = () => {
+		const url = window.location.href; // Obtiene la URL actual
+		navigator.clipboard.writeText(url)
+		  .then(() => alert("¡Enlace copiado al portapapeles!"))
+		  .catch(err => console.error("Error al copiar:", err));
+	  };
+
 	// Share modal component
 		const ShareModal = () => (
 			<div className="modal-overlay">
@@ -59,31 +67,42 @@ const ServiceImagesMain = ({ images, onGoBack }) => {
 					{/* Botones */}
 					<div className="general-share-container">
 						<div className="right-container">
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal" onClick={handleCopy}>
 								<IoCopy className="share-icon"/>
 								Copiar enlace
 							</button>
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal">
 								<IoLogoWhatsapp className="share-icon"/>
-								WhatsApp
+								<a href="https://api.whatsapp.com/send?text=¡Mira esto! https://tuweb.com" target="_blank">
+									WhatsApp
+								</a>
+
 							</button>
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal">
 								<FaSquareXTwitter className="share-icon"/>
-								Twitter
+								<a href="https://twitter.com/intent/tweet?text=¡Mira esto!&url=https://tuweb.com" target="_blank">
+									Twitter
+								</a>
 							</button>
 						</div>
 						<div className="left-container">
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal">
 								<MdMail className="share-icon"/>
-								Correo Electrónico
+								<a href="mailto:correo@ejemplo.com?subject=Consulta&body=Hola, quiero más información.">
+									Correo Electrónico
+								</a>
 							</button>
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal">
 								<FaFacebook className="share-icon"/>
-								Facebook
+								<a href="https://www.facebook.com/sharer/sharer.php?u=https://tuweb.com" target="_blank">
+									Facebook
+								</a>
 							</button>
-							<button className="share-btn-modal" onClick={""}>
+							<button className="share-btn-modal">
 								<FaFacebookMessenger className="share-icon"/>
-								Messenger
+								<a href="https://www.facebook.com/dialog/send?app_id=TU_APP_ID&link=https://tuweb.com&redirect_uri=https://tuweb.com" target="_blank">
+									Messenger
+								</a>
 							</button>
 						</div>
 					</div>
@@ -106,7 +125,7 @@ const ServiceImagesMain = ({ images, onGoBack }) => {
 				}}
 			>
 				<button onClick={()=>setShowShareModal(true)} className="share-button">
-					<GoShare style={{height:"22px", width:"22px", color:"orange"}}/>
+					<GoShare style={{height:"22px", width:"22px", color:"orange"}}/>	
 					Compartir
 				</button>
 				<button onClick={handleBackClick} className="back-button">
