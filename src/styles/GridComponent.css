@@ -108,3 +108,24 @@
     font-size: 1.2rem;
     color: #666;
 }
+
+.bvTFwL{
+    align-items: start !important;
+
+}
+
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+}
+
+.sc-fHnHgl.eBbbhw.infoContainer{
+    display: flex;
+    justify-self: flex-end;
+    align-self: flex-end;
+    height: 100%;    
+}

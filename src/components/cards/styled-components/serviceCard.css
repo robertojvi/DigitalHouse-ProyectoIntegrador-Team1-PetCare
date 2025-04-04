@@ -1,0 +1,19 @@
+.tipoContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconsContainer{
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;   
+}
+
+.shareIcon{
+    cursor: pointer;
+}
+
+.shareIcon:hover{
+    transform: scale(1.2);
+    color: #f5a623;
+}

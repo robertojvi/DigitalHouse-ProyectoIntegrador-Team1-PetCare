@@ -5,9 +5,9 @@ import axios from "axios";
 import { AuthContext } from "../../auth/AuthContext";
 
 const HeartIcon = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  // position: absolute;
+  // top: 20px;
+  // right: 20px;
   cursor: pointer;
   z-index: 2;
   font-size: 20px;
