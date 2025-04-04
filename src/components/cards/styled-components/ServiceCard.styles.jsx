@@ -27,8 +27,8 @@ export const Image = styled.img`
 export const InfoContainer = styled.div`
     width: 50%;
     padding: 10px 10px;
-    & h4.serviceType {
-        color: #685044;
+    & h3.serviceType {
+        color: #314549;
         font-size: 16px; 
         font-weight: 700;
     }

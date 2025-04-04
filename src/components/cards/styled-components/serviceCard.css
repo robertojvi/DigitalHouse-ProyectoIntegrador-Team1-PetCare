@@ -4,7 +4,7 @@
     flex-wrap: wrap;
 }
 
-.tipoContainer h3{
+.tipoContainer h3 {
     word-wrap: break-word;
     max-width: 70%;
 }
@@ -12,7 +12,7 @@
 .iconsContainer {
     display: flex;
     justify-content: space-between;
-    gap: .7rem;   
+    gap: .7rem;
 }
 
 .shareIcon {
@@ -25,23 +25,23 @@
     color: #f5a623;
 }
 
-.nameContainer{
+.nameContainer {
     margin-top: .5rem;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.infoContainer{
+.infoContainer {
     display: flex;
     align-items: normal;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.iFibRp{
+.iFibRp {
     gap: 0;
 }
 
-.iFibRp p{
+.iFibRp p {
     margin-right: .5rem;
 }
