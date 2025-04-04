@@ -70,14 +70,14 @@ export const ExcerptContainer = styled.div`
     }
   `;
 
-  export const CTAContainer = styled.div`
+export const CTAContainer = styled.div`
     display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px
   `;
 
-  export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button`
     background-color: #314549;
     padding: 10px;
     border-radius: 16px;
