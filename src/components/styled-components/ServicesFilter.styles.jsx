@@ -8,7 +8,7 @@ export const ServicesFilterContainer = styled.div`
   margin-bottom: 30px;
   padding: 10px 0px;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1200px) {
     flex-flow: wrap;
   }
 `;
