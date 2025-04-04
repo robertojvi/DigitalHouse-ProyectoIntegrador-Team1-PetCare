@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { StarsComponent } from "../shared/StarsComponent";
 import "../../styles/services/ReviewsPopup.css";
 import cerrar from "../../images/cerrar.png";
 import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_API_URL || "";
 
 const ReviewsPopup = ({ isOpen, onClose, serviceId }) => {
   const [reviews, setReviews] = useState([]);
@@ -51,7 +54,7 @@ const ReviewsPopup = ({ isOpen, onClose, serviceId }) => {
           console.log("Making request with config:", config);
 
           const response = await axios.get(
-            `http://localhost:8080/api/reviews/servicio/${serviceId}`,
+            `${BASE_URL}/api/reviews/servicio/${serviceId}`,
             config
           );
 
@@ -97,10 +100,10 @@ const ReviewsPopup = ({ isOpen, onClose, serviceId }) => {
   const getInitials = (fullName) => {
     return fullName
       ? fullName
-          .split(" ")
-          .map((name) => name[0])
-          .join("")
-          .toUpperCase()
+        .split(" ")
+        .map((name) => name[0])
+        .join("")
+        .toUpperCase()
       : "";
   };
 
@@ -182,6 +185,12 @@ const ReviewsPopup = ({ isOpen, onClose, serviceId }) => {
       </div>
     </div>
   );
+};
+
+ReviewsPopup.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  serviceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 export default ReviewsPopup;
