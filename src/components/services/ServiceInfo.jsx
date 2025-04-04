@@ -485,9 +485,9 @@ const ServiceInfo = ({ serviceInfo }) => {
               className="btnReservar"
               onClick={openConfirmReservaModal}
             >
-              Reservar ahora
+              Reserva
             </button>
-            <p>No se realizará ningún cargo inmediato</p>
+            <p>No se hará ningún cargo por el momento</p>
           </div>
         </form>
       </div>

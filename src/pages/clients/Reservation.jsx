@@ -15,7 +15,8 @@ export default function Reservation() {
   const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
-  const [showModal, setShowModal] = useState(false); // <-- Modal visible o no
+  const [showModal, setShowModal] = useState(false);
+  const [comentario, setComentario] = useState("");
   const { auth } = useContext(AuthContext);
   const BASE_URL = import.meta.env.VITE_API_URL || "";
   const API_URL = `${BASE_URL}/api/reservas/${id}`;
@@ -54,6 +55,32 @@ export default function Reservation() {
     } catch (err) {
       console.error("Error al cancelar reserva:", err);
       alert("Ocurrió un error al cancelar la reserva.");
+    }
+  };
+
+  const enviarReview = async () => {
+    if (!rating) {
+      toast.warning("Por favor selecciona una puntuación antes de enviar.");
+      return;
+    }
+  
+    try {
+      await axios.post(`${BASE_URL}/api/reviews`, {
+        puntuacion: rating,
+        comentario,
+        idReserva: reserva.idReserva
+      }, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
+  
+      alert("Reseña enviada con éxito.");
+      setComentario("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error al enviar reseña:", error);
+      alert(error.response?.data?.message || "Error al enviar reseña"); 
     }
   };
 
@@ -181,9 +208,11 @@ export default function Reservation() {
           <div className="comentario">
             <textarea
               className="input-textarea"
+              value={comentario}
+              onChange={(e) => setComentario(e.target.value)}
               placeholder="Agrega un comentario sobre el servicio (opcional)"
             ></textarea>
-            <div className="enviar-container">
+            <div className="enviar-container" onClick={enviarReview}>
               <span className="texto-enviar">Enviar</span>
               <img src={sent} alt="Enviar" className="icono-enviar" />
             </div>
