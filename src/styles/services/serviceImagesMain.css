@@ -14,7 +14,8 @@
   min-width: 120px;
   gap: 8px;
 }
-/* Modal */
+
+/* Modal - Versión mejorada */
 .share-modal {
   background: white;
   padding: 30px 120px;
@@ -24,7 +25,17 @@
   position: relative;
   max-height: 80vh;
   overflow-y: auto;
+  margin-top: 5rem; /* Nueva propiedad añadida */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Mejora visual añadida */
 }
+
+
+.sc-gKcHA-D.bvTFwL{
+	margin-left: 2rem;
+
+}
+
+/* Icono de cierre - Versión unificada */
 .share-close-icon {
   position: absolute;
   top: 20px;
@@ -38,6 +49,7 @@
   justify-content: center;
   transition: transform 0.2s ease;
 }
+
 .share-close-icon img {
   width: 40px;
   height: 40px;
