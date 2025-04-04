@@ -1,4 +1,4 @@
-.tipoContainer{
+.tipoContainer {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -9,18 +9,18 @@
     max-width: 70%;
 }
 
-.iconsContainer{
+.iconsContainer {
     display: flex;
     justify-content: space-between;
     gap: .7rem;   
 }
 
-.shareIcon{
+.shareIcon {
     cursor: pointer;
     margin-top: 4px;
 }
 
-.shareIcon:hover{
+.shareIcon:hover {
     transform: scale(1.2);
     color: #f5a623;
 }
