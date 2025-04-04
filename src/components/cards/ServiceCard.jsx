@@ -28,10 +28,10 @@ export const ServiceCard = ({
   return (
     <CardContainer>
       <ImageContainer onClick={() => onImageClick()}>
-        <Image alt={name} src={image || "https://images-s3-test.s3.us-east-1.amazonaws.com/Home-Pics/pets.jpg"}/>
+        <Image alt={name} src={image || "https://images-s3-test.s3.us-east-1.amazonaws.com/Home-Pics/pets.jpg"} />
       </ImageContainer>
       <InfoContainer>
-        <h3 className="serviceType">{serviceType?.nombre}</h3>
+        <h4 className="serviceType">{serviceType?.nombre}</h4>
         <FavoriteButton serviceId={id} initialFavorite={isFavorito} onToggle={(fav) => console.log("Favorito:", fav)} />
         <NameContainer>
           <p>{name}</p>
